@@ -18,7 +18,8 @@
   <link href="<?php echo base_url() ?>assets/css/pages/login-register-lock.css" rel="stylesheet">
   <!-- Custom CSS -->
   <link href="<?php echo base_url() ?>assets/css/style.css" rel="stylesheet">
-
+  <link rel="stylesheet" href="<?php echo base_url(); ?>custom/signature/css/jquery.signature.css">
+  <script src="<?php echo base_url(); ?>custom/signature/js/jquery.signature.min.js" charset="utf-8"></script>
 <!-- CUSTOM COLOR AND CSS -->
   <link href="<?php echo base_url() ?>assets/css/custom.css" rel="stylesheet">
   <link href="<?php echo base_url() ?>custom/css/custom.css" rel="stylesheet">

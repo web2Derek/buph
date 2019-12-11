@@ -40,6 +40,12 @@ $('document').ready(function(){
         $("#loginform").slideUp();
         $("#recoverform").fadeIn();
     });
+
+    $('#signaturetab').signature({syncField:'#signaturedata' , syncFormat : 'PNG'});
+
+    $('#clear_signature').on('click' , function() {
+        $('#signaturetab').signature('clear');
+    });
 </script>
 
 </body>

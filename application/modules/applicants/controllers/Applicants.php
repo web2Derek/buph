@@ -125,4 +125,10 @@ class Applicants extends Applicant_Controller{
 
   }
 
+        public function agreementform(){
+            $this->load_member('agreementform' , '');
+        }
+
+
+
 }
