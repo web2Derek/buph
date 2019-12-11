@@ -1,0 +1,35 @@
+#btn-login {
+  background: #95DC3B!important;
+  border:none!important;
+}
+
+#img-logo {
+  text-align: center!important;
+}
+
+.img-logo {
+  display: flex!important;
+  justify-content: center!important;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.login-register {
+  background: linear-gradient(90deg, #137E09 0.22%, #559A00 100%)!important;
+  padding: 6% 0!important;
+}
+
+
+
+@media only screen and (max-width:320px) {
+  .img-logo {
+    display: flex!important;
+    justify-content: center!important;
+
+  }
+  #img-logo {
+    height: 99px;
+    width: 200px;
+    overflow: hidden;
+  }
+}

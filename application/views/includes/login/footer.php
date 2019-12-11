@@ -1,0 +1,52 @@
+</section>
+
+
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script src="<?php echo base_url() ?>assets/node_modules/cam-js/instascan.min.js"></script>
+<script src="<?php echo base_url() ?>assets/node_modules/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap tether Core JavaScript -->
+<script src="<?php echo base_url() ?>assets/node_modules/bootstrap/js/popper.min.js"></script>
+<script src="<?php echo base_url() ?>assets/node_modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url() ?>assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script src="<?php echo base_url() ?>assets/node_modules/sweetalert2/sweet-alert.init.js"></script>
+<script src="<?php echo base_url() ?>custom/js/loginModule.js"></script>
+<script src="<?php echo base_url() ?>custom/js/cam.js"></script>
+<!--Custom JavaScript -->
+
+<!-- SHOW PASSSWORD -->
+<script type="text/javascript">
+  $('document').ready(function(){
+    $('#checkbox0').on('change',function() {
+      let isCheck = $(this).prop('checked');
+      if(isCheck) {
+        $('#password').attr('type', 'text');
+      } else {
+        $('#password').attr('type', 'password');
+      }
+    });
+  });
+
+  $(function() {
+      $(".preloader").fadeOut();
+  });
+  $(function() {
+      $('[data-toggle="tooltip"]').tooltip()
+  });
+  // ==============================================================
+  // Login and Recover Password
+  // ==============================================================
+  $('#to-recover').on("click", function() {
+      $("#loginform").slideUp();
+      $("#recoverform").fadeIn();
+  });
+</script>
+
+</body>
+
+</html>
