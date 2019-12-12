@@ -128,6 +128,13 @@ class Applicants extends Applicant_Controller{
             $this->load_member('agreementform' , '');
         }
 
+        public function submitAgreement(){
+            $post = $this->input->post();
+            echo "<pre>";
+            print_r($post);
+            die();
+        }
+
 
 
 }

@@ -15,7 +15,7 @@
             <div class="card">
                 <div class="card-header"><h2>MEMBERSHIP AND SUBSCRIPTION AGREEMENT</h2></div>
                 <div class="card-body">
-                    <form action="">
+                    <form id="submitAgreement">
                         <p>The Board of Directors</p>
                         <p>I <span><input type="text"></span>
                             a resident of
@@ -223,7 +223,7 @@
                         </div>
                         <hr>
 
-
+                    <button type="submit" class="btn btn-sm btn-success">Submit</button>
                     </form>
                 </div>
             </div>
