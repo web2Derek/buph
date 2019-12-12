@@ -82,7 +82,11 @@ class Login extends MY_Controller {
                 );
 
                 $userDatas = $this->MY_Model->getRows('tbl_user_credentials' , $params , 'array');
-                $userDatas[0]['logged_in'] = TRUE;
+                $userDatas[0] = array(
+                  'logged_in' => true,
+                  'user_type' => 0,
+                  'email' => $userDatas[0]['email']
+                );
                 $this->session->set_userdata($userDatas[0]);
                 redirect(base_url('login/select_branch'));
             }else{

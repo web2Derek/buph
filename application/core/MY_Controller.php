@@ -7,11 +7,11 @@ class MY_Controller extends MX_Controller {
 		$route = $this->router->fetch_class();
 
 		if($route == 'login'){
-			if($this->session->has_userdata('logged_in')){
+			if($this->session->has_userdata('logged_in') && $this->session->has_userdata('user_type') == 0){
 				redirect(base_url("home"));
 			}
 		} else {
-			if(!$this->session->has_userdata('logged_in')){
+			if(!$this->session->has_userdata('logged_in') && $this->session->has_userdata('user_type') == 0){
 				redirect(base_url());
 			}
 		}

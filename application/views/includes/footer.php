@@ -85,14 +85,14 @@
     <script src="<?php echo base_url() ?>assets/node_modules/table-assets/buttons.print.js"></script>
     <!-- end - This is for export functionality only -->
 <script>
-    $('.dropify').dropify({
-      messages: {
-         'default': 'Drag and drop an image here or click',
-         'replace': 'Drag and drop or click to replace',
-         'remove':  'Change',
-         'error':   'Something went wrong. Please try again.'
-       }
-    });
+    // $('.dropify').dropify({
+    //   messages: {
+    //      'default': 'Drag and drop an image here or click',
+    //      'replace': 'Drag and drop or click to replace',
+    //      'remove':  'Change',
+    //      'error':   'Something went wrong. Please try again.'
+    //    }
+    // });
     $('#unfreeze').hide();
     $('#controls').hide();
     $('#use_photo').hide();

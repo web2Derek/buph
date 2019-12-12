@@ -7,11 +7,11 @@ class Applicant_Controller extends MX_Controller {
 		$route = $this->router->fetch_class();
 
 		// if($route == 'applicants'){
-		// 	if($this->session->has_userdata('logged_in')){
+		// 	if($this->session->has_userdata('logged_in') && $this->session->has_userdata('user_type') == 3){
 		// 		redirect(base_url("applicants/member_account"));
 		// 	}
 		// } else {
-		// 	if(!$this->session->has_userdata('logged_in')){
+		// 	if(!$this->session->has_userdata('logged_in') && $this->session->has_userdata('user_type') == 3){
 		// 		redirect(base_url('applicants'));
 		// 	}
 		// }
