@@ -67,6 +67,11 @@
 <script src="<?php echo base_url() ?>custom/js/my-jquery.js" charset="utf-8"></script>
 <script src="<?php echo base_url() ?>custom/js/scheduler.js" charset="utf-8"></script>
 <script src="<?php echo base_url();?>custom/js/selectjs.js" charset="utf-8"></script>
+<script src="<?php echo base_url();?>assets/node_modules/wizard/jquery.steps.min.js"></script>
+<script src="<?php echo base_url();?>assets/node_modules/wizard/jquery.validate.min.js"></script>
+<!-- Sweet-Alert  -->
+<script src="<?php echo base_url();?>assets/node_modules/sweetalert/sweetalert.min.js"></script>
+<script src="<?php echo base_url();?>assets/node_modules/wizard/steps.js"></script>
 <script>
     // $('.dropify').dropify();
     // $('#signaturetab').signature({syncField:'#testsignature' , syncFormat : 'PNG'});

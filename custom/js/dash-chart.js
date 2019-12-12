@@ -2,6 +2,107 @@
 
 $(document).ready(function() {
 
+  var url = $('#base_url').val();
+  $.ajax({
+    method: "POST",
+    url: url + 'home/ageMemRange',
+    dataType:"json",
+    success: function(data) {
+      let table_data = '';
+      let male_count = [];
+      let range = [];
+      var female_count = [];
+      console.log(data['female']);
+      // for(var i=0;i<data.length;i++){
+      //   if(data[i].gender === "Male")
+      //   {
+      //     male_count.push(data[i].count);// for(var i=0;i<data.length;i++){
+      //   if(data[i].gender === "Male")
+      //   {
+      //     male_count.push(data[i].count);
+      //   }
+      //   if(data[i].gender === "Female")
+      //   {
+      //     female_count.push(data[i].count);
+      //   }
+      //   range.push(data[i].range_data);
+      // }
+      //
+      // for(var i = 0; i < female_count.length; i++) {
+      //   table_data = `
+      //       <td>${female_count[i]}</td>
+      //     `;
+      //   $('.table_body_data').next('#range_data_body').append(table_data);
+      // }
+      //   }
+      //   if(data[i].gender === "Female")
+      //   {
+      //     female_count.push(data[i].count);
+      //   }
+      //   range.push(data[i].range_data);
+      // }
+      //
+      // for(var i = 0; i < female_count.length; i++) {
+      //   table_data = `
+      //       <td>${female_count[i]}</td>
+      //     `;
+      //   $('.table_body_data').next('#range_data_body').append(table_data);
+      // }
+
+      // for(var i = 0; i < data['female'].length; i++) {
+      //   range.push(data['female'][i]);
+      // }
+
+      for(var i = 0; i < data['female'].length; i++) {
+          console.log(data['female'][i].range_data)
+      }
+
+      // REMOVE REDUNDANT RANGE
+
+      // let newSet = [...new Set(range)];
+      // console.log(newSet);
+      //
+        if(data['female'].length > 0) {
+            generateTr(data);
+          } else {
+            table_data = `
+              <tr><td>No Data Found</td></tr>`;
+        }
+              // <td>${[i].count}</td>
+              // <td>${[i].count}</td>
+          $('#range_data_body').prepend(table_data);
+        }
+      })
+
+          // GENERATE TABLE DATA
+      function generateTr(data) {
+        let newArr = data['female'].reverse();
+        let  maletd = '';
+        let maleData = '';
+        for(var i = 0; i < newArr.length; i++) {
+          if(data['male'].length <= i){
+            maleData = '0';
+          }else{
+            maleData = data['male'][i].count;
+          }
+          table_data = `
+            <tr id="mem_data_range">
+              <td >${newArr[i].range_data} Years Old</td>
+              <td >${newArr[i].count} Years Old</td>
+              <td >${maleData}</td>
+            </tr>
+            `;
+          $('.table_body_data').prepend(table_data);
+        }
+        // for(var i= 0; i < data['male'].length; i++) {
+        //    maletd = `<td>${data['male'][i].count}</td>`;
+        //  ('#mem_data_range').append(maletd);
+        // }
+
+      }
+
+
+// FETCH DATA
   $(document).on('change','#group-type', function(e) {
     var url = $('#base_url').val();
     var member_type = $(this).val();
@@ -183,6 +284,8 @@ function getAllMember(branch, dataset) {
         }
         // END FILE FOR CHART
       }
+
+
 //SELECT DEFAULT DATA IN DROPDOWN
       $('select#group-type').trigger('change');
       $('select#alltype').trigger('change');

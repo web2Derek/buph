@@ -10,10 +10,6 @@
     <meta name="author" content="">
 
     <script src="<?php echo base_url() ?>assets/node_modules/jquery/jquery.min.js"></script>
-    <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet">
-    <!-- SELECTIZE THEME -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap2.min.css">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <!-- FOR SIGNATURE -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>custom/signature/css/jquery.signature.css">
     <script src="<?php echo base_url(); ?>custom/signature/js/jquery.signature.min.js" charset="utf-8"></script>
@@ -24,8 +20,6 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url() ?>assets/images/gallery/icon.png">
     <title>BUPHARCO</title>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js" charset="utf-8"></script>
     <!-- <script src="https://www.jsdelivr.com/package/npm/chart.js?path=dist" charset="utf-8"></script> -->
     <link rel="stylesheet" type="text/css"
        href="<?php echo base_url() ?>assets/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css">
@@ -43,8 +37,7 @@
     <link href="<?php echo base_url() ?>custom/css/custom.css" id="theme" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url() ?>assets/node_modules/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="<?php echo base_url() ?>assets/node_modules/dropify/dist/css/dropify.min.css">
-    <!-- <script src="https://files.codepedia.info/files/uploads/iScripts/html2canvas.js"></script> -->
+    <link href="<?php echo base_url() ?>assets/node_modules/wizard/steps.css" rel="stylesheet">
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">

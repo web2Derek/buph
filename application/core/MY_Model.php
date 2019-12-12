@@ -9,7 +9,7 @@ class MY_Model extends CI_Model {
 
 
     public function raw($sql,$resut = 'array'){
-        $query = $this->db->get($sql);
+        $query = $this->db->query($sql);
 
         switch ($result) {
             case 'array':
