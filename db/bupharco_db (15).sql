@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2019 at 10:55 AM
+-- Generation Time: Dec 12, 2019 at 10:37 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 5.6.34
 
@@ -48,9 +48,39 @@ CREATE TABLE `tbl_account_info` (
 --
 
 INSERT INTO `tbl_account_info` (`account_info_id`, `date_approve`, `member_id`, `ac_resolution_no`, `branch`, `classifications`, `facilitator`, `encoded_by`, `invited_by`, `date_of_pmes`, `encoded_date`, `remarks`) VALUES
-(2, '11/26/2019', 216, '000123', 3, 'A+', 'Samsung', '1', '', '11/12/2019', '11/19/2019', 'OKAY'),
+(2, '11/26/2019', 216, '000123', 3, 'A+', 'Samsung8458', '1', '', '11/12/2019', '11/19/2019', 'OKAY keeeeyo'),
 (3, '11/28/2019', 217, '000123', 1, 'C', 'Ghre', '1', 'Matthew Derek', '11/27/2019', '11/24/2019', ''),
-(4, '', 218, '', 1, 'C', '', '1', '', '', '2019-12-03', '');
+(4, '12/03/2019', 218, '', 1, 'C', '', '1', '', '', '2019-12-03', ''),
+(5, '', 222, '', 1, 'C', '', '1', '', '', '2019-12-09', ''),
+(6, '', 223, '', 1, 'C', '', '1', '', '', '2019-12-09', ''),
+(7, '', 224, '', 2, 'C', '', '1', '', '', '2019-12-09', ''),
+(8, '', 228, '', 1, 'C', '', '1', '', '', '2019-12-09', ''),
+(9, '', 236, '', 1, 'C', '', '1', '', '', '2019-12-09', ''),
+(10, '', 237, '', 1, 'C', '', '1', '', '', '2019-12-09', ''),
+(11, '', 238, '', 1, 'C', '', '1', '', '', '2019-12-11', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_applicant_access`
+--
+
+CREATE TABLE `tbl_applicant_access` (
+  `applicant_id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_applicant_access`
+--
+
+INSERT INTO `tbl_applicant_access` (`applicant_id`, `username`, `password`, `email`, `status`, `first_name`, `last_name`) VALUES
+(1, 'user', 'user', 'user@gmail.com', 1, 'colz', 'aligz');
 
 -- --------------------------------------------------------
 
@@ -83,8 +113,8 @@ INSERT INTO `tbl_branch` (`branch_id`, `branch_name`, `branch_code`, `address`, 
 (9, 'Maramag', 3, 'Maramag', 1, '2019-10-03'),
 (10, 'Mintal', 13, '', 1, '2019-10-03'),
 (11, 'Puerto', 4, '', 1, '2019-10-03'),
-(12, 'Quezon', 9, '', 1, '2019-10-03'),
-(13, 'Valencia', 1, 'Terry', 1, '2019-10-03');
+(12, 'Quezon', 77, '-', 1, '2019-10-03'),
+(13, 'Valencia', 1, 'Terry', 0, '2019-10-03');
 
 -- --------------------------------------------------------
 
@@ -98,17 +128,22 @@ CREATE TABLE `tbl_contact_group` (
   `contact_list` varchar(255) NOT NULL,
   `date_created` date NOT NULL,
   `date_updated` date NOT NULL,
-  `added_by` varchar(200) NOT NULL,
-  `status` int(11) NOT NULL
+  `added_by` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_contact_group`
 --
 
-INSERT INTO `tbl_contact_group` (`group_id`, `group_name`, `contact_list`, `date_created`, `date_updated`, `added_by`, `status`) VALUES
-(1, 'palautang', '[\"2\",\"1\",\"4\",\"3\"]', '2019-10-25', '0000-00-00', 'admin', 0),
-(2, 'WIFEZILLA', '[\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\"]', '2019-10-30', '0000-00-00', 'admin', 0);
+INSERT INTO `tbl_contact_group` (`group_id`, `group_name`, `contact_list`, `date_created`, `date_updated`, `added_by`) VALUES
+(1, 'palautang', '[\"2\",\"1\",\"4\",\"3\"]', '2019-10-25', '0000-00-00', 'admin'),
+(2, 'WIFEZILLA', '[\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\"]', '2019-10-30', '0000-00-00', 'admin'),
+(3, 'Chronos', '[\"09056568956\",\"09306543214\",\"09056567931\"]', '2019-12-06', '0000-00-00', 'admin'),
+(4, 'Chronos', '[\"09056568956\",\"09306543214\",\"09056567931\"]', '2019-12-06', '0000-00-00', 'admin'),
+(6, 'Cassiopea', '[\"09306543214\",\"09056568956\",\"09056567931\"]', '2019-12-06', '0000-00-00', 'admin'),
+(7, 'Cassiopeas', '[\"09306543214\",\"09056568956\",\"09056567931\"]', '2019-12-06', '0000-00-00', 'admin'),
+(8, 'Nyx', '[\"09056568956\",\"09306543214\",\"09056567931\"]', '2019-12-06', '0000-00-00', 'admin'),
+(10, 'test', '[\"09306543214\",\"09056568956\",\"09056567931\"]', '2019-12-06', '0000-00-00', 'admin');
 
 -- --------------------------------------------------------
 
@@ -144,7 +179,14 @@ INSERT INTO `tbl_financial_info` (`financial_info_id`, `member_id`, `sourceOf_in
 (110, 215, '{\"salary_honorarium\":\"on\",\"interest_commission\":\"on\",\"source_business\":null,\"ofw_remitance\":\"on\",\"source_farmer\":null,\"other_remittance\":\"on\",\"pension\":\"on\",\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, '10000'),
 (111, 216, '{\"salary_honorarium\":\"on\",\"interest_commission\":null,\"source_business\":null,\"ofw_remitance\":\"on\",\"source_farmer\":null,\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, ''),
 (112, 217, '{\"salary_honorarium\":null,\"interest_commission\":null,\"source_business\":null,\"ofw_remitance\":null,\"source_farmer\":null,\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, ''),
-(113, 218, '{\"salary_honorarium\":null,\"interest_commission\":null,\"source_business\":null,\"ofw_remitance\":null,\"source_farmer\":null,\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, '');
+(113, 218, '{\"salary_honorarium\":null,\"interest_commission\":null,\"source_business\":\"on\",\"ofw_remitance\":null,\"source_farmer\":\"on\",\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":\"owned\"}', '', '', '', '', '', '', '10000', ''),
+(114, 222, '{\"salary_honorarium\":null,\"interest_commission\":null,\"source_business\":null,\"ofw_remitance\":null,\"source_farmer\":null,\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, ''),
+(115, 223, '{\"salary_honorarium\":null,\"interest_commission\":null,\"source_business\":null,\"ofw_remitance\":null,\"source_farmer\":null,\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, ''),
+(116, 224, '{\"salary_honorarium\":null,\"interest_commission\":null,\"source_business\":null,\"ofw_remitance\":null,\"source_farmer\":null,\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, ''),
+(117, 228, '{\"salary_honorarium\":null,\"interest_commission\":null,\"source_business\":null,\"ofw_remitance\":null,\"source_farmer\":null,\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, ''),
+(118, 236, '{\"salary_honorarium\":null,\"interest_commission\":null,\"source_business\":null,\"ofw_remitance\":null,\"source_farmer\":null,\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, ''),
+(119, 237, '{\"salary_honorarium\":null,\"interest_commission\":null,\"source_business\":null,\"ofw_remitance\":null,\"source_farmer\":null,\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, ''),
+(120, 238, '{\"salary_honorarium\":null,\"interest_commission\":null,\"source_business\":null,\"ofw_remitance\":null,\"source_farmer\":null,\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -181,6 +223,21 @@ CREATE TABLE `tbl_id_logs` (
   `date_last_generated` varchar(20) NOT NULL,
   `date_added` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_id_logs`
+--
+
+INSERT INTO `tbl_id_logs` (`logs_id`, `member_id`, `total`, `date_last_generated`, `date_added`) VALUES
+(1, 216, '3', '2019-12-06', '2019-12-06'),
+(2, 218, '2', '2019-12-06', '2019-12-06'),
+(4, 222, '', '', ''),
+(5, 223, '', '', ''),
+(7, 224, '', '', ''),
+(8, 228, '', '', ''),
+(9, 236, '', '', ''),
+(10, 237, '', '', ''),
+(11, 238, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -283,7 +340,15 @@ CREATE TABLE `tbl_member_withdrawal` (
 
 INSERT INTO `tbl_member_withdrawal` (`withdraw_id`, `member_id`, `reason`, `wt_resolution_no`, `date_close`, `date_approve`) VALUES
 (9, 217, 'pang bayad sa hospital', '123456', '12/02/2019', '12/04/2019'),
-(11, 216, 'Y sidoy', '132', '11/12/2019', '11/19/2019');
+(11, 216, 'Emergency', '132', '11/12/2019', '11/19/2019'),
+(12, 216, '', '', '', ''),
+(13, 216, '', '', '', ''),
+(14, 217, '', '', '', ''),
+(15, 218, '', '', '', ''),
+(16, 218, '', '', '', ''),
+(17, 217, '', '', '', ''),
+(18, 218, '', '', '', ''),
+(19, 217, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -328,7 +393,14 @@ INSERT INTO `tbl_mem_education_attainment` (`education_id`, `member_id`, `attain
 (76, 215, 'College Grad', '', ''),
 (77, 216, 'College Grad', '', ''),
 (78, 217, 'College Grad', '', ''),
-(79, 218, 'College Grad', '', '');
+(79, 218, 'College Grad', '', ''),
+(80, 222, 'College Grad', '', ''),
+(81, 223, 'College Grad', '', ''),
+(82, 224, 'College Grad', 'Proweaver Test Kerry', ''),
+(83, 228, 'College Grad', '', ''),
+(84, 236, 'College Grad', '', ''),
+(85, 237, 'College Grad', '', ''),
+(86, 238, 'College Grad', '', '');
 
 -- --------------------------------------------------------
 
@@ -360,7 +432,14 @@ INSERT INTO `tbl_mem_eployment_information` (`employmentInfo_id`, `member_id`, `
 (74, 215, 'Student', '', '', '', '', ''),
 (75, 216, 'Student', '', '', '', '', ''),
 (76, 217, 'Student', '', '', '', '', ''),
-(77, 218, 'Student', '', '', '', '', '');
+(77, 218, 'Student', '', '', '', '', ''),
+(78, 222, 'Student', '', '', '', '', ''),
+(79, 223, 'Student', '', '', '', '', ''),
+(80, 224, 'Student', '', '', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court, 162 Little Embers Court', '', ''),
+(81, 228, 'Student', '', '', '', '', ''),
+(82, 236, 'Student', '', '', '', '', ''),
+(83, 237, 'Student', '', '', '', '', ''),
+(84, 238, 'Student', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -396,9 +475,21 @@ CREATE TABLE `tbl_mem_personal_information` (
 --
 
 INSERT INTO `tbl_mem_personal_information` (`member_id`, `acount_id`, `member_type_id`, `last_name`, `first_name`, `middle_name`, `birthdate`, `age`, `blood_type`, `birth_place`, `religion`, `email`, `nationality`, `civil_status`, `gender`, `mobile_no`, `tin`, `sss`, `pag_ibig`, `date_added`) VALUES
-(216, 'AG19B7B284BB00', 4, 'Amaba', 'Matthew Derek', 'Antig', '05/09/1996', '24', '0+', 'Dalaguete', 'Catholic', 'prospteam@gmail.com', 'Fil-Am', 'Single', 'Male', '2025550140', '', '', '', '11/26/2019'),
-(217, 'BM19F6CE1A54CB', 4, 'Morales', 'Eduardo', 'Tonion', '02/16/2009', '55', '0+', 'Dalaguete', 'TEST', 'example@proweaver.com', 'Fil-AM', 'Married', 'Male', '2025550140', '2025550140', '2025550140', '2025550140', '11/28/2019'),
-(218, 'VA195C59305160', 1, 'Kerry', 'Proweaver', 'Test', '05/09/1995', '24', '0+', 'Spring Valley', 'Catholic', 'example@proweaver.com', 'Fil-Am', 'Married', 'Male', '2025550140', '123456', '123456', '132456', '12/03/2019');
+(216, 'AG19B7B284BB00', 6, 'Amaba', 'Matthew Derek', 'Antig', '05/09/1996', '24', '0+', 'Dalaguete', 'Catholic', 'prospteam@gmail.com', 'Fil-Am', 'Single', 'Male', '09306543214', '', '', '', '11/26/2019'),
+(218, 'VA195C59305160', 6, 'Testing', 'Proweaver', 'Test', '05/09/1995', '24', '0+', 'Spring Valley', 'Catholic', 'example@proweaver.com', 'Fil-Am', 'Married', 'Male', '09056567931', '123456', '123456', '132456', '12/03/2019'),
+(222, 'AG19DD05915F24', 2, 'Kerry', 'Proweaver', 'Test', '', '', 'O', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', '12/31/2019'),
+(223, 'AG19DD079DE1D1', 2, 'Kerry', 'Proweaver', 'Test', '', '', 'O', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', '12/31/2019'),
+(224, '19E14FFDC267', 6, 'Kerry', 'Proweaver', 'Test', '', '', 'T', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', ''),
+(227, NULL, 1, 'Kerry', 'Proweaver', 'Test', '', '', 'T', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', ''),
+(228, '19E184C0F90C', 6, 'Kerry', 'Proweaver', 'Test', '', '', 'T', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', ''),
+(231, '19E19084A875', 1, 'Kerry', 'Proweaver', 'Test', '', '', 'T', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', ''),
+(232, '19E1910EE659', 1, 'Kerry', 'Proweaver', 'Test', '', '', 'T', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', ''),
+(233, '19E196BD4EAA', 1, 'Kerry', 'Proweaver', 'Test', '', '', 'T', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', ''),
+(234, '19E197BC9413', 1, 'Kerry', 'Proweaver', 'Test', '', '', 'T', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', ''),
+(235, '19E19C46CEA0', 1, 'Kerry', 'Proweaver', 'Test', '', '', 'T', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', ''),
+(236, '19E1AEAA6781', 1, 'Kerry', 'Proweaver', 'Test', '', '', 'T', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', ''),
+(237, '19E1B233485B', 1, 'Matte Red', 'Proweaver', 'Test', '', '', 'T', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', ''),
+(238, '1905EB301904', 1, 'Kerry', 'Proweaver', 'Test', '12/04/2019', '55', 'T', 'Spring Valley', 'Kerry', 'example@proweaver.com', '', 'Married', 'Male', '2025550140', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -430,7 +521,14 @@ INSERT INTO `tbl_mem_residence` (`residence_id`, `member_id`, `type_of_residence
 (74, 215, 'Owned', '', '', '', '', 0),
 (75, 216, 'Owned', '', '', '', '', 0),
 (76, 217, 'Owned', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court, 162 Little Embers Court', '', '', '', 0),
-(77, 218, 'Owned', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court', '', '', 'Michigan', 22345);
+(77, 218, 'Owned', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court', '', '', 'Michigan', 22345),
+(78, 222, 'Owned', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court, 162 Little Embers Court', 'Kamagayan', '', '', 0),
+(79, 223, 'Owned', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court, 162 Little Embers Court', 'Kamagayan', '', '', 0),
+(80, 224, 'Owned', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court, 162 Little Embers Court', '', 'Spring Valley', 'Michigan', 22345),
+(81, 228, 'Owned', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court, 162 Little Embers Court', '', '', '', 0),
+(82, 236, 'Owned', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court, 162 Little Embers Court', '', '', '', 0),
+(83, 237, 'Owned', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court, 162 Little Embers Court', '', '', '', 0),
+(84, 238, 'Owned', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court', '', '', 'Michigan', 22345);
 
 -- --------------------------------------------------------
 
@@ -462,7 +560,14 @@ INSERT INTO `tbl_mem_spouse_emp_info` (`spouse_emp_id`, `member_id`, `type_of_em
 (64, 215, 'Student', '', '', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court', '', ''),
 (65, 216, 'Student', '', '', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court', '', ''),
 (66, 217, 'Student', '', '', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court', '', ''),
-(67, 218, 'Student', '', '', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court', '', '');
+(67, 218, 'Student', '', '', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court', '', ''),
+(68, 222, 'Student', '', '', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court', '', ''),
+(69, 223, 'Student', '', '', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court', '', ''),
+(70, 224, 'Student', '', '', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court', '', ''),
+(71, 228, 'Student', '', '', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court', '', ''),
+(72, 236, 'Student', '', '', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court', '', ''),
+(73, 237, 'Student', '', '', '', '', ''),
+(74, 238, 'Student', '', '', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court', '', '');
 
 -- --------------------------------------------------------
 
@@ -495,7 +600,14 @@ INSERT INTO `tbl_mem_spouse_information` (`spouse_id`, `member_id`, `sp_last_nam
 (74, 215, '', '', '', '', '', '', ''),
 (75, 216, '', '', '', '', '', '', ''),
 (76, 217, 'Kerry', 'Proweaver', 'Test', '', '2025550140', '', ''),
-(77, 218, 'Kerry', 'Proweaver', 'Test', '', '2025550140', '', '');
+(77, 218, 'Kerry', 'Proweaver', 'Test', '', '2025550140', '', ''),
+(78, 222, '', '', '', '', '', '', ''),
+(79, 223, '', '', '', '', '', '', ''),
+(80, 224, 'Kerry', 'Proweaver', 'Test', '', '2025550140', 'United States', ''),
+(81, 228, '', '', '', '', '', '', ''),
+(82, 236, '', '', '', '', '', '', ''),
+(83, 237, '', '', '', '', '', '', ''),
+(84, 238, 'Kerry', 'Proweaver', 'Test', '', '2025550140', '', '');
 
 -- --------------------------------------------------------
 
@@ -531,9 +643,16 @@ CREATE TABLE `tbl_monetary_req` (
 --
 
 INSERT INTO `tbl_monetary_req` (`monetary_id`, `member_id`, `membership_fee`, `mortuary_prem`, `savings_deposit`, `paid_up_capital`, `total`, `amount`, `no_of_shares`, `deposited_for_subs`, `capital_share_deposit`, `loans_payable`, `credit_on_trade_payable`, `interest_on_loan_payable`, `penalties_on_trade_payable`, `time_deposit`, `penalties_on_loan_payable_2`, `sub_total`, `deductions`, `grand_total`) VALUES
-(5, 216, '450', '45', '45', '45', '585', '100', '5', '5', '100', '1', '1', '12', '1', '200', '152', '345', '167', '178'),
+(5, 216, '449', '45', '45', '45', '584', '100', '5', '5', '100', '1', '1', '12', '1', '200', '152', '345', '167', '178'),
 (6, 217, '45', '45', '45', '45', '180', '40', '52', '52', '40', '100', '50', '20', '10', '400', '148', '485', '330', '155'),
-(7, 218, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+(7, 218, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(8, 222, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(9, 223, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(10, 224, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(11, 228, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(12, 236, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(13, 237, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(14, 238, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -561,7 +680,14 @@ INSERT INTO `tbl_profile_img` (`image_id`, `member_id`, `pr_file_name`, `pr_date
 (15, '215', '191122-5dd7927b3ba0a.png', '2019-11-22'),
 (16, '216', '191128-5ddf81394d217.jpg', '2019-11-25'),
 (17, '217', '191128-5ddf81a1e3b3e.png', '2019-11-28'),
-(18, '218', '191203-5de5c59321a2d.png', '2019-12-03');
+(18, '218', '191205-5de87056051f2.jpg', '2019-12-03'),
+(19, '222', '191209-5dedd0591cdde.png', '2019-12-09'),
+(20, '223', '191209-5dedd079e1cc9.png', '2019-12-09'),
+(21, '224', '191209-5dee14ffe2a23.png', '2019-12-09'),
+(22, '228', '191209-5dee184c12b3c.jpg', '2019-12-09'),
+(23, '236', '191209-5dee1aeaa8651.jpg', '2019-12-09'),
+(24, '237', '191209-5dee1b23369ad.jpg', '2019-12-09'),
+(25, '238', '191211-5df05eb30fd1a.jpg', '2019-12-11');
 
 -- --------------------------------------------------------
 
@@ -572,23 +698,93 @@ INSERT INTO `tbl_profile_img` (`image_id`, `member_id`, `pr_file_name`, `pr_date
 CREATE TABLE `tbl_signatures` (
   `signature_id` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
-  `sg_file_name` varchar(100) NOT NULL
+  `sg_file_name` varchar(100) NOT NULL,
+  `qrcode` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_signatures`
 --
 
-INSERT INTO `tbl_signatures` (`signature_id`, `member_id`, `sg_file_name`) VALUES
-(53, 208, '191118-5dd1e64aee219.jpeg'),
-(54, 209, '191118-5dd256ac9ebb9.jpeg'),
-(55, 211, '191119-5dd3b8965b4fa.png'),
-(56, 212, 'AG19E71CA62FAF.jpeg'),
-(57, 213, 'AG19E774B27775.jpeg'),
-(58, 215, '191122-5dd7927b194ef.png'),
-(59, 216, '191125-5ddb7b284c108.jpg'),
-(60, 217, '191128-5ddf6ce1a6e5c.jpg'),
-(61, 218, '191203-5de5c59305733.png');
+INSERT INTO `tbl_signatures` (`signature_id`, `member_id`, `sg_file_name`, `qrcode`) VALUES
+(53, 208, '191118-5dd1e64aee219.jpeg', ''),
+(54, 209, '191118-5dd256ac9ebb9.jpeg', ''),
+(55, 211, '191119-5dd3b8965b4fa.png', ''),
+(56, 212, 'AG19E71CA62FAF.jpeg', ''),
+(57, 213, 'AG19E774B27775.jpeg', ''),
+(58, 215, '191122-5dd7927b194ef.png', ''),
+(59, 216, '191125-5ddb7b284c108.jpg', ''),
+(60, 217, '191128-5ddf6ce1a6e5c.jpg', ''),
+(61, 218, '191203-5de5c59305733.png', ''),
+(62, 0, '', '191206-5de9e8810b30a.png'),
+(63, 0, '', '191206-5de9e8810ee9b.png'),
+(64, 0, '', '191206-5de9ea1e7906a.png'),
+(65, 0, '', '191206-5de9ea2204005.png'),
+(66, 0, '', '191206-5de9ea2206f76.png'),
+(67, 0, '', '191206-5de9ea8285994.png'),
+(68, 0, '', '191206-5de9ea8288192.png'),
+(69, 0, '', '191206-5de9ec2597139.png'),
+(70, 0, '', '191206-5de9ec2598d3c.png'),
+(71, 0, '', '191206-5de9ec714d1d7.png'),
+(72, 0, '', '191206-5de9ec714f777.png'),
+(73, 0, '', '191206-5de9ec9102172.png'),
+(74, 0, '', '191206-5de9ec9103971.png'),
+(75, 0, '', '191206-5de9ecb287a14.png'),
+(76, 0, '', '191206-5de9ecb28a4cb.png'),
+(77, 0, '', '191206-5de9ee3a2064d.png'),
+(78, 0, '', '191206-5de9ee3a21ed1.png'),
+(79, 0, '', '191206-5de9eec862f81.png'),
+(80, 0, '', '191206-5de9eec8641a4.png'),
+(81, 0, '', '191206-5de9f03e6c206.png'),
+(82, 0, '', '191206-5de9f03e6d79c.png'),
+(83, 0, '', '191206-5de9f08e44976.png'),
+(84, 0, '', '191206-5de9f08e47813.png'),
+(85, 0, '', '191206-5de9f1178607a.png'),
+(86, 0, '', '191206-5de9f1178772e.png'),
+(87, 0, '', '191206-5de9f1264c085.png'),
+(88, 0, '', '191206-5de9f12c2edfe.png'),
+(89, 0, '', '191206-5de9f12ed6fd0.png'),
+(90, 0, '', '191206-5de9f12ee261a.png'),
+(91, 0, '', '191206-5de9f1bfc49cb.png'),
+(92, 0, '', '191206-5de9f1bfc5ec3.png'),
+(93, 0, '', '191206-5de9f2060cfe9.png'),
+(94, 0, '', '191206-5de9f2060f7df.png'),
+(95, 0, '', '191206-5de9f40d174a5.png'),
+(96, 0, '', '191206-5de9f40d1963f.png'),
+(97, 0, '', '191206-5de9f44f01797.png'),
+(98, 0, '', '191206-5de9f44f03057.png'),
+(99, 0, '', '191206-5de9f59024838.png'),
+(100, 0, '', '191206-5de9f590280a1.png'),
+(101, 0, '', '191206-5de9f5dfbd06f.png'),
+(102, 0, '', '191206-5de9f5dfbf04a.png'),
+(103, 0, '', '191206-5dea04417712a.png'),
+(104, 0, '', '191206-5dea04417b328.png'),
+(105, 0, '', '191206-5dea047080274.png'),
+(106, 0, '', '191206-5dea047081f5f.png'),
+(107, 0, '', '191206-5dea04d995d83.png'),
+(108, 0, '', '191206-5dea04d9980fa.png'),
+(109, 0, '', '191206-5dea066aa739b.png'),
+(110, 0, '', '191206-5dea066aa8ebe.png'),
+(111, 0, '', '191206-5dea06957726f.png'),
+(112, 0, '', '191206-5dea06957a629.png'),
+(113, 0, '', '191206-5dea06fad9473.png'),
+(114, 0, '', '191206-5dea06fada780.png'),
+(115, 0, '', '191206-5dea077bdbe6a.png'),
+(116, 0, '', '191206-5dea077bdf209.png'),
+(117, 0, '', '191206-5dea07c6b5de0.png'),
+(118, 0, '', '191206-5dea07c6b921b.png'),
+(119, 0, '', '191206-5dea086ec842f.png'),
+(120, 0, '', '191206-5dea088c51e2d.png'),
+(121, 0, '', '191206-5dea0a694b9ac.png'),
+(122, 0, '', '191206-5dea0a694e69e.png'),
+(123, 0, '', '191206-5dea0c9b280b1.png'),
+(124, 222, '191209-5dedd0591664e.jpg', ''),
+(125, 223, '191209-5dedd079deaf1.jpg', ''),
+(126, 224, '191209-5dee14ffdcafb.jpg', ''),
+(127, 228, '191209-5dee184c10499.jpg', ''),
+(128, 236, '191209-5dee1aeaa6bfc.jpg', ''),
+(129, 237, '191209-5dee1b2334d61.jpg', ''),
+(130, 238, '191211-5df05eb301f96.jpg', '');
 
 -- --------------------------------------------------------
 
@@ -600,18 +796,21 @@ CREATE TABLE `tbl_sms` (
   `sms_id` int(11) NOT NULL,
   `sms_title` varchar(255) NOT NULL,
   `sms_message` varchar(255) NOT NULL,
-  `sms_created` date NOT NULL
+  `sms_created` date NOT NULL,
+  `added_by` varchar(255) NOT NULL,
+  `date_modified` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_sms`
 --
 
-INSERT INTO `tbl_sms` (`sms_id`, `sms_title`, `sms_message`, `sms_created`) VALUES
-(1, 'Happy Birthday', 'Happy Birthday To You. You May have a wonderful and blessed year. More Birthdays to Come.', '2019-10-11'),
-(2, 'Due Reminder', 'This is to remind you about the payment due which is next week. Failure to report to our office will be subject to discipline.', '2019-10-11'),
-(3, 'Happy New Year!', 'Happy New Year to you and your Family. May you have a prosperous new Year!!!', '2019-10-11'),
-(4, 'Merry Christmas', 'Merry Christmas to you and your Family. May you have a wonderful and memorable Christmas', '0000-00-00');
+INSERT INTO `tbl_sms` (`sms_id`, `sms_title`, `sms_message`, `sms_created`, `added_by`, `date_modified`) VALUES
+(1, 'Happy Birthday', 'Happy Birthday To You. You May have a wonderful and blessed year. More Birthdays to Come.', '2019-10-11', '', '2019-12-09'),
+(2, 'Due Reminder', 'This is to remind you about the payment due which is next week. Failure to report to our office will be subject to discipline.', '2019-10-11', '', '2019-12-06'),
+(3, 'Happy New Year!', 'Happy New Year to you and your Family. May you have a prosperous new Year!!!', '2019-10-11', '', '2019-12-09'),
+(4, 'Merry Christmas', 'Merry Christmas to you and your Family. May you have a wonderful and memorable Christmas', '0000-00-00', '', NULL),
+(0, 'Sample greetings', 'Sample greetings', '2019-12-05', 'admin', NULL);
 
 -- --------------------------------------------------------
 
@@ -626,6 +825,13 @@ CREATE TABLE `tbl_token` (
   `date_generated` date NOT NULL,
   `info_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_token`
+--
+
+INSERT INTO `tbl_token` (`token_id`, `token`, `status`, `date_generated`, `info_id`) VALUES
+(1, 'tcMafE1R7hHZYZBkuJ4UrBPSu', 0, '2019-12-04', 1);
 
 -- --------------------------------------------------------
 
@@ -649,9 +855,10 @@ CREATE TABLE `tbl_to_receives_benefits` (
 --
 
 INSERT INTO `tbl_to_receives_benefits` (`benefit_id`, `member_id`, `type`, `full_name`, `birthdate`, `age`, `relationship`, `date_added`) VALUES
-(23, 216, 'Primary', 'Matthew Derek', '05/03/1995', 24, 'BAGYONG TISOY', ''),
-(24, 216, 'Secondary', 'Matthew Derek', '01/19/1995', 24, 'BAGYONG TISOY', ''),
-(25, 216, 'Primary', 'Matthew Derek', '05/03/1995', 24, 'BAGYONG TISOY', '');
+(23, 216, 'Primary', 'Matthew Derek', '05/03/1995', 24, 'Web2 TEST', ''),
+(24, 216, 'Secondary', 'Matthew Derek', '01/19/1995', 24, 'Prweaver Test', ''),
+(25, 216, 'Primary', 'Matthew Derek', '05/03/1995', 24, 'TEST', ''),
+(26, 217, 'Primary', 'Matthew Derek', '05/06/2013', 6, 'TISOY', '');
 
 -- --------------------------------------------------------
 
@@ -665,8 +872,8 @@ CREATE TABLE `tbl_user_credentials` (
   `branch_id` int(20) NOT NULL,
   `username` varchar(200) NOT NULL,
   `password` varchar(200) NOT NULL,
-  `user_type` int(10) NOT NULL,
-  `status` int(2) NOT NULL,
+  `user_type` int(10) NOT NULL COMMENT '0 - guest, 1 - Staff, 2 - SuperAdmin ',
+  `status` int(2) NOT NULL COMMENT '1-active , 0 - inactive',
   `date_added` date NOT NULL,
   `date_updated` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -676,8 +883,10 @@ CREATE TABLE `tbl_user_credentials` (
 --
 
 INSERT INTO `tbl_user_credentials` (`credentials_id`, `info_id`, `branch_id`, `username`, `password`, `user_type`, `status`, `date_added`, `date_updated`) VALUES
-(1, 1, 1, 'admin', 'admin', 0, 1, '2019-09-26', '2019-09-26'),
-(6, 15, 1, 'user@a.com', 'test', 0, 1, '2019-10-10', '2019-10-10');
+(1, 1, 1, 'admin', 'admin', 2, 1, '2019-09-26', '2019-09-26'),
+(6, 15, 1, 'user1', 'user1', 1, 1, '2019-10-10', '2019-10-10'),
+(7, 16, 2, 'user', 'user', 3, 0, '2019-12-04', '2019-12-04'),
+(9, 18, 1, 'user123', 'user123', 3, 0, '2019-12-05', '2019-12-05');
 
 -- --------------------------------------------------------
 
@@ -701,7 +910,15 @@ CREATE TABLE `tbl_user_informations` (
 
 INSERT INTO `tbl_user_informations` (`info_id`, `firstname`, `middlename`, `lastname`, `email`, `date_added`, `last_logged_in`) VALUES
 (1, 'Proweaver', 'Derek', 'Web2', 'prospteam@gmail.com', '2019-09-26', '2019-09-26'),
-(15, 'Proweaverrrr', 'Test', 'Kerry', 'example@proweaver.com', '2019-10-10', '0000-00-00');
+(15, 'Proweaverrrr', 'Test', 'Kerry', 'example@proweaver.com', '2019-10-10', '0000-00-00'),
+(16, 'Proweaver Nicole ', '-', 'Cilley', 'test@gmail.com', '2019-12-04', '0000-00-00'),
+(18, 'Proweaver Nicole', '-', 'Cilley', 'test@test.com', '2019-12-05', '0000-00-00'),
+(19, 'Petey', 'Kerry', 'Peter', 'example@proweaver.com', '2019-12-05', '0000-00-00'),
+(20, 'Sue', 'Petey', 'Cliff', 'proweaver@example.com', '2019-12-05', '0000-00-00'),
+(21, 'Uy', 'Anna', 'Uy', 'example@proweaver.com', '2019-12-05', '0000-00-00'),
+(22, 'Marion', 'Hollyy', 'Cliff', 'proweaverrrr@example.com', '2019-12-05', '0000-00-00'),
+(23, 'Cruiser', 'Sue', 'Bobb', 'proweaver@example.com', '2019-12-05', '0000-00-00'),
+(24, 'Bob', 'Brock', 'Anna', 'example@proweaver.com', '2019-12-05', '0000-00-00');
 
 --
 -- Indexes for dumped tables
@@ -712,6 +929,12 @@ INSERT INTO `tbl_user_informations` (`info_id`, `firstname`, `middlename`, `last
 --
 ALTER TABLE `tbl_account_info`
   ADD PRIMARY KEY (`account_info_id`);
+
+--
+-- Indexes for table `tbl_applicant_access`
+--
+ALTER TABLE `tbl_applicant_access`
+  ADD PRIMARY KEY (`applicant_id`);
 
 --
 -- Indexes for table `tbl_branch`
@@ -859,7 +1082,13 @@ ALTER TABLE `tbl_user_informations`
 -- AUTO_INCREMENT for table `tbl_account_info`
 --
 ALTER TABLE `tbl_account_info`
-  MODIFY `account_info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `account_info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `tbl_applicant_access`
+--
+ALTER TABLE `tbl_applicant_access`
+  MODIFY `applicant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_branch`
@@ -871,13 +1100,13 @@ ALTER TABLE `tbl_branch`
 -- AUTO_INCREMENT for table `tbl_contact_group`
 --
 ALTER TABLE `tbl_contact_group`
-  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_financial_info`
 --
 ALTER TABLE `tbl_financial_info`
-  MODIFY `financial_info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `financial_info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT for table `tbl_holiday`
@@ -889,7 +1118,7 @@ ALTER TABLE `tbl_holiday`
 -- AUTO_INCREMENT for table `tbl_id_logs`
 --
 ALTER TABLE `tbl_id_logs`
-  MODIFY `logs_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `logs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_insured_dependents`
@@ -913,7 +1142,7 @@ ALTER TABLE `tbl_member_types`
 -- AUTO_INCREMENT for table `tbl_member_withdrawal`
 --
 ALTER TABLE `tbl_member_withdrawal`
-  MODIFY `withdraw_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `withdraw_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tbl_mem_beneficiaries`
@@ -925,79 +1154,79 @@ ALTER TABLE `tbl_mem_beneficiaries`
 -- AUTO_INCREMENT for table `tbl_mem_education_attainment`
 --
 ALTER TABLE `tbl_mem_education_attainment`
-  MODIFY `education_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `education_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT for table `tbl_mem_eployment_information`
 --
 ALTER TABLE `tbl_mem_eployment_information`
-  MODIFY `employmentInfo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `employmentInfo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `tbl_mem_personal_information`
 --
 ALTER TABLE `tbl_mem_personal_information`
-  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=219;
+  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=239;
 
 --
 -- AUTO_INCREMENT for table `tbl_mem_residence`
 --
 ALTER TABLE `tbl_mem_residence`
-  MODIFY `residence_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `residence_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `tbl_mem_spouse_emp_info`
 --
 ALTER TABLE `tbl_mem_spouse_emp_info`
-  MODIFY `spouse_emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `spouse_emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `tbl_mem_spouse_information`
 --
 ALTER TABLE `tbl_mem_spouse_information`
-  MODIFY `spouse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `spouse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `tbl_monetary_req`
 --
 ALTER TABLE `tbl_monetary_req`
-  MODIFY `monetary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `monetary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_profile_img`
 --
 ALTER TABLE `tbl_profile_img`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `tbl_signatures`
 --
 ALTER TABLE `tbl_signatures`
-  MODIFY `signature_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `signature_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
 -- AUTO_INCREMENT for table `tbl_token`
 --
 ALTER TABLE `tbl_token`
-  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_to_receives_benefits`
 --
 ALTER TABLE `tbl_to_receives_benefits`
-  MODIFY `benefit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `benefit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `tbl_user_credentials`
 --
 ALTER TABLE `tbl_user_credentials`
-  MODIFY `credentials_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `credentials_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_user_informations`
 --
 ALTER TABLE `tbl_user_informations`
-  MODIFY `info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
