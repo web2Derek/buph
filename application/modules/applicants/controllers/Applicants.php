@@ -17,7 +17,7 @@ class Applicants extends Applicant_Controller{
   }
 
   public function members_account() {
-    $this->load_member('member_page');
+    $this->load_member('membership_form', '');
   }
 
   public function member_account() {
@@ -30,11 +30,10 @@ class Applicants extends Applicant_Controller{
       $mem_user = $post['mem-username'];
       $mem_pass = $post['mem-password'];
       $where['where'] = array('username' => $mem_user, 'password' => $mem_pass);
-      $result = $this->MY_Model->getRows('tbl_applicant_access', $where, 'row');
+      $result = $this->MY_Model->getRows('tbl_user_credentials', $where, 'row');
 
       if($result){
-          if ($result->password == $mem_pass) {
-
+          if ($result->user_type == 3) {
             $session = array('logged_in' => true, 'first_name' => $mem_user);
             $this->session->set_userdata($session);
             $this->members_account();

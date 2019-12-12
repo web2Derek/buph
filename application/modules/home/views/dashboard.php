@@ -25,16 +25,17 @@
                   <div class="col-md-12">
                     <h4 class="card-title">Total Member Summary</h4>
                        <div class="table-responsive">
-                             <table class="table color-table table-striped success-table">
+                             <table class="table color-table table-striped success-table" id="members_range">
                                  <thead>
                                      <tr>
                                          <th>Member</th>
-                                         <th>Male</th>
                                          <th>Female</th>
+                                         <th>Male</th>
                                      </tr>
                                  </thead>
-                                 <tbody>
-                                     <tr>
+                                 <tbody class="table_body_data">
+
+                                      <!-- <tr>
                                          <td>18-30 years old</td>
                                          <td>10</td>
                                          <td>10</td>
@@ -62,7 +63,7 @@
                                      <tr>
                                          <td>61-70 years old</td>
                                          <td>10</td>
-                                         <td>10</td>
+                                         <td>10</td> -->
                                      <!-- </tr>
                                          <td>71 and above years old</td>
                                          <td>10</td>
