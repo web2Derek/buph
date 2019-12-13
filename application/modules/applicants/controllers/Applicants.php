@@ -16,6 +16,10 @@ class Applicants extends Applicant_Controller{
     // }
   }
 
+  public function depositors_signature() {
+    $this->load_member('signature_depositor', '');
+  }
+
   public function members_account() {
     $this->load_member('membership_form', '');
   }
@@ -157,7 +161,7 @@ class Applicants extends Applicant_Controller{
           $where = array('member_id' => $pi_id );
           $insert_account_id_data = array('acount_id' => $account_id);
           $execute = $this->MY_Model->update('tbl_mem_personal_information' , $insert_account_id_data , $where );
-          // $profile_image = $this->profileUpload();
+          $profile_image = $this->profileUpload();
 
           if($execute){
             try {
@@ -334,7 +338,7 @@ class Applicants extends Applicant_Controller{
                 $this->MY_Model->update('tbl_financial_info' , $main_data[2] , $where);
                 $this->MY_Model->update('tbl_financial_info' , $main_data[3] , $where);
                 $this->MY_Model->insert('tbl_signatures'     , $signature);
-                // $this->MY_Model->insert('tbl_profile_img'    , $profile_image);
+                $this->MY_Model->insert('tbl_profile_img'    , $profile_image);
                 $this->MY_Model->insert('tbl_account_info'   , $acount_info);
                 $this->MY_Model->insert('tbl_monetary_req'   , $monetary);
                 $this->MY_Model->insert('tbl_id_logs'   , $id_logs);
@@ -447,37 +451,27 @@ public function updateSignatureImage(){
   echo json_encode($results);
 }
 
-public function updateProfileImage(){
-  $member_id = $this->input->post('member_id');
-
-  $results = array();
+public function profileUpload(){
   $available_file = array('jpg' , 'jpeg' , 'png');
   $file_type = pathinfo($_FILES['profile_new']['name'], PATHINFO_EXTENSION);
   $config['upload_path'] = './assets/profile/';
   $config['allowed_types'] = '*';
   $config['max_size'] = 2000;
   $config['file_name'] =  date('ymd').'-'.uniqid('' , false);
+
   $this->load->library('upload', $config);
+
   if(in_array($file_type , $available_file)){
     if ($this->upload->do_upload('profile_new')) {
-      $file_name = $config['file_name'].'.'.$file_type;
-      $where = array('member_id' => $member_id);
-      $set = array('pr_file_name' => $file_name);
-      $update = $this->MY_Model->update('tbl_profile_img' , $set , $where);
-      if ($update) {
-        $results = array('status' => 'Success' , 'msg' => 'Member profile updated.');
-      }else{
-        $results = array('status' => 'Error' , 'msg' => 'Something went wrong while uploading the image.Please try again');
-      }
+      return $config['file_name'].'.'.$file_type;
     }else{
-      $results = array('status' => 'Error' , 'msg' => $this->upload->display_errors());
+      return array('error' => $this->upload->display_errors()['error']);
     }
   } else {
-    $results = array('status' => 'Error' , 'msg'=> 'Invalid file type');
+    return array('error' => 'Invalid file types.');
   }
-
-  echo json_encode($results);
 }
+
 
 public function member_id(){
   if($this->session->has_userdata('logged_in')) {

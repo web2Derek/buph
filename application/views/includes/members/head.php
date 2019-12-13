@@ -13,9 +13,10 @@
   <!-- FOR SIGNATURE -->
   <script type="text/javascript" src="<?php echo base_url();?>custom/signature/js/theme.jquery-ui.js"></script>
   <link rel="stylesheet" href="<?php echo base_url(); ?>custom/signature/css/jquery.signature.css">
-  <script src="<?php echo base_url(); ?>custom/signature/js/jquery.signature.min.js" charset="utf-8"></script>
+  <script src="<?php echo base_url(); ?>custom/signature/js/jquery.signature.min.js" charset="utf-8">=
+  </script>
 
-</script>
+
 
 <!-- END SIGNATURE -->
 <!-- <link rel="stylesheet" type="text/css" href="<?php //echo base_url() ?>assets/node_modules/datatables.net-bs4/css/responsive.dataTables.min.css"> -->
@@ -41,6 +42,7 @@ href="<?php echo base_url() ?>assets/node_modules/datatables.net-bs4/css/dataTab
 <link href="<?php echo base_url() ?>assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url() ?>assets/node_modules/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
 <link href="<?php echo base_url() ?>assets/node_modules/wizard/steps.css" rel="stylesheet">
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/node_modules/dropify/dist/css/dropify.min.css">
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">

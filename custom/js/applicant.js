@@ -94,15 +94,16 @@ $(document).ready(function() {
       emailAddress: {
         email: true
       },
-      zip_code: {
-        digit: true,
-      }
+      // zip_code: {
+      //   digit: true,
+      //   required: true
+      // }
     }
   })
 
   // CALCULATE MEMBERS AGE
-  var membdate = $('#birthdate').val();
-  var datenow = new Date().toLocaleDateString();
-  alert(Math.floor(membdate - datenow));
-  alert(membdate);
+//   var membdate = $('#birthdate').val();
+//   var datenow = new Date().toLocaleDateString();
+//   alert(Math.floor(membdate - datenow));
+//   alert(membdate);
 })
