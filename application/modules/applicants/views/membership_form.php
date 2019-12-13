@@ -35,7 +35,7 @@
                   <div class="col-md-2 col-sm-12">
                     <div class="form-group">
                       <label for="">Birthdate</label>
-                      <input type="text" class="form-control mydatepicker" name="birthdate" value="" autocomplete="off" required>
+                      <input type="text" class="form-control mydatepicker" id="birthdate" name="birthdate" value="" autocomplete="off" required>
                     </div>
                   </div>
                   <div class="col-md-2 col-sm-12">
@@ -71,7 +71,7 @@
                   <div class="col-md-4 col-sm-12">
                     <div class="form-group">
                       <label for="">Email Address</label>
-                      <input type="text" class="form-control" name="emailAddress" value="" required>
+                      <input type="text" class="form-control" name="emailAddress" id="emailAddress" value="" required>
 
                     </div>
                   </div>
@@ -185,7 +185,7 @@
               <div class="col-md-4 col-sm-12">
                 <div class="form-group">
                   <label for="">Zip Code</label>
-                  <input type="text" class="form-control" name="zip_code" value="" required>
+                  <input type="text" class="form-control" name="zip_code" id="zip_code" value="" required>
                 </div>
               </div>
             </div>
@@ -712,7 +712,7 @@
             </div>
 
             <div class="row">
-              <h4 class="mb-3">Attach signature here:</h3>
+              <h4 class="mb-3">Please Sign Below:</h3><br>
                 <div class="col-md-6 col-sm-12">
                   <input type="hidden" id="testsignature" name="member_signature">
                   <div id="signaturetab" style="width:400px; height: 200px"></div>
