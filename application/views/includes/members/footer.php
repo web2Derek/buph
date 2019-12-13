@@ -72,7 +72,10 @@
 <script src="<?php echo base_url(); ?>custom/js/applicant.js"></script>
 <script>
     // $('.dropify').dropify();
-    $('#signaturetab').signature({syncField:'#testsignature' , syncFormat : 'PNG'});
+    $('#agreementSignature').signature({syncField:'#signaturedata' , syncFormat : 'PNG'});
+    $('#btnclear_agree').on('click' , function() {
+        $('#agreementSignature').signature('clear');
+    });
    //
    //  $('#clear_signature').on('click' , function() {
    //      $('#signaturetab').signature('clear');

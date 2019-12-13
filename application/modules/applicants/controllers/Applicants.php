@@ -479,21 +479,32 @@ public function updateProfileImage(){
   echo json_encode($results);
 }
 
-public function member_id(){
-  if($this->session->has_userdata('logged_in')) {
-    $params['select'] = "CONCAT(last_name ,',',first_name,',' , middle_name) as membername , acount_id , member_id";
-    // $params['where'] = array(
-    //     'member_type_id' => 2
-    // );
-    // $params['or_where'] = array(
-    //     'member_type_id' => 6
-    // );
-    $data['list'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params);
-    $this->load_page('memberId_v' , $data);
-  } else {
-    redirect(base_url('login'));
-  }
+        public function member_id(){
+            if($this->session->has_userdata('logged_in')) {
+                $params['select'] = "CONCAT(last_name ,',',first_name,',' , middle_name) as membername , acount_id , member_id";
+                // $params['where'] = array(
+                //     'member_type_id' => 2
+                // );
+                // $params['or_where'] = array(
+                //     'member_type_id' => 6
+                // );
+                $data['list'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params);
+                $this->load_page('memberId_v' , $data);
+                } else {
+                    redirect(base_url('login'));
+                }
 
-}
+        }
+
+        public function agreementform(){
+            $this->load_member('agreementform' , '');
+        }
+
+        public function submitAgreement(){
+            $post = $this->input->post();
+            echo "<pre>";
+            print_r($post);
+            die();
+        }
 
 }

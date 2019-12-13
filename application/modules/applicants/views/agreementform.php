@@ -157,7 +157,7 @@
                             </div>
                             <div class="col-md-12">
                                 <p>
-                                    a. Subscribe to at least <span><input type="text"></span> shares and pay the value of at least <span><input type="text"></span>shares upan approval
+                                    a. Subscribe to at least <span><input type="text" name="shares"> </span>  shares and pay the value of at least <span><input type="text" name="share_upan_approval"></span>shares upan approval
                                     of the applications for membership (each share is valued at &#8369;1,000 )
                                 </p>
                                 <p>
@@ -177,8 +177,15 @@
                             </div>
                         </div>
                         <div class="row">
-                            <input type="hidden" id="signaturedata" name="member_signature">
-                            <div id="signaturetab" style="width:400px; height: 200px"></div>
+                            <div class="col-md-6">
+                                <input type="hidden" id="signaturedata" name="signaturedata">
+                                <div id="agreementSignature" style="width:400px; height: 200px"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-sm btn-success" id="btnclear_agree">Clear</button>
+                            </div>
                         </div>
                         <hr>
 

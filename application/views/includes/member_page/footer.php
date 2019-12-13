@@ -43,6 +43,7 @@ $('document').ready(function(){
 
     $('#signaturetab').signature({syncField:'#signaturedata' , syncFormat : 'PNG'});
 
+
     $('#clear_signature').on('click' , function() {
         $('#signaturetab').signature('clear');
     });

@@ -6,34 +6,49 @@
 // })
 
 $(document).ready(function() {
-
-  // MEMBERS REGISTRATION
-  $('#member_reg_form').on('submit', function(e) {
-    e.preventDefault();
-    clearError();
     let url = $('#base_url').val();
-    let formdata = $(this).serializeArray();
-    $.ajax({
-      method: "POST",
-      url: url + "applicants/members_registration",
-      data: formdata,
-      dataType: 'json',
-      success: function(response) {
-        if(response.form_error) {
-          let err = Object.keys(response.form_error);
-          $(err).each(function(index, value) {
-            $('input[name="'+value+'"]').next('.mem-err').text(response.form_error[value]);
-          })
-        } else {
-          $('#member_reg_form')[0].reset();
-          Swal.fire(' Successfully Registered!','You can now login');
-        }
-      },
-      error:function(xhr, thrownError, ajaxOptions) {
-        Swal.fire(' Error!','Something went Wrong');
-      }
-    })
-  })
+  // MEMBERS REGISTRATION
+    $('#member_reg_form').on('submit', function(e) {
+        e.preventDefault();
+        clearError();
+        let formdata = $(this).serializeArray();
+        $.ajax({
+            method: "POST",
+            url: url + "applicants/members_registration",
+            data: formdata,
+            dataType: 'json',
+            success: function(response) {
+                if(response.form_error) {
+                    let err = Object.keys(response.form_error);
+                    $(err).each(function(index, value) {
+                    $('input[name="'+value+'"]').next('.mem-err').text(response.form_error[value]);
+                    })
+                } else {
+                    $('#member_reg_form')[0].reset();
+                    Swal.fire(' Successfully Registered!','You can now login');
+                }
+            },
+                error:function(xhr, thrownError, ajaxOptions) {
+                Swal.fire(' Error!','Something went Wrong');
+            }
+        })
+    });
+
+    $(document).on('submit' , '#submitAgreement' , function(e) {
+        e.preventDefault();
+        let formdata = new FormData($(this)[0]);
+        $.ajax({
+            url : url + 'applicants/submitAgreement',
+            method : 'POST',
+            data : formdata,
+            processData: false,
+            contentType: false,
+            dataType : 'json',
+            success : function(e){
+                    console.log(e);
+            }
+        });
+    });
 
 
   // CLEAR ERROR
@@ -103,6 +118,6 @@ $(document).ready(function() {
   // CALCULATE MEMBERS AGE
   var membdate = $('#birthdate').val();
   var datenow = new Date().toLocaleDateString();
-  alert(Math.floor(membdate - datenow));
-  alert(membdate);
+  // alert(Math.floor(membdate - datenow));
+  // alert(membdate);
 })
