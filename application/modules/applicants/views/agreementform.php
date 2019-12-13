@@ -15,11 +15,11 @@
             <div class="card">
                 <div class="card-header"><h2>MEMBERSHIP AND SUBSCRIPTION AGREEMENT</h2></div>
                 <div class="card-body">
-                    <form id="submitAgreement">
+                    <form id="submitAgreement" method="post">
                         <p>The Board of Directors</p>
-                        <p>I <span><input type="text"></span>
+                        <p>I <span><input type="text" name="applicant_name"></span>
                             a resident of
-                            <span><input type="text"></span>
+                            <span><input type="text" name="applicant_address"></span>
                             hereby agree to be a member of the Bukidnon Parmaceutical Multi Purpose Cooperative (BUPHARCO) after having
                             attended The Pre-Membership Education Seminar,paid and submitted the following requirements:
                         </p>
@@ -44,20 +44,13 @@
                                         b. Mortuary Premium
                                     </div>
                                     <div class="col-md-3">
-                                        &#8369;350.00
+                                        &#8369;810.00
                                     </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="col-md-3">
-                                        c. Savings deposit (at least)
-                                    </div>
-                                    <div class="col-md-3">
-                                        &#8369;400.00
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        d. Paid-up Capital
+                                        c. Paid-up Capital
                                     </div>
                                     <div class="col-md-3">
                                         &#8369;2,000.00
@@ -68,11 +61,12 @@
                                         Total:
                                     </div>
                                     <div class="col-md-3">
-                                        &#8369;3,000.00
+                                        &#8369;3,060.00
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <br>
                         <div class="row">
                             <div class="col-md-3">
                                 <h5><strong>2. Documentary Requirements:</strong></h5>
@@ -88,7 +82,7 @@
                                         <input type="checkbox" class="check" id="filled_up" name="filled_up" data-checkbox="icheckbox_square-green">
                                         <label for="filled_up"></label>
                                     </div>
-                                </div>
+                                </div> <br>
                                 <div class="row">
                                     <div class="col-md-3">
                                         b. 2pcs. 2x2 ID picture
@@ -97,50 +91,15 @@
                                         <input type="checkbox" class="check" id="id_picture" name="id_picture" data-checkbox="icheckbox_square-green">
                                         <label for="id_picture"></label>
                                     </div>
-                                </div>
+                                </div> <br>
+
                                 <div class="row">
                                     <div class="col-md-3">
-                                        c. Cedula
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input type="checkbox" class="check" id="cedula" name="cedula" data-checkbox="icheckbox_square-green">
-                                        <label for="cedula"></label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        d. Marriage Certificate
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input type="checkbox" class="check" id="marriage_cert" name="marriage_cert" data-checkbox="icheckbox_square-green">
-                                        <label for="marriage_cert"></label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        e. Birth Certificate (If single and for beneficiaries)
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input type="checkbox" class="check" id="birth_cert" name="birth_cert" data-checkbox="icheckbox_square-green">
-                                        <label for="birth_cert"></label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        f. TIN
+                                        c. TIN
                                     </div>
                                     <div class="col-md-3">
                                         <input type="checkbox" class="check" id="tin" name="tin" data-checkbox="icheckbox_square-green">
                                         <label for="tin"></label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        g. Sketch (use the sheet provided)
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input type="checkbox" class="check" id="sketch" name="sketch" data-checkbox="icheckbox_square-green">
-                                        <label for="sketch"></label>
                                     </div>
                                 </div>
                             </div>
