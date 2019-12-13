@@ -69,16 +69,23 @@
 <script src="<?php echo base_url();?>custom/js/selectjs.js" charset="utf-8"></script>
 <script src="<?php echo base_url();?>assets/node_modules/wizard/jquery.steps.min.js"></script>
 <script src="<?php echo base_url();?>assets/node_modules/wizard/jquery.validate.min.js"></script>
-<!-- Sweet-Alert  -->
-<script src="<?php echo base_url();?>assets/node_modules/sweetalert/sweetalert.min.js"></script>
-<script src="<?php echo base_url();?>assets/node_modules/wizard/steps.js"></script>
+<script src="<?php echo base_url(); ?>custom/js/applicant.js"></script>
 <script>
     // $('.dropify').dropify();
-    // $('#signaturetab').signature({syncField:'#testsignature' , syncFormat : 'PNG'});
-    //
-    // $('#clear_signature').on('click' , function() {
-    //     $('#signaturetab').signature('clear');
-    // });
+    $('#signaturetab').signature({syncField:'#testsignature' , syncFormat : 'PNG'});
+   //
+   //  $('#clear_signature').on('click' , function() {
+   //      $('#signaturetab').signature('clear');
+   //  });
+   //
+    $('.dropify').dropify({
+     messages: {
+        'default': 'Drag and drop an image here or click',
+        'replace': 'Drag and drop or click to replace',
+        'remove':  'Change',
+        'error':   'Something went wrong. Please try again.'
+      }
+   });
 
 </script>
 </body>

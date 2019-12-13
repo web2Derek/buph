@@ -777,6 +777,7 @@
               <div class="col-md-6 col-sm-12">
                 <!-- <input type="hidden" id="testsignature" name="member_signature">
                 <div id="signaturetab" style="width:400px; height: 200px"></div> -->
+
                 <label for="input-file-now">Attach signature here:</label>
                 <?php if ($isEdit && !empty($info->sg_file_name)): ?>
                   <input type="file" name="signature_edit" id="signature_edit" class="dropify" data-max-file-size-preview="5M" data-allowed-file-extensions="jpg png jpeg" data-default-file="<?php echo base_url() ?>assets/signatures/members/<?php echo $info->sg_file_name; ?>"/>

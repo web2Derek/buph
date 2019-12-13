@@ -16,7 +16,8 @@
     <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
     <!-- FOR SIGNATURE -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>custom/signature/css/jquery.signature.css">
-    <script src="<?php echo base_url(); ?>custom/signature/js/jquery.signature.min.js" charset="utf-8"></script>
+    <script src="<?php echo base_url(); ?>custom/signature/js/jquery.signature.min.js" charset="utf-8">
+    </script>
     <!-- END SIGNATURE -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/node_modules/datatables.net-bs4/css/responsive.dataTables.min.css">
     <!-- date picker -->
@@ -225,9 +226,8 @@
                                         <div class="dw-user-box">
                                             <div class="u-img"><img src="<?php echo base_url(); ?>assets/images/gallery/profile.jpg" alt="user"></div>
                                             <div class="u-text">
-                                                <h4><?php echo sesdata('username'); ?></h4>
-
-                                                <p class="text-muted"><?php echo sesdata('email'); ?></p></div>
+                                                <h4><?php echo $_SESSION['email'] ;?></h4>
+                                              </div>
                                         </div>
                                     </li>
                                     <li role="separator" class="divider"></li>
