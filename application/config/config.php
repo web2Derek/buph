@@ -27,11 +27,7 @@ $config['modules_locations'] = array(
 |
 */
 // $base_url = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-<<<<<<< HEAD
 $config['base_url'] = 'http://localhost/buph/';
-=======
-$config['base_url'] = 'http://localhost/Project/buph/';
->>>>>>> 1fe9290a1d4aa5caed2126baf7857c83be81c472
 
 /*
 |--------------------------------------------------------------------------
