@@ -76,6 +76,7 @@
     $('#signaturetab1').signature({syncField:'#testsignature1' , syncFormat : 'PNG'});
     $('#signaturetab2').signature({syncField:'#testsignature2' , syncFormat : 'PNG'});
     $('#signaturetab3').signature({syncField:'#testsignature3' , syncFormat : 'PNG'});
+    $('#agreementform_sig').signature({syncField:'#agre_sig_val' , syncFormat : 'PNG'});
 
    //
    //  $('#clear_signature').on('click' , function() {

@@ -490,4 +490,46 @@ public function member_id(){
 
 }
 
+    public function agreementform() {
+      $this->load_member('agreement_v');
+    }
+
+    public function submitAgreement() {
+      $post = $this->input->post();
+      $member_id = "AG19B7B284BB00";
+
+      $docs = array(
+        'filled_form' => isset($post['filled_up_form']) ? true : false,
+        '2x_id' => isset($post['2x_id'] ) ? true : false,
+        'tin' => isset($post['tin']) ? true : false,
+      );
+
+      $item = array(
+          'member_id' => $member_id,
+          'doc_requirements' => json_encode($docs),
+          'subs_atleast' => $post['atleast_'],
+          'value_atleast' => $post['atleast_2'],
+          'date_added' => date('Y-m-d')
+      );
+
+      $insert = $this->MY_Model->insert('tbl_applicant_agreement' ,$item );
+        if ($insert) {
+            $filename = $this->agreementSignatureConvert($post['agre_sig_val']);
+            $itm = array('signature_file' => $filename);
+            $where = array('agreement_id' => $insert);
+            $this->MY_Model->update('tbl_applicant_agreement' ,$itm, $where);
+        }
+    }
+
+    public function agreementSignatureConvert($base64){
+      $folderPath = "./assets/signatures/applicants/";
+      $base64_string = explode(";base64,", $base64);
+      $image_base64 = base64_decode($base64_string[1]);
+      $file_name = date('ymd').'-'.uniqid('' , false).".png";
+      $file = $folderPath . $file_name;
+      file_put_contents($file, $image_base64);
+      return $file_name;
+      // return "$account_id.png";
+    }
+
 }
