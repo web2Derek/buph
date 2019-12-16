@@ -201,7 +201,7 @@ $(document).ready(function() {
               }},
               {"data" : "branch_name"},
               {"data":"branch_id","render": function(data, type, row,meta){
-
+                        console.log(row.user_loggedin_type);
                         var str = '';
                         str += `
                         <div class="btn-group">
@@ -811,7 +811,7 @@ Swal.fire({
             let url = $('#base_url').val() + 'members/AddNewMember';
             let formData = new FormData(this);
             let profile_new = $('#profile_new').prop('files')[0];
-            
+
             formData.append('profile_new' , profile_new);
             $.ajax({
                 method : 'POST',

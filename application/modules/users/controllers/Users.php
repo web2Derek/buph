@@ -70,12 +70,14 @@ class Users extends MY_Controller {
         $group = array();
         $list = datatables('tbl_user_credentials',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
         $final_output = array();
+
         foreach($list['data'] as $key => $value){
             foreach($value as $k => $v){
                 $final_output[$key][$k] = $v;
                 $final_output[$key]['user_loggedin_type'] = sesdata('user_type');
             }
         }
+        
         $output = array(
                 "draw" => $draw,
                 "recordsTotal" => $list['count_all'],
