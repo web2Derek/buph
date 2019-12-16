@@ -1,7 +1,62 @@
 $(document).ready(function() {
   $('.mydatepicker').datepicker();
   var base_url = $('#base_url').val();
+
   $('#memberlist_id').DataTable();
+  var memberlist = $('#memberlist').DataTable({
+    "processing": true, //Feature control the processing indicator.
+    "serverSide": true, //Feature control DataTables' server-side processing mode.
+    "order": [[0,'desc']], //Initial no order.
+    "columns":[
+      {"data":"first_name" , "render" : function(data, type, row,meta) {
+        var str = row.first_name+ ' ' +row.last_name;
+        return str;
+      }
+    },
+    {"data":"acount_id"},
+    {"data":"title"},
+    {"data":"birthdate"},
+    {"data":"age"},
+    {"data":"blood_type"},
+    {"data":"gender"},
+    {"data":"civil_status"},
+    {"data":"religion"},
+    {"data":"branch_name"},
+    {"data":"acount_id" , "render" : function(data, type, row,meta) {
+      var str = '';
+      str = `
+      <a href="javascript:;" title="Account Information">
+      <button type="button" data-toggle="modal" data-target="#accountInfo" class="btn waves-effect waves-light btn-outline-warning btn-sm accountInfo" member-data=${row.member_id} name="accountInfo" ><i class="ti-user"></i></button>
+      </a>
+      <a title="Edit Member" href="${base_url}members/viewMember/${row.member_id}">
+      <button type="button" class="btn waves-effect waves-light btn-outline-warning btn-sm" ><i class="far fa-edit"></i></button>
+      </a>
+      <a href="javascript:;" title="View Member Details">
+      <button type="button" data-toggle="modal" data-target="#viewMember" class="btn waves-effect waves-light btn-outline-warning btn-sm viewMember" name="viewMember" member-data=${row.member_id}><i class="fa fa-eye"></i></button>
+      </a>
+      <a href="javascript:;">
+      <button type="button" class="btn waves-effect waves-light btn-outline-warning btn-sm" name="button"><i class="fa fa-trash"></i></button>
+      </a>
+      <a href="javascript:;" title="Approve Member">
+      <button type="button" class="btn waves-effect waves-light btn-outline-warning btn-sm" name="button"><i class="fa fa-check"></i></button>
+      </a>
+      `;
+      return str;
+    }}
+  ],
+  // Load data for the table's content from an Ajax source
+  "ajax": {
+    "url": base_url+"members/getMembers",
+    "type": "POST"
+  },
+  //Set column definition initialisation properties.
+  "columnDefs": [
+    {
+      "targets": [10], //first column / numbering column
+      "orderable": true, //set not orderable
+    },
+  ],
+});
 
         var memberlist = $('#memberlist').DataTable({
             "processing": true, //Feature control the processing indicator.
@@ -725,7 +780,6 @@ $('input[name="source_farmer"]').click(function() {
   }
 })
 
-
 $('input[name="source_others"]').click(function() {
   if ($(this).prop('checked') == true) {
     $('#if_others').fadeIn();
@@ -847,7 +901,7 @@ $('#update_mem').on('submit' , function(e) {
 // Member ID Section
 
 // add to list
-$('.addtolist').on('click' , function() {
+$(document).on('click' , '.addtolist' , function() {
   let key = $(this).attr('remove_id');
   if ($(this).prop('checked') == true) {
     let clone = $(this).closest('tr').clone();
@@ -1149,12 +1203,29 @@ $(document).on('click' , '#take_picture' , function() {
 });
 
 $('#message').on('keyup', function() {
-  var charLen = 160;
+  let charLen = 160;
   let count = $(this).val().length;
+  $(this).val($(this).val().substring(0, 160));
   let charCount = charLen - count;
-  document.getElementById('charNum').innerText = charCount;
-  if(count === charLen) {
-    document.getElementById('charNum').innerHTML = "Maximum character has been reached!"
+  $('#charNum').text(charCount);
+  if(charCount < 1) {
+    $('#charNum').text("Maximum character has been reached!");
+    let limit = charLen - parseInt(count);
+    $(this).text(limit);
+  }
+});
+
+
+$('#group_message').on('keyup', function() {
+  let charLen = 160;
+  let count = $(this).val().length;
+  $(this).val($(this).val().substring(0, 160));
+  let charCount = charLen - count;
+  $('#groupcharNum').text(charCount);
+  if(charCount < 1) {
+    $('#groupcharNum').text("Maximum character has been reached!");
+    let limit = charLen - parseInt(count);
+    $(this).text(limit);
   }
 });
 
@@ -1422,30 +1493,30 @@ jQuery(function ($) {
   });
 });
 
-$('#btn-template-insert').on('click', function(event){
+$('#sms-template').on('change', function(event){
   event.preventDefault();
   let sms_message = $('#sms-template').val();
   $('#message').val(sms_message);
 })
 
-$('#btn-group-insert').on('click', function(event){
+$('#sms-group-template').on('change', function(event){
   event.preventDefault();
   let group_template = $('#sms-group-template').val();
   $('#group_message').val(group_template);
 })
 
 $('#btn-clear-group').on('click', function() {
-  $('#sms-group-template').val("");
-  $('#group_message').val("");
-  var selectize = $('#group_list')[0].selectize;
-  selectize.clear();
+    $('#sms-group-template').val("");
+    $('#group_message').val("");
+    var selectize = $('#group_list')[0].selectize;
+    selectize.clear();
 })
 
 $('#btn-clear-single').on('click', function() {
-  $('#sms-template').val('');
-  $('#message').val("");
-  var selectize = $('#to')[0].selectize;
-  selectize.clear();
+    $('#sms-template').val('');
+    $('#message').val("");
+    var selectize = $('#to')[0].selectize;
+    selectize.clear();
 })
 
 

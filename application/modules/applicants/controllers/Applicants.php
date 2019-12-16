@@ -477,33 +477,21 @@ public function profileUpload(){
 }
 
 
-<<<<<<< HEAD
 public function member_id(){
-          if($this->session->has_userdata('logged_in')) {
-            $params['select'] = "CONCAT(last_name ,',',first_name,',' , middle_name) as membername , acount_id , member_id";
-            $params['where'] = array(
-                'member_type_id' => 2
-            );
-            $params['or_where'] = array(
-                'member_type_id' => 6
-            );
-=======
-        public function member_id(){
-          if($this->session->has_userdata('logged_in')) {
-            $params['select'] = "CONCAT(last_name ,',',first_name,',' , middle_name) as membername , acount_id , member_id";
-            // $params['where'] = array(
-            //     'member_type_id' => 2
-            // );
-            // $params['or_where'] = array(
-            //     'member_type_id' => 6
-            // );
->>>>>>> 813a82a40736a3ef184cbb4d23113575133c9d08
-            $data['list'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params);
-            $this->load_page('memberId_v' , $data);
-          } else {
-            redirect(base_url('login'));
-          }
-<<<<<<< HEAD
+  if($this->session->has_userdata('logged_in')) {
+    $params['select'] = "CONCAT(last_name ,',',first_name,',' , middle_name) as membername , acount_id , member_id";
+    $params['where'] = array(
+        'member_type_id' => 2
+    );
+    $params['or_where'] = array(
+        'member_type_id' => 6
+    );
+    $data['list'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params);
+    $this->load_page('memberId_v' , $data);
+  } else {
+    redirect(base_url('login'));
+  }
+
         }
 
         // public function agreementform(){
@@ -516,10 +504,6 @@ public function member_id(){
         //     print_r($post);
         //     die();
         // }
-=======
-
-        }
->>>>>>> 813a82a40736a3ef184cbb4d23113575133c9d08
 
     public function agreementform() {
       $this->load_member('agreement_v');
@@ -563,7 +547,6 @@ public function member_id(){
       // return "$account_id.png";
     }
 
-<<<<<<< HEAD
     public function mem_signatures()  {
       $base64 = $this->input->post('mem_signs');
       $folderPath = "./assets/signatures/applicants/";
@@ -574,10 +557,6 @@ public function member_id(){
       file_put_contents($file, $image_base64);
       return $file_name;
       // return "$account_id.png";
-=======
-    public function insuranceform(){
-        $this->load_member('insuranceform');
->>>>>>> 813a82a40736a3ef184cbb4d23113575133c9d08
     }
 
 }
