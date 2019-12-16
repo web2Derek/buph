@@ -18,31 +18,31 @@
 
 
 
-<!-- END SIGNATURE -->
-<!-- <link rel="stylesheet" type="text/css" href="<?php //echo base_url() ?>assets/node_modules/datatables.net-bs4/css/responsive.dataTables.min.css"> -->
-<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"> -->
-<link href="<?php echo base_url(); ?>assets/node_modules/icheck/skins/all.css" rel="stylesheet">
-<!-- Favicon icon -->
-<link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url() ?>assets/images/gallery/icon.png">
-<title>BUPHARCO</title>
-<!-- <script src="https://www.jsdelivr.com/package/npm/chart.js?path=dist" charset="utf-8"></script> -->
-<link rel="stylesheet" type="text/css"
-href="<?php echo base_url() ?>assets/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css">
-<link href="<?php echo base_url() ?>assets/node_modules/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- END SIGNATURE -->
+  <!-- <link rel="stylesheet" type="text/css" href="<?php //echo base_url() ?>assets/node_modules/datatables.net-bs4/css/responsive.dataTables.min.css"> -->
+  <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"> -->
+  <link href="<?php echo base_url(); ?>assets/node_modules/icheck/skins/all.css" rel="stylesheet">
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url() ?>assets/images/gallery/icon.png">
+  <title>BUPHARCO</title>
+  <!-- <script src="https://www.jsdelivr.com/package/npm/chart.js?path=dist" charset="utf-8"></script> -->
+  <link rel="stylesheet" type="text/css"
+  href="<?php echo base_url() ?>assets/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css">
+  <link href="<?php echo base_url() ?>assets/node_modules/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-<link href="<?php echo base_url() ?>assets/node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
-<link href="<?php echo base_url() ?>assets/css/style.css" rel="stylesheet">
-<link href="<?php echo base_url() ?>assets/css/pages/table-pages.css" rel="stylesheet">
-<link href="<?php echo base_url() ?>assets/css/pages/dashboard1.css" rel="stylesheet">
-<link href="<?php echo base_url() ?>assets/css/colors/default.css" id="theme" rel="stylesheet">
+  <link href="<?php echo base_url() ?>assets/node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+  <link href="<?php echo base_url() ?>assets/css/style.css" rel="stylesheet">
+  <link href="<?php echo base_url() ?>assets/css/pages/table-pages.css" rel="stylesheet">
+  <link href="<?php echo base_url() ?>assets/css/pages/dashboard1.css" rel="stylesheet">
+  <link href="<?php echo base_url() ?>assets/css/colors/default.css" id="theme" rel="stylesheet">
 
-<link href="<?php echo base_url() ?>assets/css/pages/icon-page.css" rel="stylesheet">
-<link href="<?php echo base_url()?>assets/node_modules/multiselect/css/multi-select.css" rel="stylesheet" type="text/css" />
-<link href="<?php echo base_url() ?>custom/css/custom.css" id="theme" rel="stylesheet">
-<link href="<?php echo base_url() ?>assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
-<link href="<?php echo base_url() ?>assets/node_modules/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
-<link href="<?php echo base_url() ?>assets/node_modules/wizard/steps.css" rel="stylesheet">
-<link rel="stylesheet" href="<?php echo base_url() ?>assets/node_modules/dropify/dist/css/dropify.min.css">
+  <link href="<?php echo base_url() ?>assets/css/pages/icon-page.css" rel="stylesheet">
+  <link href="<?php echo base_url()?>assets/node_modules/multiselect/css/multi-select.css" rel="stylesheet" type="text/css" />
+  <link href="<?php echo base_url() ?>custom/css/custom.css" id="theme" rel="stylesheet">
+  <link href="<?php echo base_url() ?>assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+  <link href="<?php echo base_url() ?>assets/node_modules/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
+  <link href="<?php echo base_url() ?>assets/node_modules/wizard/steps.css" rel="stylesheet">
+  <link rel="stylesheet" href="<?php echo base_url() ?>assets/node_modules/dropify/dist/css/dropify.min.css">
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">

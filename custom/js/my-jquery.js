@@ -1103,12 +1103,29 @@ $(document).on('click' , '#take_picture' , function() {
 });
 
 $('#message').on('keyup', function() {
-  var charLen = 160;
+  let charLen = 160;
   let count = $(this).val().length;
+  $(this).val($(this).val().substring(0, 160));
   let charCount = charLen - count;
-  document.getElementById('charNum').innerText = charCount;
-  if(count === charLen) {
-    document.getElementById('charNum').innerHTML = "Maximum character has been reached!"
+  $('#charNum').text(charCount);
+  if(charCount < 1) {
+    $('#charNum').text("Maximum character has been reached!");
+    let limit = charLen - parseInt(count);
+    $(this).text(limit);
+  }
+});
+
+
+$('#group_message').on('keyup', function() {
+  let charLen = 160;
+  let count = $(this).val().length;
+  $(this).val($(this).val().substring(0, 160));
+  let charCount = charLen - count;
+  $('#groupcharNum').text(charCount);
+  if(charCount < 1) {
+    $('#groupcharNum').text("Maximum character has been reached!");
+    let limit = charLen - parseInt(count);
+    $(this).text(limit);
   }
 });
 
@@ -1376,30 +1393,30 @@ jQuery(function ($) {
   });
 });
 
-$('#btn-template-insert').on('click', function(event){
+$('#sms-template').on('change', function(event){
   event.preventDefault();
   let sms_message = $('#sms-template').val();
   $('#message').val(sms_message);
 })
 
-$('#btn-group-insert').on('click', function(event){
+$('#sms-group-template').on('change', function(event){
   event.preventDefault();
   let group_template = $('#sms-group-template').val();
   $('#group_message').val(group_template);
 })
 
 $('#btn-clear-group').on('click', function() {
-  $('#sms-group-template').val("");
-  $('#group_message').val("");
-  var selectize = $('#group_list')[0].selectize;
-  selectize.clear();
+    $('#sms-group-template').val("");
+    $('#group_message').val("");
+    var selectize = $('#group_list')[0].selectize;
+    selectize.clear();
 })
 
 $('#btn-clear-single').on('click', function() {
-  $('#sms-template').val('');
-  $('#message').val("");
-  var selectize = $('#to')[0].selectize;
-  selectize.clear();
+    $('#sms-template').val('');
+    $('#message').val("");
+    var selectize = $('#to')[0].selectize;
+    selectize.clear();
 })
 
 

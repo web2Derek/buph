@@ -82,6 +82,14 @@
    //      $('#signaturetab').signature('clear');
    //  });
    //
+  //  $('.dropify').dropify({
+  //   messages: {
+  //      'default': 'Drag and drop an image here or click',
+  //      'replace': 'Drag and drop or click to replace',
+  //      'remove':  'Change',
+  //      'error':   'Something went wrong. Please try again.'
+  //    }
+  // })
 
     $('#member_profile').dropify({
      messages: {

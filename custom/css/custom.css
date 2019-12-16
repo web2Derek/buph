@@ -229,6 +229,11 @@ div#modal_content {
   font-weight: bold!important;
 }
 
+#groupcharNum {
+  color: #4CAF50!important;
+  font-weight: bold!important
+}
+
 @media only screen and (max-width:320px) {
   .img-logo {
     display: flex!important;

@@ -133,7 +133,7 @@
                   <div class="row">
                     <div class="col-md-12 col-sm-12">
                       <label for="signature"><h4>Members Profile Photo:</h4></label>
-                      <input type="file" name="member_profile" id="member_profile" class="dropify" required/>
+                      <input type="file" name="member_profile" id="member_profile" class="dropify member_profile" required/>
                     </div>
                   </div>
 

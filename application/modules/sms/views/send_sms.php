@@ -180,7 +180,7 @@
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="control-label">Message:</label>
-                        <textarea class="form-control" name="group_message" id="group_message" required></textarea>
+                        <textarea class="form-control" name="group_message" id="group_message" required></textarea><sub id="groupcharNum">160</sub>
                     </div>
                     <div class="form-group">
                       <button type="button" id="btn-clear-group" class="btn btn-info btn-sm" name="btn-clear-group">Clear</button>
