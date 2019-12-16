@@ -50,6 +50,26 @@ $(document).ready(function() {
         });
     });
 
+  $(document).on('click' , '#clear_sig' , function() {
+    $('#agreementform_sig').signature('clear');
+  });
+
+  $(document).on('submit' , '#agreementform' , function(e) {
+      e.preventDefault();
+      let url = $('#base_url').val();
+      let formdata = new FormData($(this)[0]);
+      $.ajax({
+        url : url + 'applicants/submitAgreement',
+        method : 'POST',
+        data : formdata,
+        processData: false,
+        contentType: false,
+        success : function(response){
+            console.log(response);
+        }
+      })
+  });
+
 
   // CLEAR ERROR
   function clearError() {
@@ -109,9 +129,10 @@ $(document).ready(function() {
       emailAddress: {
         email: true
       },
-      zip_code: {
-        digit: true,
-      }
+      // zip_code: {
+      //   digit: true,
+      //   required: true
+      // }
     }
   })
 

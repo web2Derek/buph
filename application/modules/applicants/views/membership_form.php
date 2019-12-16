@@ -35,7 +35,7 @@
                   <div class="col-md-2 col-sm-12">
                     <div class="form-group">
                       <label for="">Birthdate</label>
-                      <input type="text" class="form-control mydatepicker" id="birthdate" name="birthdate" value="" autocomplete="off" required>
+                      <input type="date" class="form-control mydatepicker" id="birthdate" name="birthdate" value="" autocomplete="off" required>
                     </div>
                   </div>
                   <div class="col-md-2 col-sm-12">
@@ -129,11 +129,14 @@
                       <input type="text" class="form-control" name="pag_ibig" value="">
                     </div>
                   </div>
+
                   <div class="row">
                     <div class="col-md-12 col-sm-12">
-                      <input type="file" name="signature" id="signature" class="dropify"/>
+                      <label for="signature"><h4>Members Profile Photo:</h4></label>
+                      <input type="file" name="member_profile" id="member_profile" class="dropify" required/>
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -185,7 +188,7 @@
               <div class="col-md-4 col-sm-12">
                 <div class="form-group">
                   <label for="">Zip Code</label>
-                  <input type="text" class="form-control" name="zip_code" id="zip_code" value="" required>
+                  <input type="text" class="form-control" name="zip_code" id="zip_code" value="">
                 </div>
               </div>
             </div>

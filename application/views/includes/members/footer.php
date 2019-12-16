@@ -71,16 +71,19 @@
 <script src="<?php echo base_url();?>assets/node_modules/wizard/jquery.validate.min.js"></script>
 <script src="<?php echo base_url(); ?>custom/js/applicant.js"></script>
 <script>
-    // $('.dropify').dropify();
-    $('#agreementSignature').signature({syncField:'#signaturedata' , syncFormat : 'PNG'});
-    $('#btnclear_agree').on('click' , function() {
-        $('#agreementSignature').signature('clear');
-    });
+    $('.dropify').dropify();
+    $('#signaturetab').signature({syncField:'#testsignature' , syncFormat : 'PNG'});
+    $('#signaturetab1').signature({syncField:'#testsignature1' , syncFormat : 'PNG'});
+    $('#signaturetab2').signature({syncField:'#testsignature2' , syncFormat : 'PNG'});
+    $('#signaturetab3').signature({syncField:'#testsignature3' , syncFormat : 'PNG'});
+    $('#agreementform_sig').signature({syncField:'#agre_sig_val' , syncFormat : 'PNG'});
+
    //
    //  $('#clear_signature').on('click' , function() {
    //      $('#signaturetab').signature('clear');
    //  });
    //
+
     $('.dropify').dropify({
      messages: {
         'default': 'Drag and drop an image here or click',

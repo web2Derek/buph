@@ -618,352 +618,356 @@ class Members extends MY_Controller {
     }
   }
 
-  public function profileUpload(){
-    $available_file = array('jpg' , 'jpeg' , 'png');
-    $file_type = pathinfo($_FILES['profile_new']['name'], PATHINFO_EXTENSION);
-    $config['upload_path'] = './assets/profile/';
-    $config['allowed_types'] = '*';
-    $config['max_size'] = 2000;
-    $config['file_name'] =  date('ymd').'-'.uniqid('' , false);
+  // public function profileUpload(){
+  //   $available_file = array('jpg' , 'jpeg' , 'png');
+  //   $file_type = pathinfo($_FILES['profile_new']['name'], PATHINFO_EXTENSION);
+  //   $config['upload_path'] = './assets/profile/';
+  //   $config['allowed_types'] = '*';
+  //   $config['max_size'] = 2000;
+  //   $config['file_name'] =  date('ymd').'-'.uniqid('' , false);
+  //
+  //   $this->load->library('upload', $config);
+  //
+  //   if(in_array($file_type , $available_file)){
+  //     if ($this->upload->do_upload('profile_new')) {
+  //       return $config['file_name'].'.'.$file_type;
+  //     }else{
+  //       return array('error' => $this->upload->display_errors()['error']);
+  //     }
+  //   }
 
-    $this->load->library('upload', $config);
 
-    if(in_array($file_type , $available_file)){
-      if ($this->upload->do_upload('profile_new')) {
-        return $config['file_name'].'.'.$file_type;
-      }else{
-        return array('error' => $this->upload->display_errors()['error']);
-      }public function profileUpload(){
-    $available_file = array('jpg' , 'jpeg' , 'png');
-    $file_type = pathinfo($_FILES['profile_new']['name'], PATHINFO_EXTENSION);
-    $config['upload_path'] = './assets/profile/';
-    $config['allowed_types'] = '*';
-    $config['max_size'] = 2000;
-    $config['file_name'] =  date('ymd').'-'.uniqid('' , false);
+    public function profileUpload(){
+      $available_file = array('jpg' , 'jpeg' , 'png');
+      $file_type = pathinfo($_FILES['profile_new']['name'], PATHINFO_EXTENSION);
+      $config['upload_path'] = './assets/profile/';
+      $config['allowed_types'] = '*';
+      $config['max_size'] = 2000;
+      $config['file_name'] =  date('ymd').'-'.uniqid('' , false);
 
-    $this->load->library('upload', $config);
+      $this->load->library('upload', $config);
 
-    if(in_array($file_type , $available_file)){
-      if ($this->upload->do_upload('profile_new')) {
-        return $config['file_name'].'.'.$file_type;
-      }else{
-        return array('error' => $this->upload->display_errors()['error']);
-      }
-    } else {
-      return array('error' => 'Invalid file types.');
-    }
-  }
-    } else {
-      return array('error' => 'Invalid file types.');
-    }
-  }
-
-  public function updateSignatureImage(){
-    $member_id = $this->input->post('member_id');
-    $results = array();
-    $available_file = array('jpg' , 'jpeg' , 'png');
-    $file_type = pathinfo($_FILES['signature_new']['name'], PATHINFO_EXTENSION);
-    $config['upload_path'] = './assets/signatures/members/';
-    $config['allowed_types'] = '*';
-    $config['max_size'] = 2000;
-    $config['file_name'] =  date('ymd').'-'.uniqid('' , false);
-    $this->load->library('upload', $config);
-    if(in_array($file_type , $available_file)){
-      if ($this->upload->do_upload('signature_new')) {
-        $file_name = $config['file_name'].'.'.$file_type;
-        $where = array('member_id' => $member_id);
-        $set = array('sg_file_name' => $file_name);
-        $update = $this->MY_Model->update('tbl_signatures' , $set , $where);
-        if ($update) {
-          $results = array('status' => 'Success' , 'msg' => 'Member signature updated.');
+      if(in_array($file_type , $available_file)){
+        if ($this->upload->do_upload('profile_new')) {
+          return $config['file_name'].'.'.$file_type;
         }else{
-          $results = array('status' => 'Error' , 'msg' => 'Something went wrong while uploading the image.Please try again');
+          return array('error' => $this->upload->display_errors()['error']);
         }
-      }else{
-        $results = array('status' => 'Error' , 'msg' => $this->upload->display_errors()['error'] );
+      } else {
+        return array('error' => 'Invalid file types.');
       }
-    } else {
-      $results = array('status' => 'Error' , 'msg'=> 'Invalid file type');
     }
+  // } else {
+  //   return array('error' => 'Invalid file types.');
+  // }
 
-    echo json_encode($results);
-  }
 
-  public function updateProfileImage(){
-    $member_id = $this->input->post('member_id');
-
-    $results = array();
-    $available_file = array('jpg' , 'jpeg' , 'png');
-    $file_type = pathinfo($_FILES['profile_new']['name'], PATHINFO_EXTENSION);
-    $config['upload_path'] = './assets/profile/';
-    $config['allowed_types'] = '*';
-    $config['max_size'] = 2000;
-    $config['file_name'] =  date('ymd').'-'.uniqid('' , false);
-    $this->load->library('upload', $config);
-    if(in_array($file_type , $available_file)){
-      if ($this->upload->do_upload('profile_new')) {
-        $file_name = $config['file_name'].'.'.$file_type;
-        $where = array('member_id' => $member_id);
-        $set = array('pr_file_name' => $file_name);
-        $update = $this->MY_Model->update('tbl_profile_img' , $set , $where);
-        if ($update) {
-          $results = array('status' => 'Success' , 'msg' => 'Member profile updated.');
-        }else{
-          $results = array('status' => 'Error' , 'msg' => 'Something went wrong while uploading the image.Please try again');
-        }
+public function updateSignatureImage(){
+  $member_id = $this->input->post('member_id');
+  $results = array();
+  $available_file = array('jpg' , 'jpeg' , 'png');
+  $file_type = pathinfo($_FILES['signature_new']['name'], PATHINFO_EXTENSION);
+  $config['upload_path'] = './assets/signatures/members/';
+  $config['allowed_types'] = '*';
+  $config['max_size'] = 2000;
+  $config['file_name'] =  date('ymd').'-'.uniqid('' , false);
+  $this->load->library('upload', $config);
+  if(in_array($file_type , $available_file)){
+    if ($this->upload->do_upload('signature_new')) {
+      $file_name = $config['file_name'].'.'.$file_type;
+      $where = array('member_id' => $member_id);
+      $set = array('sg_file_name' => $file_name);
+      $update = $this->MY_Model->update('tbl_signatures' , $set , $where);
+      if ($update) {
+        $results = array('status' => 'Success' , 'msg' => 'Member signature updated.');
       }else{
-        $results = array('status' => 'Error' , 'msg' => $this->upload->display_errors());
+        $results = array('status' => 'Error' , 'msg' => 'Something went wrong while uploading the image.Please try again');
       }
-    } else {
-      $results = array('status' => 'Error' , 'msg'=> 'Invalid file type');
+    }else{
+      $results = array('status' => 'Error' , 'msg' => $this->upload->display_errors()['error'] );
     }
-
-    echo json_encode($results);
+  } else {
+    $results = array('status' => 'Error' , 'msg'=> 'Invalid file type');
   }
 
-  // Member ID Section
+  echo json_encode($results);
+}
 
-  public function member_id(){
-    if($this->session->has_userdata('logged_in')) {
-      $params['select'] = "CONCAT(last_name ,',',first_name,',' , middle_name) as membername , acount_id , member_id";
-      // $params['where'] = array(
-      //     'member_type_id' => 2
-      // );
-      // $params['or_where'] = array(
-      //     'member_type_id' => 6
-      // );
-      $data['list'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params);
-      $this->load_page('memberId_v' , $data);
-    } else {
-      redirect(base_url('login'));
+public function updateProfileImage(){
+  $member_id = $this->input->post('member_id');
+
+  $results = array();
+  $available_file = array('jpg' , 'jpeg' , 'png');
+  $file_type = pathinfo($_FILES['profile_new']['name'], PATHINFO_EXTENSION);
+  $config['upload_path'] = './assets/profile/';
+  $config['allowed_types'] = '*';
+  $config['max_size'] = 2000;
+  $config['file_name'] =  date('ymd').'-'.uniqid('' , false);
+  $this->load->library('upload', $config);
+  if(in_array($file_type , $available_file)){
+    if ($this->upload->do_upload('profile_new')) {
+      $file_name = $config['file_name'].'.'.$file_type;
+      $where = array('member_id' => $member_id);
+      $set = array('pr_file_name' => $file_name);
+      $update = $this->MY_Model->update('tbl_profile_img' , $set , $where);
+      if ($update) {
+        $results = array('status' => 'Success' , 'msg' => 'Member profile updated.');
+      }else{
+        $results = array('status' => 'Error' , 'msg' => 'Something went wrong while uploading the image.Please try again');
+      }
+    }else{
+      $results = array('status' => 'Error' , 'msg' => $this->upload->display_errors());
     }
-
+  } else {
+    $results = array('status' => 'Error' , 'msg'=> 'Invalid file type');
   }
 
-  public function getlistid(){
+  echo json_encode($results);
+}
 
-    $limit = $this->input->post('length');
-    $offset = $this->input->post('start');
-    $search = $this->input->post('search');
-    $order = $this->input->post('order');
-    $draw = $this->input->post('draw');
-    $column_order = array('last_name','first_name','middle_name','tbl_mem_personal_information.acount_id' , 'total' , 'date_last_generated');
-    $join = array(
-      'tbl_mem_personal_information' => 'tbl_mem_personal_information.member_id = tbl_id_logs.member_id'
-    );
-    $select = "last_name , first_name , middle_name , acount_id , total , date_last_generated";
-    // $where = array(
-    //     'tbl_mem_personal_information.member_type_id' => 2,
-    //     'tbl_mem_personal_information.member_type_id' => 6
+// Member ID Section
+
+public function member_id(){
+  if($this->session->has_userdata('logged_in')) {
+    $params['select'] = "CONCAT(last_name ,',',first_name,',' , middle_name) as membername , acount_id , member_id";
+    // $params['where'] = array(
+    //     'member_type_id' => 2
     // );
-
-    $where = "tbl_mem_personal_information.member_type_id = 2";
-    $group = array();
-    $list = datatables('tbl_id_logs',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
-    $final_output = array();
-
-    $output = array(
-      "draw" => $draw,
-      "recordsTotal" => $list['count_all'],
-      "recordsFiltered" => $list['count'],
-      "data" =>  $list['data']
-    );
-
-    echo json_encode($output);
+    // $params['or_where'] = array(
+    //     'member_type_id' => 6
+    // );
+    $data['list'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params);
+    $this->load_page('memberId_v' , $data);
+  } else {
+    redirect(base_url('login'));
   }
 
-  public function getMemberBy_id(){
-    $post = $this->input->post();
-    $results = array();
-    $params['where'] = array('tbl_mem_personal_information.member_id' => $post['member_id']);
-    $params['join'] = array(
-      'tbl_profile_img' => 'tbl_mem_personal_information.member_id = tbl_profile_img.member_id'
-    );
-    $member_info = $this->MY_Model->getRows('tbl_mem_personal_information' , $params , 'row');
-    $results = array('data' => $member_info);
-    echo json_encode($results);
+}
+
+public function getlistid(){
+
+  $limit = $this->input->post('length');
+  $offset = $this->input->post('start');
+  $search = $this->input->post('search');
+  $order = $this->input->post('order');
+  $draw = $this->input->post('draw');
+  $column_order = array('last_name','first_name','middle_name','tbl_mem_personal_information.acount_id' , 'total' , 'date_last_generated');
+  $join = array(
+    'tbl_mem_personal_information' => 'tbl_mem_personal_information.member_id = tbl_id_logs.member_id'
+  );
+  $select = "last_name , first_name , middle_name , acount_id , total , date_last_generated";
+  // $where = array(
+  //     'tbl_mem_personal_information.member_type_id' => 2,
+  //     'tbl_mem_personal_information.member_type_id' => 6
+  // );
+
+  $where = "tbl_mem_personal_information.member_type_id = 2";
+  $group = array();
+  $list = datatables('tbl_id_logs',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
+  $final_output = array();
+
+  $output = array(
+    "draw" => $draw,
+    "recordsTotal" => $list['count_all'],
+    "recordsFiltered" => $list['count'],
+    "data" =>  $list['data']
+  );
+
+  echo json_encode($output);
+}
+
+public function getMemberBy_id(){
+  $post = $this->input->post();
+  $results = array();
+  $params['where'] = array('tbl_mem_personal_information.member_id' => $post['member_id']);
+  $params['join'] = array(
+    'tbl_profile_img' => 'tbl_mem_personal_information.member_id = tbl_profile_img.member_id'
+  );
+  $member_info = $this->MY_Model->getRows('tbl_mem_personal_information' , $params , 'row');
+  $results = array('data' => $member_info);
+  echo json_encode($results);
+}
+
+// END
+
+// Update Member
+public function viewMember($member_id){
+  $params['where'] = array(
+    'tbl_mem_personal_information.member_id' => $member_id
+  );
+  $params['join'] = array(
+    'tbl_mem_residence'             => 'tbl_mem_personal_information.member_id = tbl_mem_residence.member_id',
+    'tbl_mem_eployment_information' => 'tbl_mem_personal_information.member_id = tbl_mem_eployment_information.member_id',
+    'tbl_mem_education_attainment'  => 'tbl_mem_personal_information.member_id = tbl_mem_education_attainment.member_id',
+    'tbl_mem_spouse_information'    => 'tbl_mem_personal_information.member_id = tbl_mem_spouse_information.member_id',
+    'tbl_mem_spouse_emp_info'       => 'tbl_mem_personal_information.member_id = tbl_mem_spouse_emp_info.member_id',
+    'tbl_financial_info'            => 'tbl_mem_personal_information.member_id = tbl_financial_info.member_id',
+    'tbl_profile_img'               => 'tbl_mem_personal_information.member_id = tbl_profile_img.member_id',
+    'tbl_signatures'                => 'tbl_mem_personal_information.member_id = tbl_signatures.member_id',
+  );
+  $data['info'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params , 'row');
+  $data['isEdit'] = true;
+  $this->load_page('members_v' , $data);
+}
+
+public function ajaxViewMember(){
+  $post = $this->input->post();
+  $results = array();
+  $params['where'] = array(
+    'tbl_mem_personal_information.member_id' => $post['id']
+  );
+  $params['join'] = array(
+    'tbl_mem_residence'             => 'tbl_mem_personal_information.member_id = tbl_mem_residence.member_id',
+    'tbl_mem_eployment_information' => 'tbl_mem_personal_information.member_id = tbl_mem_eployment_information.member_id',
+    'tbl_mem_education_attainment'  => 'tbl_mem_personal_information.member_id = tbl_mem_education_attainment.member_id',
+    'tbl_mem_spouse_information'    => 'tbl_mem_personal_information.member_id = tbl_mem_spouse_information.member_id',
+    'tbl_mem_spouse_emp_info'       => 'tbl_mem_personal_information.member_id = tbl_mem_spouse_emp_info.member_id',
+    'tbl_financial_info'            => 'tbl_mem_personal_information.member_id = tbl_financial_info.member_id',
+    'tbl_profile_img'               => 'tbl_mem_personal_information.member_id = tbl_profile_img.member_id',
+    'tbl_signatures'                => 'tbl_mem_personal_information.member_id = tbl_signatures.member_id',
+  );
+  $data['info'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params , 'row');
+
+  if ($data['info']) {
+    $results = array('status' => 'success' , 'data' => $data['info'] );
+  }else{
+    $results = array('status' => 'error' , 'data' => [] );
+  }
+  echo json_encode($results);
+}
+
+public function getInfoData(){
+  $post = $this->input->post();
+
+  $results = array();
+  $params['select'] = 'firstname , middlename , lastname, acount_id ,ac_resolution_no, member_type_id, tbl_mem_personal_information.date_added , branch , classifications , facilitator , encoded_by,invited_by , date_of_pmes ,date_approve,encoded_date ,
+  remarks , membership_fee , mortuary_prem , savings_deposit , paid_up_capital , total , amount , no_of_shares , deposited_for_subs , capital_share_deposit , loans_payable , credit_on_trade_payable,
+  interest_on_loan_payable , penalties_on_trade_payable , time_deposit , penalties_on_loan_payable_2 , sub_total , deductions , grand_total';
+  $params['where'] = array('tbl_mem_personal_information.member_id' => $post['id']);
+  $params['join'] = array(
+    'tbl_account_info' => 'tbl_account_info.member_id = tbl_mem_personal_information.member_id',
+    'tbl_monetary_req' => 'tbl_monetary_req.member_id = tbl_mem_personal_information.member_id',
+    'tbl_user_informations' => 'tbl_user_informations.info_id = tbl_account_info.encoded_by',
+  );
+  $data = $this->MY_Model->getRows('tbl_mem_personal_information' , $params , 'row');
+  // if accout close
+  $close['where'] = array('member_id' =>  $post['id']);
+  $ifcloseAccount = $this->MY_Model->getRows('tbl_member_withdrawal' , $close , 'row');
+  //end
+  if ($data) {
+    $results = array('status' => 'success' , 'data' => $data , 'closedata' => $ifcloseAccount ? $ifcloseAccount : []);
+  }else{
+    $results = array('status' => 'nodata' , 'data' => []);
   }
 
-  // END
+  echo json_encode($results);
+}
 
-  // Update Member
-  public function viewMember($member_id){
-    $params['where'] = array(
-      'tbl_mem_personal_information.member_id' => $member_id
+public function submit_account_info(){
+
+  $post = $this->input->post();
+
+  $results = array();
+  $where = array('member_id' => $post['member_id'] );
+  $member_type = array(
+    'member_type_id' => $post['member_type']
+  );
+  $memType_update = $this->MY_Model->update('tbl_mem_personal_information' , $member_type ,$where );
+  if ($memType_update) {
+    $monetary = array(
+      'membership_fee'                 => $post['membershipFee'],
+      'mortuary_prem'                  => $post['mortuaryPrem'],
+      'savings_deposit'                => $post['savingsDeposit'],
+      'paid_up_capital'                => $post['paidup_capital'],
+      'total'                          => $post['total'],
+      'amount'                         => $post['amount'],
+      'no_of_shares'                   => $post['noOfshares'],
+      'deposited_for_subs'             => $post['depositedForSubs'],
+      'capital_share_deposit'          => $post['capitalShareDeposit'],
+      'loans_payable'                  => $post['loansPayable'],
+      'credit_on_trade_payable'        => $post['CreditoTrade'],
+      'interest_on_loan_payable'       => $post['interestOnLoanPayable'],
+      'penalties_on_trade_payable'     => $post['penaltiesOnTrade'],
+      'time_deposit'                   => $post['time_deposit'],
+      'penalties_on_loan_payable_2'    => $post['penalties_on_loan'],
+      'sub_total'                      => $post['sub_total'],
+      'deductions'                     => $post['deduction'],
+      'grand_total'                    => $post['grand_total']
     );
-    $params['join'] = array(
-      'tbl_mem_residence'             => 'tbl_mem_personal_information.member_id = tbl_mem_residence.member_id',
-      'tbl_mem_eployment_information' => 'tbl_mem_personal_information.member_id = tbl_mem_eployment_information.member_id',
-      'tbl_mem_education_attainment'  => 'tbl_mem_personal_information.member_id = tbl_mem_education_attainment.member_id',
-      'tbl_mem_spouse_information'    => 'tbl_mem_personal_information.member_id = tbl_mem_spouse_information.member_id',
-      'tbl_mem_spouse_emp_info'       => 'tbl_mem_personal_information.member_id = tbl_mem_spouse_emp_info.member_id',
-      'tbl_financial_info'            => 'tbl_mem_personal_information.member_id = tbl_financial_info.member_id',
-      'tbl_profile_img'               => 'tbl_mem_personal_information.member_id = tbl_profile_img.member_id',
-      'tbl_signatures'                => 'tbl_mem_personal_information.member_id = tbl_signatures.member_id',
-    );
-    $data['info'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params , 'row');
-    $data['isEdit'] = true;
-    $this->load_page('members_v' , $data);
-  }
 
-  public function ajaxViewMember(){
-    $post = $this->input->post();
-    $results = array();
-    $params['where'] = array(
-      'tbl_mem_personal_information.member_id' => $post['id']
-    );
-    $params['join'] = array(
-      'tbl_mem_residence'             => 'tbl_mem_personal_information.member_id = tbl_mem_residence.member_id',
-      'tbl_mem_eployment_information' => 'tbl_mem_personal_information.member_id = tbl_mem_eployment_information.member_id',
-      'tbl_mem_education_attainment'  => 'tbl_mem_personal_information.member_id = tbl_mem_education_attainment.member_id',
-      'tbl_mem_spouse_information'    => 'tbl_mem_personal_information.member_id = tbl_mem_spouse_information.member_id',
-      'tbl_mem_spouse_emp_info'       => 'tbl_mem_personal_information.member_id = tbl_mem_spouse_emp_info.member_id',
-      'tbl_financial_info'            => 'tbl_mem_personal_information.member_id = tbl_financial_info.member_id',
-      'tbl_profile_img'               => 'tbl_mem_personal_information.member_id = tbl_profile_img.member_id',
-      'tbl_signatures'                => 'tbl_mem_personal_information.member_id = tbl_signatures.member_id',
-    );
-    $data['info'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params , 'row');
-
-    if ($data['info']) {
-      $results = array('status' => 'success' , 'data' => $data['info'] );
-    }else{
-      $results = array('status' => 'error' , 'data' => [] );
-    }
-    echo json_encode($results);
-  }
-
-  public function getInfoData(){
-    $post = $this->input->post();
-
-    $results = array();
-    $params['select'] = 'firstname , middlename , lastname, acount_id ,ac_resolution_no, member_type_id, tbl_mem_personal_information.date_added , branch , classifications , facilitator , encoded_by,invited_by , date_of_pmes ,date_approve,encoded_date ,
-    remarks , membership_fee , mortuary_prem , savings_deposit , paid_up_capital , total , amount , no_of_shares , deposited_for_subs , capital_share_deposit , loans_payable , credit_on_trade_payable,
-    interest_on_loan_payable , penalties_on_trade_payable , time_deposit , penalties_on_loan_payable_2 , sub_total , deductions , grand_total';
-    $params['where'] = array('tbl_mem_personal_information.member_id' => $post['id']);
-    $params['join'] = array(
-      'tbl_account_info' => 'tbl_account_info.member_id = tbl_mem_personal_information.member_id',
-      'tbl_monetary_req' => 'tbl_monetary_req.member_id = tbl_mem_personal_information.member_id',
-      'tbl_user_informations' => 'tbl_user_informations.info_id = tbl_account_info.encoded_by',
-    );
-    $data = $this->MY_Model->getRows('tbl_mem_personal_information' , $params , 'row');
-    // if accout close
-    $close['where'] = array('member_id' =>  $post['id']);
-    $ifcloseAccount = $this->MY_Model->getRows('tbl_member_withdrawal' , $close , 'row');
-    //end
-    if ($data) {
-      $results = array('status' => 'success' , 'data' => $data , 'closedata' => $ifcloseAccount ? $ifcloseAccount : []);
-    }else{
-      $results = array('status' => 'nodata' , 'data' => []);
-    }
-
-    echo json_encode($results);
-  }
-
-  public function submit_account_info(){
-
-    $post = $this->input->post();
-
-    $results = array();
-    $where = array('member_id' => $post['member_id'] );
-    $member_type = array(
-      'member_type_id' => $post['member_type']
-    );
-    $memType_update = $this->MY_Model->update('tbl_mem_personal_information' , $member_type ,$where );
-    if ($memType_update) {
-      $monetary = array(
-        'membership_fee'                 => $post['membershipFee'],
-        'mortuary_prem'                  => $post['mortuaryPrem'],
-        'savings_deposit'                => $post['savingsDeposit'],
-        'paid_up_capital'                => $post['paidup_capital'],
-        'total'                          => $post['total'],
-        'amount'                         => $post['amount'],
-        'no_of_shares'                   => $post['noOfshares'],
-        'deposited_for_subs'             => $post['depositedForSubs'],
-        'capital_share_deposit'          => $post['capitalShareDeposit'],
-        'loans_payable'                  => $post['loansPayable'],
-        'credit_on_trade_payable'        => $post['CreditoTrade'],
-        'interest_on_loan_payable'       => $post['interestOnLoanPayable'],
-        'penalties_on_trade_payable'     => $post['penaltiesOnTrade'],
-        'time_deposit'                   => $post['time_deposit'],
-        'penalties_on_loan_payable_2'    => $post['penalties_on_loan'],
-        'sub_total'                      => $post['sub_total'],
-        'deductions'                     => $post['deduction'],
-        'grand_total'                    => $post['grand_total']
+    $exec = $this->MY_Model->update('tbl_monetary_req' ,$monetary , $where);
+    if ($exec) {
+      $info = array(
+        'ac_resolution_no'               => $post['resolutionNo'],
+        'date_approve'                   => $post['dateApplied'],
+        'branch'                         => $post['branch'],
+        'classifications'                => $post['classification'],
+        'facilitator'                    => $post['facilitator'],
+        'invited_by'                     => $post['invited_by'],
+        'date_of_pmes'                   => $post['date_of_pmes'],
+        'encoded_date'                   => $post['date_encoded'],
+        'remarks'                        => $post['remarks']
       );
+      $exec2 = $this->MY_Model->update('tbl_account_info' , $info , $where);
 
-      $exec = $this->MY_Model->update('tbl_monetary_req' ,$monetary , $where);
-      if ($exec) {
-        $info = array(
-          'ac_resolution_no'               => $post['resolutionNo'],
-          'date_approve'                   => $post['dateApplied'],
-          'branch'                         => $post['branch'],
-          'classifications'                => $post['classification'],
-          'facilitator'                    => $post['facilitator'],
-          'invited_by'                     => $post['invited_by'],
-          'date_of_pmes'                   => $post['date_of_pmes'],
-          'encoded_date'                   => $post['date_encoded'],
-          'remarks'                        => $post['remarks']
-        );
-        $exec2 = $this->MY_Model->update('tbl_account_info' , $info , $where);
-
-        if ($exec2) {
-          if ($post['member_type'] == 4) {
-            $closeData = array(
-              'member_id'         =>    $post['member_id'],
-              'reason'            =>    $post['close_reason'],
-              'wt_resolution_no'  =>    $post['w_resolution_no'],
-              'date_close'        =>    $post['date_close'],
-              'date_approve'      =>    $post['date_close_approve']
-            );
-            $withdraw = $this->MY_Model->insert('tbl_member_withdrawal' , $closeData);
-            if ($withdraw) {
-              $results = array('status' => 'success');
-            }else{
-              $results = array('status' => 'failed');
-            }
-          }else{
+      if ($exec2) {
+        if ($post['member_type'] == 4) {
+          $closeData = array(
+            'member_id'         =>    $post['member_id'],
+            'reason'            =>    $post['close_reason'],
+            'wt_resolution_no'  =>    $post['w_resolution_no'],
+            'date_close'        =>    $post['date_close'],
+            'date_approve'      =>    $post['date_close_approve']
+          );
+          $withdraw = $this->MY_Model->insert('tbl_member_withdrawal' , $closeData);
+          if ($withdraw) {
             $results = array('status' => 'success');
+          }else{
+            $results = array('status' => 'failed');
           }
         }else{
-          $results = array('status' => 'failed');
+          $results = array('status' => 'success');
         }
-      }else {
+      }else{
         $results = array('status' => 'failed');
       }
-    }else{
+    }else {
       $results = array('status' => 'failed');
     }
-    echo json_encode($results);
+  }else{
+    $results = array('status' => 'failed');
   }
+  echo json_encode($results);
+}
 
-  public function idLogs(){
-    $post = $this->input->post('value');
-    $data = json_decode($post , true);
-    foreach ($data as $key => $value) {
-      // checking
-      $params['where'] = array('member_id' => $value);
-      $check = $this->MY_Model->getRows('tbl_id_logs' , $params ,'row');
+public function idLogs(){
+  $post = $this->input->post('value');
+  $data = json_decode($post , true);
+  foreach ($data as $key => $value) {
+    // checking
+    $params['where'] = array('member_id' => $value);
+    $check = $this->MY_Model->getRows('tbl_id_logs' , $params ,'row');
 
-      if (!$check) {
-        $items = array(
-          'member_id' => $value,
-          'total' => 1,
-          'date_last_generated' => date("Y-m-d"),
-          'date_added' => date("Y-m-d")
-        );
+    if (!$check) {
+      $items = array(
+        'member_id' => $value,
+        'total' => 1,
+        'date_last_generated' => date("Y-m-d"),
+        'date_added' => date("Y-m-d")
+      );
 
-        // $i = $this->MY_Model->insert('tbl_id_logs' , $items);
-      }else{
-        $where = array('member_id' => $value );
-        $items = array(
-          'total' => $check->total + 1,
-          'date_last_generated' => date("Y-m-d")
-        );
-        $u = $this->MY_Model->update('tbl_id_logs' , $items , $where);
-      }
+      // $i = $this->MY_Model->insert('tbl_id_logs' , $items);
+    }else{
+      $where = array('member_id' => $value );
+      $items = array(
+        'total' => $check->total + 1,
+        'date_last_generated' => date("Y-m-d")
+      );
+      $u = $this->MY_Model->update('tbl_id_logs' , $items , $where);
     }
-
-
   }
+
+
+}
 
 }
