@@ -216,7 +216,11 @@ var table_users = $('#userlist').DataTable({
               }},
               {"data" : "branch_name"},
               {"data":"branch_id","render": function(data, type, row,meta){
+<<<<<<< HEAD
                         console.log(row.user_loggedin_type);
+=======
+                        
+>>>>>>> 813a82a40736a3ef184cbb4d23113575133c9d08
                         var str = '';
                         str += `
                         <div class="btn-group">
