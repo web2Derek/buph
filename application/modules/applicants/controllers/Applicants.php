@@ -532,4 +532,8 @@ public function profileUpload(){
       // return "$account_id.png";
     }
 
+    public function insuranceform(){
+        $this->load_member('insuranceform');
+    }
+
 }

@@ -201,7 +201,7 @@ $(document).ready(function() {
               }},
               {"data" : "branch_name"},
               {"data":"branch_id","render": function(data, type, row,meta){
-                        console.log(row.user_loggedin_type);
+                        
                         var str = '';
                         str += `
                         <div class="btn-group">
