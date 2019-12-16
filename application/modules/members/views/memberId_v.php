@@ -29,6 +29,7 @@
                               </thead>
                               <tbody>
                                   <?php foreach ($list as $key => $value): ?>
+
                                       <tr class="parent">
                                         <td>
                                           <input type="checkbox" class="addtolist" remove_id ="<?php echo $key; ?>">

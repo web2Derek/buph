@@ -9,8 +9,8 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <!-- Favicon icon -->
-  <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url() ?>assets/images/favicon.png">
-  <title>BUPHARCO</title>
+<link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url() ?>assets/images/gallery/icon.png">
+<title>BUPHARCO</title>
   <!-- <link rel="canonical" href="https://www.wrappixel.com/templates/adminwrap/" /> -->
   <!-- Bootstrap Core CSS -->
   <link href="<?php echo base_url() ?>assets/node_modules/bootstrap/css/bootstrap.min.css" rel="stylesheet">

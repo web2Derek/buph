@@ -6,7 +6,25 @@
 // })
 
 $(document).ready(function() {
-    let url = $('#base_url').val();
+  var url = $('#base_url').val();
+// MEMBERS SIGNATURE
+  $('#member_signatures').on('submit', function(e) {
+      e.preventDefault();
+      let formdata = $(this).serializeArray();
+    $.ajax({
+      method: 'POST',
+      url: url + 'applicants/mem_signatures',
+      data: formdata,
+      success: function(data) {
+        Swal.fire('Success', 'Signature Submitted')
+        $('#signaturetab').signature('clear');
+        $('#signaturetab1').signature('clear');
+        $('#signaturetab2').signature('clear');
+        $('#signaturetab3').signature('clear');
+      }
+    })
+  })
+
   // MEMBERS REGISTRATION
     $('#member_reg_form').on('submit', function(e) {
         e.preventDefault();

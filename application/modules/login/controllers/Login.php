@@ -75,18 +75,20 @@ class Login extends MY_Controller {
           // $branch['select'] =  'branch_name';
           // $branchData['branchList'] = $this->MY_Model->getRows('tbl_branch', $branch);
           if($data) {
+
             if ($data->user_type != 3) {
                 $params['where'] = array('tbl_user_credentials.credentials_id' => $data->credentials_id[0]);
                 $params['join'] = array(
-                  'tbl_user_informations' => 'tbl_user_credentials.credentials_id = tbl_user_informations.info_id'
+                  'tbl_user_informations' => 'tbl_user_credentials.info_id = tbl_user_informations.info_id'
                 );
 
                 $userDatas = $this->MY_Model->getRows('tbl_user_credentials' , $params , 'array');
-                $userDatas[0] = array(
-                  'logged_in' => true,
-                  'user_type' => 0,
-                  'email' => $userDatas[0]['email']
-                );
+                $userDatas[0]['logged_in'] = true;
+
+                // $userDatas[0] = array(
+                //   'logged_in' => true,
+                //   'email' => $userDatas[0]['email']
+                // );
                 $this->session->set_userdata($userDatas[0]);
                 redirect(base_url('login/select_branch'));
             }else{

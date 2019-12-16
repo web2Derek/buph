@@ -21,6 +21,10 @@ class Applicants extends Applicant_Controller{
   }
 
   public function members_account() {
+    $this->load_member('member_dashboard', '');
+  }
+
+  public function membership_registration() {
     $this->load_member('membership_form', '');
   }
 
@@ -40,7 +44,7 @@ class Applicants extends Applicant_Controller{
         if ($result->user_type == 3) {
           $session = array('logged_in' => true, 'first_name' => $mem_user, 'user_type' => 3);
           $this->session->set_userdata($session);
-          redirect(base_url('applicants/members_account'));
+          redirect(base_url('applicants/membership_registration'));
         }
         //
       } else {
@@ -474,32 +478,31 @@ public function profileUpload(){
 
 
 public function member_id(){
-  if($this->session->has_userdata('logged_in')) {
-    $params['select'] = "CONCAT(last_name ,',',first_name,',' , middle_name) as membername , acount_id , member_id";
-    // $params['where'] = array(
-    //     'member_type_id' => 2
-    // );
-    // $params['or_where'] = array(
-    //     'member_type_id' => 6
-    // );
-    $data['list'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params);
-    $this->load_page('memberId_v' , $data);
-  } else {
-    redirect(base_url('login'));
-  }
-
+          if($this->session->has_userdata('logged_in')) {
+            $params['select'] = "CONCAT(last_name ,',',first_name,',' , middle_name) as membername , acount_id , member_id";
+            $params['where'] = array(
+                'member_type_id' => 2
+            );
+            $params['or_where'] = array(
+                'member_type_id' => 6
+            );
+            $data['list'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params);
+            $this->load_page('memberId_v' , $data);
+          } else {
+            redirect(base_url('login'));
+          }
         }
 
-        public function agreementform(){
-            $this->load_member('agreementform' , '');
-        }
+        // public function agreementform(){
+        //     $this->load_member('agreementform' , '');
+        // }
 
-        public function submitAgreement(){
-            $post = $this->input->post();
-            echo "<pre>";
-            print_r($post);
-            die();
-        }
+        // public function submitAgreement(){
+        //     $post = $this->input->post();
+        //     echo "<pre>";
+        //     print_r($post);
+        //     die();
+        // }
 
     public function agreementform() {
       $this->load_member('agreement_v');
@@ -533,6 +536,18 @@ public function member_id(){
     }
 
     public function agreementSignatureConvert($base64){
+      $folderPath = "./assets/signatures/applicants/";
+      $base64_string = explode(";base64,", $base64);
+      $image_base64 = base64_decode($base64_string[1]);
+      $file_name = date('ymd').'-'.uniqid('' , false).".png";
+      $file = $folderPath . $file_name;
+      file_put_contents($file, $image_base64);
+      return $file_name;
+      // return "$account_id.png";
+    }
+
+    public function mem_signatures()  {
+      $base64 = $this->input->post('mem_signs');
       $folderPath = "./assets/signatures/applicants/";
       $base64_string = explode(";base64,", $base64);
       $image_base64 = base64_decode($base64_string[1]);
