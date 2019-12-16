@@ -26,12 +26,12 @@
                                         <th>Account ID</th>
                                         <th>Member Type</th>
                                         <th>Birth Date</th>
-                                        <!-- <th>Age</th> -->
-                                        <!-- <th>Blood Type</th> -->
+                                        <th>Age</th>
+                                        <th>Blood Type</th>
                                         <th>Gender</th>
-                                        <!-- <th>Civil Status</th> -->
-                                        <!-- <th>Religion</th> -->
-                                        <!-- <th>Branch</th> -->
+                                        <th>Civil Status</th>
+                                        <th>Religion</th>
+                                        <th>Branch</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

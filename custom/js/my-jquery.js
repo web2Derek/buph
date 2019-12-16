@@ -1,6 +1,7 @@
 $(document).ready(function() {
   $('.mydatepicker').datepicker();
   var base_url = $('#base_url').val();
+
   $('#memberlist_id').DataTable();
   var memberlist = $('#memberlist').DataTable({
     "processing": true, //Feature control the processing indicator.
@@ -51,7 +52,7 @@ $(document).ready(function() {
   //Set column definition initialisation properties.
   "columnDefs": [
     {
-      "targets": [9], //first column / numbering column
+      "targets": [10], //first column / numbering column
       "orderable": true, //set not orderable
     },
   ],
@@ -104,7 +105,6 @@ var table_branch = $('#tbl_branch').DataTable({
 ],
 });
 
-<<<<<<< HEAD
 var table_users = $('#userlist').DataTable({
   "processing": true, //Feature control the processing indicator.
   "serverSide": true, //Feature control DataTables' server-side processing mode.
@@ -179,89 +179,7 @@ var table_users = $('#userlist').DataTable({
   },
 ],
 });
-=======
-    var table_users = $('#userlist').DataTable({
-         "processing": true, //Feature control the processing indicator.
-         "serverSide": true, //Feature control DataTables' server-side processing mode.
-         "order": [[0,'desc']], //Initial no order.
-         "columns":[
-              {"data":"full_name"},
-              {"data":"username"},
-              {"data":"email"},
-              {"data":"status","render": function(data, type, row,meta){
-                  var str = '';
-                  if(row.status == '1'){
-                      str += 'Active';
-                  } else {
-                      str += 'In-Active';
-                  }
-                  return str;
-              }
-          },
-              {"data":"user_type" , "render" : function(data,type,row,meta){
-                  var str = '';
-                  switch (row.user_type) {
-                      case '0':
-                          return 'Guest';
-                          break;
-                      case '1':
-                          return 'Administrator';
-                          break;
-                      case '2':
-                          return 'Super Admin';
-                          break;
-                      default:
-                          break;
-                  }
-              }},
-              {"data" : "branch_name"},
-              {"data":"branch_id","render": function(data, type, row,meta){
-<<<<<<< HEAD
-                        console.log(row.user_loggedin_type);
-=======
-                        
->>>>>>> 813a82a40736a3ef184cbb4d23113575133c9d08
-                        var str = '';
-                        str += `
-                        <div class="btn-group">
-                            <button info_id="${row.info_id}" type="button" class="btn_edit btn waves-effect waves-light btn-outline-warning edit-btn btn-sm" data-toggle="modal" data-target="#edit_User">
-                              <i class="far fa-edit"></i>
-                            </button>
-                        </div>
-                        `;
-                        if (row.user_loggedin_type == 2) {
-                            if (row.status == 1) {
-                                str+= `
-                                <button type="button" class="btn waves-effect waves-light btn-outline-warning  activate-btn btn-sm" id="${row.info_id}" stats = "inactive">
-                                <i class=" fas fa-lock"></i>
-                                </button>
-                                `;
-                            }else{
-                                str+= `
-                                <button type="button" class="btn waves-effect waves-light btn-outline-warning activate-btn btn-sm" id="${row.info_id}" stats = "active">
-                                <i class="fas fa-lock-open fas fa-lock"></i>
-                                </button>
-                                `;
-                            }
-                        }
-                        return str;
-                   }
-              },
-         ],
-         // Load data for the table's content from an Ajax source
-         "ajax": {
-              "url": base_url+"users/get_users",
-              "type": "POST"
-         },
-         //Set column definition initialisation properties.
-         "columnDefs": [
-              {
-                   "targets": [6], //first column / numbering column
-                   "orderable": false, //set not orderable
-               },
-          ],
-    });
->>>>>>> 4e3f6a3d11612108b1ed3a40f299c2c6aa4cdab5
+
 
 // SMS TEMPLATE DATABLE
 
@@ -804,7 +722,6 @@ $('input[name="source_farmer"]').click(function() {
   }
 })
 
-<<<<<<< HEAD
 $('input[name="source_others"]').click(function() {
   if ($(this).prop('checked') == true) {
     $('#if_others').fadeIn();
@@ -820,48 +737,6 @@ $('#add_member').on('submit' , function(e) {
   let formData = new FormData(this);
   let profile_image = $('#capture_photo').attr('src');
   formData.append('profile_image' , profile_image);
-=======
-    $('input[name="source_others"]').click(function() {
-        if ($(this).prop('checked') == true) {
-            $('#if_others').fadeIn();
-        }else{
-            $('#if_others').fadeOut();
-        }
-    })
-        $('#add_member').on('submit' , function(e) {
-            e.preventDefault();
-            clearError();
-            let isEdit = $(this).attr('isEdit');
-            let url = $('#base_url').val() + 'members/AddNewMember';
-            let formData = new FormData(this);
-            let profile_new = $('#profile_new').prop('files')[0];
-
-            formData.append('profile_new' , profile_new);
-            $.ajax({
-                method : 'POST',
-                url : url,
-                data : formData,
-                processData: false,
-                contentType: false,
-                dataType : 'json',
-                success : function(data) {
-                    if (data.form_error) {
-                        let keys = Object.keys(data.form_error);
-                        $(keys).each( function(idx , val){
-                            $("input[name='"+val+"']").next('.err').text(data.form_error[val]);
-                        })
-                    }else if (data.success) {
-                        Swal.fire("Success!",data.success, "success");
-                        setTimeout(function () {
-                          location.reload();
-                        }, 1000);
-                    }else {
-                        Swal.fire("Server Error.",data.error, "error");
-                    }
-                },
-            })
-        });
->>>>>>> 4e3f6a3d11612108b1ed3a40f299c2c6aa4cdab5
 
   $.ajax({
     method : 'POST',
@@ -926,7 +801,7 @@ $('#update_mem').on('submit' , function(e) {
 // Member ID Section
 
 // add to list
-$('.addtolist').on('click' , function() {
+$(document).on('click' , '.addtolist' , function() {
   let key = $(this).attr('remove_id');
   if ($(this).prop('checked') == true) {
     let clone = $(this).closest('tr').clone();
