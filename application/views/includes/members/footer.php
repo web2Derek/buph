@@ -71,25 +71,29 @@
 <script src="<?php echo base_url();?>assets/node_modules/wizard/jquery.validate.min.js"></script>
 <script src="<?php echo base_url(); ?>custom/js/applicant.js"></script>
 <script>
+
+  $(document).ready(function(e) {
+    $('#signaturetab_form').signature({syncField:'#testsignature_form' , syncFormat : 'PNG'});
     $('#signaturetab').signature({syncField:'#testsignature' , syncFormat : 'PNG'});
     $('#signaturetab1').signature({syncField:'#testsignature1' , syncFormat : 'PNG'});
     $('#signaturetab2').signature({syncField:'#testsignature2' , syncFormat : 'PNG'});
     $('#signaturetab3').signature({syncField:'#testsignature3' , syncFormat : 'PNG'});
     $('#agreementform_sig').signature({syncField:'#agre_sig_val' , syncFormat : 'PNG'});
 
+    $('.mydatepicker').datepicker();
    //
    //  $('#clear_signature').on('click' , function() {
    //      $('#signaturetab').signature('clear');
    //  });
    //
-  //  $('.dropify').dropify({
-  //   messages: {
-  //      'default': 'Drag and drop an image here or click',
-  //      'replace': 'Drag and drop or click to replace',
-  //      'remove':  'Change',
-  //      'error':   'Something went wrong. Please try again.'
-  //    }
-  // })
+   $('.dropify').dropify({
+    messages: {
+       'default': 'Drag and drop an image here or click',
+       'replace': 'Drag and drop or click to replace',
+       'remove':  'Change',
+       'error':   'Something went wrong. Please try again.'
+     }
+  })
 
     $('#member_profile').dropify({
      messages: {
@@ -99,6 +103,16 @@
         'error':   'Something went wrong. Please try again.'
       }
    });
+
+   //  $('#signaturetab_form').dropify({
+   //   messages: {
+   //      'default': 'Drag and drop an image here or click',
+   //      'replace': 'Drag and drop or click to replace',
+   //      'remove':  'Change',
+   //      'error':   'Something went wrong. Please try again.'
+   //    }
+   // });
+  })
 
 </script>
 </body>

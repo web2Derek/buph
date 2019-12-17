@@ -4,7 +4,7 @@
     <div class="card wizard-content">
       <div class="card-body">
         <h4 class="card-title">Membership Form</h4>
-        <form action="#" id="applicant_form" class="validation-wizard wizard-circle">
+        <form action="#" id="applicant_form" class="validation-wizard wizard-circle" enctype="multipart/form-data">
           <!-- Step 1 -->
           <h6>Personal Information</h6>
           <section>
@@ -35,7 +35,7 @@
                   <div class="col-md-2 col-sm-12">
                     <div class="form-group">
                       <label for="">Birthdate</label>
-                      <input type="date" class="form-control mydatepicker" id="birthdate" name="birthdate" value="" autocomplete="off" required>
+                      <input type="text" class="form-control mydatepicker" id="birthdate" name="birthdate" value="" required>
                     </div>
                   </div>
                   <div class="col-md-2 col-sm-12">
@@ -54,7 +54,7 @@
                   <div class="col-md-2 col-sm-12">
                     <div class="form-group">
                       <label for="">Birth Place</label>
-                      <input type="text" class="form-control" name="birthplace" value="">
+                      <input type="text" class="form-control mydatepicker" name="birthplace" value="">
 
                     </div>
                   </div>
@@ -133,7 +133,7 @@
                   <div class="row">
                     <div class="col-md-12 col-sm-12">
                       <label for="signature"><h4>Members Profile Photo:</h4></label>
-                      <input type="file" name="member_profile" id="member_profile" class="dropify member_profile" required/>
+                      <input type="file" name="member_profile" id="member_profile" class="dropify member_profile"  data-max-file-size-preview="5M" data-allowed-file-extensions="jpg png jpeg" data-default-file="<?php echo base_url() ?>assets/profile/profile.jpg"/required/>
                     </div>
                   </div>
 
@@ -148,7 +148,7 @@
               <div class="col-md-3 col-sm-12">
                 <div class="form-group">
                   <label for="">Type of Residence</label>
-                  <select class="form-control custom-select" tabindex="1" name= "typeOfResidence">
+                  <select class="form-control custom-select" tabindex="1" name= "typeOfResidence" required>
                     <option value="Owned">Owned</option>
                     <option value="Renting">Renting</option>
                     <option value="Living w/ Parents">Living w/ Parents</option>
@@ -188,7 +188,7 @@
               <div class="col-md-4 col-sm-12">
                 <div class="form-group">
                   <label for="">Zip Code</label>
-                  <input type="text" class="form-control" name="zip_code" id="zip_code" value="">
+                  <input type="text" class="form-control" name="zip_code" id="zip_code" value="" required>
                 </div>
               </div>
             </div>
@@ -216,7 +216,6 @@
                 <div class="form-group">
                   <label for="">Company name</label>
                   <input type="text" class="form-control" name="empinfo_companyName" value="">
-
                 </div>
               </div>
 
@@ -245,7 +244,7 @@
                 <div class="col-md-4 col-sm-12">
                   <div class="form-group">
                     <label for="">Employment Status</label>
-                    <input type="text" name="employment_status" class="form-control"  value="">
+                    <input type="text" name="employment_status" class="form-control"  value="" required>
 
                   </div>
                 </div>
@@ -276,7 +275,7 @@
               </div>
               <div class="col-md-4 col-sm-12">
                 <div class="form-group">
-                  <input type="text" placeholder="Course & Year Graduated" name="course_year_graduated" class="form-control" value="" required>
+                  <input type="text" placeholder="Course & Year Graduated" name="course_year_graduated" class="form-control mydatepicker" value="" required>
 
                 </div>
               </div>
@@ -516,7 +515,7 @@
                 <div class="form-group">
                   <label class="control-label">Monthly Gross Income</label>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="under_10k" name="monthly_gross_income" class="custom-control-input" value="10000" >
+                    <input type="radio" id="under_10k" name="monthly_gross_income" class="custom-control-input" value="10000">
                     <label class="custom-control-label" for="under_10k">Under ₱ 10,000</label>
                   </div>
 
@@ -649,8 +648,7 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label for=""><h5>Gross Income per year</h5></label>
-                  <input type="text" class="form-control" name="grossyear"  value="">
-
+                  <input type="text" class="form-control" name="grossyear"  value="" required>
                 </div>
               </div>
             </div>
@@ -695,8 +693,8 @@
                 </div>
               </div>
             </div>
+            <!-- BENIFIACIRIES FIELD -->
             <div id="addMore">
-
             </div>
           </section>
 
@@ -708,17 +706,16 @@
               </div>
               <div class="col-md-2">
                 <div class="form-group">
-                  <input type="text" class="form-control mydatepicker"  name="date_applied" value="">
-
+                  <input type="text" class="form-control mydatepicker"  name="date_applied" value="" required>
                 </div>
               </div>
             </div>
 
             <div class="row">
               <h4 class="mb-3">Please Sign Below:</h3><br>
-                <div class="col-md-6 col-sm-12">
-                  <input type="hidden" id="testsignature" name="member_signature">
-                  <div id="signaturetab" style="width:400px; height: 200px"></div>
+                <div class="col-md-4 col-sm-12">
+                  <input type="hidden" id="testsignature_form" name="mem_sign" required/>
+                  <div id="signaturetab_form" style="width:400px; height: 200px"></div>
                   <!-- <label for="input-file-now">Attach signature here:</label> -->
                   <!-- <input type="file" name="signature_edit" id="signature_edit" class="dropify" data-max-file-size-preview="5M" data-allowed-file-extensions="jpg png jpeg" data-default-file=""/>
                   <input type="file" name="signature" id="signature" class="dropify"/> -->

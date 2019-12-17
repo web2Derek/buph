@@ -60,7 +60,7 @@ function loginQr(data) {
           confirmButtonText: 'Yes, log me in!'
         }).then(function(result) {
           if(result.value) {
-          window.location = 'http://localhost/SP/Sep-153/bupharco/applicants/members_load_account';
+          window.location = url + 'applicants/members_load_account';
           }
         });
         $('#open-cam').modal('hide');

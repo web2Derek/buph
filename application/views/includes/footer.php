@@ -86,86 +86,88 @@
     <!-- end - This is for export functionality only -->
 <script>
 
+$(document).ready(function(e) {
+  $('.profile_edit').dropify({
+    messages: {
+       'default': 'Drag and drop an image here or click',
+       'replace': 'Drag and drop or click to replace',
+       'remove':  'Change',
+       'error':   'Something went wrong. Please try again.'
+     }
+  });
 
-    $('.profile_edit').dropify({
-      messages: {
-         'default': 'Drag and drop an image here or click',
-         'replace': 'Drag and drop or click to replace',
-         'remove':  'Change',
-         'error':   'Something went wrong. Please try again.'
-       }
+  $('.dropify').dropify({
+    messages: {
+       'default': 'Drag and drop an image here or click',
+       'replace': 'Drag and drop or click to replace',
+       'remove':  'Change',
+       'error':   'Something went wrong. Please try again.'
+     }
+  });
+
+  $('#signature').dropify({
+    messages: {
+       'default': 'Drag and drop an image here or click',
+       'replace': 'Drag and drop or click to replace',
+       'remove':  'Change',
+       'error':   'Something went wrong. Please try again.'
+     }
+  });
+
+  $('#unfreeze').hide();
+  $('#controls').hide();
+  $('#use_photo').hide();
+  $('#takephoto').on('click' , function() {
+  $('#controls').show();
+    Webcam.set({
+     width: 208,
+     height: 190,
+     image_format: 'png',
+     png_quality: 90
     });
+    Webcam.attach( '#photo_container' );
+  })
 
-    $('.profile_new').dropify({
-      messages: {
-         'default': 'Drag and drop an image here or click',
-         'replace': 'Drag and drop or click to replace',
-         'remove':  'Change',
-         'error':   'Something went wrong. Please try again.'
-       }
-    });
+  $('#snap').on('click' , function() {
+      $(this).hide();
+      $('#use_photo').show();
+      $('#unfreeze').show();
+      Webcam.freeze();
+  });
 
-    $('#signature').dropify({
-      messages: {
-         'default': 'Drag and drop an image here or click',
-         'replace': 'Drag and drop or click to replace',
-         'remove':  'Change',
-         'error':   'Something went wrong. Please try again.'
-       }
-    });
+  $('#unfreeze').on('click' , function() {
+      $(this).hide();
+      $('#use_photo').hide();
+      $('#snap').show();
+      Webcam.unfreeze();
 
-    $('#unfreeze').hide();
-    $('#controls').hide();
-    $('#use_photo').hide();
-    $('#takephoto').on('click' , function() {
-    $('#controls').show();
-      Webcam.set({
-       width: 208,
-       height: 190,
-       image_format: 'png',
-       png_quality: 90
-      });
-      Webcam.attach( '#photo_container' );
-    })
+  });
 
-    $('#snap').on('click' , function() {
-        $(this).hide();
-        $('#use_photo').show();
-        $('#unfreeze').show();
-        Webcam.freeze();
-    });
-
-    $('#unfreeze').on('click' , function() {
-        $(this).hide();
-        $('#use_photo').hide();
-        $('#snap').show();
-        Webcam.unfreeze();
-
-    });
-
-    $('#use_photo').on('click' , function() {
-        Webcam.snap( function(data_uri) {
-        document.getElementById('photo_container').innerHTML = '<img id="capture_photo" src="'+data_uri+'"/>';
-        $('#controls').hide();
-        Webcam.reset();
-          } );
+  $('#use_photo').on('click' , function() {
+      Webcam.snap( function(data_uri) {
+      document.getElementById('photo_container').innerHTML = '<img id="capture_photo" src="'+data_uri+'"/>';
+      $('#controls').hide();
+      Webcam.reset();
+        } );
 
 
-    });
+  });
 
-    $('#use_photo').on('click' , function() {
-        Webcam.snap( function(data_uri) {
-        document.getElementById('photo_container').innerHTML = '<img id="capture_photo" src="'+data_uri+'"/>';
-        $('#controls').hide();
-        Webcam.reset();
-          } );
-    });
+  $('#use_photo').on('click' , function() {
+      Webcam.snap( function(data_uri) {
+      document.getElementById('photo_container').innerHTML = '<img id="capture_photo" src="'+data_uri+'"/>';
+      $('#controls').hide();
+      Webcam.reset();
+        } );
+  });
 
-    $('#signaturetab').signature({syncField:'#testsignature' , syncFormat : 'PNG'});
+  $('#signaturetab').signature({syncField:'#testsignature' , syncFormat : 'PNG'});
 
-    $('#clear_signature').on('click' , function() {
-        $('#signaturetab').signature('clear');
-    });
+  $('#clear_signature').on('click' , function() {
+      $('#signaturetab').signature('clear');
+  });
+})
+
 </script>
 <script src="<?php echo base_url('custom/js/report.js') ?>" charset="utf-8"></script>
 </body>

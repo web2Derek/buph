@@ -56,7 +56,7 @@
                               </div>
                     <?php } ?>
 
-                      <form class="form-horizontal" id="loginform" method="post" action="<?php echo base_url()?>login/select_branch">
+                      <form class="form-horizontal" id="loginform" method="POST" action="<?php echo base_url('applicants/selectedBranch'); ?>">
 
                         <a href="javascript:void(0)" class="text-center img-logo"><img src="<?php echo base_url() ?>assets/images/gallery/logo.jpg" id="img-logo" alt="Home" /></a>
 
@@ -66,9 +66,9 @@
                               <div class="col-xs-12">
                                   <select class="form-control" name="branch_name">
 
-                                      <?php foreach($branchList as $keys):?>
+                                      <?php foreach($branch as $values => $keys):?>
 
-                                      <option value="<?=$keys['branch_name']; ?>"> <?= $keys['branch_name'];?> </option>
+                                      <option value="<?=$keys['branch_id']; ?>"> <?= $keys['branch_name'];?> </option>
 
                                       <!-- <option value="Aglanyan">Aglanyan</option>
                                       <option value="BMBL Aglanyan">BMBL Aglanyan</option>
@@ -83,7 +83,7 @@
 
                           <div class="form-group text-center">
                               <div class="col-xs-12 p-b-20">
-                                  <input class="btn btn-block btn-lg btn-info" id="btn-login" name="btn-branch" value="Select Branch" type="submit">
+                                  <input class="btn btn-block btn-lg btn-info" id="btn-login" name="mem-btn-branch" value="Select Branch" type="submit">
                               </div>
                           </div>
 

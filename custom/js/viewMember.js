@@ -11,6 +11,7 @@ $(document).ready(function() {
               data : {id : id},
               dataType : 'json',
               success : function(res){
+                console.log(res);
                   renderHtmlData(res);
               }
           })
