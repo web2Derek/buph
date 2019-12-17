@@ -35,7 +35,7 @@
     <div class="col-md-4 col-sm-12">
     </div>
     <div class="col-md-4 col-sm-12 mt-4 d-flex justify-content-end">
-      <input type="submit" class="btn btn-primary btn-sm" name="submit_signature" value="Submit">
+      <input type="submit" id="submit_signature" class="btn btn-primary btn-sm" name="submit_signature" value="Submit">
     </div>
   </div>
 </form>

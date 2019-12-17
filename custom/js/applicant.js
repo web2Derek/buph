@@ -112,17 +112,21 @@ $(document).ready(function() {
     }
     , onFinished: function (event, currentIndex) {
       // Swal.fire("Form Submitted!", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem erat eleifend ex semper, lobortis purus sed.");
+      event.preventDefault();
       var url = $('#base_url').val();
-      var formdata = $('#applicant_form').serialize();
+      // var formdata = $('#applicant_form').serialize();
+      var formdata = new FormData($('#applicant_form')[0]);
       $.ajax({
         method: "POST",
         url: url + 'applicants/addApplicants',
         data: formdata,
-        dataType: 'json',
+        processData: false,
+        contentType: false,
         success: function(data) {
           console.log(data);
           if(data) {
             $('#applicant_form')[0].reset();
+            $('#signaturetab_form').signature('clear');
             Swal.fire("Registration Form Completed", "Please Proceed to the next Step.");
           }
         }

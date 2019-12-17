@@ -36,7 +36,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    <!-- DATA LOADED VIA AJAX -->
                                 </tbody>
                             </table>
                         </div>

@@ -6,15 +6,16 @@ class Applicant_Controller extends MX_Controller {
 	public function __construct(){
 		$route = $this->router->fetch_class();
 
-		// if($route == 'applicants'){
-		// 	if($this->session->has_userdata('logged_in') && $this->session->has_userdata('user_type') == 3){
-		// 		redirect(base_url("applicants/member_account"));
-		// 	}
-		// } else {
-		// 	if(!$this->session->has_userdata('logged_in') && $this->session->has_userdata('user_type') == 3){
-		// 		redirect(base_url('applicants'));
-		// 	}
-		// }
+		if($route == 'applicants'){
+			if($this->session->has_userdata('logged_in') && $this->session->has_userdata('user_type') == 0) {
+				return true;
+				// redirect(base_url("applicants/membership_registration"));
+			}
+		} else {
+			if(!$this->session->has_userdata('logged_in')){
+				redirect(base_url('applicants'));
+			}
+		}
 
 
 	}
