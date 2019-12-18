@@ -157,6 +157,44 @@
                                     <div id="formdpndents">
 
                                     </div>
+
+                                    <h6>Beneficiary(ies) to received the Benefits</h6>
+                                    <p>Primary</p>
+                                    <div class="row">
+                                      <div class="col-md-4">
+                                          <div class="form-group">
+                                            <input type="text" name="p_fullname" value="" class="form-control" placeholder="Full Name">
+                                          </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <div class="form-group">
+                                            <input type="text" name="p_dob" value="" class="form-control mydatepicker" placeholder="Date of Birth">
+                                          </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <div class="form-group">
+                                            <input type="text" name="p_relationship" value="" class="form-control" placeholder="Relationship">
+                                          </div>
+                                      </div>
+                                    </div>
+                                    <p>Secondary</p>
+                                    <div class="row">
+                                      <div class="col-md-4">
+                                          <div class="form-group">
+                                            <input type="text" name="s_fullname" value="" class="form-control" placeholder="Full Name">
+                                          </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <div class="form-group">
+                                            <input type="text" name="s_dob" value="" class="form-control mydatepicker" placeholder="Date of Birth">
+                                          </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <div class="form-group">
+                                            <input type="text" name="s_relationship" value="" class="form-control" placeholder="Relationship">
+                                          </div>
+                                      </div>
+                                    </div>
                                 </section>
 
                                 <h6>HEALTH DECLARATION</h6>
@@ -164,7 +202,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                            
+                                                
                                             </div>
                                         </div>
                                     </div>
