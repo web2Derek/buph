@@ -71,7 +71,7 @@ class Members extends MY_Controller {
         'first_name'    => $post['firstname'],
         'middle_name'   => $post['middlename'],
         'birthdate'     => $post['birthdate'],
-        'age'           => $post['age'],
+        'age'           => calculateAge($post['birthdate']),
         'blood_type'    => $post['blood_type'],
         'birth_place'   => $post['birthplace'],
         'religion'      => $post['religion'],

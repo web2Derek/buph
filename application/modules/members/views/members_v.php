@@ -73,13 +73,15 @@
                 <span class="err"></span>
               </div>
             </div>
-            <div class="col-md-2 col-sm-12">
-              <div class="form-group">
-                <label for="">Age</label>
-                <input type="text" class="form-control" name="age" value="<?php echo ($isEdit ? $info->age : '') ?>">
-                <span class="err"></span>
-              </div>
-            </div>
+            <?php if ($isEdit): ?>
+                <div class="col-md-2 col-sm-12">
+                  <div class="form-group">
+                    <label for="">Age</label>
+                    <input type="text" disabled class="form-control" name="age" value="<?php echo ($isEdit ? $info->age : '') ?>">
+                    <span class="err"></span>
+                  </div>
+                </div>
+            <?php endif; ?>
             <div class="col-md-2 col-sm-12">
               <div class="form-group">
                 <label for="">Blood type</label>

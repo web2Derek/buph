@@ -34,13 +34,13 @@ $(document).ready(function() {
       <a href="javascript:;" title="View Member Details">
       <button type="button" data-toggle="modal" data-target="#viewMember" class="btn waves-effect waves-light btn-outline-warning btn-sm viewMember" name="viewMember" member-data=${row.member_id}><i class="fa fa-eye"></i></button>
       </a>
-      <a href="javascript:;">
-      <button type="button" class="btn waves-effect waves-light btn-outline-warning btn-sm" name="button"><i class="fa fa-trash"></i></button>
-      </a>
-      <a href="javascript:;" title="Approve Member">
-      <button type="button" class="btn waves-effect waves-light btn-outline-warning btn-sm" name="button"><i class="fa fa-check"></i></button>
-      </a>
       `;
+      // <a href="javascript:;">
+      // <button type="button" class="btn waves-effect waves-light btn-outline-warning btn-sm" name="button"><i class="fa fa-trash"></i></button>
+      // </a>
+      // <a href="javascript:;" title="Approve Member">
+      // <button type="button" class="btn waves-effect waves-light btn-outline-warning btn-sm" name="button"><i class="fa fa-check"></i></button>
+      // </a>
       return str;
     }}
   ],
@@ -58,60 +58,60 @@ $(document).ready(function() {
   ],
 });
 
-        var memberlist = $('#memberlist').DataTable({
-            "processing": true, //Feature control the processing indicator.
-            "serverSide": true, //Feature control DataTables' server-side processing mode.
-            "order": [[0,'desc']], //Initial no order.
-            "columns":[
-              {"data":"first_name" , "render" : function(data, type, row,meta) {
-                var str = row.first_name+ ' ' +row.last_name;
-                return str;
-              }
-            },
-            {"data":"acount_id"},
-            {"data":"title"},
-            {"data":"birthdate"},
-            {"data":"age"},
-            {"data":"blood_type"},
-            {"data":"gender"},
-            {"data":"civil_status"},
-            {"data":"religion"},
-            {"data":"branch_name"},
-            {"data":"acount_id" , "render" : function(data, type, row,meta) {
-              var str = '';
-              str = `
-              <a href="javascript:;" title="Account Information">
-              <button type="button" data-toggle="modal" data-target="#accountInfo" class="btn waves-effect waves-light btn-outline-warning btn-sm accountInfo" member-data=${row.member_id} name="accountInfo" ><i class="ti-user"></i></button>
-              </a>
-              <a title="Edit Member" href="${base_url}members/viewMember/${row.member_id}">
-              <button type="button" class="btn waves-effect waves-light btn-outline-warning btn-sm" ><i class="far fa-edit"></i></button>
-              </a>
-              <a href="javascript:;" title="View Member Details">
-              <button type="button" data-toggle="modal" data-target="#viewMember" class="btn waves-effect waves-light btn-outline-warning btn-sm viewMember" name="viewMember" member-data=${row.member_id}><i class="fa fa-eye"></i></button>
-              </a>
-              <a href="javascript:;">
-              <button type="button" class="btn waves-effect waves-light btn-outline-warning btn-sm" name="button"><i class="fa fa-trash"></i></button>
-              </a>
-              <a href="javascript:;" title="Approve Member">
-              <button type="button" class="btn waves-effect waves-light btn-outline-warning btn-sm" name="button"><i class="fa fa-check"></i></button>
-              </a>
-              `;
-              return str;
-            }}
-        ],
-            // Load data for the table's content from an Ajax source
-            "ajax": {
-                "url": base_url+"members/getMembers",
-                "type": "POST"
-            },
-            //Set column definition initialisation properties.
-            "columnDefs": [
-            {
-              "targets": [9], //first column / numbering column
-              "orderable": true, //set not orderable
-            },
-            ],
-        });
+        // var memberlist = $('#memberlist').DataTable({
+        //     "processing": true, //Feature control the processing indicator.
+        //     "serverSide": true, //Feature control DataTables' server-side processing mode.
+        //     "order": [[0,'desc']], //Initial no order.
+        //     "columns":[
+        //       {"data":"first_name" , "render" : function(data, type, row,meta) {
+        //         var str = row.first_name+ ' ' +row.last_name;
+        //         return str;
+        //       }
+        //     },
+        //     {"data":"acount_id"},
+        //     {"data":"title"},
+        //     {"data":"birthdate"},
+        //     {"data":"age"},
+        //     {"data":"blood_type"},
+        //     {"data":"gender"},
+        //     {"data":"civil_status"},
+        //     {"data":"religion"},
+        //     {"data":"branch_name"},
+        //     {"data":"acount_id" , "render" : function(data, type, row,meta) {
+        //       var str = '';
+        //       str = `
+        //       <a href="javascript:;" title="Account Information">
+        //       <button type="button" data-toggle="modal" data-target="#accountInfo" class="btn waves-effect waves-light btn-outline-warning btn-sm accountInfo" member-data=${row.member_id} name="accountInfo" ><i class="ti-user"></i></button>
+        //       </a>
+        //       <a title="Edit Member" href="${base_url}members/viewMember/${row.member_id}">
+        //       <button type="button" class="btn waves-effect waves-light btn-outline-warning btn-sm" ><i class="far fa-edit"></i></button>
+        //       </a>
+        //       <a href="javascript:;" title="View Member Details">
+        //       <button type="button" data-toggle="modal" data-target="#viewMember" class="btn waves-effect waves-light btn-outline-warning btn-sm viewMember" name="viewMember" member-data=${row.member_id}><i class="fa fa-eye"></i></button>
+        //       </a>
+        //       <a href="javascript:;">
+        //       <button type="button" class="btn waves-effect waves-light btn-outline-warning btn-sm" name="button"><i class="fa fa-trash"></i></button>
+        //       </a>
+        //       <a href="javascript:;" title="Approve Member">
+        //       <button type="button" class="btn waves-effect waves-light btn-outline-warning btn-sm" name="button"><i class="fa fa-check"></i></button>
+        //       </a>
+        //       `;
+        //       return str;
+        //     }}
+        // ],
+        //     // Load data for the table's content from an Ajax source
+        //     "ajax": {
+        //         "url": base_url+"members/getMembers",
+        //         "type": "POST"
+        //     },
+        //     //Set column definition initialisation properties.
+        //     "columnDefs": [
+        //     {
+        //       "targets": [9], //first column / numbering column
+        //       "orderable": true, //set not orderable
+        //     },
+        //     ],
+        // });
 
         var table_branch = $('#tbl_branch').DataTable({
             "processing": true, //Feature control the processing indicator.
