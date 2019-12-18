@@ -72,6 +72,50 @@
                                                         </select>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="place_of_birth">Civil Status</label>
+                                                        <select class="form-control custom-select" tabindex="1" name="emp_type">
+                                                          <option value="Private">Private</option>
+                                                          <option value="Government">Government</option>
+                                                          <option value="Retired">Retired</option>
+                                                          <option value="Self-employed">Self-employed</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                  <div class="form-group">
+                                                    <label for="occupation">Occupation</label>
+                                                    <input type="text" name="occupation" value="" class="form-control">
+                                                  </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                  <div class="form-group">
+                                                    <label for="religion">Religion</label>
+                                                    <input type="text" name="religion" value="" class="form-control">
+                                                  </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                  <div class="form-group">
+                                                    <label for="height">Height</label>
+                                                    <input type="text" name="height" value="" class="form-control">
+                                                  </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                  <div class="form-group">
+                                                    <label for="weight">Weight</label>
+                                                    <input type="text" name="weight" value="" class="form-control">
+                                                  </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                  <div class="form-group">
+                                                    <label for="blood_type">Blood Type</label>
+                                                    <input type="text" name="blood_type" value="" class="form-control">
+                                                  </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

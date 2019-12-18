@@ -585,4 +585,8 @@ public function member_id(){
       // return "$account_id.png";
     }
 
+    public function insuranceform(){
+      $this->load_member('insuranceform');
+    }
+
 }
