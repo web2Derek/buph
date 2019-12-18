@@ -163,4 +163,48 @@ $(document).ready(function() {
   var datenow = new Date().toLocaleDateString();
   // alert(Math.floor(membdate - datenow));
   // alert(membdate);
-})
+});
+var count = 0;
+function addfields(){
+    var html = '';
+    count++
+    html = `
+    <div class="row removedpnd${count}">
+      <div class="col-md-4  col-sm-12 col-xs-12">
+        <div class="form-group">
+          <input type="text" class="form-control" id="ben_fullname" name="ben_fullname[]" placeholder="(Last Name,First, MI)" >
+          <span class="err"></span>
+        </div>
+      </div>
+      <div class="col-md-2col-sm-12 col-xs-12">
+        <div class="form-group">
+          <input type="text" class="form-control mydatepicker" id="ben_dob" name="ben_dob[]" placeholder="Date of Birth(mm/dd/yy)" >
+          <span class="err"></span>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-12 col-xs-12">
+        <div class="form-group">
+          <input type="text" class="form-control" id="age" name="age[]" placeholder="Age" >
+          <span class="err"></span>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-xs-12">
+        <div class="form-group">
+          <input type="text" class="form-control" id="ben_relationship" name="ben_relationship[]" placeholder="Relationship" >
+          <span class="err"></span>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="input-group-append">
+          <button class="btn btn-success" type="button" onclick="removefields(${count});"><i class="fa fa-minus"></i></button>
+        </div>
+      </div>
+    </div>
+    `;
+
+    $('#formdpndents').append(html);
+}
+
+function removefields(id){
+    $('.removedpnd'+id).remove();
+}

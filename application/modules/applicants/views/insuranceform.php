@@ -1,9 +1,9 @@
 <div>
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h3 class="text-themecolor titleheader">Agreement</h3>
+            <h3 class="text-themecolor titleheader">Applicantion for Family Insurance</h3>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">MEMBERSHIP AND SUBSCRIPTION AGREEMENT</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Insurance Form</a></li>
             </ol>
         </div>
     </div>
@@ -116,6 +116,55 @@
                                                     <input type="text" name="blood_type" value="" class="form-control">
                                                   </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <h6>Co-insured Dependents</h6>
+                                <section>
+                                    <div class="row">
+                                      <div class="col-md-4  col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                          <input type="text" class="form-control" id="ben_fullname" name="ben_fullname[]" placeholder="(Last Name,First, MI)" >
+                                          <span class="err"></span>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-2col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                          <input type="text" class="form-control mydatepicker" id="ben_dob" name="ben_dob[]" placeholder="Date of Birth(mm/dd/yy)" >
+                                          <span class="err"></span>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-2 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                          <input type="text" class="form-control" id="age" name="age[]" placeholder="Age" >
+                                          <span class="err"></span>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-3 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                          <input type="text" class="form-control" id="ben_relationship" name="ben_relationship[]" placeholder="Relationship" >
+                                          <span class="err"></span>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-1">
+                                        <div class="input-group-append">
+                                          <button class="btn btn-success" type="button" onclick="addfields();"><i class="fa fa-plus"></i></button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div id="formdpndents">
+
+                                    </div>
+                                </section>
+
+                                <h6>HEALTH DECLARATION</h6>
+                                <section>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                            
                                             </div>
                                         </div>
                                     </div>
