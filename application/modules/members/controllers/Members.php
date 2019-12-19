@@ -57,6 +57,7 @@ class Members extends MY_Controller {
 
   public function AddNewMember() {
     $post = $this->input->post();
+
     $results = array();
     $this->form_validation->set_rules('lastname' , 'Last Name' , 'required');
     $this->form_validation->set_rules('firstname' , 'First Name' , 'required');
@@ -71,7 +72,7 @@ class Members extends MY_Controller {
         'first_name'    => $post['firstname'],
         'middle_name'   => $post['middlename'],
         'birthdate'     => $post['birthdate'],
-        'age'           => calculateAge($post['birthdate']),
+        'age'           => 24,
         'blood_type'    => $post['blood_type'],
         'birth_place'   => $post['birthplace'],
         'religion'      => $post['religion'],
@@ -97,7 +98,7 @@ class Members extends MY_Controller {
           $where = array('member_id' => $pi_id );
           $insert_account_id_data = array('acount_id' => $account_id);
           $execute = $this->MY_Model->update('tbl_mem_personal_information' , $insert_account_id_data , $where );
-          $profile_image = $this->convertProfile($post['profile_image'] , $account_id);
+          $profile_image = $this->profileUpload();
           if($execute){
             try {
               // Residence Section
@@ -166,7 +167,6 @@ class Members extends MY_Controller {
               // Financial Information Section
               $main_data = array();
 
-              // initial Insert
               $member_id = array('member_id' => $pi_id);
               $initail_insert = $this->MY_Model->insert('tbl_financial_info' , $member_id);
               // end
@@ -674,6 +674,27 @@ class Members extends MY_Controller {
     echo json_encode($results);
   }
 
+  public function profileUpload(){
+    $available_file = array('jpg' , 'jpeg' , 'png');
+    $file_type = pathinfo($_FILES['profile_new']['name'], PATHINFO_EXTENSION);
+    $config['upload_path'] = './assets/profile/';
+    $config['allowed_types'] = '*';
+    $config['max_size'] = 2000;
+    $config['file_name'] =  date('ymd').'-'.uniqid('' , false);
+
+    $this->load->library('upload', $config);
+
+      if(in_array($file_type , $available_file)){
+          if ($this->upload->do_upload('profile_new')) {
+              return $config['file_name'].'.'.$file_type;
+          }else{
+              return array('error' => $this->upload->display_errors()['error']);
+          }
+      } else {
+          return array('error' => 'Invalid file types.');
+      }
+  }
+
   // Member ID Section
 
   public function member_id(){
@@ -695,6 +716,9 @@ class Members extends MY_Controller {
 
   public function getMemberBy_id(){
     $post = $this->input->post();
+    echo "<pre>";
+    print_r($post);
+    die();
     $results = array();
     // $params['where'] = array('tbl_mem_personal_information.member_id' => $post['member_id']);
     $params['where_in'] = array('col' => 'tbl_mem_personal_information.member_id','value' => $post['account_id']);
@@ -862,5 +886,65 @@ class Members extends MY_Controller {
     echo json_encode($results);
 
   }
+
+    public function getlistid(){
+
+        $limit = $this->input->post('length');
+        $offset = $this->input->post('start');
+        $search = $this->input->post('search');
+        $order = $this->input->post('order');
+        $draw = $this->input->post('draw');
+        $column_order = array('last_name','first_name','middle_name','tbl_mem_personal_information.acount_id' , 'total' , 'date_last_generated');
+        $join = array(
+          'tbl_mem_personal_information' => 'tbl_mem_personal_information.member_id = tbl_id_logs.member_id'
+        );
+        $select = "tbl_mem_personal_information.member_id,last_name , first_name , middle_name , acount_id , total , date_last_generated";
+    // $where = array(
+    //     'tbl_mem_personal_information.member_type_id' => 2,
+    //     'tbl_mem_personal_information.member_type_id' => 6
+    // );
+
+        $where = "tbl_mem_personal_information.member_type_id = 2";
+        $group = array();
+        $list = datatables('tbl_id_logs',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
+
+
+        $output = array(
+              "draw" => $draw,
+              "recordsTotal" => $list['count_all'],
+              "recordsFiltered" => $list['count'],
+              "data" =>  $list['data']
+        );
+
+        echo json_encode($output);
+    }
+
+    public function idLogs(){
+        $post = $this->input->post('value');
+        $data = json_decode($post , true);
+        foreach ($data as $key => $value) {
+            // checking
+            $params['where'] = array('member_id' => $value);
+            $check = $this->MY_Model->getRows('tbl_id_logs' , $params ,'row');
+
+            if (!$check) {
+                $items = array(
+                    'member_id' => $value,
+                    'total' => 1,
+                    'date_last_generated' => date("Y-m-d"),
+                    'date_added' => date("Y-m-d")
+                );
+
+                // $i = $this->MY_Model->insert('tbl_id_logs' , $items);
+            }else{
+                $where = array('member_id' => $value );
+                $items = array(
+                    'total' => $check->total + 1,
+                    'date_last_generated' => date("Y-m-d")
+                );
+                $u = $this->MY_Model->update('tbl_id_logs' , $items , $where);
+            }
+        }
+    }
 
 }

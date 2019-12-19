@@ -164,7 +164,7 @@ class Applicants extends Applicant_Controller{
         'first_name'    => $post['firstname'],
         'middle_name'   => $post['middlename'],
         'birthdate'     => $post['birthdate'],
-        'age'           => $post['age'],
+        'age'           => calculateAge($post['age']),
         'blood_type'    => $post['blood_type'],
         'birth_place'   => $post['birthplace'],
         'religion'      => $post['religion'],

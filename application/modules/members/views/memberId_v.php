@@ -28,18 +28,17 @@
                                   </tr>
                               </thead>
                               <tbody>
-                                  <?php foreach ($list as $key => $value): ?>
-
+                                  <!-- <1?php foreach ($list as $key => $value): ?>
                                       <tr class="parent">
                                         <td>
-                                          <input type="checkbox" class="addtolist" remove_id ="<?php echo $key; ?>">
+                                          <input type="checkbox" class="addtolist" remove_id ="<1?php echo $key; ?>">
                                           </td>
-                                          <td><?php echo $value['membername']; ?></td>
-                                          <td account="<?php echo $value['member_id'] ?>"><?php echo $value['acount_id']; ?></td>
+                                          <td><1?php echo $value['membername']; ?></td>
+                                          <td account="<1?php echo $value['member_id'] ?>"><1?php echo $value['acount_id']; ?></td>
                                           <td>1</td>
                                           <td>Oct 15 2019</td>
                                       </tr>
-                                  <?php endforeach; ?>
+                                  <1?php endforeach; ?> -->
                               </tbody>
                           </table>
                       </div>

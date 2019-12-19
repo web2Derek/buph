@@ -2,7 +2,44 @@ $(document).ready(function() {
   $('.mydatepicker').datepicker();
   var base_url = $('#base_url').val();
 
-  $('#memberlist_id').DataTable();
+  var memberlistid = $('#memberlist_id').DataTable({
+    "processing": true, //Feature control the processing indicator.
+    "serverSide": true, //Feature control DataTables' server-side processing mode.
+    "order": [[0,'desc']], //Initial no order.
+    "columns":[
+        {"data" : "first_name" , "render" : function() {
+            var str = '';
+            str = `<input type="checkbox" class="addtolist">`;
+            return str;
+        }},
+        {"data":"first_name" , "render" : function(data, type, row,meta) {
+            var str = row.first_name+ ' ' +row.last_name;
+            return str;
+        }
+        },
+        {"data":"acount_id" , 'render' : function(data, type, row,meta) {
+            var str = '';
+            str += row.first_name;
+            str += `<input type="hidden" class="account_no_generated" value="${row.member_id}">`;
+            return str;
+        }},
+        {"data":"total"},
+        {"data":"date_last_generated"},
+    ],
+  // Load data for the table's content from an Ajax source
+  "ajax": {
+    "url": base_url+"members/getlistid",
+    "type": "POST"
+  },
+  //Set column definition initialisation properties.
+  "columnDefs": [
+    {
+      "targets": [0], //first column / numbering column
+      "orderable": true, //set not orderable
+    },
+  ],
+});
+
   var memberlist = $('#memberlist').DataTable({
     "processing": true, //Feature control the processing indicator.
     "serverSide": true, //Feature control DataTables' server-side processing mode.
@@ -787,81 +824,48 @@ $('input[name="source_others"]').click(function() {
     $('#if_others').fadeOut();
   }
 })
-$('#add_member').on('submit' , function(e) {
-  e.preventDefault();
-  clearError();
-  let isEdit = $(this).attr('isEdit');
-  let url = $('#base_url').val() + 'members/AddNewMember';
-  let formData = new FormData(this);
-  let profile_image = $('#capture_photo').attr('src');
-  formData.append('profile_image' , profile_image);
 
-    $('input[name="source_others"]').click(function() {
-        if ($(this).prop('checked') == true) {
-            $('#if_others').fadeIn();
-        }else{
-            $('#if_others').fadeOut();
-        }
-    })
-        $('#add_member').on('submit' , function(e) {
-            e.preventDefault();
-            clearError();
-            let isEdit = $(this).attr('isEdit');
-            let url = $('#base_url').val() + 'members/AddNewMember';
-            let formData = new FormData(this);
-            let profile_new = $('#profile_new').prop('files')[0];
-
-            formData.append('profile_new' , profile_new);
-            $.ajax({
-                method : 'POST',
-                url : url,
-                data : formData,
-                processData: false,
-                contentType: false,
-                dataType : 'json',
-                success : function(data) {
-                    if (data.form_error) {
-                        let keys = Object.keys(data.form_error);
-                        $(keys).each( function(idx , val){
-                            $("input[name='"+val+"']").next('.err').text(data.form_error[val]);
-                        })
-                    }else if (data.success) {
-                        Swal.fire("Success!",data.success, "success");
-                        setTimeout(function () {
-                          location.reload();
-                        }, 1000);
-                    }else {
-                        Swal.fire("Server Error.",data.error, "error");
-                    }
-                },
-            })
-        });
-
-
-  $.ajax({
-    method : 'POST',
-    url : url,
-    data : formData,
-    processData: false,
-    contentType: false,
-    dataType : 'json',
-    success : function(data) {
-      if (data.form_error) {
-        let keys = Object.keys(data.form_error);
-        $(keys).each( function(idx , val){
-          $("input[name='"+val+"']").next('.err').text(data.form_error[val]);
+$('input[name="source_others"]').click(function() {
+    if ($(this).prop('checked') == true) {
+        $('#if_others').fadeIn();
+    }else{
+        $('#if_others').fadeOut();
+    }
+})
+    $('#add_member').on('submit' , function(e) {
+        e.preventDefault();
+        clearError();
+        let isEdit = $(this).attr('isEdit');
+        let url = $('#base_url').val() + 'members/AddNewMember';
+        let formData = new FormData(this);
+        let profile_new = $('#profile_new').prop('files')[0];
+        formData.append('profile_new' , profile_new);
+        // $(this).prop('files')[0]);
+        $.ajax({
+            method : 'POST',
+            url : url,
+            data : formData,
+            processData: false,
+            contentType: false,
+            dataType : 'json',
+            success : function(data) {
+                if (data.form_error) {
+                    let keys = Object.keys(data.form_error);
+                    $(keys).each( function(idx , val){
+                        $("input[name='"+val+"']").next('.err').text(data.form_error[val]);
+                    })
+                }else if (data.success) {
+                    Swal.fire("Success!",data.success, "success");
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000);
+                }else {
+                    Swal.fire("Something went wrong.",data.error, "error");
+                }
+            },
         })
-      }else if (data.success) {
-        Swal.fire("Success!",data.success, "success");
-        setTimeout(function () {
-          location.reload();
-        }, 1000);
-      }else {
-        Swal.fire("Something went wrong.",data.error, "error");
-      }
-    },
-  })
-});
+    });
+
 $('#update_mem').on('submit' , function(e) {
   e.preventDefault();
   clearError();
@@ -917,109 +921,116 @@ $(document).on('click' , '.addtolist' , function() {
 $(document).on('click' , '.generate_id' , function() {
   let data_array = [];
   let accountID = [];
-  $('.generate').each(function(idx , val) {
-    let html = '';
-    let outer =  $('#selectedmember tr td:nth-child(3)')[idx].outerHTML
-    let id = $(outer).attr('account');
-    let txt  =  $('#selectedmember tr td:nth-child(3)')[idx].innerText;
-    accountID.push(txt)
-    data_array.push(id);
+  var checked_member = $('#memberlist_id .account_no_generated').parents('tbody').find('input[type="checkbox"]:checked');
+  $.each(checked_member,function(index,element){
+      var account_no = $(element).parent().parent().find('input[type="hidden"]').val()
+      console.log(account_no);
   });
-
-  let url = $('#base_url').val();
-  $.ajax({
-    method: 'POST',
-    url : url + 'members/getMemberBy_id',
-    data : {account_id: data_array},
-    dataType : 'json',
-    success : function(response) {
-      let data_arr = [];
-      var html = '';
-      console.log(response);
-      // generateId_html(response);
-      // console.log(response);
-      $.each(response.data, function(index,element) {
-        data_arr.push(element.acount_id);
-        console.log(element.acount_id);
-        html += `<div id="print_me_plss"><div class="col-md-6 col-sm-12 col-xs-12 animated bounceInLeft">
-        <div class="id_wrapper">
-        <div class="front">
-        <div class="idbackground">
-        <figure>
-        <img src="${$('#base_url').val()}${'assets/images/id/front2.png'}" alt="">
-        </figure>
-        </div>
-        <div class="iddetails">
-        <div class="id_container">
-        <img width="102px" height="70px" src="${$('#base_url').val()}${'assets/profile/'}${element.pr_file_name}">
-        </div>
-        <div class="name_container">
-        <h6>${element.last_name}</h6>
-        <h6>${element.first_name}</h6>
-        <h6>${element.acount_id}</h6>
-        </div>
-        <div class="signature_container">
-        SIGNATURE HERE
-        </div>
-        </div>
-        </div>
-        <div class="back">
-        <div class="idbackground">
-        <figure>
-        <img src="${$('#base_url').val()}${'assets/images/id/back2.png'}" alt="Members Image">
-        </figure>
-        </div>
-        <div class="iddetails">
-        <div class="personal_info">
-        <div class="col">
-        <p>Birth Date: ${element.birthdate}</p>
-        <p>PhilHealth: ${'na'}</p>
-        <p>TIN: ${element.tin}</p>
-        </div>
-        <div class="col">
-        <p>GSIS: ${'na'}</p>
-        <p>SSS: ${element.sss}</p>
-        <p>Blood type: ${element.blood_type}</p>
-        </div>
-        <div class="signature" id="qr-code${element.acount_id}"></div>
-        <div class="address">
-        <p> Address: ${'sample address'} </p>
-        </div>
-        </div>
-        <div class="ft">
-        <div class="emergency">
-        <h5>IN CASE OF EMERGENCY, PLEASE CONTACT: </h5>
-        <p>Name:</p>
-        <p>Contact No.:</p>
-        </div>
-        <div class="board">
-        <p>EUGENE M. PABUALAN</p>
-        <p>Chairperson Board of Director</p>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>`;
-        // generate_qr(element.acount_id)
-      });
-
-      $('.generate_here').html(html)
-      // GENERATE QR CODE
-      $(data_arr).each(function(idx, val) {
-          console.log(val);
-          generate_qr(val);
-      })
-
-      $(data_arr).each(function(idx, val) {
-        setTimeout(function() {
-          save_qr(val);
-        }, 1000)
-    });
-
-    }
-  })
+  // $('.generate').each(function(idx , val) {
+  //   let html = '';
+  //   let outer =  $('#selectedmember tr td:nth-child(3)')[idx];
+  //
+  //   return;
+  //   let id = $(outer).attr('account');
+  //   let txt  =  $('#selectedmember tr td:nth-child(3)')[idx].innerText;
+  //   accountID.push(txt)
+  //   data_array.push(id);
+  // });
+  //   console.log(data_array);
+  // let url = $('#base_url').val();
+  // $.ajax({
+  //   method: 'POST',
+  //   url : url + 'members/getMemberBy_id',
+  //   data : {account_id: data_array},
+  //   dataType : 'json',
+  //   success : function(response) {
+  //     let data_arr = [];
+  //     var html = '';
+  //     console.log(response);
+  //     // generateId_html(response);
+  //     // console.log(response);
+  //     $.each(response.data, function(index,element) {
+  //       data_arr.push(element.acount_id);
+  //       console.log(element.acount_id);
+  //       html += `<div id="print_me_plss"><div class="col-md-6 col-sm-12 col-xs-12 animated bounceInLeft">
+  //       <div class="id_wrapper">
+  //       <div class="front">
+  //       <div class="idbackground">
+  //       <figure>
+  //       <img src="${$('#base_url').val()}${'assets/images/id/front2.png'}" alt="">
+  //       </figure>
+  //       </div>
+  //       <div class="iddetails">
+  //       <div class="id_container">
+  //       <img width="102px" height="70px" src="${$('#base_url').val()}${'assets/profile/'}${element.pr_file_name}">
+  //       </div>
+  //       <div class="name_container">
+  //       <h6>${element.last_name}</h6>
+  //       <h6>${element.first_name}</h6>
+  //       <h6>${element.acount_id}</h6>
+  //       </div>
+  //       <div class="signature_container">
+  //       SIGNATURE HERE
+  //       </div>
+  //       </div>
+  //       </div>
+  //       <div class="back">
+  //       <div class="idbackground">
+  //       <figure>
+  //       <img src="${$('#base_url').val()}${'assets/images/id/back2.png'}" alt="Members Image">
+  //       </figure>
+  //       </div>
+  //       <div class="iddetails">
+  //       <div class="personal_info">
+  //       <div class="col">
+  //       <p>Birth Date: ${element.birthdate}</p>
+  //       <p>PhilHealth: ${'na'}</p>
+  //       <p>TIN: ${element.tin}</p>
+  //       </div>
+  //       <div class="col">
+  //       <p>GSIS: ${'na'}</p>
+  //       <p>SSS: ${element.sss}</p>
+  //       <p>Blood type: ${element.blood_type}</p>
+  //       </div>
+  //       <div class="signature" id="qr-code${element.acount_id}"></div>
+  //       <div class="address">
+  //       <p> Address: ${'sample address'} </p>
+  //       </div>
+  //       </div>
+  //       <div class="ft">
+  //       <div class="emergency">
+  //       <h5>IN CASE OF EMERGENCY, PLEASE CONTACT: </h5>
+  //       <p>Name:</p>
+  //       <p>Contact No.:</p>
+  //       </div>
+  //       <div class="board">
+  //       <p>EUGENE M. PABUALAN</p>
+  //       <p>Chairperson Board of Director</p>
+  //       </div>
+  //       </div>
+  //       </div>
+  //       </div>
+  //       </div>
+  //       </div>
+  //       </div>`;
+  //       // generate_qr(element.acount_id)
+  //     });
+  //
+  //     $('.generate_here').html(html)
+  //     // GENERATE QR CODE
+  //     $(data_arr).each(function(idx, val) {
+  //         console.log(val);
+  //         generate_qr(val);
+  //     })
+  //
+  //     $(data_arr).each(function(idx, val) {
+  //       setTimeout(function() {
+  //         save_qr(val);
+  //       }, 1000)
+  //   });
+  //
+  //   }
+  // })
 
   //
     // $(data_arr).each(function(idx, val) {
@@ -1095,7 +1106,17 @@ $(document).on('click' , '.btn_print' , function(){
     copyTagClasses: false,      // copy classes from the html & body tag
     beforePrintEvent: null,     // callback function for printEvent in iframe
     beforePrint: null,          // function called before iframe is filled
-    afterPrint: null
+    afterPrint: function() {
+        let json_data = localStorage.getItem('printLogs');
+        $.ajax({
+            url     : base_url + 'members/idLogs',
+            method  : 'POST',
+            data    : {value : json_data },
+            success : function(e){
+                console.log(e);
+            }
+         })
+    }
   });
 
 })
