@@ -171,12 +171,15 @@ $(document).ready(function() {
             {"data":"branch_id","render": function(data, type, row,meta){
             var str = '';
             str += `
-                <div class="btn-group ">
+                <a href="javascript:;">
                 <button branch_id ="${row.branch_id}" type="button" class="btn waves-effect waves-light btn-outline-warning branch_btn_edit btn-sm" data-toggle="modal" data-target="#edit_Branch"><i class="far fa-edit"></i></button>
+                </a>
+                <a href="javascript:;">
                 <button type="button" class="btn waves-effect waves-light btn-outline-warning del-branch btn-sm" id="${row.branch_id}">
                 <i class="fas fa-lock"></i>
                 </button>
-                </div>
+                </a>
+
             `;
             return str;
             }
@@ -1171,7 +1174,7 @@ $('.profile_edit').on('click' , function() {
 
 $('.profile_edit').on('change' , function() {
   let allowed_types = ['jpg', 'png' , 'jpeg'];
-  let file = $(this).val(); 
+  let file = $(this).val();
   let element = $(this);
   let extension = file.split('.').pop();
   let checkValidation = jQuery.inArray(extension , allowed_types);

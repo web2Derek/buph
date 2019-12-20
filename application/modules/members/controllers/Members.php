@@ -72,7 +72,7 @@ class Members extends MY_Controller {
         'first_name'    => $post['firstname'],
         'middle_name'   => $post['middlename'],
         'birthdate'     => $post['birthdate'],
-        'age'           => 24,
+        'age'           => calculateAge($post['birthdate']),
         'blood_type'    => $post['blood_type'],
         'birth_place'   => $post['birthplace'],
         'religion'      => $post['religion'],
@@ -263,6 +263,10 @@ class Members extends MY_Controller {
                   'member_id' => $pi_id
                 );
 
+                $idlogs = array(
+                    'member_id' => $pi_id
+                );
+
                 //end
                 $where = array('member_id' => $pi_id );
                 $this->MY_Model->update('tbl_financial_info' , $main_data[0] , $where);
@@ -273,6 +277,7 @@ class Members extends MY_Controller {
                 $this->MY_Model->insert('tbl_profile_img'    , $profile_image);
                 $this->MY_Model->insert('tbl_account_info'   , $acount_info);
                 $this->MY_Model->insert('tbl_monetary_req'   , $monetary);
+                $this->MY_Model->insert('tbl_id_logs'        , $idlogs);
                 $results = array('success' => 'Added new member successfully.');
               }
               // end Financial Information Section
@@ -686,7 +691,7 @@ class Members extends MY_Controller {
 
     $this->load->library('upload');
     $this->upload->initialize($config);
-    
+
     if(in_array($file_type , $available_file)){
         if ($this->upload->do_upload('profile_new')) {
             return $config['file_name'].'.'.$file_type;
@@ -716,6 +721,7 @@ class Members extends MY_Controller {
       $params['select'] = "tbl_mem_personal_information.member_id,last_name , first_name , middle_name , acount_id , total , date_last_generated";
       $data['list'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params);
       $this->load_page('memberId_v' , $data);
+
     } else {
       redirect(base_url('login'));
     }
