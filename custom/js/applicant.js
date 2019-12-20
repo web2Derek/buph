@@ -7,10 +7,10 @@
 
 $(document).ready(function() {
   var url = $('#base_url').val();
-// MEMBERS SIGNATURE
+  // MEMBERS SIGNATURE
   $('#member_signatures').on('submit', function(e) {
-      e.preventDefault();
-      let formdata = $(this).serializeArray();
+    e.preventDefault();
+    let formdata = $(this).serializeArray();
     $.ajax({
       method: 'POST',
       url: url + 'applicants/mem_signatures',
@@ -26,66 +26,66 @@ $(document).ready(function() {
   })
 
   // MEMBERS REGISTRATION
-    $('#member_reg_form').on('submit', function(e) {
-        e.preventDefault();
-        clearError();
-        let formdata = $(this).serializeArray();
-        $.ajax({
-            method: "POST",
-            url: url + "applicants/members_registration",
-            data: formdata,
-            dataType: 'json',
-            success: function(response) {
-                if(response.form_error) {
-                    let err = Object.keys(response.form_error);
-                    $(err).each(function(index, value) {
-                    $('input[name="'+value+'"]').next('.mem-err').text(response.form_error[value]);
-                    })
-                } else {
-                    $('#member_reg_form')[0].reset();
-                    Swal.fire(' Successfully Registered!','You can now login');
-                }
-            },
-                error:function(xhr, thrownError, ajaxOptions) {
-                Swal.fire(' Error!','Something went Wrong');
-            }
-        })
-    });
+  $('#member_reg_form').on('submit', function(e) {
+    e.preventDefault();
+    clearError();
+    let formdata = $(this).serializeArray();
+    $.ajax({
+      method: "POST",
+      url: url + "applicants/members_registration",
+      data: formdata,
+      dataType: 'json',
+      success: function(response) {
+        if(response.form_error) {
+          let err = Object.keys(response.form_error);
+          $(err).each(function(index, value) {
+            $('input[name="'+value+'"]').next('.mem-err').text(response.form_error[value]);
+          })
+        } else {
+          $('#member_reg_form')[0].reset();
+          Swal.fire(' Successfully Registered','You can now login');
+        }
+      },
+      error:function(xhr, thrownError, ajaxOptions) {
+        Swal.fire(' Error','Server Error');
+      }
+    })
+  });
 
-    $(document).on('submit' , '#submitAgreement' , function(e) {
-        e.preventDefault();
-        let formdata = new FormData($(this)[0]);
-        $.ajax({
-            url : url + 'applicants/submitAgreement',
-            method : 'POST',
-            data : formdata,
-            processData: false,
-            contentType: false,
-            dataType : 'json',
-            success : function(e){
-                    console.log(e);
-            }
-        });
+  $(document).on('submit' , '#submitAgreement' , function(e) {
+    e.preventDefault();
+    let formdata = new FormData($(this)[0]);
+    $.ajax({
+      url : url + 'applicants/submitAgreement',
+      method : 'POST',
+      data : formdata,
+      processData: false,
+      contentType: false,
+      dataType : 'json',
+      success : function(e){
+        console.log(e);
+      }
     });
+  });
 
   $(document).on('click' , '#clear_sig' , function() {
     $('#agreementform_sig').signature('clear');
   });
 
   $(document).on('submit' , '#agreementform' , function(e) {
-      e.preventDefault();
-      let url = $('#base_url').val();
-      let formdata = new FormData($(this)[0]);
-      $.ajax({
-        url : url + 'applicants/submitAgreement',
-        method : 'POST',
-        data : formdata,
-        processData: false,
-        contentType: false,
-        success : function(response){
-            console.log(response);
-        }
-      })
+    e.preventDefault();
+    let url = $('#base_url').val();
+    let formdata = new FormData($(this)[0]);
+    $.ajax({
+      url : url + 'applicants/submitAgreement',
+      method : 'POST',
+      data : formdata,
+      processData: false,
+      contentType: false,
+      success : function(response){
+        console.log(response);
+      }
+    })
   });
 
 
@@ -94,6 +94,12 @@ $(document).ready(function() {
     $('.mem-err').text('');
   }
 
+  $(".pmes-wizard").steps({
+    headerTag: "h6"
+    , bodyTag: "section"
+    , transitionEffect: "fade"
+    , titleTemplate: '<span class="step">#index#</span> #title#'
+    })
 
   var form = $(".validation-wizard").show();
   $(".validation-wizard").steps({
@@ -102,7 +108,7 @@ $(document).ready(function() {
     , transitionEffect: "fade"
     , titleTemplate: '<span class="step">#index#</span> #title#'
     , labels: {
-      finish: "Submit"
+        finish: "Submit"
     }
     , onStepChanging: function (event, currentIndex, newIndex) {
       return currentIndex > newIndex || !(3 === newIndex && Number($("#age-2").val()) < 18) && (currentIndex < newIndex && (form.find(".body:eq(" + newIndex + ") label.error").remove(), form.find(".body:eq(" + newIndex + ") .error").removeClass("error")), form.validate().settings.ignore = ":disabled,:hidden", form.valid())
@@ -146,24 +152,111 @@ $(document).ready(function() {
     }
     , errorPlacement: function (error, element) {
       error.insertAfter(element)
-    }
-    , rules: {
+    },
+     rules: {
       emailAddress: {
         email: true
+      },
+      members_age: {
+        digit: true,
+        required: true
       },
       // zip_code: {
       //   digit: true,
       //   required: true
       // }
+    },
+    messages: {
+      mebers_age: "Please input a valid data"
     }
   })
 
+
+
+  // VIDEO TRACKING
+  $("#pmesVid").on("timeupdate", function(event) {
+    onTrackedVideoFrame(this.currentTime, this.duration);
+    let timex = this.currentTime;
+    let url = $('#base_url').val();
+    let mem_id = $('#members_id').val();
+    let prevTime = $('#prev_time').val();
+    // SAVE TIME WATCH EVERY 5 seconds
+    setTimeout(function() {
+      lastwatch(timex, url, mem_id);
+    }, 5000);
+    if(this.ended) {
+      $.ajax({
+        method: "POST",
+        url: url + 'applicants/progressUp',
+        data: {id: mem_id},
+        success: function(data) {
+          Swal.fire('Completed',
+          'You have Completed the Seminar you may now Proceed to the next Step.')
+        }
+      })
+    }
+  });
+
+// FUNCTION TO SAVE TIME
+  function lastwatch(currentTime, url, mem_id) {
+    $.ajax({
+      method: 'POST',
+      url: url + 'applicants/saveLastTime',
+      data: {timevid:currentTime, mem_id:mem_id},
+      success: function(data) {
+        // DO NOTHING
+      }
+    })
+  }
+
+  // window.addEventListener('onunload', function(e) {
+  //        e.preventDefault();
+  //        e.returnValue = '';
+  //        if(e) {
+  //          console.log('cancelled');
+  //        } else {
+  //          console.log('cancelled11')
+  //        }
+  // });
+
+
+//   window.onunload = function () {
+//     window.localstorage[myVideo.currentTime] = document.getElementById("pmesVid").currentTime;
+//     alert(window.localstorage[myVideo.currentTime]);
+// }
+
+// SAVE LAST WATCH  AFTER CLOSING
+  // function onclosing(saveTime, url) {
+  // window.bind('beforeunload', function (e) {
+  //          e.preventDefault();
+  //          e.returnValue = '';
+  //   });
+  //   console.log(closetab);
+  //   if(closetab) {
+  //     $.ajax({
+  //       method: "POST",
+  //       url: url + 'applicants/saveLastWatch',
+  //       data: {lastwatch: saveTime},
+  //       success:function(data) {
+  //         // nothing here
+  //       }
+  //     })
+  //   }
+  //
+  // }
+
+  function onTrackedVideoFrame(currentTime, duration){
+    $("#current").text(currentTime.toFixed(2)); //Change #current to currentTime
+    $("#duration").text(Math.floor(duration))
+  }
+
+  $('#pmes_notif').modal('show');
+})
   // CALCULATE MEMBERS AGE
-  var membdate = $('#birthdate').val();
-  var datenow = new Date().toLocaleDateString();
+  // var membdate = $('#birthdate').val();
+  // var datenow = new Date().toLocaleDateString();
   // alert(Math.floor(membdate - datenow));
   // alert(membdate);
-});
 var count = 0;
 function addfields(){
     var html = '';

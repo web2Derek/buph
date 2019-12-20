@@ -18,8 +18,8 @@ $(document).ready(function() {
  });
 
 
-  filterTable(date_filter = '', branch='');
-  fullPledge(date_filter = '', branch='');
+  filterTable(date_filter = '', to='', branch='');
+  fullPledge(date_filter = '', to='', branch='');
   memberStats(date_filter = '', member_type='');
 
   $(document).on('submit', '#filterMemberStat', function(e) {
@@ -30,21 +30,24 @@ $(document).ready(function() {
     memberStats(date_filter, member_type);
   })
 
+// SEARCH USER BY DATE AND BRANCH IN FULL PLEDGE TABLE
   $(document).on('submit', '#fullPledgeTable', function(e) {
     e.preventDefault();
     var date_filter = $('#fp_singledate').val();
     var mem_branch = $('#fp_mem_branch').val();
+    var to = getlastDayOfMonth(date_filter);
     $('#full_pledge').DataTable().destroy();
-    fullPledge(date_filter, mem_branch);
+    fullPledge(date_filter, to,mem_branch);
   })
 
-
+// SEARCH USER BY DATE AND BRANCH IN NEW MEMBERS
   $(document).on('submit', '#filterTable', function(e) {
     e.preventDefault();
     var date_filter = $('#singledate').val();
     var mem_branch = $('#mem_branch').val();
+    var to = getlastDayOfMonth(date_filter);
     $('#newlist').DataTable().destroy();
-    filterTable(date_filter, mem_branch);
+    filterTable(date_filter, to, mem_branch);
   })
 
   $(document).on('click' , '#filter_withdraw' , function() {
@@ -70,90 +73,102 @@ $(document).ready(function() {
       return last_day.getMonth() + 1 +'/'+ last_day.getDate() + '/' + last_day.getFullYear();
   }
 
-  function filterTable( date_filter ='', branch='') {
-
-    var url = $('#base_url').val();
-    var date_filter = date_filter;
-    var mem_branch = branch;
-    var new_member = $('#newlist').DataTable({
-        responsive: true,
-        "processing": true, //Feature control the processing indicator.
-        "serverSide": true, //Feature control DataTables' server-side processing mode.
-        "order": [[0, 'asc']], //Initial no order.
-        "columns": [
-          {"data": "member_name"},
-          {"data": "member_address"},
-          {"data": "date_added"},
-          {"data": "gender"},
-          {"data": "birthdate"},
-          {"data": "age"},
-          {"data": "age"},
-          {"data": "savings_deposit"},
-          {"data": "title"},
-          {"data": "invited_by"},
-          {"data": "facilitator"},
-          {"data": "branch_name"},
-      ],
-       // Load data for the table's content from an Ajax source
-
-      "ajax": {
-        "url": url + "reports/get_members",
-        "type": "POST",
-        "data": {date_filter:date_filter, mem_branch:mem_branch},
-      },
-      //Set column definition initialisation properties.
-      "columnDefs": [{
-      "targets": [11],//first column / numbering column
-      "orderable": true, //set orderable
-      }],
-         dom: 'Bfrtip',
-         buttons: ['csv', 'excel']
-    });
-
-     $('.buttons-csv, .buttons-excel').addClass('btn btn-primary mr-1');
-  }
-
-     // filter for another table
-    function fullPledge( date_filter ='', branch='') {
+// GET DATA FOR NEW MEMBERS
+  function filterTable( date_filter ='', to, branch='') {
+      var url = $('#base_url').val();
       var date_filter = date_filter;
       var mem_branch = branch;
-      var url = $('#base_url').val();
-      var new_member = $('#full_pledge').DataTable({
+      var new_member = $('#newlist').DataTable({
           responsive: true,
           "processing": true, //Feature control the processing indicator.
           "serverSide": true, //Feature control DataTables' server-side processing mode.
-          "order": [[0, 'asc']], //Initial no order.
+          "order": [[11, 'asc']], //Initial no order.
           "columns": [
-            {"data": "member_name"},
-            {"data": "member_address"},
+            {"data": "member_name", render: function(data, type, row, meta) {
+              let str = `${row.first_name} ${row.middle_name} ${row.last_name}`;
+                  return str;
+            }},
+            {"data": "member_address", render:function(data, type, row, meta) {
+              let address =`${row.barangay_district} ${row.municipality}`;
+              return address
+            }},
             {"data": "date_added"},
             {"data": "gender"},
             {"data": "birthdate"},
             {"data": "age"},
-            {"data": "age"},
-            {"data": "age"},
+            {"data": "grand_total"},
+            {"data": "savings_deposit"},
             {"data": "title"},
-            {"data": "member_name"},
-            {"data": "member_name"},
-            {"data": "member_name"},
+            {"data": "invited_by"},
+            {"data": "facilitator"},
+            {"data": "branch_name"},
         ],
          // Load data for the table's content from an Ajax source
 
         "ajax": {
-          "url": url + "reports/get_full_pledge",
+          "url": url + "reports/get_members",
           "type": "POST",
-          "data": {date_filter:date_filter, mem_branch:mem_branch },
+          "data": {date_filter:date_filter, mem_branch:mem_branch, to:to},
         },
         //Set column definition initialisation properties.
         "columnDefs": [{
-          "targets": [11],//first column / numbering column
+        "targets": [11],//first column / numbering column
         "orderable": true, //set orderable
         }],
            dom: 'Bfrtip',
            buttons: ['csv', 'excel']
-       });
-       $('.buttons-csv, .buttons-excel').addClass('btn btn-info mr-1');
-     }
+      });
+
+       $('.buttons-csv, .buttons-excel').addClass('btn btn-primary mr-1');
+    }
+
+  // GET DATA FOR FULL PLEDGE TABLE
+     function fullPledge( date_filter ='', to,branch='') {
+       var date_filter = date_filter;
+       var mem_branch = branch;
+       var url = $('#base_url').val();
+       var new_member = $('#full_pledge').DataTable({
+           responsive: true,
+           "processing": true, //Feature control the processing indicator.
+           "serverSide": true, //Feature control DataTables' server-side processing mode.
+           "order": [[11, 'asc']], //Initial no order.
+           "columns": [
+             {"data": "first_name", render: function(data, type, row, meta) {
+               let str = ` ${row.middle_name} ${row.last_name}`;
+                   return str;
+             }},
+             {"data": "barangay_district", render:function(data, type, row, meta) {
+               let address =` ${row.municipality}`;
+               return address;
+             }},
+             {"data": "date_added"},
+             {"data": "gender"},
+             {"data": "birthdate"},
+             {"data": "age"},
+             {"data": "grand_total"},
+             {"data": "savings_deposit"},
+             {"data": "title"},
+             {"data": "invited_by"},
+             {"data": "facilitator"},
+             {"data": "branch_name"},
+         ],
+          // Load data for the table's content from an Ajax source
+
+         "ajax": {
+           "url": url + "reports/get_full_pledge",
+           "type": "POST",
+           "data": {date_filter:date_filter, mem_branch:mem_branch, to:to },
+         },
+         //Set column definition initialisation properties.
+         "columnDefs": [{
+           "targets": [11],//first column / numbering column
+         "orderable": true, //set orderable
+         }],
+            dom: 'Bfrtip',
+            buttons: ['csv', 'excel']
+        });
+        $('.buttons-csv, .buttons-excel').addClass('btn btn-info mr-1');
+      }
 
 
   // GET MEMBERSHIP STATISTIC DATA TABLE

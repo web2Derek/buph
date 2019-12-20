@@ -29,10 +29,12 @@ class Reports extends MY_Controller {
       $search = $this->input->post('search');
       $order = $this->input->post('order');
       $draw = $this->input->post('draw');
+      $to = $this->input->post('to');
 
-      $column_order = array('gender','birthdate', 'age', 'facilitator', 'invited_by', 'savings_deposit','branch_name');
+      $column_order = array('first_name', 'middle_name', 'last_name', 'barangay_district',                    'municipality','gender','birthdate', 'age', 'facilitator', 'invited_by',
+      'grand_total', 'savings_deposit','branch_name');
 
-      $select = "CONCAT(first_name ,' ',middle_name,' ',last_name) as member_name , CONCAT(barangay_district,',', municipality) as member_address ,acount_id , birthdate,age,blood_type , religion, savings_deposit, facilitator,  invited_by,civil_status , title, branch_name, gender, tbl_mem_personal_information.date_added ,tbl_mem_personal_information.member_id";
+      $select = "first_name , middle_name, last_name, barangay_district, municipality ,acount_id , birthdate, age,blood_type, religion, grand_total ,savings_deposit, facilitator,  invited_by,civil_status , title, branch_name, gender, tbl_mem_personal_information.date_added ,tbl_mem_personal_information.member_id";
 
       $join = array(
             'tbl_member_types' => 'tbl_mem_personal_information.member_type_id = tbl_member_types.type_id',
@@ -43,12 +45,17 @@ class Reports extends MY_Controller {
         );
 
         // $data['list'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params);
-
-        if (isset($date_filter) && !empty($date_filter)) {
-          $where = array('birthdate' => $date_filter, 'birth_place' => $mem_branch);
-        } else {
-          $where = array();
+        if (!empty($date_filter)) {
+            $where = "(tbl_mem_personal_information.date_added BETWEEN '$date_filter' AND '$to') AND (tbl_branch.branch_name = '$mem_branch') ";
+        }else{
+            $where = array();
         }
+
+        // if (isset($date_filter) && !empty($date_filter)) {
+        //   $where = array('birthdate' => $date_filter, 'birth_place' => $mem_branch);
+        // } else {
+        //   $where = array();
+        // }
         $group="";
         $list = datatables('tbl_mem_personal_information',$column_order, $select ,$where, $join, $limit, $offset ,$search, $order, $group);
         $output = array(
@@ -83,44 +90,54 @@ class Reports extends MY_Controller {
     }
   }
 
+public function get_full_pledge() {
+  $date_filter = $this->input->post('date_filter');
+  $mem_branch = $this->input->post('mem_branch');
+  $limit = $this->input->post('length');
+  $offset = $this->input->post('start');
+  $search = $this->input->post('search');
+  $order = $this->input->post('order');
+  $draw = $this->input->post('draw');
+  $to = $this->input->post('to');
 
-  public function get_full_pledge() {
+  $column_order = array('first_name', 'middle_name', 'last_name', 'barangay_district',                            'municipality','gender','birthdate', 'age', 'facilitator', 'invited_by',
+  'grand_total', 'savings_deposit','branch_name');
 
-    $date_filter = $this->input->post('date_filter');
-    $mem_branch = $this->input->post('mem_branch');
-    $limit = $this->input->post('length');
-    $offset = $this->input->post('start');
-    $search = $this->input->post('search');
-    $order = $this->input->post('order');
-    $draw = $this->input->post('draw');
+  // $select = "*";
+  $select = "first_name , middle_name, last_name, barangay_district, municipality ,acount_id , birthdate, age,blood_type, religion, grand_total ,savings_deposit, facilitator, invited_by,civil_status , title, branch_name, gender, tbl_mem_personal_information.date_added ,tbl_mem_personal_information.member_id";
 
-    $column_order = array('gender','birthdate', 'age');
+  $join = array(
+        'tbl_member_types' => 'tbl_mem_personal_information.member_type_id = tbl_member_types.type_id',
+        'tbl_account_info' => 'tbl_mem_personal_information.member_id = tbl_account_info.member_id',
+        'tbl_mem_residence' => 'tbl_mem_personal_information.member_id = tbl_mem_residence.member_id',
+        'tbl_branch' => 'tbl_account_info.branch = tbl_branch.branch_id',
+        'tbl_monetary_req' => 'tbl_mem_personal_information.member_id = tbl_monetary_req.member_id'
+    );
 
-    $select = "CONCAT(first_name ,' ',middle_name,' ',last_name) as member_name , CONCAT(barangay_district,',', municipality) as member_address ,acount_id , birthdate,age,blood_type , religion , civil_status , title , gender,  ,tbl_mem_personal_information.date_added ,tbl_mem_personal_information.member_id";
+    // $data['list'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params);
 
-    $join = array(
-          'tbl_member_types' => 'tbl_mem_personal_information.member_type_id = tbl_member_types.type_id',
-          'tbl_mem_residence' => 'tbl_mem_personal_information.member_id = tbl_mem_residence.member_id'
+    if (!empty($date_filter)) {
+        $where = "(tbl_mem_personal_information.date_added BETWEEN '$date_filter' AND '$to') AND (tbl_branch.branch_name = '$mem_branch') ";
+    }else{
+        $where = array();
+    }
+
+    // if (!empty($date_filter)) {
+    //   $where = array('date_added' => $date_filter, 'branch_name' => $mem_branch);
+    // } else {
+    //   $where = array();
+    // }
+    $group= "";
+    $list = datatables('tbl_mem_personal_information',$column_order, $select ,$where, $join, $limit, $offset ,$search, $order, $group);
+    $output = array(
+              "draw" => $draw,
+              "recordsTotal" => $list['count_all'],
+              "recordsFiltered" => $list['count'],
+              "data" => $list['data']
       );
 
-      // $data['list'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params);
-
-      if (isset($date_filter) && !empty($date_filter)) {
-        $where = array('birthdate' => $date_filter, 'birth_place' => $mem_branch);
-      } else {
-        $where = array();
-      }
-      $group="";
-      $list = datatables('tbl_mem_personal_information',$column_order, $select ,$where, $join, $limit, $offset ,$search, $order, $group);
-      $output = array(
-                "draw" => $draw,
-                "recordsTotal" => $list['count_all'],
-                "recordsFiltered" => $list['count'],
-                "data" => $list['data']
-        );
-
-      echo json_encode($output);
-    }
+    echo json_encode($output);
+  }
 
     public function get_membership_statistic() {
 

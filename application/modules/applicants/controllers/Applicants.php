@@ -37,20 +37,27 @@ class Applicants extends Applicant_Controller{
     if($this->form_validation->run() !== FALSE) {
       $mem_user = $post['mem-username'];
       $mem_pass = $post['mem-password'];
-      $where['where'] = array('username' => $mem_user, 'password' => $mem_pass);
-      $result = $this->MY_Model->getRows('tbl_user_credentials', $where, 'row');
+      $params['where'] = array('username' => $mem_user, 'password' => $mem_pass);
+      $params['join'] = array('tbl_progress' => 'tbl_user_credentials.credentials_id = tbl_progress.fk_member_id');
+      $result = $this->MY_Model->getRows('tbl_user_credentials', $params, 'row');
+      echo "<pre>";
+      print_r($result);
+      exit;
       if($result){
         if ($result->user_type == 0) {
             $session = array(
             'logged_in' => true,
             'first_name' => $mem_user,
             'user_type' => 0,
-            'member_id' => $result->credentials_id
+            'member_id' => $result->credentials_id,
+            'previous_session' => $result->previous_session
           );
-          $this->session->set_userdata($session);
+            $this->session->set_userdata($session);
             if($result->branch_id == 0) {
               redirect(base_url('applicants/mem_branch'));
-            } else {
+            } elseif($result->progress_status == 0) {
+              redirect(base_url('applicants/pmes_video'));
+            }else{
               redirect(base_url('applicants/membership_registration'));
             }
         }
@@ -99,6 +106,11 @@ class Applicants extends Applicant_Controller{
       // do nothing but shit!!!
     }
   }
+
+  // LOAD VIDEOS FOR MEMBER Registration
+public function pmes_video() {
+  $this->load_member('pmes_seminar', '');
+}
 
 // LOAD BRANCH FOR USER TO select branch
   public function mem_branch() {

@@ -41,7 +41,7 @@
                   <div class="col-md-2 col-sm-12">
                     <div class="form-group">
                       <label for="">Age</label>
-                      <input type="text" class="form-control" name="age" value="">
+                      <input type="text" class="form-control" id="members_age" name="age" value="" required>
                     </div>
                   </div>
                   <div class="col-md-2 col-sm-12">
@@ -133,7 +133,7 @@
                   <div class="row">
                     <div class="col-md-12 col-sm-12">
                       <label for="signature"><h4>Members Profile Photo:</h4></label>
-                      <input type="file" name="member_profile" id="member_profile" class="dropify member_profile"  data-max-file-size-preview="5M" data-allowed-file-extensions="jpg png jpeg" data-default-file="<?php echo base_url() ?>assets/profile/profile.jpg"/required/>
+                      <input type="file" name="member_profile" id="member_profile" class="dropify member_profile"  data-max-file-size-preview="5M" data-allowed-file-extensions="jpg png jpeg" data-default-file="<?php echo base_url() ?>assets/profile/profile.jpg"/>
                     </div>
                   </div>
 
