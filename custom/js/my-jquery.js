@@ -1171,7 +1171,7 @@ $('.profile_edit').on('click' , function() {
 
 $('.profile_edit').on('change' , function() {
   let allowed_types = ['jpg', 'png' , 'jpeg'];
-  let file = $(this).val();
+  let file = $(this).val(); 
   let element = $(this);
   let extension = file.split('.').pop();
   let checkValidation = jQuery.inArray(extension , allowed_types);
