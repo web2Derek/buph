@@ -2,43 +2,43 @@ $(document).ready(function() {
   $('.mydatepicker').datepicker();
   var base_url = $('#base_url').val();
 
-  var memberlistid = $('#memberlist_id').DataTable({
-    "processing": true, //Feature control the processing indicator.
-    "serverSide": true, //Feature control DataTables' server-side processing mode.
-    "order": [[0,'desc']], //Initial no order.
-    "columns":[
-        {"data" : "first_name" , "render" : function() {
-            var str = '';
-            str = `<input type="checkbox" class="addtolist">`;
-            return str;
-        }},
-        {"data":"first_name" , "render" : function(data, type, row,meta) {
-            var str = row.first_name+ ' ' +row.last_name;
-            return str;
-        }
-        },
-        {"data":"acount_id" , 'render' : function(data, type, row,meta) {
-            var str = '';
-            str += row.first_name;
-            str += `<input type="hidden" class="account_no_generated" value="${row.member_id}">`;
-            return str;
-        }},
-        {"data":"total"},
-        {"data":"date_last_generated"},
-    ],
-  // Load data for the table's content from an Ajax source
-  "ajax": {
-    "url": base_url+"members/getlistid",
-    "type": "POST"
-  },
-  //Set column definition initialisation properties.
-  "columnDefs": [
-    {
-      "targets": [0], //first column / numbering column
-      "orderable": true, //set not orderable
-    },
-  ],
-});
+//   var memberlistid = $('#memberlist_id').DataTable({
+//     "processing": true, //Feature control the processing indicator.
+//     "serverSide": true, //Feature control DataTables' server-side processing mode.
+//     "order": [[0,'desc']], //Initial no order.
+//     "columns":[
+//         {"data" : "first_name" , "render" : function() {
+//             var str = '';
+//             str = `<input type="checkbox" class="addtolist">`;
+//             return str;
+//         }},
+//         {"data":"first_name" , "render" : function(data, type, row,meta) {
+//             var str = row.first_name+ ' ' +row.last_name;
+//             return str;
+//         }
+//         },
+//         {"data":"acount_id" , 'render' : function(data, type, row,meta) {
+//             var str = '';
+//             str += row.first_name;
+//             str += `<input type="hidden" class="account_no_generated" value="${row.member_id}">`;
+//             return str;
+//         }},
+//         {"data":"total"},
+//         {"data":"date_last_generated"},
+//     ],
+//   // Load data for the table's content from an Ajax source
+//   "ajax": {
+//     "url": base_url+"members/getlistid",
+//     "type": "POST"
+//   },
+//   //Set column definition initialisation properties.
+//   "columnDefs": [
+//     {
+//       "targets": [0], //first column / numbering column
+//       "orderable": true, //set not orderable
+//     },
+//   ],
+// });
 
   var memberlist = $('#memberlist').DataTable({
     "processing": true, //Feature control the processing indicator.
@@ -921,131 +921,129 @@ $(document).on('click' , '.addtolist' , function() {
 $(document).on('click' , '.generate_id' , function() {
   let data_array = [];
   let accountID = [];
-  var checked_member = $('#memberlist_id .account_no_generated').parents('tbody').find('input[type="checkbox"]:checked');
-  $.each(checked_member,function(index,element){
-      var account_no = $(element).parent().parent().find('input[type="hidden"]').val()
-      console.log(account_no);
+  // var checked_member = $('#memberlist_id .account_no_generated').parents('tbody').find('input[type="checkbox"]:checked');
+  // $.each(checked_member,function(index,element){
+  //     var account_no = $(element).parent().parent().find('input[type="hidden"]').val()
+  //     console.log(account_no);
+  // });
+var data_arr = [];
+  $('.generate').each(function(idx , val) {
+    let html = '';
+    let outer =  $('#selectedmember tr td:nth-child(3)')[idx];
+    let id = $(outer).attr('account');
+    let txt  =  $('#selectedmember tr td:nth-child(3)')[idx].innerText;
+    accountID.push(txt)
+    data_array.push(id);
   });
-  // $('.generate').each(function(idx , val) {
-  //   let html = '';
-  //   let outer =  $('#selectedmember tr td:nth-child(3)')[idx];
-  //
-  //   return;
-  //   let id = $(outer).attr('account');
-  //   let txt  =  $('#selectedmember tr td:nth-child(3)')[idx].innerText;
-  //   accountID.push(txt)
-  //   data_array.push(id);
-  // });
-  //   console.log(data_array);
-  // let url = $('#base_url').val();
-  // $.ajax({
-  //   method: 'POST',
-  //   url : url + 'members/getMemberBy_id',
-  //   data : {account_id: data_array},
-  //   dataType : 'json',
-  //   success : function(response) {
-  //     let data_arr = [];
-  //     var html = '';
-  //     console.log(response);
-  //     // generateId_html(response);
-  //     // console.log(response);
-  //     $.each(response.data, function(index,element) {
-  //       data_arr.push(element.acount_id);
-  //       console.log(element.acount_id);
-  //       html += `<div id="print_me_plss"><div class="col-md-6 col-sm-12 col-xs-12 animated bounceInLeft">
-  //       <div class="id_wrapper">
-  //       <div class="front">
-  //       <div class="idbackground">
-  //       <figure>
-  //       <img src="${$('#base_url').val()}${'assets/images/id/front2.png'}" alt="">
-  //       </figure>
-  //       </div>
-  //       <div class="iddetails">
-  //       <div class="id_container">
-  //       <img width="102px" height="70px" src="${$('#base_url').val()}${'assets/profile/'}${element.pr_file_name}">
-  //       </div>
-  //       <div class="name_container">
-  //       <h6>${element.last_name}</h6>
-  //       <h6>${element.first_name}</h6>
-  //       <h6>${element.acount_id}</h6>
-  //       </div>
-  //       <div class="signature_container">
-  //       SIGNATURE HERE
-  //       </div>
-  //       </div>
-  //       </div>
-  //       <div class="back">
-  //       <div class="idbackground">
-  //       <figure>
-  //       <img src="${$('#base_url').val()}${'assets/images/id/back2.png'}" alt="Members Image">
-  //       </figure>
-  //       </div>
-  //       <div class="iddetails">
-  //       <div class="personal_info">
-  //       <div class="col">
-  //       <p>Birth Date: ${element.birthdate}</p>
-  //       <p>PhilHealth: ${'na'}</p>
-  //       <p>TIN: ${element.tin}</p>
-  //       </div>
-  //       <div class="col">
-  //       <p>GSIS: ${'na'}</p>
-  //       <p>SSS: ${element.sss}</p>
-  //       <p>Blood type: ${element.blood_type}</p>
-  //       </div>
-  //       <div class="signature" id="qr-code${element.acount_id}"></div>
-  //       <div class="address">
-  //       <p> Address: ${'sample address'} </p>
-  //       </div>
-  //       </div>
-  //       <div class="ft">
-  //       <div class="emergency">
-  //       <h5>IN CASE OF EMERGENCY, PLEASE CONTACT: </h5>
-  //       <p>Name:</p>
-  //       <p>Contact No.:</p>
-  //       </div>
-  //       <div class="board">
-  //       <p>EUGENE M. PABUALAN</p>
-  //       <p>Chairperson Board of Director</p>
-  //       </div>
-  //       </div>
-  //       </div>
-  //       </div>
-  //       </div>
-  //       </div>
-  //       </div>`;
-  //       // generate_qr(element.acount_id)
-  //     });
-  //
-  //     $('.generate_here').html(html)
-  //     // GENERATE QR CODE
-  //     $(data_arr).each(function(idx, val) {
-  //         console.log(val);
-  //         generate_qr(val);
-  //     })
-  //
-  //     $(data_arr).each(function(idx, val) {
-  //       setTimeout(function() {
-  //         save_qr(val);
-  //       }, 1000)
-  //   });
-  //
-  //   }
-  // })
 
+  localStorage.setItem('printLogs' , JSON.stringify(data_array));
+  let url = $('#base_url').val();
+  $.ajax({
+    method: 'POST',
+    url : url + 'members/getMemberBy_id',
+    data : {account_id: data_array},
+    dataType : 'json',
+    success : function(response) {
+      // let data_arr = [];
+      var html = '';
+      // generateId_html(response);
+      // console.log(response);
+      $.each(response.data, function(index,element) {
+        data_arr.push(element.acount_id);
+        console.log(element.acount_id);
+        html += `<div id="print_me_plss"><div class="col-md-6 col-sm-12 col-xs-12 animated bounceInLeft">
+        <div class="id_wrapper">
+        <div class="front">
+        <div class="idbackground">
+        <figure>
+        <img src="${$('#base_url').val()}${'assets/images/id/front2.png'}" alt="">
+        </figure>
+        </div>
+        <div class="iddetails">
+        <div class="id_container">
+        <img width="102px" height="70px" src="${$('#base_url').val()}${'assets/profile/'}${element.pr_file_name}">
+        </div>
+        <div class="name_container">
+        <h6>${element.last_name}</h6>
+        <h6>${element.first_name}</h6>
+        <h6>${element.acount_id}</h6>
+        </div>
+        <div class="signature_container">
+        SIGNATURE HERE
+        </div>
+        </div>
+        </div>
+        <div class="back">
+        <div class="idbackground">
+        <figure>
+        <img src="${$('#base_url').val()}${'assets/images/id/back2.png'}" alt="Members Image">
+        </figure>
+        </div>
+        <div class="iddetails">
+        <div class="personal_info">
+        <div class="col">
+        <p>Birth Date: ${element.birthdate}</p>
+        <p>PhilHealth: ${'na'}</p>
+        <p>TIN: ${element.tin}</p>
+        </div>
+        <div class="col">
+        <p>GSIS: ${'na'}</p>
+        <p>SSS: ${element.sss}</p>
+        <p>Blood type: ${element.blood_type}</p>
+        </div>
+        <div class="signature" id="qr-code${element.acount_id}"></div>
+        <div class="address">
+        <p> Address: ${'sample address'} </p>
+        </div>
+        </div>
+        <div class="ft">
+        <div class="emergency">
+        <h5>IN CASE OF EMERGENCY, PLEASE CONTACT: </h5>
+        <p>Name:</p>
+        <p>Contact No.:</p>
+        </div>
+        <div class="board">
+        <p>EUGENE M. PABUALAN</p>
+        <p>Chairperson Board of Director</p>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>`;
+        // generate_qr(element.acount_id)
+      });
+
+      $('.generate_here').html(html)
+      // GENERATE QR CODE
+      $(data_arr).each(function(idx, val) {
+          generate_qr(val);
+      })
+
+      $(data_arr).each(function(idx, val) {
+        setTimeout(function() {
+          save_qr(val);
+        }, 1000)
+    });
+
+    }
+  })
+
+
+    $(data_arr).each(function(idx, val) {
+      setTimeout(function(){
+        generate_qr(val);
+      },100)
+    })
+
+    $(accountID).each(function(idx, val) {
+      setTimeout(function() {
+        save_qr(val);
+      }, 1000)
+  });
   //
-    // $(data_arr).each(function(idx, val) {
-    //   setTimeout(function(){
-    //     generate_qr(val);
-    //   },100)
-    // })
-  //
-  //   $(accountID).each(function(idx, val) {
-  //     setTimeout(function() {
-  //       save_qr(val);
-  //     }, 1000)
-  // });
-  // //
-  //   get_id_details_ajax(data_array);
+    get_id_details_ajax(data_array);
 
 })
 
@@ -1113,7 +1111,7 @@ $(document).on('click' , '.btn_print' , function(){
             method  : 'POST',
             data    : {value : json_data },
             success : function(e){
-                console.log(e);
+                location.reload();
             }
          })
     }
@@ -1193,6 +1191,7 @@ $('.profile_edit').on('change' , function() {
       success : function(res) {
         if (res.status == "Success") {
           Swal.fire('Success',res.msg, 'success');
+          location.reload();
         }else{
           Swal.fire('Error',res.msg, 'error');
         }

@@ -77,7 +77,7 @@
                 <div class="col-md-2 col-sm-12">
                   <div class="form-group">
                     <label for="">Age</label>
-                    <input type="text" disabled class="form-control" name="age" value="<?php echo ($isEdit ? $info->age : '') ?>">
+                    <input type="text" readonly class="form-control" name="age" value="<?php echo ($isEdit ? $info->age : '') ?>">
                     <span class="err"></span>
                   </div>
                 </div>

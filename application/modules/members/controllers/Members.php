@@ -99,6 +99,7 @@ class Members extends MY_Controller {
           $insert_account_id_data = array('acount_id' => $account_id);
           $execute = $this->MY_Model->update('tbl_mem_personal_information' , $insert_account_id_data , $where );
           $profile_image = $this->profileUpload();
+
           if($execute){
             try {
               // Residence Section
@@ -598,8 +599,9 @@ class Members extends MY_Controller {
     $config['max_size'] = 2000;
     $config['file_name'] =  date('ymd').'-'.uniqid('' , false);
 
-    $this->load->library('upload', $config);
 
+    $this->load->library('upload');
+    $this->upload->initialize($config);
     if(in_array($file_type , $available_file)){
       if ($this->upload->do_upload('signature')) {
         return $config['file_name'].'.'.$file_type;
@@ -682,30 +684,36 @@ class Members extends MY_Controller {
     $config['max_size'] = 2000;
     $config['file_name'] =  date('ymd').'-'.uniqid('' , false);
 
-    $this->load->library('upload', $config);
-
-      if(in_array($file_type , $available_file)){
-          if ($this->upload->do_upload('profile_new')) {
-              return $config['file_name'].'.'.$file_type;
-          }else{
-              return array('error' => $this->upload->display_errors()['error']);
-          }
-      } else {
-          return array('error' => 'Invalid file types.');
-      }
+    $this->load->library('upload');
+    $this->upload->initialize($config);
+    
+    if(in_array($file_type , $available_file)){
+        if ($this->upload->do_upload('profile_new')) {
+            return $config['file_name'].'.'.$file_type;
+        }else{
+            return array('error' => $this->upload->display_errors()['error']);
+        }
+    } else {
+        return array('error' => 'Invalid file types.');
+    }
   }
 
   // Member ID Section
 
   public function member_id(){
     if($this->session->has_userdata('logged_in')) {
-      $params['select'] = "CONCAT(last_name ,',',first_name,',' , middle_name) as membername , acount_id , member_id";
+      // $params['select'] = "CONCAT(last_name ,',',first_name,',' , middle_name) as membername , acount_id , member_id";
+
       $params['where'] = array(
         'member_type_id' => 2
       );
       $params['or_where'] = array(
         'member_type_id' => 6
       );
+      $params['join'] = array(
+        'tbl_id_logs' => 'tbl_mem_personal_information.member_id = tbl_id_logs.member_id'
+      );
+      $params['select'] = "tbl_mem_personal_information.member_id,last_name , first_name , middle_name , acount_id , total , date_last_generated";
       $data['list'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params);
       $this->load_page('memberId_v' , $data);
     } else {
@@ -716,9 +724,7 @@ class Members extends MY_Controller {
 
   public function getMemberBy_id(){
     $post = $this->input->post();
-    echo "<pre>";
-    print_r($post);
-    die();
+
     $results = array();
     // $params['where'] = array('tbl_mem_personal_information.member_id' => $post['member_id']);
     $params['where_in'] = array('col' => 'tbl_mem_personal_information.member_id','value' => $post['account_id']);
