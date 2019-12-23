@@ -79,7 +79,6 @@ $(document).ready(function() {
         let newArr = data['female'].reverse();
         let maleData = data['male'].reverse();
         let mcount = 0;
-        console.log(data);
         for(var i = 0; i < newArr.length; i++) {
           if(maleData.length <= i){
             maleData = '0';
