@@ -1,0 +1,12 @@
+FEEDBACK
+gd am sir partial feedback sa system sa user ug member list
+-dpt ang membership dli ma double entry ang name
+-dli dpt ma post kung wala na fillupan ang req fields.
+-mag error inig walay g.upload na signature, dpt ma aware ang user kung aha dpt nag error, ang error man gd kay invalid datatype
+-lahi ang data gagawas after mag save ug member (view details)
+-makalogin gihapon maski dli activated ang user
+-dli kaedit member
+-afer mag login dli ang login ang nka butang admin lng gihapon
+-beneficiries ug signature dli ga display
+-civil status, sex dli ga display inig edit
+-financial info dli ga refect pag edit
