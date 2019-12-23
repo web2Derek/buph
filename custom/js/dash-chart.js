@@ -12,7 +12,7 @@ $(document).ready(function() {
       let male_count = [];
       let range = [];
       var female_count = [];
-      console.log(data['female']);
+      // console.log(data['female']);
       // for(var i=0;i<data.length;i++){
       //   if(data[i].gender === "Male")
       //   {
@@ -78,19 +78,19 @@ $(document).ready(function() {
       function generateTr(data) {
         let newArr = data['female'].reverse();
         let maleData = data['male'].reverse();
+        let mcount = 0;
+        console.log(data);
         for(var i = 0; i < newArr.length; i++) {
-          console.log(maleData);
-          debugger
           if(maleData.length <= i){
             maleData = '0';
           }else{
-            maleData = data['male'][i].count;
+           mcount = maleData[i].count;
           }
           table_data = `
             <tr id="mem_data_range">
               <td >${newArr[i].range_data} Years Old</td>
               <td >${newArr[i].count}</td>
-              <td >${maleData}</td>
+              <td >${mcount}</td>
             </tr>
             `;
           $('.table_body_data').prepend(table_data);
@@ -121,8 +121,8 @@ $(document).ready(function() {
             branches.push(data[i].branch_name);
             dataset.push(data[i].member_per_branch);
           }
-          console.log(branches);
-          console.log(dataset);
+          // console.log(branches);
+          // console.log(dataset);
           generateChart(branches, dataset);
       },
       error: function(xhr, ajaxOptions, thrownError) {
@@ -150,8 +150,8 @@ $(document).ready(function() {
               branches.push(data[i].branch_name);
               dataset.push(data[i].member_per_branch);
             }
-            console.log(branches);
-            console.log(dataset);
+            // console.log(branches);
+            // console.log(dataset);
             getAllMember(branches, dataset);
         },
         error: function(xhr, ajaxOptions, thrownError) {

@@ -1,22 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
--- https://www.phpmyadmin.net/
+-- version 4.2.11
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2019 at 10:52 AM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 5.6.34
+-- Generation Time: Dec 23, 2019 at 06:09 AM
+-- Server version: 5.6.21
+-- PHP Version: 5.6.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `bupharco_db`
@@ -28,8 +26,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `tbl_account_info`
 --
 
-CREATE TABLE `tbl_account_info` (
-  `account_info_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_account_info` (
+`account_info_id` int(11) NOT NULL,
   `date_approve` varchar(20) NOT NULL,
   `member_id` int(11) NOT NULL,
   `ac_resolution_no` varchar(150) NOT NULL,
@@ -41,23 +39,26 @@ CREATE TABLE `tbl_account_info` (
   `date_of_pmes` varchar(50) NOT NULL,
   `encoded_date` varchar(50) NOT NULL,
   `remarks` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_account_info`
 --
 
 INSERT INTO `tbl_account_info` (`account_info_id`, `date_approve`, `member_id`, `ac_resolution_no`, `branch`, `classifications`, `facilitator`, `encoded_by`, `invited_by`, `date_of_pmes`, `encoded_date`, `remarks`) VALUES
-(2, '11/26/2019', 216, '000123', 3, 'A+', 'Samsung8458', '1', '', '11/12/2019', '11/19/2019', 'OKAY keeeeyo'),
+(2, '11/26/2019', 216, '000123', 3, 'A+', 'Samsung8458', '1', 'Chaen', '11/12/2019', '11/19/2019', 'OKAY keeeeyo'),
 (3, '11/28/2019', 217, '000123', 1, 'C', 'Ghre', '1', 'Matthew Derek', '11/27/2019', '11/24/2019', ''),
-(4, '12/03/2019', 218, '', 1, 'C', '', '1', '', '', '2019-12-03', ''),
-(5, '', 222, '', 1, 'C', '', '1', '', '', '2019-12-09', ''),
-(6, '', 223, '', 1, 'C', '', '1', '', '', '2019-12-09', ''),
+(4, '12/03/2019', 218, '', 1, 'C', 'Juvs', '1', 'Jerald', '', '2019-12-03', ''),
+(5, '', 222, '', 1, 'C', 'Jups', '1', 'Eds', '', '2019-12-09', ''),
+(6, '', 223, '', 1, 'C', 'Philip', '1', 'Collens', '', '2019-12-09', ''),
 (7, '', 224, '', 2, 'C', '', '1', '', '', '2019-12-09', ''),
-(8, '', 228, '', 1, 'C', '', '1', '', '', '2019-12-09', ''),
+(8, 'Petey', 228, '', 1, 'C', '', '1', '', '', '2019-12-09', ''),
 (9, '', 236, '', 1, 'C', '', '1', '', '', '2019-12-09', ''),
 (10, '', 237, '', 1, 'C', '', '1', '', '', '2019-12-09', ''),
-(11, '', 238, '', 1, 'C', '', '1', '', '', '2019-12-11', '');
+(11, '', 238, '', 1, 'C', '', '1', '', '', '2019-12-11', ''),
+(12, '', 247, '', 1, 'C', '', '0', '', '', '2019-12-18', ''),
+(13, '', 248, '', 1, 'C', '', '1', '', '', '2019-12-19', ''),
+(14, 'Kerry', 230, '', 1, 'C', '', '1', '', '', '2019-12-23', '');
 
 -- --------------------------------------------------------
 
@@ -65,15 +66,15 @@ INSERT INTO `tbl_account_info` (`account_info_id`, `date_approve`, `member_id`, 
 -- Table structure for table `tbl_applicant_access`
 --
 
-CREATE TABLE `tbl_applicant_access` (
-  `applicant_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_applicant_access` (
+`applicant_id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_applicant_access`
@@ -88,14 +89,14 @@ INSERT INTO `tbl_applicant_access` (`applicant_id`, `username`, `password`, `ema
 -- Table structure for table `tbl_branch`
 --
 
-CREATE TABLE `tbl_branch` (
-  `branch_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_branch` (
+`branch_id` int(11) NOT NULL,
   `branch_name` varchar(100) NOT NULL,
   `branch_code` int(20) NOT NULL,
   `address` varchar(100) NOT NULL,
   `Status` int(2) NOT NULL DEFAULT '1',
   `date_added` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_branch`
@@ -122,28 +123,28 @@ INSERT INTO `tbl_branch` (`branch_id`, `branch_name`, `branch_code`, `address`, 
 -- Table structure for table `tbl_contact_group`
 --
 
-CREATE TABLE `tbl_contact_group` (
-  `group_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_contact_group` (
+`group_id` int(11) NOT NULL,
   `group_name` varchar(200) NOT NULL,
   `contact_list` varchar(255) NOT NULL,
   `date_created` date NOT NULL,
   `date_updated` date NOT NULL,
   `added_by` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_contact_group`
 --
 
 INSERT INTO `tbl_contact_group` (`group_id`, `group_name`, `contact_list`, `date_created`, `date_updated`, `added_by`) VALUES
-(1, 'palautang', '[\"2\",\"1\",\"4\",\"3\"]', '2019-10-25', '0000-00-00', 'admin'),
-(2, 'WIFEZILLA', '[\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\"]', '2019-10-30', '0000-00-00', 'admin'),
-(3, 'Chronos', '[\"09056568956\",\"09306543214\",\"09056567931\"]', '2019-12-06', '0000-00-00', 'admin'),
-(4, 'Chronos', '[\"09056568956\",\"09306543214\",\"09056567931\"]', '2019-12-06', '0000-00-00', 'admin'),
-(6, 'Cassiopea', '[\"09306543214\",\"09056568956\",\"09056567931\"]', '2019-12-06', '0000-00-00', 'admin'),
-(7, 'Cassiopeas', '[\"09306543214\",\"09056568956\",\"09056567931\"]', '2019-12-06', '0000-00-00', 'admin'),
-(8, 'Nyx', '[\"09056568956\",\"09306543214\",\"09056567931\"]', '2019-12-06', '0000-00-00', 'admin'),
-(10, 'test', '[\"09306543214\",\"09056568956\",\"09056567931\"]', '2019-12-06', '0000-00-00', 'admin');
+(1, 'palautang', '["2","1","4","3"]', '2019-10-25', '0000-00-00', 'admin'),
+(2, 'WIFEZILLA', '["1","2","3","4","5","6","7"]', '2019-10-30', '0000-00-00', 'admin'),
+(3, 'Chronos', '["09056568956","09306543214","09056567931"]', '2019-12-06', '0000-00-00', 'admin'),
+(4, 'Chronos', '["09056568956","09306543214","09056567931"]', '2019-12-06', '0000-00-00', 'admin'),
+(6, 'Cassiopea', '["09306543214","09056568956","09056567931"]', '2019-12-06', '0000-00-00', 'admin'),
+(7, 'Cassiopeas', '["09306543214","09056568956","09056567931"]', '2019-12-06', '0000-00-00', 'admin'),
+(8, 'Nyx', '["09056568956","09306543214","09056567931"]', '2019-12-06', '0000-00-00', 'admin'),
+(10, 'test', '["09306543214","09056568956","09056567931"]', '2019-12-06', '0000-00-00', 'admin');
 
 -- --------------------------------------------------------
 
@@ -151,8 +152,8 @@ INSERT INTO `tbl_contact_group` (`group_id`, `group_name`, `contact_list`, `date
 -- Table structure for table `tbl_financial_info`
 --
 
-CREATE TABLE `tbl_financial_info` (
-  `financial_info_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_financial_info` (
+`financial_info_id` int(11) NOT NULL,
   `member_id` int(11) DEFAULT NULL,
   `sourceOf_income` varchar(255) DEFAULT NULL,
   `farmer` varchar(255) NOT NULL,
@@ -164,29 +165,40 @@ CREATE TABLE `tbl_financial_info` (
   `fi_business_gross_income_month` varchar(100) NOT NULL,
   `fi_gross_income_month` varchar(100) DEFAULT NULL,
   `fi_gross_income_year` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_financial_info`
 --
 
 INSERT INTO `tbl_financial_info` (`financial_info_id`, `member_id`, `sourceOf_income`, `farmer`, `fi_company_name`, `fi_office_address`, `fi_Job_title`, `fi_employmentStatus`, `fi_contact_no`, `fi_business_gross_income_month`, `fi_gross_income_month`, `fi_gross_income_year`) VALUES
-(105, 208, '{\"salary_honorarium\":\"on\",\"interest_commission\":\"on\",\"source_business\":\"on\",\"ofw_remitance\":\"on\",\"source_farmer\":\"on\",\"other_remittance\":\"on\",\"pension\":\"on\",\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, '232323'),
-(106, 209, '{\"salary_honorarium\":\"on\",\"interest_commission\":\"on\",\"source_business\":\"on\",\"ofw_remitance\":\"on\",\"source_farmer\":\"on\",\"other_remittance\":\"on\",\"pension\":\"on\",\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, '232323'),
-(107, 211, '{\"salary_honorarium\":null,\"interest_commission\":null,\"source_business\":null,\"ofw_remitance\":null,\"source_farmer\":null,\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, ''),
-(108, 212, '{\"salary_honorarium\":\"on\",\"interest_commission\":\"on\",\"source_business\":\"on\",\"ofw_remitance\":\"on\",\"source_farmer\":\"on\",\"other_remittance\":\"on\",\"pension\":\"on\",\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, ''),
-(109, 213, '{\"salary_honorarium\":\"on\",\"interest_commission\":\"on\",\"source_business\":\"on\",\"ofw_remitance\":\"on\",\"source_farmer\":\"on\",\"other_remittance\":\"on\",\"pension\":\"on\",\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, ''),
-(110, 215, '{\"salary_honorarium\":\"on\",\"interest_commission\":\"on\",\"source_business\":null,\"ofw_remitance\":\"on\",\"source_farmer\":null,\"other_remittance\":\"on\",\"pension\":\"on\",\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, '10000'),
-(111, 216, '{\"salary_honorarium\":\"on\",\"interest_commission\":null,\"source_business\":null,\"ofw_remitance\":\"on\",\"source_farmer\":null,\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, ''),
-(112, 217, '{\"salary_honorarium\":null,\"interest_commission\":null,\"source_business\":null,\"ofw_remitance\":null,\"source_farmer\":null,\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, ''),
-(113, 218, '{\"salary_honorarium\":null,\"interest_commission\":null,\"source_business\":\"on\",\"ofw_remitance\":null,\"source_farmer\":\"on\",\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":\"owned\"}', '', '', '', '', '', '', '10000', ''),
-(114, 222, '{\"salary_honorarium\":null,\"interest_commission\":null,\"source_business\":null,\"ofw_remitance\":null,\"source_farmer\":null,\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, ''),
-(115, 223, '{\"salary_honorarium\":null,\"interest_commission\":null,\"source_business\":null,\"ofw_remitance\":null,\"source_farmer\":null,\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, ''),
-(116, 224, '{\"salary_honorarium\":null,\"interest_commission\":null,\"source_business\":null,\"ofw_remitance\":null,\"source_farmer\":null,\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, ''),
-(117, 228, '{\"salary_honorarium\":null,\"interest_commission\":null,\"source_business\":null,\"ofw_remitance\":null,\"source_farmer\":null,\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, ''),
-(118, 236, '{\"salary_honorarium\":null,\"interest_commission\":null,\"source_business\":null,\"ofw_remitance\":null,\"source_farmer\":null,\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, ''),
-(119, 237, '{\"salary_honorarium\":null,\"interest_commission\":null,\"source_business\":null,\"ofw_remitance\":null,\"source_farmer\":null,\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, ''),
-(120, 238, '{\"salary_honorarium\":null,\"interest_commission\":null,\"source_business\":null,\"ofw_remitance\":null,\"source_farmer\":null,\"other_remittance\":null,\"pension\":null,\"others\":null}', '{\"corn\":null,\"sugarcane\":null,\"rice\":null,\"fruits\":null,\"cash\":null,\"livestock\":null}', '', '', '', '', '', '', NULL, '');
+(105, 208, '{"salary_honorarium":"on","interest_commission":"on","source_business":"on","ofw_remitance":"on","source_farmer":"on","other_remittance":"on","pension":"on","others":null}', '{"corn":null,"sugarcane":null,"rice":null,"fruits":null,"cash":null,"livestock":null}', '', '', '', '', '', '', NULL, '232323'),
+(106, 209, '{"salary_honorarium":"on","interest_commission":"on","source_business":"on","ofw_remitance":"on","source_farmer":"on","other_remittance":"on","pension":"on","others":null}', '{"corn":null,"sugarcane":null,"rice":null,"fruits":null,"cash":null,"livestock":null}', '', '', '', '', '', '', NULL, '232323'),
+(107, 211, '{"salary_honorarium":null,"interest_commission":null,"source_business":null,"ofw_remitance":null,"source_farmer":null,"other_remittance":null,"pension":null,"others":null}', '{"corn":null,"sugarcane":null,"rice":null,"fruits":null,"cash":null,"livestock":null}', '', '', '', '', '', '', NULL, ''),
+(108, 212, '{"salary_honorarium":"on","interest_commission":"on","source_business":"on","ofw_remitance":"on","source_farmer":"on","other_remittance":"on","pension":"on","others":null}', '{"corn":null,"sugarcane":null,"rice":null,"fruits":null,"cash":null,"livestock":null}', '', '', '', '', '', '', NULL, ''),
+(109, 213, '{"salary_honorarium":"on","interest_commission":"on","source_business":"on","ofw_remitance":"on","source_farmer":"on","other_remittance":"on","pension":"on","others":null}', '{"corn":null,"sugarcane":null,"rice":null,"fruits":null,"cash":null,"livestock":null}', '', '', '', '', '', '', NULL, ''),
+(110, 215, '{"salary_honorarium":"on","interest_commission":"on","source_business":null,"ofw_remitance":"on","source_farmer":null,"other_remittance":"on","pension":"on","others":null}', '{"corn":null,"sugarcane":null,"rice":null,"fruits":null,"cash":null,"livestock":null}', '', '', '', '', '', '', NULL, '10000'),
+(111, 216, '{"salary_honorarium":"on","interest_commission":null,"source_business":null,"ofw_remitance":"on","source_farmer":null,"other_remittance":null,"pension":null,"others":null}', '{"corn":null,"sugarcane":null,"rice":null,"fruits":null,"cash":null,"livestock":null}', '', '', '', '', '', '', NULL, ''),
+(112, 217, '{"salary_honorarium":null,"interest_commission":null,"source_business":null,"ofw_remitance":null,"source_farmer":null,"other_remittance":null,"pension":null,"others":null}', '{"corn":null,"sugarcane":null,"rice":null,"fruits":null,"cash":null,"livestock":null}', '', '', '', '', '', '', NULL, ''),
+(113, 218, '{"salary_honorarium":null,"interest_commission":null,"source_business":"on","ofw_remitance":null,"source_farmer":"on","other_remittance":null,"pension":null,"others":null}', '{"corn":null,"sugarcane":null,"rice":null,"fruits":null,"cash":null,"livestock":"owned"}', '', '', '', '', '', '', '10000', ''),
+(114, 222, '{"salary_honorarium":null,"interest_commission":null,"source_business":null,"ofw_remitance":null,"source_farmer":null,"other_remittance":null,"pension":null,"others":null}', '{"corn":null,"sugarcane":null,"rice":null,"fruits":null,"cash":null,"livestock":null}', '', '', '', '', '', '', NULL, ''),
+(115, 223, '{"salary_honorarium":null,"interest_commission":null,"source_business":null,"ofw_remitance":null,"source_farmer":null,"other_remittance":null,"pension":null,"others":null}', '{"corn":null,"sugarcane":null,"rice":null,"fruits":null,"cash":null,"livestock":null}', '', '', '', '', '', '', NULL, ''),
+(116, 224, '{"salary_honorarium":null,"interest_commission":null,"source_business":null,"ofw_remitance":null,"source_farmer":null,"other_remittance":null,"pension":null,"others":null}', '{"corn":null,"sugarcane":null,"rice":null,"fruits":null,"cash":null,"livestock":null}', '', '', '', '', '', '', NULL, ''),
+(117, 228, '{"salary_honorarium":null,"interest_commission":null,"source_business":null,"ofw_remitance":null,"source_farmer":null,"other_remittance":null,"pension":null,"others":null}', '{"corn":null,"sugarcane":null,"rice":null,"fruits":null,"cash":null,"livestock":null}', '', '', '', '', '', '', NULL, ''),
+(118, 236, '{"salary_honorarium":null,"interest_commission":null,"source_business":null,"ofw_remitance":null,"source_farmer":null,"other_remittance":null,"pension":null,"others":null}', '{"corn":null,"sugarcane":null,"rice":null,"fruits":null,"cash":null,"livestock":null}', '', '', '', '', '', '', NULL, ''),
+(119, 237, '{"salary_honorarium":null,"interest_commission":null,"source_business":null,"ofw_remitance":null,"source_farmer":null,"other_remittance":null,"pension":null,"others":null}', '{"corn":null,"sugarcane":null,"rice":null,"fruits":null,"cash":null,"livestock":null}', '', '', '', '', '', '', NULL, ''),
+(120, 238, '{"salary_honorarium":null,"interest_commission":null,"source_business":null,"ofw_remitance":null,"source_farmer":null,"other_remittance":null,"pension":null,"others":null}', '{"corn":null,"sugarcane":null,"rice":null,"fruits":null,"cash":null,"livestock":null}', '', '', '', '', '', '', NULL, ''),
+(121, 239, '{"salary_honorarium":"on","interest_commission":"on","source_business":"on","ofw_remitance":"on","source_farmer":"on","other_remittance":"on","pension":"on","others":"Anna"}', '{"corn":"rented","sugarcane":"rented","rice":"rented","fruits":"rented","cash":"rented","livestock":"rented"}', 'Kerry', '7339 Silver Pine Highlands', 'Leonardo', 'Petey', 'Brock', 'Matt', 'Above 50000', 'Marion'),
+(122, 240, '{"salary_honorarium":"on","interest_commission":"on","source_business":"on","ofw_remitance":"on","source_farmer":"on","other_remittance":"on","pension":"on","others":"Anna"}', '{"corn":"rented","sugarcane":"rented","rice":"rented","fruits":"rented","cash":"rented","livestock":"rented"}', 'Kerry', '7339 Silver Pine Highlands', 'Leonardo', 'Petey', 'Brock', 'Matt', 'Above 50000', 'Marion'),
+(123, 241, '{"salary_honorarium":"on","interest_commission":"on","source_business":"on","ofw_remitance":"on","source_farmer":"on","other_remittance":"on","pension":"on","others":"Anna"}', '{"corn":"rented","sugarcane":"rented","rice":"rented","fruits":"rented","cash":"rented","livestock":"rented"}', 'Kerry', '7339 Silver Pine Highlands', 'Leonardo', 'Petey', 'Brock', 'Matt', 'Above 50000', 'Marion'),
+(124, 242, '{"salary_honorarium":"on","interest_commission":"on","source_business":"on","ofw_remitance":"on","source_farmer":"on","other_remittance":"on","pension":"on","others":"Sue"}', '{"corn":"rented","sugarcane":"rented","rice":"rented","fruits":"rented","cash":"rented","livestock":"rented"}', 'Holly', '7669 Gulf Drive', 'Tom', 'Kerry', 'Tom', 'Matt', 'Above 50000', 'Mull'),
+(125, 243, '{"salary_honorarium":"on","interest_commission":"on","source_business":"on","ofw_remitance":"on","source_farmer":"on","other_remittance":"on","pension":"on","others":"Frank"}', '{"corn":"rented","sugarcane":"rented","rice":"rented","fruits":"rented","cash":"rented","livestock":"rented"}', 'Peter', '7339 Silver Pine Highlands', 'Cory', 'Kerry', 'Tom', 'Holly', 'Above 50000', 'Leonardo'),
+(126, 244, '{"salary_honorarium":null,"interest_commission":null,"source_business":null,"ofw_remitance":null,"source_farmer":null,"other_remittance":null,"pension":null,"others":null}', '{"corn":"rented","sugarcane":"rented","rice":"rented","fruits":"rented","cash":"rented","livestock":"rented"}', 'Petey', '162 Little Embers Court', 'Holly', 'Uy', 'Peter', 'Petey', 'Above 50000', 'Peter'),
+(127, 245, '{"salary_honorarium":"on","interest_commission":"on","source_business":"on","ofw_remitance":"on","source_farmer":"on","other_remittance":"on","pension":"on","others":"Brock"}', '{"corn":"rented","sugarcane":"rented","rice":"rented","fruits":"rented","cash":"rented","livestock":"rented"}', 'Cruiser', '7339 Silver Pine Highlands', 'Leonardo', 'Bob', 'Petey', 'Kerry', 'Above 50000', 'Anna'),
+(128, 246, '{"salary_honorarium":null,"interest_commission":null,"source_business":"on","ofw_remitance":"on","source_farmer":null,"other_remittance":null,"pension":null,"others":null}', '{"corn":"rented","sugarcane":"rented","rice":"rented","fruits":"rented","cash":"rented","livestock":"rented"}', 'Cliff', '7669 Gulf Drive', 'Anna', 'Bob', 'Cruiser', 'Terry', 'Above 50000', 'Tom'),
+(129, 247, '{"salary_honorarium":null,"interest_commission":null,"source_business":"on","ofw_remitance":"on","source_farmer":null,"other_remittance":null,"pension":null,"others":null}', '{"corn":"rented","sugarcane":"rented","rice":"rented","fruits":"rented","cash":"rented","livestock":"rented"}', 'Cliff', '7669 Gulf Drive', 'Anna', 'Bob', 'Cruiser', 'Terry', 'Above 50000', 'Tom'),
+(130, 248, '{"salary_honorarium":"on","interest_commission":"on","source_business":"on","ofw_remitance":"on","source_farmer":null,"other_remittance":"on","pension":"on","others":"Mull"}', '{"corn":"rented","sugarcane":"rented","rice":"rented","fruits":"rented","cash":"rented","livestock":"rented"}', 'Anna', '9170 N. Summerhouse St.', 'Lynn', 'Kerry', 'Mull', 'Uy', 'Above 50000', 'Frank'),
+(131, 230, '{"salary_honorarium":"on","interest_commission":"on","source_business":"on","ofw_remitance":"on","source_farmer":"on","other_remittance":"on","pension":"on","others":"Leonardo"}', '{"corn":"rented","sugarcane":"rented","rice":"rented","fruits":"rented","cash":"rented","livestock":"rented"}', 'Lynn', '162 Little Embers Court', 'Frank', 'Uy', 'Uy', 'Peter', 'Above 50000', 'Sue');
 
 -- --------------------------------------------------------
 
@@ -194,13 +206,13 @@ INSERT INTO `tbl_financial_info` (`financial_info_id`, `member_id`, `sourceOf_in
 -- Table structure for table `tbl_holiday`
 --
 
-CREATE TABLE `tbl_holiday` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_holiday` (
+`id` int(11) NOT NULL,
   `holiday` varchar(250) NOT NULL,
   `holiday_mess` varchar(250) NOT NULL,
   `hol_date` date NOT NULL,
   `sent_status` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_holiday`
@@ -216,28 +228,30 @@ INSERT INTO `tbl_holiday` (`id`, `holiday`, `holiday_mess`, `hol_date`, `sent_st
 -- Table structure for table `tbl_id_logs`
 --
 
-CREATE TABLE `tbl_id_logs` (
-  `logs_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_id_logs` (
+`logs_id` int(11) NOT NULL,
   `member_id` int(20) NOT NULL,
   `total` varchar(20) NOT NULL,
   `date_last_generated` varchar(20) NOT NULL,
   `date_added` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_id_logs`
 --
 
 INSERT INTO `tbl_id_logs` (`logs_id`, `member_id`, `total`, `date_last_generated`, `date_added`) VALUES
-(1, 216, '3', '2019-12-06', '2019-12-06'),
-(2, 218, '2', '2019-12-06', '2019-12-06'),
-(4, 222, '', '', ''),
-(5, 223, '', '', ''),
+(1, 216, '4', '2019-12-20', '2019-12-06'),
+(2, 218, '3', '2019-12-20', '2019-12-06'),
+(4, 222, '1', '2019-12-20', ''),
+(5, 223, '1', '2019-12-20', ''),
 (7, 224, '', '', ''),
 (8, 228, '', '', ''),
 (9, 236, '', '', ''),
 (10, 237, '', '', ''),
-(11, 238, '', '', '');
+(11, 238, '', '', ''),
+(12, 247, '', '', ''),
+(13, 230, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -245,15 +259,15 @@ INSERT INTO `tbl_id_logs` (`logs_id`, `member_id`, `total`, `date_last_generated
 -- Table structure for table `tbl_insured_dependents`
 --
 
-CREATE TABLE `tbl_insured_dependents` (
-  `ins_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_insured_dependents` (
+`ins_id` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
   `full_name` varchar(100) NOT NULL,
   `birthdate` varchar(20) NOT NULL,
   `age` int(11) NOT NULL,
   `relationship` varchar(100) NOT NULL,
   `date_added` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_insured_dependents`
@@ -275,12 +289,12 @@ INSERT INTO `tbl_insured_dependents` (`ins_id`, `member_id`, `full_name`, `birth
 -- Table structure for table `tbl_member_contact`
 --
 
-CREATE TABLE `tbl_member_contact` (
-  `contact_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_member_contact` (
+`contact_id` int(11) NOT NULL,
   `contact_number` varchar(11) NOT NULL,
   `member_name` varchar(255) NOT NULL,
   `status` int(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_member_contact`
@@ -301,11 +315,11 @@ INSERT INTO `tbl_member_contact` (`contact_id`, `contact_number`, `member_name`,
 -- Table structure for table `tbl_member_types`
 --
 
-CREATE TABLE `tbl_member_types` (
-  `type_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_member_types` (
+`type_id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `date_added` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_member_types`
@@ -325,14 +339,14 @@ INSERT INTO `tbl_member_types` (`type_id`, `title`, `date_added`) VALUES
 -- Table structure for table `tbl_member_withdrawal`
 --
 
-CREATE TABLE `tbl_member_withdrawal` (
-  `withdraw_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_member_withdrawal` (
+`withdraw_id` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
   `reason` varchar(200) NOT NULL,
   `wt_resolution_no` varchar(50) NOT NULL,
   `date_close` varchar(11) NOT NULL,
   `date_approve` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_member_withdrawal`
@@ -356,8 +370,8 @@ INSERT INTO `tbl_member_withdrawal` (`withdraw_id`, `member_id`, `reason`, `wt_r
 -- Table structure for table `tbl_mem_beneficiaries`
 --
 
-CREATE TABLE `tbl_mem_beneficiaries` (
-  `beneficiaries_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_mem_beneficiaries` (
+`beneficiaries_id` int(11) NOT NULL,
   `member_id` int(11) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   `dob` date DEFAULT NULL,
@@ -372,13 +386,13 @@ CREATE TABLE `tbl_mem_beneficiaries` (
 -- Table structure for table `tbl_mem_education_attainment`
 --
 
-CREATE TABLE `tbl_mem_education_attainment` (
-  `education_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_mem_education_attainment` (
+`education_id` int(11) NOT NULL,
   `member_id` int(11) DEFAULT NULL,
   `attainment` varchar(100) DEFAULT NULL,
   `name_of_school` varchar(100) DEFAULT NULL,
   `course_year_graduated` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_mem_education_attainment`
@@ -400,7 +414,18 @@ INSERT INTO `tbl_mem_education_attainment` (`education_id`, `member_id`, `attain
 (83, 228, 'College Grad', '', ''),
 (84, 236, 'College Grad', '', ''),
 (85, 237, 'College Grad', '', ''),
-(86, 238, 'College Grad', '', '');
+(86, 238, 'College Grad', '', ''),
+(87, 239, 'College Grad', 'Tom', 'Terry'),
+(88, 240, 'College Grad', 'Tom', 'Terry'),
+(89, 241, 'College Grad', 'Tom', 'Terry'),
+(90, 242, 'College Level', 'Petey', 'Mull'),
+(91, 243, 'Elementary', 'Holly', 'Sue'),
+(92, 244, 'Secondary', 'Brock', 'Anna'),
+(93, 245, 'College Grad', 'Matt', 'Leonardo'),
+(94, 246, 'Elementary', 'Leonardo', 'Anna'),
+(95, 247, 'Elementary', 'Leonardo', 'Anna'),
+(96, 248, 'Elementary', 'Mull', 'Cliff'),
+(97, 230, 'Secondary', 'Sue', 'Anna');
 
 -- --------------------------------------------------------
 
@@ -408,8 +433,8 @@ INSERT INTO `tbl_mem_education_attainment` (`education_id`, `member_id`, `attain
 -- Table structure for table `tbl_mem_eployment_information`
 --
 
-CREATE TABLE `tbl_mem_eployment_information` (
-  `employmentInfo_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_mem_eployment_information` (
+`employmentInfo_id` int(11) NOT NULL,
   `member_id` int(11) DEFAULT NULL,
   `type_of_employment` varchar(50) DEFAULT NULL,
   `company_name` varchar(100) DEFAULT NULL,
@@ -417,7 +442,7 @@ CREATE TABLE `tbl_mem_eployment_information` (
   `address` varchar(100) DEFAULT NULL,
   `designation` varchar(100) DEFAULT NULL,
   `employmentStatus` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_mem_eployment_information`
@@ -439,7 +464,18 @@ INSERT INTO `tbl_mem_eployment_information` (`employmentInfo_id`, `member_id`, `
 (81, 228, 'Student', '', '', '', '', ''),
 (82, 236, 'Student', '', '', '', '', ''),
 (83, 237, 'Student', '', '', '', '', ''),
-(84, 238, 'Student', '', '', '', '', '');
+(84, 238, 'Student', '', '', '', '', ''),
+(85, 239, 'Government Employee', 'Holly', 'Uy', '7339 Silver Pine Highlands', 'Uy', 'Cliff'),
+(86, 240, 'Government Employee', 'Holly', 'Uy', '7339 Silver Pine Highlands', 'Uy', 'Cliff'),
+(87, 241, 'Government Employee', 'Holly', 'Uy', '7339 Silver Pine Highlands', 'Uy', 'Cliff'),
+(88, 242, 'OFW', 'Mull', 'Cliff', '7669 Gulf Drive', 'Holly', 'Terry'),
+(89, 243, 'OFW', 'Kerry', 'Terry', '7669 Gulf Drive', 'Holly', 'Holly'),
+(90, 244, 'Farmer', 'Petey', 'Cliff', '7669 Gulf Drive', 'Tom', 'Anna'),
+(91, 245, 'Student', 'Cory', 'Sue', '7339 Silver Pine Highlands', 'Tom', 'Cruiser'),
+(92, 246, 'Government Employee', 'Cruiser', 'Cliff', '162 Little Embers Court', 'Anna', 'Frank'),
+(93, 247, 'Government Employee', 'Cruiser', 'Cliff', '162 Little Embers Court', 'Anna', 'Frank'),
+(94, 248, 'Student', 'Sue', 'Terry', '9170 N. Summerhouse St.', 'Uy', 'Peter'),
+(95, 230, 'Government Employee', 'Holly', 'Uy', '9170 N. Summerhouse St.', 'Matt', 'Kerry');
 
 -- --------------------------------------------------------
 
@@ -447,8 +483,8 @@ INSERT INTO `tbl_mem_eployment_information` (`employmentInfo_id`, `member_id`, `
 -- Table structure for table `tbl_mem_personal_information`
 --
 
-CREATE TABLE `tbl_mem_personal_information` (
-  `member_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_mem_personal_information` (
+`member_id` int(11) NOT NULL,
   `acount_id` varchar(100) DEFAULT NULL,
   `member_type_id` int(11) NOT NULL,
   `last_name` varchar(100) DEFAULT NULL,
@@ -468,7 +504,7 @@ CREATE TABLE `tbl_mem_personal_information` (
   `sss` varchar(50) DEFAULT NULL,
   `pag_ibig` varchar(50) DEFAULT NULL,
   `date_added` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=231 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_mem_personal_information`
@@ -477,19 +513,10 @@ CREATE TABLE `tbl_mem_personal_information` (
 INSERT INTO `tbl_mem_personal_information` (`member_id`, `acount_id`, `member_type_id`, `last_name`, `first_name`, `middle_name`, `birthdate`, `age`, `blood_type`, `birth_place`, `religion`, `email`, `nationality`, `civil_status`, `gender`, `mobile_no`, `tin`, `sss`, `pag_ibig`, `date_added`) VALUES
 (216, 'AG19B7B284BB00', 6, 'Amaba', 'Matthew Derek', 'Antig', '05/09/1996', '24', '0+', 'Dalaguete', 'Catholic', 'prospteam@gmail.com', 'Fil-Am', 'Single', 'Male', '09306543214', '', '', '', '11/26/2019'),
 (218, 'VA195C59305160', 6, 'Testing', 'Proweaver', 'Test', '05/09/1995', '24', '0+', 'Spring Valley', 'Catholic', 'example@proweaver.com', 'Fil-Am', 'Married', 'Male', '09056567931', '123456', '123456', '132456', '12/03/2019'),
-(222, 'AG19DD05915F24', 2, 'Kerry', 'Proweaver', 'Test', '', '', 'O', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', '12/31/2019'),
-(223, 'AG19DD079DE1D1', 2, 'Kerry', 'Proweaver', 'Test', '', '', 'O', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', '12/31/2019'),
-(224, '19E14FFDC267', 6, 'Kerry', 'Proweaver', 'Test', '', '', 'T', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', ''),
-(227, NULL, 1, 'Kerry', 'Proweaver', 'Test', '', '', 'T', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', ''),
-(228, '19E184C0F90C', 6, 'Kerry', 'Proweaver', 'Test', '', '', 'T', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', ''),
-(231, '19E19084A875', 1, 'Kerry', 'Proweaver', 'Test', '', '', 'T', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', ''),
-(232, '19E1910EE659', 1, 'Kerry', 'Proweaver', 'Test', '', '', 'T', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', ''),
-(233, '19E196BD4EAA', 1, 'Kerry', 'Proweaver', 'Test', '', '', 'T', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', ''),
-(234, '19E197BC9413', 1, 'Kerry', 'Proweaver', 'Test', '', '', 'T', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', ''),
-(235, '19E19C46CEA0', 1, 'Kerry', 'Proweaver', 'Test', '', '', 'T', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', ''),
-(236, '19E1AEAA6781', 1, 'Kerry', 'Proweaver', 'Test', '', '', 'T', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', ''),
-(237, '19E1B233485B', 1, 'Matte Red', 'Proweaver', 'Test', '', '', 'T', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Married', 'Male', '2025550140', '', '', '', ''),
-(238, '1905EB301904', 1, 'Kerry', 'Proweaver', 'Test', '12/04/2019', '55', 'T', 'Spring Valley', 'Kerry', 'example@proweaver.com', '', 'Married', 'Male', '2025550140', '', '', '', '');
+(222, 'AG19DD05915F24', 2, 'Kerry', 'Proweaver', 'Test', '05/09/1995', '24', 'O', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Single', 'Female', '2025550140', '', '', '', '12/31/2019'),
+(223, 'AG19DD079DE1D1', 2, 'Kerry', 'Proweaver', 'Test', '05/09/1995', '24', 'O', 'Spring Valley', '', 'example@proweaver.com', 'United States', 'Single', 'Female', '2025550140', '', '', '', '12/31/2019'),
+(228, 'AG19DD079DE1D2', 3, 'Bob', 'Kerry', 'Bob', '12/25/1990', '28', 'Petey', 'Marion', 'Brock', 'proweaver@example.com', 'Mull', 'Married', 'Female', 'Peter', 'Marion', 'Petey', 'Cruiser', 'Petey'),
+(230, 'AG1902C26701C0', 3, 'Leonardo', 'Marion', 'Lynn', '11/27/1990', '56', 'Anna', 'Marion', 'Kerry', 'example@proweaver.com', 'Cruiser', 'Single', 'Female', 'Holly', 'Mull', 'Bob', 'Cory', 'Kerry');
 
 -- --------------------------------------------------------
 
@@ -497,8 +524,8 @@ INSERT INTO `tbl_mem_personal_information` (`member_id`, `acount_id`, `member_ty
 -- Table structure for table `tbl_mem_residence`
 --
 
-CREATE TABLE `tbl_mem_residence` (
-  `residence_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_mem_residence` (
+`residence_id` int(11) NOT NULL,
   `member_id` int(11) DEFAULT NULL,
   `type_of_residence` varchar(100) DEFAULT NULL,
   `street` varchar(100) DEFAULT NULL,
@@ -506,7 +533,7 @@ CREATE TABLE `tbl_mem_residence` (
   `municipality` varchar(100) DEFAULT NULL,
   `province` varchar(100) DEFAULT NULL,
   `zip_code` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_mem_residence`
@@ -528,7 +555,18 @@ INSERT INTO `tbl_mem_residence` (`residence_id`, `member_id`, `type_of_residence
 (81, 228, 'Owned', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court, 162 Little Embers Court', '', '', '', 0),
 (82, 236, 'Owned', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court, 162 Little Embers Court', '', '', '', 0),
 (83, 237, 'Owned', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court, 162 Little Embers Court', '', '', '', 0),
-(84, 238, 'Owned', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court', '', '', 'Michigan', 22345);
+(84, 238, 'Owned', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court', '', '', 'Michigan', 22345),
+(85, 239, 'Renting', 'Tom', 'Uy', 'Uy', 'Brock', 0),
+(86, 240, 'Renting', 'Tom', 'Uy', 'Uy', 'Brock', 0),
+(87, 241, 'Renting', 'Tom', 'Uy', 'Uy', 'Brock', 0),
+(88, 242, 'Living w/ Parents', 'Leonardo', 'Cruiser', 'Brock', 'Uy', 0),
+(89, 243, 'Owned', 'Kerry', 'Cory', 'Petey', 'Tom', 0),
+(90, 244, 'Owned', 'Sue', 'Uy', 'Holly', 'Sue', 0),
+(91, 245, 'Living w/ Parents', 'Petey', 'Bob', 'Petey', 'Peter', 0),
+(92, 246, 'Owned', 'Mull', 'Mull', 'Matt', 'Frank', 0),
+(93, 247, 'Owned', 'Mull', 'Mull', 'Matt', 'Frank', 0),
+(94, 248, 'Living w/ Parents', 'Anna', 'Anna', 'Tom', 'Matt', 0),
+(95, 230, 'Living w/ Parents', 'Holly', 'Mull', 'Mull', 'Leonardo', 0);
 
 -- --------------------------------------------------------
 
@@ -536,8 +574,8 @@ INSERT INTO `tbl_mem_residence` (`residence_id`, `member_id`, `type_of_residence
 -- Table structure for table `tbl_mem_spouse_emp_info`
 --
 
-CREATE TABLE `tbl_mem_spouse_emp_info` (
-  `spouse_emp_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_mem_spouse_emp_info` (
+`spouse_emp_id` int(11) NOT NULL,
   `member_id` int(11) DEFAULT NULL,
   `type_of_employment` varchar(100) DEFAULT NULL,
   `sp_company_name` varchar(100) DEFAULT NULL,
@@ -545,7 +583,7 @@ CREATE TABLE `tbl_mem_spouse_emp_info` (
   `sp_comp_address` varchar(100) DEFAULT NULL,
   `sp_designation` varchar(100) DEFAULT NULL,
   `sp_employmentStatus` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_mem_spouse_emp_info`
@@ -567,7 +605,18 @@ INSERT INTO `tbl_mem_spouse_emp_info` (`spouse_emp_id`, `member_id`, `type_of_em
 (71, 228, 'Student', '', '', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court', '', ''),
 (72, 236, 'Student', '', '', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court', '', ''),
 (73, 237, 'Student', '', '', '', '', ''),
-(74, 238, 'Student', '', '', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court', '', '');
+(74, 238, 'Student', '', '', '3178 Quiet Trail, 162 Little Embers Court, 162 Little Embers Court', '', ''),
+(75, 239, 'Self-Employed', 'Holly', 'Holly', '3178 Quiet Trail', 'Terry', 'Holly'),
+(76, 240, 'Self-Employed', 'Holly', 'Holly', '3178 Quiet Trail', 'Terry', 'Holly'),
+(77, 241, 'Self-Employed', 'Holly', 'Holly', '3178 Quiet Trail', 'Terry', 'Holly'),
+(78, 242, 'Farmer', 'Peter', 'Brock', '9170 N. Summerhouse St.', 'Matt', 'Bob'),
+(79, 243, 'Student', 'Holly', 'Uy', '3178 Quiet Trail', 'Leonardo', 'Leonardo'),
+(80, 244, 'Farmer', 'Peter', 'Terry', '7339 Silver Pine Highlands', 'Peter', 'Cory'),
+(81, 245, 'Private Employee', 'Anna', 'Mull', '7339 Silver Pine Highlands', 'Cruiser', 'Petey'),
+(82, 246, 'OFW', 'Lynn', 'Mull', '162 Little Embers Court', 'Cruiser', 'Brock'),
+(83, 247, 'OFW', 'Lynn', 'Mull', '162 Little Embers Court', 'Cruiser', 'Brock'),
+(84, 248, 'Private Employee', 'Marion', 'Sue', '9170 N. Summerhouse St.', 'Terry', 'Mull'),
+(85, 230, 'Retire/Pensioner', 'Frank', 'Leonardo', '3178 Quiet Trail', 'Sue', 'Bob');
 
 -- --------------------------------------------------------
 
@@ -575,8 +624,8 @@ INSERT INTO `tbl_mem_spouse_emp_info` (`spouse_emp_id`, `member_id`, `type_of_em
 -- Table structure for table `tbl_mem_spouse_information`
 --
 
-CREATE TABLE `tbl_mem_spouse_information` (
-  `spouse_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_mem_spouse_information` (
+`spouse_id` int(11) NOT NULL,
   `member_id` int(11) DEFAULT NULL,
   `sp_last_name` varchar(100) DEFAULT NULL,
   `sp_first_name` varchar(100) DEFAULT NULL,
@@ -585,7 +634,7 @@ CREATE TABLE `tbl_mem_spouse_information` (
   `sp_mobile_no` varchar(100) DEFAULT NULL,
   `sp_nationality` varchar(100) DEFAULT NULL,
   `sp_tin` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_mem_spouse_information`
@@ -607,7 +656,18 @@ INSERT INTO `tbl_mem_spouse_information` (`spouse_id`, `member_id`, `sp_last_nam
 (81, 228, '', '', '', '', '', '', ''),
 (82, 236, '', '', '', '', '', '', ''),
 (83, 237, '', '', '', '', '', '', ''),
-(84, 238, 'Kerry', 'Proweaver', 'Test', '', '2025550140', '', '');
+(84, 238, 'Kerry', 'Proweaver', 'Test', '', '2025550140', '', ''),
+(85, 239, 'Matt', 'Sue', 'Mull', 'Cory', 'Holly', 'Anna', 'Marion'),
+(86, 240, 'Matt', 'Sue', 'Mull', 'Cory', 'Holly', 'Anna', 'Marion'),
+(87, 241, 'Matt', 'Sue', 'Mull', 'Cory', 'Holly', 'Anna', 'Marion'),
+(88, 242, 'Peter', 'Lynn', 'Mull', 'Petey', 'Mull', 'Petey', 'Cruiser'),
+(89, 243, 'Mull', 'Leonardo', 'Bob', 'Marion', 'Uy', 'Peter', 'Anna'),
+(90, 244, 'Cruiser', 'Kerry', 'Marion', 'Kerry', 'Leonardo', 'Marion', 'Terry'),
+(91, 245, 'Peter', 'Kerry', 'Petey', 'Cory', 'Holly', 'Tom', 'Cory'),
+(92, 246, 'Cruiser', 'Cruiser', 'Mull', 'Petey', 'Anna', 'Frank', 'Cruiser'),
+(93, 247, 'Cruiser', 'Cruiser', 'Mull', 'Petey', 'Anna', 'Frank', 'Cruiser'),
+(94, 248, 'Terry', 'Peter', 'Mull', 'Anna', 'Sue', 'Cory', 'Cruiser'),
+(95, 230, 'Matt', 'Cruiser', 'Kerry', 'Sue', 'Matt', 'Cliff', 'Anna');
 
 -- --------------------------------------------------------
 
@@ -615,8 +675,8 @@ INSERT INTO `tbl_mem_spouse_information` (`spouse_id`, `member_id`, `sp_last_nam
 -- Table structure for table `tbl_monetary_req`
 --
 
-CREATE TABLE `tbl_monetary_req` (
-  `monetary_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_monetary_req` (
+`monetary_id` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
   `membership_fee` varchar(100) NOT NULL,
   `mortuary_prem` varchar(100) NOT NULL,
@@ -636,7 +696,7 @@ CREATE TABLE `tbl_monetary_req` (
   `sub_total` varchar(100) NOT NULL,
   `deductions` varchar(100) NOT NULL,
   `grand_total` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_monetary_req`
@@ -645,14 +705,17 @@ CREATE TABLE `tbl_monetary_req` (
 INSERT INTO `tbl_monetary_req` (`monetary_id`, `member_id`, `membership_fee`, `mortuary_prem`, `savings_deposit`, `paid_up_capital`, `total`, `amount`, `no_of_shares`, `deposited_for_subs`, `capital_share_deposit`, `loans_payable`, `credit_on_trade_payable`, `interest_on_loan_payable`, `penalties_on_trade_payable`, `time_deposit`, `penalties_on_loan_payable_2`, `sub_total`, `deductions`, `grand_total`) VALUES
 (5, 216, '449', '45', '45', '45', '584', '100', '5', '5', '100', '1', '1', '12', '1', '200', '152', '345', '167', '178'),
 (6, 217, '45', '45', '45', '45', '180', '40', '52', '52', '40', '100', '50', '20', '10', '400', '148', '485', '330', '155'),
-(7, 218, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(8, 222, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(9, 223, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(7, 218, '', '', '587', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '895'),
+(8, 222, '', '', '651', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '2541'),
+(9, 223, '', '', '150', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '2500'),
 (10, 224, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (11, 228, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (12, 236, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (13, 237, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(14, 238, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+(14, 238, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(15, 247, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(16, 248, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(17, 230, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -660,12 +723,12 @@ INSERT INTO `tbl_monetary_req` (`monetary_id`, `member_id`, `membership_fee`, `m
 -- Table structure for table `tbl_profile_img`
 --
 
-CREATE TABLE `tbl_profile_img` (
-  `image_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_profile_img` (
+`image_id` int(11) NOT NULL,
   `member_id` varchar(50) NOT NULL,
   `pr_file_name` varchar(40) NOT NULL,
   `pr_date_added` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_profile_img`
@@ -687,7 +750,33 @@ INSERT INTO `tbl_profile_img` (`image_id`, `member_id`, `pr_file_name`, `pr_date
 (22, '228', '191209-5dee184c12b3c.jpg', '2019-12-09'),
 (23, '236', '191209-5dee1aeaa8651.jpg', '2019-12-09'),
 (24, '237', '191209-5dee1b23369ad.jpg', '2019-12-09'),
-(25, '238', '191211-5df05eb30fd1a.jpg', '2019-12-11');
+(25, '238', '191211-5df05eb30fd1a.jpg', '2019-12-11'),
+(26, '244', '191218-5df9f100e3a7c.png', '2019-12-18'),
+(27, '246', '191218-5df9f8b18414e.png', '2019-12-18'),
+(28, '247', '191218-5df9f97d610bf.png', '2019-12-18'),
+(29, '248', '191219-5dfb3f5876177.png', '2019-12-19'),
+(30, '230', 'profile.jpg', '2019-12-23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_progress`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_progress` (
+`progress_id` int(11) NOT NULL,
+  `fk_member_id` int(11) NOT NULL,
+  `progress_status` int(11) NOT NULL,
+  `previous_session` varchar(100) NOT NULL,
+  `member_status` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_progress`
+--
+
+INSERT INTO `tbl_progress` (`progress_id`, `fk_member_id`, `progress_status`, `previous_session`, `member_status`) VALUES
+(1, 7, 0, '8', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -695,12 +784,12 @@ INSERT INTO `tbl_profile_img` (`image_id`, `member_id`, `pr_file_name`, `pr_date
 -- Table structure for table `tbl_signatures`
 --
 
-CREATE TABLE `tbl_signatures` (
-  `signature_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_signatures` (
+`signature_id` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
   `sg_file_name` varchar(100) NOT NULL,
   `qrcode` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=158 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_signatures`
@@ -785,9 +874,33 @@ INSERT INTO `tbl_signatures` (`signature_id`, `member_id`, `sg_file_name`, `qrco
 (128, 236, '191209-5dee1aeaa6bfc.jpg', ''),
 (129, 237, '191209-5dee1b2334d61.jpg', ''),
 (130, 238, '191211-5df05eb301f96.jpg', ''),
-(131, 0, '', '191216-5df73b897894c.png'),
-(132, 0, '', '191216-5df73b899efca.png'),
-(133, 0, '', '191216-5df73b89b65b6.png');
+(131, 239, '191217-5df85ffbf367b.png', ''),
+(132, 240, '191217-5df85ffd6c989.png', ''),
+(133, 241, '191217-5df86025263c7.png', ''),
+(134, 242, '191217-5df8603b6c182.png', ''),
+(135, 243, '191217-5df860ce5c20d.png', ''),
+(136, 244, '191218-5df9f100da15e.png', ''),
+(137, 245, '191218-5df9f69374bce.png', ''),
+(138, 246, '191218-5df9f8b17626b.png', ''),
+(139, 247, '191218-5df9f97d4bfa4.png', ''),
+(140, 248, '191219-5dfb3f56e22fd.png', ''),
+(141, 0, '', '191220-5dfc3a9126fa4.png'),
+(142, 0, '', '191220-5dfc3a9142835.png'),
+(143, 0, '', '191220-5dfc3a9157594.png'),
+(144, 0, '', '191220-5dfc3a916b316.png'),
+(145, 0, '', '191220-5dfc3a91841b2.png'),
+(146, 0, '', '191220-5dfc3a9197c2a.png'),
+(147, 0, '', '191220-5dfc3a91ac5ca.png'),
+(148, 0, '', '191220-5dfc3a91c0297.png'),
+(149, 0, '', '191220-5dfc93ad0772d.png'),
+(150, 0, '', '191220-5dfc93ad46595.png'),
+(151, 0, '', '191220-5dfc93ad6013c.png'),
+(152, 0, '', '191220-5dfc93ad78890.png'),
+(153, 0, '', '191220-5dfc93ad8fc98.png'),
+(154, 0, '', '191220-5dfc93adb3de2.png'),
+(155, 0, '', '191220-5dfc93adf28d2.png'),
+(156, 0, '', '191220-5dfc93ae17ab1.png'),
+(157, 230, '191223-5e002c2670759.png', '');
 
 -- --------------------------------------------------------
 
@@ -795,7 +908,7 @@ INSERT INTO `tbl_signatures` (`signature_id`, `member_id`, `sg_file_name`, `qrco
 -- Table structure for table `tbl_sms`
 --
 
-CREATE TABLE `tbl_sms` (
+CREATE TABLE IF NOT EXISTS `tbl_sms` (
   `sms_id` int(11) NOT NULL,
   `sms_title` varchar(255) NOT NULL,
   `sms_message` varchar(255) NOT NULL,
@@ -821,13 +934,13 @@ INSERT INTO `tbl_sms` (`sms_id`, `sms_title`, `sms_message`, `sms_created`, `add
 -- Table structure for table `tbl_token`
 --
 
-CREATE TABLE `tbl_token` (
-  `token_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_token` (
+`token_id` int(11) NOT NULL,
   `token` varchar(200) NOT NULL,
   `status` int(2) NOT NULL DEFAULT '1',
   `date_generated` date NOT NULL,
   `info_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_token`
@@ -842,8 +955,8 @@ INSERT INTO `tbl_token` (`token_id`, `token`, `status`, `date_generated`, `info_
 -- Table structure for table `tbl_to_receives_benefits`
 --
 
-CREATE TABLE `tbl_to_receives_benefits` (
-  `benefit_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_to_receives_benefits` (
+`benefit_id` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
   `type` varchar(20) NOT NULL,
   `full_name` varchar(100) NOT NULL,
@@ -851,7 +964,7 @@ CREATE TABLE `tbl_to_receives_benefits` (
   `age` int(50) NOT NULL,
   `relationship` varchar(30) NOT NULL,
   `date_added` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_to_receives_benefits`
@@ -869,8 +982,8 @@ INSERT INTO `tbl_to_receives_benefits` (`benefit_id`, `member_id`, `type`, `full
 -- Table structure for table `tbl_user_credentials`
 --
 
-CREATE TABLE `tbl_user_credentials` (
-  `credentials_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_user_credentials` (
+`credentials_id` int(11) NOT NULL,
   `info_id` int(20) NOT NULL,
   `branch_id` int(20) NOT NULL,
   `username` varchar(200) NOT NULL,
@@ -879,7 +992,7 @@ CREATE TABLE `tbl_user_credentials` (
   `status` int(2) NOT NULL COMMENT '1-active , 0 - inactive',
   `date_added` date NOT NULL,
   `date_updated` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_user_credentials`
@@ -888,8 +1001,8 @@ CREATE TABLE `tbl_user_credentials` (
 INSERT INTO `tbl_user_credentials` (`credentials_id`, `info_id`, `branch_id`, `username`, `password`, `user_type`, `status`, `date_added`, `date_updated`) VALUES
 (1, 1, 1, 'admin', 'admin', 2, 1, '2019-09-26', '2019-09-26'),
 (6, 15, 1, 'user1', 'user1', 1, 1, '2019-10-10', '2019-10-10'),
-(7, 16, 2, 'user', 'user', 3, 0, '2019-12-04', '2019-12-04'),
-(9, 18, 1, 'user123', 'user123', 3, 0, '2019-12-05', '2019-12-05');
+(7, 16, 1, 'user', 'user', 0, 0, '2019-12-04', '2019-12-04'),
+(9, 18, 1, 'user123', 'user123', 0, 0, '2019-12-05', '2019-12-05');
 
 -- --------------------------------------------------------
 
@@ -897,22 +1010,22 @@ INSERT INTO `tbl_user_credentials` (`credentials_id`, `info_id`, `branch_id`, `u
 -- Table structure for table `tbl_user_informations`
 --
 
-CREATE TABLE `tbl_user_informations` (
-  `info_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_user_informations` (
+`info_id` int(11) NOT NULL,
   `firstname` varchar(200) NOT NULL,
   `middlename` varchar(200) NOT NULL,
   `lastname` varchar(200) NOT NULL,
   `email` varchar(150) NOT NULL,
   `date_added` date NOT NULL,
   `last_logged_in` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_user_informations`
 --
 
 INSERT INTO `tbl_user_informations` (`info_id`, `firstname`, `middlename`, `lastname`, `email`, `date_added`, `last_logged_in`) VALUES
-(1, 'Proweaver', 'Derek', 'Web2', 'prospteam@gmail.com', '2019-09-26', '2019-09-26'),
+(1, 'Proweavers', 'Derek', 'Web2', 'prospteam@gmail.com', '2019-09-26', '2019-09-26'),
 (15, 'Proweaverrrr', 'Test', 'Kerry', 'example@proweaver.com', '2019-10-10', '0000-00-00'),
 (16, 'Proweaver Nicole ', '-', 'Cilley', 'test@gmail.com', '2019-12-04', '0000-00-00'),
 (18, 'Proweaver Nicole', '-', 'Cilley', 'test@test.com', '2019-12-05', '0000-00-00'),
@@ -931,151 +1044,157 @@ INSERT INTO `tbl_user_informations` (`info_id`, `firstname`, `middlename`, `last
 -- Indexes for table `tbl_account_info`
 --
 ALTER TABLE `tbl_account_info`
-  ADD PRIMARY KEY (`account_info_id`);
+ ADD PRIMARY KEY (`account_info_id`);
 
 --
 -- Indexes for table `tbl_applicant_access`
 --
 ALTER TABLE `tbl_applicant_access`
-  ADD PRIMARY KEY (`applicant_id`);
+ ADD PRIMARY KEY (`applicant_id`);
 
 --
 -- Indexes for table `tbl_branch`
 --
 ALTER TABLE `tbl_branch`
-  ADD PRIMARY KEY (`branch_id`);
+ ADD PRIMARY KEY (`branch_id`);
 
 --
 -- Indexes for table `tbl_contact_group`
 --
 ALTER TABLE `tbl_contact_group`
-  ADD PRIMARY KEY (`group_id`);
+ ADD PRIMARY KEY (`group_id`);
 
 --
 -- Indexes for table `tbl_financial_info`
 --
 ALTER TABLE `tbl_financial_info`
-  ADD PRIMARY KEY (`financial_info_id`);
+ ADD PRIMARY KEY (`financial_info_id`);
 
 --
 -- Indexes for table `tbl_holiday`
 --
 ALTER TABLE `tbl_holiday`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_id_logs`
 --
 ALTER TABLE `tbl_id_logs`
-  ADD PRIMARY KEY (`logs_id`);
+ ADD PRIMARY KEY (`logs_id`);
 
 --
 -- Indexes for table `tbl_insured_dependents`
 --
 ALTER TABLE `tbl_insured_dependents`
-  ADD PRIMARY KEY (`ins_id`);
+ ADD PRIMARY KEY (`ins_id`);
 
 --
 -- Indexes for table `tbl_member_contact`
 --
 ALTER TABLE `tbl_member_contact`
-  ADD PRIMARY KEY (`contact_id`);
+ ADD PRIMARY KEY (`contact_id`);
 
 --
 -- Indexes for table `tbl_member_types`
 --
 ALTER TABLE `tbl_member_types`
-  ADD PRIMARY KEY (`type_id`);
+ ADD PRIMARY KEY (`type_id`);
 
 --
 -- Indexes for table `tbl_member_withdrawal`
 --
 ALTER TABLE `tbl_member_withdrawal`
-  ADD PRIMARY KEY (`withdraw_id`);
+ ADD PRIMARY KEY (`withdraw_id`);
 
 --
 -- Indexes for table `tbl_mem_beneficiaries`
 --
 ALTER TABLE `tbl_mem_beneficiaries`
-  ADD PRIMARY KEY (`beneficiaries_id`);
+ ADD PRIMARY KEY (`beneficiaries_id`);
 
 --
 -- Indexes for table `tbl_mem_education_attainment`
 --
 ALTER TABLE `tbl_mem_education_attainment`
-  ADD PRIMARY KEY (`education_id`);
+ ADD PRIMARY KEY (`education_id`);
 
 --
 -- Indexes for table `tbl_mem_eployment_information`
 --
 ALTER TABLE `tbl_mem_eployment_information`
-  ADD PRIMARY KEY (`employmentInfo_id`);
+ ADD PRIMARY KEY (`employmentInfo_id`);
 
 --
 -- Indexes for table `tbl_mem_personal_information`
 --
 ALTER TABLE `tbl_mem_personal_information`
-  ADD PRIMARY KEY (`member_id`);
+ ADD PRIMARY KEY (`member_id`);
 
 --
 -- Indexes for table `tbl_mem_residence`
 --
 ALTER TABLE `tbl_mem_residence`
-  ADD PRIMARY KEY (`residence_id`);
+ ADD PRIMARY KEY (`residence_id`);
 
 --
 -- Indexes for table `tbl_mem_spouse_emp_info`
 --
 ALTER TABLE `tbl_mem_spouse_emp_info`
-  ADD PRIMARY KEY (`spouse_emp_id`);
+ ADD PRIMARY KEY (`spouse_emp_id`);
 
 --
 -- Indexes for table `tbl_mem_spouse_information`
 --
 ALTER TABLE `tbl_mem_spouse_information`
-  ADD PRIMARY KEY (`spouse_id`);
+ ADD PRIMARY KEY (`spouse_id`);
 
 --
 -- Indexes for table `tbl_monetary_req`
 --
 ALTER TABLE `tbl_monetary_req`
-  ADD PRIMARY KEY (`monetary_id`);
+ ADD PRIMARY KEY (`monetary_id`);
 
 --
 -- Indexes for table `tbl_profile_img`
 --
 ALTER TABLE `tbl_profile_img`
-  ADD PRIMARY KEY (`image_id`);
+ ADD PRIMARY KEY (`image_id`);
+
+--
+-- Indexes for table `tbl_progress`
+--
+ALTER TABLE `tbl_progress`
+ ADD PRIMARY KEY (`progress_id`);
 
 --
 -- Indexes for table `tbl_signatures`
 --
 ALTER TABLE `tbl_signatures`
-  ADD PRIMARY KEY (`signature_id`);
+ ADD PRIMARY KEY (`signature_id`);
 
 --
 -- Indexes for table `tbl_token`
 --
 ALTER TABLE `tbl_token`
-  ADD PRIMARY KEY (`token_id`);
+ ADD PRIMARY KEY (`token_id`);
 
 --
 -- Indexes for table `tbl_to_receives_benefits`
 --
 ALTER TABLE `tbl_to_receives_benefits`
-  ADD PRIMARY KEY (`benefit_id`);
+ ADD PRIMARY KEY (`benefit_id`);
 
 --
 -- Indexes for table `tbl_user_credentials`
 --
 ALTER TABLE `tbl_user_credentials`
-  ADD PRIMARY KEY (`credentials_id`);
+ ADD PRIMARY KEY (`credentials_id`);
 
 --
 -- Indexes for table `tbl_user_informations`
 --
 ALTER TABLE `tbl_user_informations`
-  ADD PRIMARY KEY (`info_id`);
+ ADD PRIMARY KEY (`info_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1085,153 +1204,132 @@ ALTER TABLE `tbl_user_informations`
 -- AUTO_INCREMENT for table `tbl_account_info`
 --
 ALTER TABLE `tbl_account_info`
-  MODIFY `account_info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
+MODIFY `account_info_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `tbl_applicant_access`
 --
 ALTER TABLE `tbl_applicant_access`
-  MODIFY `applicant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+MODIFY `applicant_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tbl_branch`
 --
 ALTER TABLE `tbl_branch`
-  MODIFY `branch_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
+MODIFY `branch_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `tbl_contact_group`
 --
 ALTER TABLE `tbl_contact_group`
-  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
+MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tbl_financial_info`
 --
 ALTER TABLE `tbl_financial_info`
-  MODIFY `financial_info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
-
+MODIFY `financial_info_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=132;
 --
 -- AUTO_INCREMENT for table `tbl_holiday`
 --
 ALTER TABLE `tbl_holiday`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tbl_id_logs`
 --
 ALTER TABLE `tbl_id_logs`
-  MODIFY `logs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
+MODIFY `logs_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `tbl_insured_dependents`
 --
 ALTER TABLE `tbl_insured_dependents`
-  MODIFY `ins_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
+MODIFY `ins_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `tbl_member_contact`
 --
 ALTER TABLE `tbl_member_contact`
-  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
+MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `tbl_member_types`
 --
 ALTER TABLE `tbl_member_types`
-  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
+MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tbl_member_withdrawal`
 --
 ALTER TABLE `tbl_member_withdrawal`
-  MODIFY `withdraw_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
+MODIFY `withdraw_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `tbl_mem_beneficiaries`
 --
 ALTER TABLE `tbl_mem_beneficiaries`
-  MODIFY `beneficiaries_id` int(11) NOT NULL AUTO_INCREMENT;
-
+MODIFY `beneficiaries_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tbl_mem_education_attainment`
 --
 ALTER TABLE `tbl_mem_education_attainment`
-  MODIFY `education_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
-
+MODIFY `education_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=98;
 --
 -- AUTO_INCREMENT for table `tbl_mem_eployment_information`
 --
 ALTER TABLE `tbl_mem_eployment_information`
-  MODIFY `employmentInfo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
-
+MODIFY `employmentInfo_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=96;
 --
 -- AUTO_INCREMENT for table `tbl_mem_personal_information`
 --
 ALTER TABLE `tbl_mem_personal_information`
-  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=239;
-
+MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=231;
 --
 -- AUTO_INCREMENT for table `tbl_mem_residence`
 --
 ALTER TABLE `tbl_mem_residence`
-  MODIFY `residence_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
-
+MODIFY `residence_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=96;
 --
 -- AUTO_INCREMENT for table `tbl_mem_spouse_emp_info`
 --
 ALTER TABLE `tbl_mem_spouse_emp_info`
-  MODIFY `spouse_emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
-
+MODIFY `spouse_emp_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=86;
 --
 -- AUTO_INCREMENT for table `tbl_mem_spouse_information`
 --
 ALTER TABLE `tbl_mem_spouse_information`
-  MODIFY `spouse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
-
+MODIFY `spouse_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=96;
 --
 -- AUTO_INCREMENT for table `tbl_monetary_req`
 --
 ALTER TABLE `tbl_monetary_req`
-  MODIFY `monetary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
+MODIFY `monetary_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `tbl_profile_img`
 --
 ALTER TABLE `tbl_profile_img`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
+MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
+--
+-- AUTO_INCREMENT for table `tbl_progress`
+--
+ALTER TABLE `tbl_progress`
+MODIFY `progress_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tbl_signatures`
 --
 ALTER TABLE `tbl_signatures`
-  MODIFY `signature_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
-
+MODIFY `signature_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=158;
 --
 -- AUTO_INCREMENT for table `tbl_token`
 --
 ALTER TABLE `tbl_token`
-  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tbl_to_receives_benefits`
 --
 ALTER TABLE `tbl_to_receives_benefits`
-  MODIFY `benefit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
+MODIFY `benefit_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `tbl_user_credentials`
 --
 ALTER TABLE `tbl_user_credentials`
-  MODIFY `credentials_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
+MODIFY `credentials_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tbl_user_informations`
 --
 ALTER TABLE `tbl_user_informations`
-  MODIFY `info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-COMMIT;
-
+MODIFY `info_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
