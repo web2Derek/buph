@@ -8,9 +8,9 @@
               <div class="row button-group">
                 <button type="button" class="btn btn-rounded btn-success btn-sm" id="create-contact" name="button" data-toggle="modal" data-target="#contact_modal"> <i class=" fas fa-users"></i> Create Contact Group</button>
                 <button type="button" class="btn btn-rounded btn-info btn-sm" id="btn-individual" name="button" data-toggle="modal" data-target="#sent_single_modal">
-                   <i class=" fas fa-user"></i> Sent to Individual</button>
+                   <i class=" fas fa-user"></i> Send to Individual</button>
                 <button type="button" class="btn btn-rounded btn-primary btn-sm" id="btn-group" name="button" data-toggle="modal" data-target="#sent_group_modal">
-                   <i class="fas fa-users"></i> Sent to Group</button>
+                   <i class="fas fa-users"></i> Send to Group</button>
               </div>
             </div>
 
@@ -99,7 +99,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel1">SENT SMS TO INDIVIDUAL CONTACT</h4>
+                <h4 class="modal-title" id="exampleModalLabel1">SEND SMS TO INDIVIDUAL CONTACT</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
@@ -152,7 +152,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel1">SENT SMS TO GROUP CONTACT</h4>
+                <h4 class="modal-title" id="exampleModalLabel1">SEND SMS TO GROUP CONTACT</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">

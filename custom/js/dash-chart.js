@@ -88,7 +88,7 @@ $(document).ready(function() {
           table_data = `
             <tr id="mem_data_range">
               <td >${newArr[i].range_data} Years Old</td>
-              <td >${newArr[i].count} Years Old</td>
+              <td >${newArr[i].count}</td>
               <td >${maleData}</td>
             </tr>
             `;
