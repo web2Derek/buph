@@ -272,7 +272,6 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="<?php echo base_url();?>sms">SMS Template</a></li>
                                 <li><a href="<?php echo base_url()?>sms/create_sms">Create SMS</a></li>
-                                <li><a href="#">Remind Due</a></li>
                             </ul>
                         </li>
                         <!-- <li class="nav-small-cap">- FORMS, TABLE &amp; WIDGETS</li> -->

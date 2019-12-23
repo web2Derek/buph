@@ -34,7 +34,6 @@
                                      </tr>
                                  </thead>
                                  <tbody class="table_body_data">
-
                                       <!-- <tr>
                                          <td>18-30 years old</td>
                                          <td>10</td>

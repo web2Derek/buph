@@ -226,7 +226,7 @@ var table_users = $('#userlist').DataTable({
       return 'Guest';
       break;
       case '1':
-      return 'Administrator';
+      return 'Staff';
       break;
       case '2':
       return 'Super Admin';
@@ -414,7 +414,7 @@ $('#add-contact-list').on('submit', function(event) {
     error: function(xhr, ajaxOptions, thrownError) {
       // alert(xhr.responseText);
       // alert(thrownError);
-      Swal.fire('Error', 'Something went Wrong', 'error');
+      Swal.fire('Error', 'Server Error', 'error');
     }
   })
 
