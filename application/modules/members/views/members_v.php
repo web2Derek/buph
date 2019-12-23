@@ -124,8 +124,8 @@
             <div class="col-md-2 col-sm-6">
               <div class="form-group">
                 <label for="">Civil Status</label>
-                <select class="form-control custom-select" tabindex="1" name="civilStatus" value="<?php echo ($isEdit ? $info->civil_status : 'Single'); ?>">
-                  <option value="Single" >Single</option>
+                <select class="form-control custom-select" tabindex="1" name="civilStatus" value="<?php echo ($isEdit ? $info->civil_status : ''); ?>">
+                  <option value="Single">Single</option>
                   <option value="Married">Married</option>
                 </select>
                 <span class="err"></span>
