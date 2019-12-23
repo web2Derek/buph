@@ -1,4 +1,5 @@
 <div>
+
   <!-- Page Title -->
   <div class="row page-titles">
     <div class="col-md-5 align-self-center">
@@ -123,9 +124,9 @@
             <div class="col-md-2 col-sm-6">
               <div class="form-group">
                 <label for="">Civil Status</label>
-                <select class="form-control custom-select" tabindex="1" name="civilStatus">
+                <select class="form-control custom-select" tabindex="1" name="civilStatus" value="<?php echo ($isEdit ? $info->civil_status : 'Single'); ?>">
                   <option value="Single" >Single</option>
-                  <option value="Married" selected="selected">Married</option>
+                  <option value="Married">Married</option>
                 </select>
                 <span class="err"></span>
               </div>
@@ -133,7 +134,7 @@
             <div class="col-md-2 col-sm-6">
               <div class="form-group">
                 <label for="">Sex</label>
-                <select class="form-control custom-select" tabindex="1" name= "sex">
+                <select class="form-control custom-select" tabindex="1" name= "sex" value=<?php echo ($isEdit ? $info->gender : 'Male'); ?>>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>

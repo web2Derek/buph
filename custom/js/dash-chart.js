@@ -77,10 +77,11 @@ $(document).ready(function() {
           // GENERATE TABLE DATA
       function generateTr(data) {
         let newArr = data['female'].reverse();
-        let  maletd = '';
-        let maleData = '';
+        let maleData = data['male'].reverse();
         for(var i = 0; i < newArr.length; i++) {
-          if(data['male'].length <= i){
+          console.log(maleData);
+          debugger
+          if(maleData.length <= i){
             maleData = '0';
           }else{
             maleData = data['male'][i].count;
@@ -88,7 +89,7 @@ $(document).ready(function() {
           table_data = `
             <tr id="mem_data_range">
               <td >${newArr[i].range_data} Years Old</td>
-              <td >${newArr[i].count} Years Old</td>
+              <td >${newArr[i].count}</td>
               <td >${maleData}</td>
             </tr>
             `;

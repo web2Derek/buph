@@ -77,7 +77,7 @@ class Users extends MY_Controller {
                 $final_output[$key]['user_loggedin_type'] = sesdata('user_type');
             }
         }
-        
+
         $output = array(
                 "draw" => $draw,
                 "recordsTotal" => $list['count_all'],
@@ -113,7 +113,7 @@ class Users extends MY_Controller {
                 return 'Guest';
                 break;
             case '1':
-                return 'Administrator';
+                return 'Staff';
                 break;
             case '2':
                 return 'Super Admin';
