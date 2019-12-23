@@ -60,7 +60,7 @@
                             <label>User Type</label>
                             <select class="form-control custom-select" name="user_type">
                                 <option value="0">Guest</option>
-                                <option value="1">Administrator</option>
+                                <option value="1">Staff</option>
                                 <option value="2">Super Admin</option>
                             </select>
                             <span class="err"></span>

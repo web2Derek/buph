@@ -98,7 +98,7 @@ class Members extends MY_Controller {
           $where = array('member_id' => $pi_id );
           $insert_account_id_data = array('acount_id' => $account_id);
           $execute = $this->MY_Model->update('tbl_mem_personal_information' , $insert_account_id_data , $where );
-          $profile_image = $this->profileUpload();
+          $profile_image = (!empty($_FILES['profile_new']) ? $this->profileUpload() : 'profile.jpg');
 
           if($execute){
             try {
@@ -326,7 +326,7 @@ class Members extends MY_Controller {
         'first_name'    => $post['firstname'],
         'middle_name'   => $post['middlename'],
         'birthdate'     => $post['birthdate'],
-        'age'           => $post['age'],
+        'age'           => calculateAge($post['birthdate']),
         'blood_type'    => $post['blood_type'],
         'birth_place'   => $post['birthplace'],
         'religion'      => $post['religion'],
