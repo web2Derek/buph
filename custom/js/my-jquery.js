@@ -1206,24 +1206,24 @@ $('.profile_edit').on('change' , function() {
 
 })
 
-$(document).on('click' , '#upload' , function() {
-  let element = $('.profile_edit');
-  $(element).attr('type' , 'file');
-  $(element).click();
-  Swal.close();
-});
+    $(document).on('click' , '#upload' , function() {
+        let element = $('.profile_edit');
+        $(element).attr('type' , 'file');
+        $(element).click();
+        Swal.close();
+    });
 
-$(document).on('click' , '#take_picture' , function() {
-  $('#controls').show();
-  Webcam.set({
-    width: 208,
-    height: 190,
-    image_format: 'png',
-    png_quality: 90
-  });
-  Webcam.attach( '#photo_container' );
-  Swal.close();
-});
+    $(document).on('click' , '#take_picture' , function() {
+        $('#controls').show();
+        Webcam.set({
+            width: 208,
+            height: 190,
+            image_format: 'png',
+            png_quality: 90
+        });
+        Webcam.attach( '#photo_container' );
+        Swal.close();
+    });
 
 $('#message').on('keyup', function() {
   let charLen = 160;
