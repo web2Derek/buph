@@ -34,35 +34,24 @@
                                      </tr>
                                  </thead>
                                  <tbody class="table_body_data">
-                                      <!-- <tr>
+                                      <!-- <tr class="18-30">
                                          <td>18-30 years old</td>
-                                         <td>10</td>
-                                         <td>10</td>
                                      </tr>
-                                     <tr>
+                                     <tr class="31-35">
                                          <td>31-35 years old</td>
-                                         <td>10</td>
-                                         <td>10</td>
                                      </tr>
-                                     <tr>
+                                     <tr class="36-40">
                                          <td>36-40 years old</td>
-                                         <td>10</td>
-                                         <td>10</td>
                                      </tr>
-                                     <tr>
+                                     <tr class="31-50">
                                          <td>31-50 years old</td>
-                                         <td>10</td>
-                                         <td>10</td>
                                      </tr>
-                                     <tr>
+                                     <tr class="51-60">
                                          <td>51-60 years old</td>
-                                         <td>10</td>
-                                         <td>10</td>
                                      </tr>
-                                     <tr>
+                                     <tr class="61-70">
                                          <td>61-70 years old</td>
-                                         <td>10</td>
-                                         <td>10</td> -->
+                                     </tr> -->
                                      <!-- </tr>
                                          <td>71 and above years old</td>
                                          <td>10</td>

@@ -75,13 +75,16 @@ class Login extends MY_Controller {
           // $branch['select'] =  'branch_name';
           // $branchData['branchList'] = $this->MY_Model->getRows('tbl_branch', $branch);
           if($data) {
-
+            //  check if user is active
+            if($data->status == 0) {
+              $this->session->set_flashdata('error', 'Your Account has been Deactivated!');
+              redirect(base_url());
+            } else {
             if ($data->user_type != 3) {
                 $params['where'] = array('tbl_user_credentials.credentials_id' => $data->credentials_id[0]);
                 $params['join'] = array(
                   'tbl_user_informations' => 'tbl_user_credentials.info_id = tbl_user_informations.info_id'
                 );
-
                 $userDatas = $this->MY_Model->getRows('tbl_user_credentials' , $params , 'array');
                 $userDatas[0]['logged_in'] = true;
 
@@ -91,11 +94,11 @@ class Login extends MY_Controller {
                 // );
                 $this->session->set_userdata($userDatas[0]);
                 redirect(base_url('login/select_branch'));
-            }else{
+            } else {
                 $this->session->set_flashdata('error', 'Invalid Username or Password!');
                 redirect(base_url());
             }
-
+              }
           } else {
             $this->session->set_flashdata('error', 'Invalid Username or Password!');
             redirect(base_url());

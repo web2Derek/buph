@@ -77,22 +77,42 @@ $(document).ready(function() {
           // GENERATE TABLE DATA
       function generateTr(data) {
         let newArr = data['female'].reverse();
-        let maleData = data['male'].reverse();
-        console.log(data);
-        for(var i = 0; i < newArr.length; i++) {
-          if(maleData.length <= i){
-            maleData = '0';
-          }else{
-            maleData[i].count;
+        let maleData = data['male'];
+        let mcount;
+
+        for(var i = 0; i < maleData.length; i++) {
+          if(maleData[i].range_data = '') {
+
           }
+        }
+
+        for(var i = 0; i < newArr.length; i++) {
+
           table_data = `
-            <tr id="mem_data_range">
-              <td >${newArr[i].range_data} Years Old</td>
-              <td >${newArr[i].count}</td>
-              <td >${maleData}</td>
-            </tr>
-            `;
+              <tr class="${newArr[i].range_data}">
+                  <td>${newArr[i].range_data} Years Old</td>
+                  <td>${newArr[i].count}</td>
+                  <td>${mcount}</td>
+              </tr>
+                  `;
           $('.table_body_data').prepend(table_data);
+          // for(let arr in maleData) {
+          //   console.log(maleData.count);
+          //   if(arr.length <= i) {
+          //     mcount = '0';
+          //   } else {
+          //     mcount = maleData[arr].count;
+          //   }
+          // }
+          // if(newArr.count = '18-30 years old') {
+            // console.log('1');
+            // table_data = `
+            //     <td >${newArr[i].count}</td>
+            //     <td >${mcount}</td>
+            //   `;
+            // $('.18-30').prepend(table_data);
+          // }
+
         }
         // for(var i= 0; i < data['male'].length; i++) {
         //    maletd = `<td>${data['male'][i].count}</td>`;
@@ -113,7 +133,7 @@ $(document).ready(function() {
       dataType:"json",
       success: function(data) {
           // Swal.fire("Success", "", "success");
-          console.log(data);
+          // console.log(data);
           let branches = [];
           let dataset = [];
           for(var i = 0; i < data.length; i++) {
@@ -142,7 +162,7 @@ $(document).ready(function() {
         dataType:"json",
         success: function(data) {
             // Swal.fire("Success", "", "success");
-            console.log(data);
+            // console.log(data);
             let branches = [];
             let dataset = [];
             for(var i = 0; i < data.length; i++) {

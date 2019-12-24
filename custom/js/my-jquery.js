@@ -544,7 +544,7 @@ $(document).on('submit', '#sent_individual', function(e) {
         }
       },
       error: function(response, status) {
-        Swal.fire('Error', 'Something went Wrong', 'error');
+        Swal.fire('Error', 'Server Error.', 'error');
       }
     })
   })
@@ -610,7 +610,7 @@ function sentToGroup(data) {
         console.log('success');
       },
       error: function(response, status) {
-        Swal.fire('Error', 'Something went Wrong', 'error');
+        Swal.fire('Error', 'Server Error', 'error');
       }
     })
   })
@@ -863,7 +863,7 @@ $('input[name="source_others"]').click(function() {
                         location.reload();
                     }, 1000);
                 }else {
-                    Swal.fire("Something went wrong.",data.error, "error");
+                    Swal.fire("Error.",data.error, "error");
                 }
             },
         })
@@ -900,7 +900,7 @@ $('#update_mem').on('submit' , function(e) {
           location.reload();
         }, 1000);
       }else {
-        Swal.fire("Something went wrong.",data.error, "error");
+        Swal.fire("Server Error.",data.error, "error");
       }
     },
   })
@@ -1080,7 +1080,7 @@ function save_qr(qr_id) {
 
     },
     error: function(xhr, ajaxOptions, thrownError) {
-      Swal.fire('Error', 'Something went Wrong', 'error');
+      Swal.fire('Error', 'Server Error', 'error');
     }
   })
 }

@@ -614,7 +614,7 @@ class Members extends MY_Controller {
         return array('error' => $this->upload->display_errors()['error']);
       }
     } else {
-      return array('error' => 'Invalid file type');
+      return array('error' => 'Please upload an Image of your Signature');
     }
   }
 
@@ -643,7 +643,7 @@ class Members extends MY_Controller {
         $results = array('status' => 'Error' , 'msg' => $this->upload->display_errors()['error'] );
       }
     } else {
-      $results = array('status' => 'Error' , 'msg'=> 'Invalid file type');
+      $results = array('status' => 'Error' , 'msg'=> 'Please upload an Image of your Signature');
     }
 
     echo json_encode($results);
