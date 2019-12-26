@@ -815,6 +815,13 @@ $('input[name="source_business"]').click(function() {
   }
 })
 
+if ($('input[name="source_business"]').prop('checked') == true) {
+    $('#if_business').fadeIn();
+}
+if ($('input[name="source_farmer"]').prop('checked') == true) {
+    $('#if_farmer').fadeIn();
+}
+
 $('input[name="source_farmer"]').click(function() {
   if ($(this).prop('checked') == true) {
     $('#if_farmer').fadeIn();
@@ -858,8 +865,14 @@ $('input[name="source_others"]').click(function() {
                 if (data.form_error) {
                     let keys = Object.keys(data.form_error);
                     $(keys).each( function(idx , val){
+                        $("input[name='"+val+"']").css('border' , '1px solid red');
                         $("input[name='"+val+"']").next('.err').text(data.form_error[val]);
-                    })
+                    });
+                    console.log(keys[0]);
+                    $('html, body').animate({
+                        scrollTop: $("input[name='"+keys[0]+"']").offset().top - 160
+                    }, 2000);
+
                 }else if (data.success) {
                     Swal.fire("Success!",data.success, "success");
                     setTimeout(function () {
@@ -1464,6 +1477,7 @@ function memberFormConfig(){
   $('#if_farmer').hide();
   $('#if_others').hide();
 }
+
 
 function clearError(){
   $('.err').text('');
