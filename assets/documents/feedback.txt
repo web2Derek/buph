@@ -20,3 +20,37 @@ gd am sir partial feedback sa system sa user ug member list
 -civil status, sex dli ga display inig edit
 
 -financial info dli ga refect pag edit
+
+ADDITIONAL INFO
+
+*Member master
+    - Age must be computed base on birthday
+    - Edit not functioning
+
+*ID
+       - Too small
+*SMS
+        - How to set phone IP
+        - Naa bay limit kung pila ang ma sendan per day?
+        - during pag text?naa bay limit sa characters?
+*Member List
+        - Dapat ang column ma display kay Acct. ID / Name / Gender / Date of birth / Age / Branch / Member Type / Action
+         - Maka generate ba sa list of all members by branch? Compose of: name / Contact # / Address / Gender / DOB / Date Registered / Civil Status / Religion / Work / TIN / Members type / BOD Resolution / Share / SD
+         - Add: maka save without address/ma save bisag incomplete info..
+          - Naa untay sign or “ * ” in.ana para ma inform ang ga input sa data nga required gyod na xia butngan kana nga field, para ma aware pud sila aha dapit ang required gyod para ma save ang data
+           - Proper case (text format)
+           - Naa untay mu appear nga dialogue box nga nagpa remember nga naa nay existing nga account sa member in.ana gyod nga name
+           - Information is not the same during sa pag fill up ug data, especially sa pag edit sa information
+Members type
+           - Young savers or smart teens?(Smart teens-lang guro gamiton)
+Closed / Write off 
+           - Dapat maka entry ko sa date applied
+Closed account
+           - Dili na lage ko ka edit utro gikan sa pag save nako nga closed na nga member, what if naa koy eh change, or nasayop ko ug butang kay nalipat..naa untay save changes japon
+*Account information
+        - Pwedi insertan ug subscribes share?nga field, same sa amount/no. of shares/deposited for subscription…kay kami raman mag input ana nga field..peru ma update2 japon na namo
+*Reporting
+             - (New Member) Display japon , ma apil ug generate bixag closed na
+             - During sa pag generate ug report, Bupharco permi ang gaka save nga file name..dapat kung unxay gi generate mao untay file name, para dali ra ma identify
+             - Membership statistics..dili mao ang reporting
+              - Total member summary ..dili mao ang reporting
