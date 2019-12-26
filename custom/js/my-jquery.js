@@ -342,11 +342,14 @@ $('#createUserForm').on("submit" , function(e) {
         $(keyNames).each(function(index , value) {
           $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
         });
+
       }else if (data.error) {
         Swal.fire("Error",data.error, "error");
       }else {
         $('#add_User').modal('hide');
         Swal.fire("Success",data.success, "success");
+        table_users.ajax.reload();
+        console.log('Updated table');
       }
     }
   })

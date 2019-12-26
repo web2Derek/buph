@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -229,6 +228,7 @@
                                                 <h4><?php echo $_SESSION['email'] ;?></h4>
                                               </div>
                                         </div>
+
                                     </li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="<?php echo base_url();?>home"><i class="ti-user"></i> My Profile</a></li>

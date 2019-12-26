@@ -126,15 +126,15 @@ class Users extends MY_Controller {
     public function createUser(){
         // $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('fname', 'First Name', 'required');
-        $this->form_validation->set_rules('middlename', 'Middle Name', 'required');
-        $this->form_validation->set_rules('lname', 'Last Name', 'required');
-        $this->form_validation->set_rules('username', 'Username', 'required|is_unique[tbl_user_credentials.username]');
+        $this->form_validation->set_rules('fname', 'First Name', 'required|trim');
+        $this->form_validation->set_rules('middlename', 'Middle Name', 'required|trim');
+        $this->form_validation->set_rules('lname', 'Last Name', 'required|trim');
+        $this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[tbl_user_credentials.username]', array('is_unique' => '%s is already taken.'));
         $this->form_validation->set_rules('branch', 'Branch', 'required');
         $this->form_validation->set_rules('user_type', 'User Type', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-        $this->form_validation->set_rules('password', 'Password', 'required');
-        $this->form_validation->set_rules('confirm_password' , 'Confirm Password' , 'required|matches[password]');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[tbl_user_informations.email]', array('is_unique' => '%s is already taken.'));
+        $this->form_validation->set_rules('password', 'Password', 'required|trim');
+        $this->form_validation->set_rules('confirm_password' , 'Confirm Password' , 'required|trim|matches[password]');
 
         if ($this->form_validation->run() !== FALSE) {
             $post = $this->input->post();
@@ -158,7 +158,7 @@ class Users extends MY_Controller {
                     'branch_id' => $post['branch'],
                     'username' => $post['username'],
                     'password' => $post['password'],
-                    'status' => 0,
+                    'status' => 1,
                     'date_added' =>  date("Y-m-d"),
                     'date_updated' => date("Y-m-d")
                 );
