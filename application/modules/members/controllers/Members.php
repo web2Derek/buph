@@ -51,17 +51,34 @@ class Members extends MY_Controller {
   public function form(){
     $params['select'] = 'branch_id , branch_name';
     $data['branch'] = $this->MY_Model->getRows('tbl_branch' , $params , 'array');
+    $data['branch'] = $this->MY_Model->getRows('tbl_branch' , $params , 'array');
     $data['isEdit'] = false;
     $this->load_page('members_v' , $data);
   }
+
+    public function dob_check($str){
+        if (!DateTime::createFromFormat('m/d/yyyy', $str)) { //yes it's YYYY-MM-DD
+        $this->form_validation->set_message('birthdate', 'The {field} has not a valid date format');
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
 
   public function AddNewMember() {
     $post = $this->input->post();
 
     $results = array();
     $this->form_validation->set_rules('lastname' , 'Last Name' , 'required');
-    $this->form_validation->set_rules('firstname' , 'First Name' , 'required');
+    $this->form_validation->set_rules('firstname' , 'First Name' , 'required|is_unique[tbl_mem_personal_information.first_name]');
     $this->form_validation->set_rules('middlename' , 'Middle Name' , 'required');
+    $this->form_validation->set_rules('birthdate' , 'Birth Date' , 'required');
+    $this->form_validation->set_rules('birthplace' , 'Birth Place' , 'required');
+    $this->form_validation->set_rules('emailAddress' , 'Email' , 'required|is_unique[tbl_mem_personal_information.email]');
+    $this->form_validation->set_rules('Street' , 'Street' , 'required');
+    $this->form_validation->set_rules('Barangay_District' , 'Barangay District' , 'required');
+    $this->form_validation->set_rules('Municipality' , 'Minucipality' , 'required');
+    $this->form_validation->set_rules('date_applied' , 'Date Applied' , 'required');
 
     if ($this->form_validation->run() !== FALSE) {
       // Personal Information
@@ -174,14 +191,14 @@ class Members extends MY_Controller {
 
               // SOURCE OF INCOME COLUMN
               $source = array(
-                'salary_honorarium'     => (isset($post['source_salary_honorarium']) ? $post['source_salary_honorarium'] : null ),
-                'interest_commission'   => (isset($post['source_interest_commision']) ? $post['source_interest_commision'] : null ),
-                'source_business'       => (isset($post['source_business']) ? $post['source_business'] : null ),
-                'ofw_remitance'         => (isset($post['source_ofw_remittance']) ? $post['source_ofw_remittance'] : null ),
-                'source_farmer'         => (isset($post['source_farmer']) ? $post['source_farmer'] : null ),
-                'other_remittance'      => (isset($post['source_other_remittance']) ? $post['source_other_remittance'] : null ),
-                'pension'               => (isset($post['source_other_remittance']) ? $post['source_other_remittance'] : null ),
-                'others'                => (isset($post['source_others']) ? $post['source_others_input'] : null ),
+                'salary_honorarium'     => (isset($post['source_salary_honorarium']) ? 'checked' : null ),
+                'interest_commission'   => (isset($post['source_interest_commision']) ? 'checked' : null ),
+                'source_business'       => (isset($post['source_business']) ? 'checked' : null ),
+                'ofw_remitance'         => (isset($post['source_ofw_remittance']) ? 'checked' : null ),
+                'source_farmer'         => (isset($post['source_farmer']) ? 'checked' : null ),
+                'other_remittance'      => (isset($post['source_other_remittance']) ? 'checked' : null ),
+                'pension'               => (isset($post['source_pension']) ? 'checked' : null ),
+                'others'                => (isset($post['source_others']) ? 'checked' : null ),
               );
 
               $source_json = array('sourceOf_income' => json_encode($source));
@@ -202,12 +219,12 @@ class Members extends MY_Controller {
               // FARMER COLUMN IF FARMER IS CHECKED
 
               $if_farmer = array(
-                'corn'      => (isset($post['corn']) ? $post['corn'] : null),
-                'sugarcane' => (isset($post['sugarcane']) ? $post['sugarcane'] : null),
-                'rice'      => (isset($post['rice']) ? $post['rice'] : null ),
-                'fruits'    => (isset($post['fruits']) ? $post['fruits'] : null),
-                'cash'      => (isset($post['cash']) ? $post['cash'] : null),
-                'livestock' => (isset($post['livestock']) ? $post['livestock'] : null),
+                'corn'      => (isset($post['corn']) ? 'checked' : null),
+                'sugarcane' => (isset($post['sugarcane']) ? 'checked' : null),
+                'rice'      => (isset($post['rice']) ? 'checked' : null ),
+                'fruits'    => (isset($post['fruits']) ? 'checked' : null),
+                'cash'      => (isset($post['cash']) ? 'checked' : null),
+                'livestock' => (isset($post['livestock']) ? 'checked' : null),
               );
 
               $farmer_json = array('farmer' => json_encode($if_farmer));
@@ -423,14 +440,14 @@ class Members extends MY_Controller {
 
             // SOURCE OF INCOME COLUMN
             $source = array(
-              'salary_honorarium'     => (isset($post['source_salary_honorarium']) ? $post['source_salary_honorarium'] : null ),
-              'interest_commission'   => (isset($post['source_interest_commision']) ? $post['source_interest_commision'] : null ),
-              'source_business'       => (isset($post['source_business']) ? $post['source_business'] : null ),
-              'ofw_remitance'         => (isset($post['source_ofw_remittance']) ? $post['source_ofw_remittance'] : null ),
-              'source_farmer'         => (isset($post['source_farmer']) ? $post['source_farmer'] : null ),
-              'other_remittance'      => (isset($post['source_other_remittance']) ? $post['source_other_remittance'] : null ),
-              'pension'               => (isset($post['source_other_remittance']) ? $post['source_other_remittance'] : null ),
-              'others'                => (isset($post['source_others']) ? $post['source_others_input'] : null ),
+              'salary_honorarium'     => (isset($post['source_salary_honorarium']) ? 'checked' : null ),
+              'interest_commission'   => (isset($post['source_interest_commision']) ? 'checked' : null ),
+              'source_business'       => (isset($post['source_business']) ? 'checked' : null ),
+              'ofw_remitance'         => (isset($post['source_ofw_remittance']) ? 'checked' : null ),
+              'source_farmer'         => (isset($post['source_farmer']) ? 'checked' : null ),
+              'other_remittance'      => (isset($post['source_other_remittance']) ? 'checked' : null ),
+              'pension'               => (isset($post['source_pension']) ? 'checked' : null ),
+              'others'                => (isset($post['source_others']) ? 'checked' : null ),
             );
 
             $source_json = array('sourceOf_income' => json_encode($source));

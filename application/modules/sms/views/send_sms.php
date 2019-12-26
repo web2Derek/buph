@@ -13,6 +13,7 @@
                    <i class="fas fa-users"></i> Send to Group</button>
               </div>
             </div>
+          </div>
 
           <!-- <form class="form-horizontal" id="sent_individual" style="display:none;">
             <div class="form-group">
@@ -93,6 +94,7 @@
   </div>
 </div>
 
+
 <!-- SENT SMS INDIVIDUAL -->
 
 <div class="modal fade in" id="sent_single_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
@@ -103,6 +105,10 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
+              <div class="form-group">
+                <label for="sms_ip">SMS IP</label>
+                <input type="text" class="form-control" name="sms_ip" id="sms_ip" placeholder="Please setup IP">
+              </div>
                 <div class="form-group">
                   <select class="form-control" id="sms-template" name="sms-template" required>
                     <option value="" selected>Choose Template...</option>
@@ -112,6 +118,13 @@
                   </select>
                   <br/>
               </div>
+              <!-- SPINNER WHEN SUBMITTING -->
+              <button class="btn btn-primary spinner" type="button" disabled>
+                <p>Sending SMS...</p>
+                <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                 <span class="sr-only">Loading...</span>
+               </div>
+              </button>
 
                 <form id="sent_individual">
                     <div class="form-group">

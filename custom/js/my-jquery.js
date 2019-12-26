@@ -202,6 +202,7 @@ $(document).ready(function() {
 
 
 var table_users = $('#userlist').DataTable({
+
   "processing": true, //Feature control the processing indicator.
   "serverSide": true, //Feature control DataTables' server-side processing mode.
   "order": [[0,'desc']], //Initial no order.
@@ -219,7 +220,7 @@ var table_users = $('#userlist').DataTable({
       return str;
     }
   },
-  {"data":"user_type" , "render" : function(data,type,row,meta){
+  {"data":"user_type" , "render" : function(data,type,row,meta) {
     var str = '';
     switch (row.user_type) {
       case '0':
@@ -243,8 +244,7 @@ var table_users = $('#userlist').DataTable({
     <button info_id="${row.info_id}" type="button" class="btn_edit btn waves-effect waves-light btn-outline-warning edit-btn btn-sm" data-toggle="modal" data-target="#edit_User">
     <i class="far fa-edit"></i>
     </button>
-    </div>
-    `;
+    </div>`;
     if (row.status == 1) {
       str+= `
       <button type="button" class="btn waves-effect waves-light btn-outline-warning  activate-btn btn-sm" id="${row.info_id}" stats = "inactive">
@@ -278,9 +278,7 @@ var table_users = $('#userlist').DataTable({
 
 
 
-
 // SMS TEMPLATE DATABLE
-
 var url = $('#base_url').val();
 var sms_table =  $('#sms_table').DataTable({
   "processing": true, //Feature control the processing indicator.
@@ -523,12 +521,16 @@ $(document).on('submit', '#sent_individual', function(e) {
   let formData = $(this).serializeArray();
   let message = $('#message').val();
   let values = $('#to').val();
+  let sms_url = $('#sms_ip').val();
+  let text_ip =  localStorage.setItem('ip', sms_url);
+  console.log(localStorage.getItem('ip'));
+
+  $('.spinner').css('display', 'block');
 
   values.map((val,idx) => {
-
     $.ajax({
       method: 'POST',
-      url: 'http://192.168.30.25:1688/services/api/messaging/',
+      url: sms_url,
       data:  {'to':val, 'message':message},
       success:  function(response) {
         if(response.isSuccessful) {
@@ -537,6 +539,9 @@ $(document).on('submit', '#sent_individual', function(e) {
             'Sms sent!!!',
             'success'
           );
+
+          $('.spinner').css('display', 'none');
+
           jQuery(function ($) {
             $('#sms-template').val('');
             $('#message').val("");
@@ -547,7 +552,9 @@ $(document).on('submit', '#sent_individual', function(e) {
         }
       },
       error: function(response, status) {
-        Swal.fire('Error', 'Server Error.', 'error');
+        Swal.fire('Error', 'Invalid IP. Please check the IP setup.', 'error');
+        $('.spinner').css('display', 'none');
+        $(this).modal('hide');
       }
     })
   })
@@ -815,6 +822,13 @@ $('input[name="source_business"]').click(function() {
   }
 })
 
+if ($('input[name="source_business"]').prop('checked') == true) {
+    $('#if_business').fadeIn();
+}
+if ($('input[name="source_farmer"]').prop('checked') == true) {
+    $('#if_farmer').fadeIn();
+}
+
 $('input[name="source_farmer"]').click(function() {
   if ($(this).prop('checked') == true) {
     $('#if_farmer').fadeIn();
@@ -858,8 +872,14 @@ $('input[name="source_others"]').click(function() {
                 if (data.form_error) {
                     let keys = Object.keys(data.form_error);
                     $(keys).each( function(idx , val){
+                        $("input[name='"+val+"']").css('border' , '1px solid red');
                         $("input[name='"+val+"']").next('.err').text(data.form_error[val]);
-                    })
+                    });
+                    console.log(keys[0]);
+                    $('html, body').animate({
+                        scrollTop: $("input[name='"+keys[0]+"']").offset().top - 160
+                    }, 2000);
+
                 }else if (data.success) {
                     Swal.fire("Success!",data.success, "success");
                     setTimeout(function () {
@@ -1464,6 +1484,7 @@ function memberFormConfig(){
   $('#if_farmer').hide();
   $('#if_others').hide();
 }
+
 
 function clearError(){
   $('.err').text('');

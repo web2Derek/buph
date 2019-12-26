@@ -74,20 +74,19 @@ $(document).ready(function() {
         }
       })
 
-          // GENERATE TABLE DATA
+          // GENERATE TOTAL MEMBER SUMMARY
       function generateTr(data) {
         let newArr = data['female'].reverse();
         let maleData = data['male'];
-        let mcount;
+        let mcount = 0;
 
-        for(var i = 0; i < maleData.length; i++) {
-          if(maleData[i].range_data = '') {
-
-          }
-        }
 
         for(var i = 0; i < newArr.length; i++) {
-
+          // if(maleData[i].length <= i) {
+          //   mcount = 0
+          // } else {
+          //   mcount = maleData[i].count;
+          // }
           table_data = `
               <tr class="${newArr[i].range_data}">
                   <td>${newArr[i].range_data} Years Old</td>
@@ -181,17 +180,6 @@ $(document).ready(function() {
 
 
   function generateChart(branch, dataset) {
-    // var url = $('#base_url').val();
-    // $.ajax({
-    //   method: 'POST',
-    //   url: url + 'home/chartData',
-    //   dataType:"json",
-    //   success:function(data) {
-    //     var branch = [];
-    //     for (var i = 0; i < data.length; i++) {
-    //       branch.push(data[i].branch_name);
-    //     }
-
         // CHART START
         var myChart = document.getElementById('myChart');
         if(myChart !== null) {
@@ -244,16 +232,6 @@ $(document).ready(function() {
       }
 
 function getAllMember(branch, dataset) {
-  // var url = $('#base_url').val();
-  // $.ajax({
-  //   method: 'GET',
-  //   url: url + 'home/chartData',
-  //   dataType:"json",
-  //   success:function(data) {
-  //     var branch = [];
-  //     for (var i = 0; i < data.length; i++) {
-  //       branch.push(data[i].branch_name);
-  //     }
       // CHART START
       var myNewChart = document.getElementById('myNewChart');
       if(myNewChart !== null) {
@@ -281,10 +259,13 @@ function getAllMember(branch, dataset) {
                 '#068101'
               ],
               borderWidth: 1,
-              responsive:true
+              responsive:true,
+              maintainAspectRatio: true
+
             }]
           },
           options: {
+            tooltip:true,
             events: ['hover'],
             scales: {
               xAxes: [{
@@ -310,6 +291,7 @@ function getAllMember(branch, dataset) {
       $('select#group-type').trigger('change');
       $('select#alltype').trigger('change');
 });
+
   // function createBarColor() {
   //   var color = [];
   //   for(var i = 0;  i < 13; i++) {

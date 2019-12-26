@@ -1,5 +1,7 @@
 <div>
+<?php
 
+ ?>
   <!-- Page Title -->
   <div class="row page-titles">
     <div class="col-md-5 align-self-center">
@@ -39,7 +41,7 @@
       <?php endif; ?>
       <div class="card">
         <div class="card-header bg-info">
-          <h4 class="m-b-0 text-white">Personal Information</h4>
+          <h4 id="req" class="m-b-0 text-white">Personal Information</h4>
         </div>
         <div class="card-body">
           <div class="row">
@@ -466,27 +468,32 @@
             <div class="col-md-2">
               <div class="form-group">
                 <div class="col-md-12">
+                    <?php
+                        if ($isEdit) {
+                            $f_info = json_decode($info->sourceOf_income);
+                        }
+                     ?>
                   <label for=""><h5>Source Of Income</h5></label>
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="source_salary_honorarium" name="source_salary_honorarium">
+                    <input type="checkbox" <?php echo ($isEdit ? $f_info->salary_honorarium : '') ?> class="custom-control-input" id="source_salary_honorarium" name="source_salary_honorarium">
                     <label class="custom-control-label" for="source_salary_honorarium">Salary/Honorarium</label>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="source_interest_commision" name="source_interest_commision">
+                    <input type="checkbox" <?php echo ($isEdit ? $f_info->interest_commission : '') ?> class="custom-control-input" id="source_interest_commision" name="source_interest_commision">
                     <label class="custom-control-label" for="source_interest_commision">Interest/Commision</label>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="source_business" name="source_business">
+                    <input type="checkbox" <?php echo ($isEdit ? $f_info->source_business : '') ?> class="custom-control-input" id="source_business" name="source_business">
                     <label class="custom-control-label" for="source_business">Business</label>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" name="source_farmer" id="source_farmer" id="source_farmer">
+                    <input type="checkbox"  <?php echo ($isEdit ? $f_info->source_farmer : '') ?> class="custom-control-input" name="source_farmer" id="source_farmer" id="source_farmer">
                     <label class="custom-control-label" for="source_farmer">Farmer</label>
                   </div>
                 </div>
@@ -498,25 +505,25 @@
                 <div class="col-md-12">
                   <label for=""></label>
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="source_ofw_remittance" name="source_ofw_remittance">
+                    <input type="checkbox" <?php echo ($isEdit ? $f_info->ofw_remitance : '') ?> class="custom-control-input" id="source_ofw_remittance" name="source_ofw_remittance">
                     <label class="custom-control-label" for="source_ofw_remittance">OFW Remittance</label>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="source_other_remittance" name="source_other_remittance">
+                    <input type="checkbox" <?php echo ($isEdit ? $f_info->other_remittance : '') ?> class="custom-control-input" id="source_other_remittance" name="source_other_remittance">
                     <label class="custom-control-label" for="source_other_remittance">Other Remittance</label>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="source_pension" name="source_pension">
+                    <input type="checkbox"  <?php echo ($isEdit ? $f_info->pension : '') ?> class="custom-control-input" id="source_pension" name="source_pension">
                     <label class="custom-control-label" for="source_pension">Pension</label>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" name="source_others" id="source_others" id="source_others">
+                    <input type="checkbox"  class="custom-control-input" name="source_others" id="source_others" id="source_others">
                     <label class="custom-control-label" for="source_others">Others, Specify</label>
                   </div>
                 </div>
@@ -533,38 +540,38 @@
               </div>
             </div>
 
-            <div class="row" id="if_business">
+            <div class="row" id="if_business" >
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Company Name</label>
-                  <input type="text" name="source_business_company_name" class="form-control">
+                  <input type="text" name="source_business_company_name" class="form-control" value="<?php echo ($isEdit ? $info->fi_company_name : ''); ?>">
                   <span class="err"></span>
                 </div>
                 <div class="form-group">
-                  <input type="text" name="source_business_emplymentStatus" class="form-control" placeholder="Employment Status">
+                  <input type="text" name="source_business_emplymentStatus" class="form-control" value="<?php echo ($isEdit ? $info->fi_employmentStatus : ''); ?>" placeholder="Employment Status">
                   <span class="err"></span>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Office Address</label>
-                  <input type="text" name="source_business_officeAddress" class="form-control">
+                  <input type="text" name="source_business_officeAddress" value="<?php echo ($isEdit ? $info->fi_office_address : ''); ?>" class="form-control">
                   <span class="err"></span>
                 </div>
                 <div class="form-group">
 
-                  <input type="text" name="source_business_contactNo" class="form-control" placeholder="Contact Number">
+                  <input type="text" name="source_business_contactNo" class="form-control" value="<?php echo ($isEdit ? $info->fi_contact_no : ''); ?>" placeholder="Contact Number">
                   <span class="err"></span>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Job Title</label>
-                  <input type="text" name="source_business_jobTitle" class="form-control">
+                  <input type="text" name="source_business_jobTitle" value="<?php echo ($isEdit ? $info->fi_Job_title : ''); ?>" class="form-control">
                   <span class="err"></span>
                 </div>
                 <div class="form-group">
-                  <input type="text" name="source_business_gross_income" class="form-control" placeholder="Gross Income per Month">
+                  <input type="text" name="source_business_gross_income" value="<?php echo ($isEdit ? $info->fi_business_gross_income_month : ''); ?>" class="form-control" placeholder="Gross Income per Month">
                   <span class="err"></span>
                 </div>
               </div>
@@ -616,18 +623,23 @@
             </div>
           </div>
 
+            <?php if ($isEdit) {
+                $farmer = json_decode($info->farmer , true);
+                
+            } ?>
+
           <div class="row" id="if_farmer">
             <div class="col-md-4">
               <div class="form-group row">
                 <label class="control-label text-right col-md-3"><h5>Corn</h5></label>
                 <div class="col-md-9">
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="corn1" name="corn" class="custom-control-input" value="owned">
-                    <label class="custom-control-label" for="corn1">Owned</label>
+                        <input type="radio" id="corn1" name="corn" class="custom-control-input" value="owned">
+                        <label class="custom-control-label" for="corn1">Owned</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="corn2" name="corn" class="custom-control-input" value="rented">
-                    <label class="custom-control-label" for="corn2">Rented</label>
+                        <input type="radio" id="corn2" name="corn" class="custom-control-input" value="rented">
+                        <label class="custom-control-label" for="corn2">Rented</label>
                   </div>
                 </div>
               </div>
