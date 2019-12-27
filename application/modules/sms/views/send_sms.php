@@ -91,8 +91,33 @@
 </div>
 </form>
 </div> -->
+    </div>
+  </div>
 </div>
-</div>
+
+<div class="container sms_card">
+  <div class="col-12">
+    <div class="card sms-card">
+        <h5 class="card-title titleheader">SMS RECORD</h5>
+        <div class="card_body">
+          <div class="table-responsive">
+            <table class="table color-table table-striped success-table">
+                <thead>
+                  <tr>
+                    <th>SMS ID</th>
+                    <th>SENDER</th>
+                    <th>RECEIVER</th>
+                    <th>DATE SENT</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+  </div>
 </div>
 
 <!-- SMS IP -->
@@ -104,12 +129,13 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
         <div class="modal-body">
-          <form class="form-material" id="sms_ip_setup">
+          <form class="" id="sms_ip_setup">
             <div class="form-group">
               <h4>Current IP: <span id="current_ip"></span></h4>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="" id="ip_address" placeholder="IP Address">
+                <label for="ip_address">IP ADDRESS:</label>
+                <input type="text" class="form-control" name="" id="ip_address" placeholder=" 192.168.30.100:1688">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
