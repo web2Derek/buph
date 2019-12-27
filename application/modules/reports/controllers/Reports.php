@@ -31,7 +31,7 @@ class Reports extends MY_Controller {
       $draw = $this->input->post('draw');
       $to = $this->input->post('to');
 
-      $column_order = array('first_name', 'middle_name', 'last_name', 'barangay_district',                    'municipality','gender','birthdate', 'age', 'facilitator', 'invited_by',
+      $column_order = array('first_name', 'middle_name', 'last_name', 'barangay_district',                 'municipality','gender','birthdate', 'age', 'facilitator', 'invited_by',
       'grand_total', 'savings_deposit','branch_name');
 
       $select = "first_name , middle_name, last_name, barangay_district, municipality ,acount_id , birthdate, age,blood_type, religion, grand_total ,savings_deposit, facilitator,  invited_by,civil_status , title, branch_name, gender, tbl_mem_personal_information.date_added ,tbl_mem_personal_information.member_id";
@@ -48,8 +48,9 @@ class Reports extends MY_Controller {
         if (!empty($date_filter)) {
             $where = "(tbl_mem_personal_information.date_added BETWEEN '$date_filter' AND '$to') AND (tbl_branch.branch_name = '$mem_branch') ";
         }else{
-            $where = array();
+            $where = "(tbl_mem_personal_information.member_type_id != 4)";
         }
+
 
         // if (isset($date_filter) && !empty($date_filter)) {
         //   $where = array('birthdate' => $date_filter, 'birth_place' => $mem_branch);
@@ -64,7 +65,6 @@ class Reports extends MY_Controller {
                   "recordsFiltered" => $list['count'],
                   "data" => $list['data']
           );
-
         echo json_encode($output);
 
   }
@@ -119,7 +119,7 @@ public function get_full_pledge() {
     if (!empty($date_filter)) {
         $where = "(tbl_mem_personal_information.date_added BETWEEN '$date_filter' AND '$to') AND (tbl_branch.branch_name = '$mem_branch') ";
     }else{
-        $where = array();
+        $where = "(tbl_mem_personal_information.member_type_id != 4)";
     }
 
     // if (!empty($date_filter)) {
@@ -161,7 +161,9 @@ public function get_full_pledge() {
         if (isset($date_filter) && !empty($date_filter)) {
           $where = array('birthdate' => $date_filter, 'member_type_id' => $mem_type);
         } else {
-          $where = array();
+          $where = "(tbl_mem_personal_information.member_type_id != 4)";
+        }
+
           $group = array();
           $list = datatables('tbl_mem_personal_information',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
           $output = array(
@@ -171,7 +173,6 @@ public function get_full_pledge() {
                   "data" => $list['data']
           );
         echo json_encode($output);
-      }
     }
     public function pmesReport(){
       $data['branch'] = $this->MY_Model->getRows('tbl_branch');
@@ -196,7 +197,7 @@ public function get_full_pledge() {
         if (!empty($from)) {
             $where = "(tbl_account_info.encoded_date BETWEEN '$from' AND '$to') AND (tbl_account_info.branch = '$branch') ";
         }else{
-            $where = array();
+            $where = "(tbl_mem_personal_information.member_type_id != 4)";
         }
 
           $group = array();
@@ -240,7 +241,9 @@ public function get_full_pledge() {
           if (isset($date_filter) && !empty($date_filter)) {
             $where = array('birthdate' => $date_filter, 'member_type_id' => $mem_type);
           } else {
-            $where = array();
+            $where = "(tbl_mem_personal_information.member_type_id != 4)";
+          }
+
             $group = array();
             $list = datatables('tbl_mem_personal_information',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
             $output = array(
@@ -250,7 +253,6 @@ public function get_full_pledge() {
                     "data" => $list['data']
             );
           echo json_encode($output);
-      }
     }
 
     public function withdrawalReport(){

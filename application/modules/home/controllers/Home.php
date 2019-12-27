@@ -42,7 +42,7 @@ class Home extends MY_Controller {
 				$type = 2;
 		} elseif($post['member_type'] === 'Regular') {
 				$type = 6;
-		} elseif($post['member_type'] === 'Smart Teens/Young Save') {
+		} elseif($post['member_type'] === 'Smart Teens') {
 				$type = 3;
 		}
 
@@ -68,10 +68,10 @@ class Home extends MY_Controller {
 		} elseif($post['member_type'] === 'Regular Female') {
 				$type = 6;
 				$gender = 'Female';
-		} elseif($post['member_type'] === 'Smart Teens/Young Savers Male') {
+		} elseif($post['member_type'] === 'Smart Teens Male') {
 				$type = 3;
 				$gender = 'Male';
-		} elseif($post['member_type'] === 'Smart Teens/Young Savers Female') {
+		} elseif($post['member_type'] === 'Smart Teens Female') {
 				$type = 3;
 				$gender = 'Female';
 		} elseif($post['member_type'] === 'Associate Male') {

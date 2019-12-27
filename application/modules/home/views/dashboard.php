@@ -9,7 +9,7 @@
                             <select class="custom-select" name="group-type" id="group-type">
                                 <option value="Regular">Regular</option>
                                 <option value="Associate">Associate</option>
-                                <option value="Smart Teens/Young Save">Smart Teens/Young Save</option>
+                                <option value="Smart Teens/Young Save">Smart Teens</option>
                               </select>
                           </div>
                       </div>
@@ -91,8 +91,8 @@
                                           <option value="Regular Female">Regular Female</option>
                                           <option value="Associate Male">Associate Male</option>
                                           <option value="Associate Female">Associate Female</option>
-                                          <option value="Smart Teens/Young Savers Male">Smart Teens/Young Savers Male</option>
-                                          <option value="Smart Teens/Young Savers Female">Smart Teens/Young Savers Female</option>
+                                          <option value="Smart Teens Male">Smart Teens Male</option>
+                                          <option value="Smart Teens Female">Smart Teens Female</option>
                                       </select>
                                 </div>
                             </div>

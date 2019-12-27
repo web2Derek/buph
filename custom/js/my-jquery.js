@@ -515,6 +515,25 @@ $(document).on('submit', '#edit_sms_form', function(event) {
   });
 })
 
+  $(document).on('click', '#remove_ip',function(e) {
+    e.preventDefault();
+    localStorage.removeItem('ip');
+    alert('Current IP has been removed.')
+    $('#current_ip').text('');
+  })
+
+ $(document).on('click', '#sms_ip_address', function(e) {
+   let getIp = localStorage.getItem('ip');
+   $('#current_ip').text(getIp);
+ })
+
+$(document).on('submit', '#sms_ip_setup', function(e) {
+  e.preventDefault();
+  let sms_ip = $('#ip_address').val();
+  localStorage.setItem('ip', sms_ip);
+  Swal.fire('SAVE', 'IP has been saved');
+});
+
 //===================================== SENDING INDIVIUAL SMS
 $(document).on('submit', '#sent_individual', function(e) {
   e.preventDefault();
@@ -522,10 +541,7 @@ $(document).on('submit', '#sent_individual', function(e) {
   let formData = $(this).serializeArray();
   let message = $('#message').val();
   let values = $('#to').val();
-  let sms_url = $('#sms_ip').val();
-  let text_ip =  localStorage.setItem('ip', sms_url);
-  console.log(localStorage.getItem('ip'));
-
+  let sms_url = localStorage.getItem('ip');
   $('.spinner').css('display', 'block');
 
   values.map((val,idx) => {
@@ -540,9 +556,7 @@ $(document).on('submit', '#sent_individual', function(e) {
             'Sms sent!!!',
             'success'
           );
-
           $('.spinner').css('display', 'none');
-
           jQuery(function ($) {
             $('#sms-template').val('');
             $('#message').val("");

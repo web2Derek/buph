@@ -116,7 +116,11 @@ $(document).ready(function() {
         "orderable": true, //set orderable
         }],
            dom: 'Bfrtip',
-           buttons: ['csv', 'excel']
+           buttons: [{
+             text : 'Export to EXCEL',
+             extend: 'excel',
+             filename: 'New Members Report'
+           }]
       });
 
        $('.buttons-csv, .buttons-excel').addClass('btn btn-primary mr-1');
@@ -165,7 +169,11 @@ $(document).ready(function() {
          "orderable": true, //set orderable
          }],
             dom: 'Bfrtip',
-            buttons: ['csv', 'excel']
+            buttons: [{
+              text : 'Export to EXCEL',
+              extend: 'excel',
+              filename: 'Full Pledge Reports'
+            }]
         });
         $('.buttons-csv, .buttons-excel').addClass('btn btn-info mr-1');
       }
@@ -206,7 +214,11 @@ $(document).ready(function() {
       "orderable": true, //set orderable
       }],
          dom: 'Bfrtip',
-         buttons: ['csv', 'excel']
+         buttons: [{
+           text : 'Export to EXCEL',
+           extend: 'excel',
+           filename: 'Membership Statistic Report'
+         }]
      });
      $('.buttons-csv, .buttons-excel').addClass('btn btn-info mr-1');
    }
@@ -224,7 +236,11 @@ $(document).ready(function() {
             "serverSide": true, //Feature control DataTables' server-side processing mode.
             "order": [[0,'desc']], //Initial no order.
             "dom": 'Bfrtip',
-            "buttons" : ['csv' , 'excel'],
+            buttons: [{
+              text : 'Export to EXCEL',
+              extend: 'excel',
+              filename: 'PMES Honorarium Reports'
+            }],
             "columns":[
                 {"data":"facilitator" , "render" : function(data, type, row, meta){
                     var str = '';
@@ -275,7 +291,11 @@ $(document).ready(function() {
             "serverSide": true, //Feature control DataTables' server-side processing mode.
             "order": [[0,'desc']], //Initial no order.
             "dom": 'Bfrtip',
-            "buttons" : ['csv' , 'excel'],
+            "buttons": [{
+                text : 'Export to EXCEL',
+                extend: 'excel',
+                filename: 'Widrawal of Membership Reports'
+              }],
             "columns":[
                 {"data":"branch_name"},
                 {"data":"first_name" , "render" : function(data, type, row, meta){

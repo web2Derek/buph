@@ -35,6 +35,7 @@ class Members extends MY_Controller {
     );
     $where = array();
     $group = array();
+
     $list = datatables('tbl_mem_personal_information',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
     $output = array(
       "draw" => $draw,

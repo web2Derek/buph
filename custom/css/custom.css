@@ -41,6 +41,11 @@
   border:none!important;
 }
 
+#sms_ip_address {
+  background: #068101!important;
+  border:none!important;
+}
+
 #btn-send-group {
   background: #068101!important;
   border:none!important;
@@ -77,6 +82,10 @@
 #btn-mem-login {
   background: #95DC3B!important;
   border:none!important;
+}
+
+#current_ip {
+  color: #95DC3B!important;
 }
 
 .spinner {

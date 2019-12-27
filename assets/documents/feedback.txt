@@ -9,19 +9,19 @@ gd am sir partial feedback sa system sa user ug member list
 
 -lahi ang data gagawas after mag save ug member (view details)
 
--makalogin gihapon maski dli activated ang user - fixed
+-makalogin gihapon maski dli activated ang user - fixed 
 
--dli kaedit member
+-dli kaedit member 
 
--afer mag login dli ang login ang nka butang admin lng gihapon
+-afer mag login dli ang login ang nka butang admin lng gihapon - fixed
 
--beneficiries ug signature dli ga display
+-beneficiries ug signature dli ga display 
 
--civil status, sex dli ga display inig edit
+-civil status, sex dli ga display inig edit 
 
--financial info dli ga refect pag edit
+-financial info dli ga refect pag edit 
 
-ADDITIONAL INFO
+ADDITIONAL FEEDBACK:
 
 *Member master
     - Age must be computed base on birthday
@@ -33,6 +33,7 @@ ADDITIONAL INFO
         - How to set phone IP
         - Naa bay limit kung pila ang ma sendan per day?
         - during pag text?naa bay limit sa characters?
+
 *Member List
         - Dapat ang column ma display kay Acct. ID / Name / Gender / Date of birth / Age / Branch / Member Type / Action
          - Maka generate ba sa list of all members by branch? Compose of: name / Contact # / Address / Gender / DOB / Date Registered / Civil Status / Religion / Work / TIN / Members type / BOD Resolution / Share / SD
@@ -41,8 +42,9 @@ ADDITIONAL INFO
            - Proper case (text format)
            - Naa untay mu appear nga dialogue box nga nagpa remember nga naa nay existing nga account sa member in.ana gyod nga name
            - Information is not the same during sa pag fill up ug data, especially sa pag edit sa information
+
 Members type
-           - Young savers or smart teens?(Smart teens-lang guro gamiton)
+           - Young savers or smart teens?(Smart teens-lang guro gamiton) - fixed
 Closed / Write off 
            - Dapat maka entry ko sa date applied
 Closed account
@@ -50,7 +52,7 @@ Closed account
 *Account information
         - Pwedi insertan ug subscribes share?nga field, same sa amount/no. of shares/deposited for subscription…kay kami raman mag input ana nga field..peru ma update2 japon na namo
 *Reporting
-             - (New Member) Display japon , ma apil ug generate bixag closed na
+             - (New Member) Display japon , ma apil ug generate bixag closed na - fixed
              - During sa pag generate ug report, Bupharco permi ang gaka save nga file name..dapat kung unxay gi generate mao untay file name, para dali ra ma identify
              - Membership statistics..dili mao ang reporting
               - Total member summary ..dili mao ang reporting
