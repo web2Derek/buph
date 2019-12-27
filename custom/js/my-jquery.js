@@ -525,6 +525,8 @@ $(document).on('submit', '#edit_sms_form', function(event) {
  $(document).on('click', '#sms_ip_address', function(e) {
    let getIp = localStorage.getItem('ip');
    $('#current_ip').text(getIp);
+   let n = 'http://192.168.30.100:1688/services/api/messaging/';
+   console.log(n.length);
  })
 
 $(document).on('submit', '#sms_ip_setup', function(e) {
@@ -532,6 +534,7 @@ $(document).on('submit', '#sms_ip_setup', function(e) {
   let sms_ip = $('#ip_address').val();
   localStorage.setItem('ip', sms_ip);
   Swal.fire('SAVE', 'IP has been saved');
+  $('#current_ip').text(sms_ip);
 });
 
 //===================================== SENDING INDIVIUAL SMS
@@ -542,50 +545,52 @@ $(document).on('submit', '#sent_individual', function(e) {
   let message = $('#message').val();
   let values = $('#to').val();
   let sms_url = localStorage.getItem('ip');
-  $('.spinner').css('display', 'block');
-
-  values.map((val,idx) => {
-    $.ajax({
-      method: 'POST',
-      url: sms_url,
-      data:  {'to':val, 'message':message},
-      success:  function(response) {
-        if(response.isSuccessful) {
-          Swal.fire(
-            'Success',
-            'Sms sent!!!',
-            'success'
-          );
+  if(sms_url == null || sms_url.length < 50) {
+    Swal.fire('Error', 'No IP Provided or Invalid IP');
+  } else {
+    $('.spinner').css('display', 'block');
+    values.map((val,idx) => {
+      $.ajax({
+        method: 'POST',
+        url: sms_url,
+        data:  {'to':val, 'message':message},
+        success:  function(response) {
+          if(response.isSuccessful) {
+            Swal.fire('Success', 'Sms sent!!!');
+            $('.spinner').css('display', 'none');
+            jQuery(function ($) {
+              $('#sms-template').val('');
+              $('#message').val("");
+              var selectize = $('#to')[0].selectize;
+              selectize.clear();
+            })
+            $('#sent_individual')[0].reset();
+          }
+        },
+        error: function(response, status) {
+          Swal.fire('Error', 'Invalid IP. Please check the IP setup.', 'error');
           $('.spinner').css('display', 'none');
-          jQuery(function ($) {
-            $('#sms-template').val('');
-            $('#message').val("");
-            var selectize = $('#to')[0].selectize;
-            selectize.clear();
-          })
-          $('#sent_individual')[0].reset();
+          $(this).modal('hide');
         }
-      },
-      error: function(response, status) {
-        Swal.fire('Error', 'Invalid IP. Please check the IP setup.', 'error');
-        $('.spinner').css('display', 'none');
-        $(this).modal('hide');
-      }
+      })
     })
-  })
+  }
 })
 
 //===================================== SENDING GROUP SMS
 
 $('#group_contact').on('submit', function(e) {
   e.preventDefault();
-
   // let url = 'http://192.168.30.113:1688/services/api/messaging/';
   // let formData = $(this).serializeArray();
   let url = $("#base_url").val();
   let values = $('#group_list').val();
   let group_list = $('#group_list').val();
+  let sms_url = localStorage.getItem('ip');
 
+  if(sms_url == null || sms_url.length < 50) {
+    Swal.fire('Error', 'No IP Provided or Invalid IP');
+      } else {
   $.ajax({
     url: url + 'sms/sent_group',
     method: 'POST',
@@ -607,14 +612,10 @@ $('#group_contact').on('submit', function(e) {
           // $('#group_contact').modal('hide');
         })
       })
-      sentToGroup(num_arr);
+      sentToGroup(num_arr, sms_url);
     }
   }).done(function() {
-    Swal.fire(
-      'Success',
-      'Sms sent to Group!!!',
-      'success'
-    );
+    Swal.fire('Success','Sms sent to Group.');
     jQuery(function ($) {
       $('#sms-group-template').val("");
       $('#group_message').val("");
@@ -622,14 +623,15 @@ $('#group_contact').on('submit', function(e) {
       selectize.clear();
     })
   })
+  }
 })
 
-function sentToGroup(data) {
+function sentToGroup( data ,sms_url) {
   let group_message = $('#group_message').val();
   $(data).each(function(idx, val) {
     $.ajax({
       method: 'POST',
-      url: 'http://192.168.30.25:1688/services/api/messaging/',
+      url: sms_url,
       data:  {'to':val, 'message':group_message},
       success:  function(response) {
         console.log('success');

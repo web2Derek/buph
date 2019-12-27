@@ -88,6 +88,11 @@
   color: #95DC3B!important;
 }
 
+#btn-save-ip {
+  background: #95DC3B!important;
+  border:none!important;
+}
+
 .spinner {
   display: none;
   position: absolute;
