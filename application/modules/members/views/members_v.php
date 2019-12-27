@@ -1,7 +1,7 @@
 <div>
-<?php
+  <?php
 
- ?>
+  ?>
   <!-- Page Title -->
   <div class="row page-titles">
     <div class="col-md-5 align-self-center">
@@ -77,13 +77,13 @@
               </div>
             </div>
             <?php if ($isEdit): ?>
-                <div class="col-md-2 col-sm-12">
-                  <div class="form-group">
-                    <label for="">Age</label>
-                    <input type="text" readonly class="form-control" name="age" value="<?php echo ($isEdit ? $info->age : '') ?>">
-                    <span class="err"></span>
-                  </div>
+              <div class="col-md-2 col-sm-12">
+                <div class="form-group">
+                  <label for="">Age</label>
+                  <input type="text" readonly class="form-control" name="age" value="<?php echo ($isEdit ? $info->age : '') ?>">
+                  <span class="err"></span>
                 </div>
+              </div>
             <?php endif; ?>
             <div class="col-md-2 col-sm-12">
               <div class="form-group">
@@ -468,11 +468,11 @@
             <div class="col-md-2">
               <div class="form-group">
                 <div class="col-md-12">
-                    <?php
-                        if ($isEdit) {
-                            $f_info = json_decode($info->sourceOf_income);
-                        }
-                     ?>
+                  <?php
+                  if ($isEdit) {
+                    $f_info = json_decode($info->sourceOf_income);
+                  }
+                  ?>
                   <label for=""><h5>Source Of Income</h5></label>
                   <div class="custom-control custom-checkbox">
                     <input type="checkbox" <?php echo ($isEdit ? $f_info->salary_honorarium : '') ?> class="custom-control-input" id="source_salary_honorarium" name="source_salary_honorarium">
@@ -623,10 +623,10 @@
             </div>
           </div>
 
-            <?php if ($isEdit) {
-                $farmer = json_decode($info->farmer , true);
+          <?php if ($isEdit) {
+            $farmer = json_decode($info->farmer , true);
 
-            } ?>
+          } ?>
 
           <div class="row" id="if_farmer">
             <div class="col-md-4">
@@ -634,12 +634,12 @@
                 <label class="control-label text-right col-md-3"><h5>Corn</h5></label>
                 <div class="col-md-9">
                   <div class="custom-control custom-radio">
-                        <input type="radio" id="corn1" name="corn" class="custom-control-input" value="owned">
-                        <label class="custom-control-label" for="corn1">Owned</label>
+                    <input type="radio" id="corn1" name="corn" class="custom-control-input" value="owned">
+                    <label class="custom-control-label" for="corn1">Owned</label>
                   </div>
                   <div class="custom-control custom-radio">
-                        <input type="radio" id="corn2" name="corn" class="custom-control-input" value="rented">
-                        <label class="custom-control-label" for="corn2">Rented</label>
+                    <input type="radio" id="corn2" name="corn" class="custom-control-input" value="rented">
+                    <label class="custom-control-label" for="corn2">Rented</label>
                   </div>
                 </div>
               </div>
@@ -734,47 +734,56 @@
             <h4 class="m-b-0 text-white">Beneficiaries</h4>
           </div>
           <div class="card-body">
-            <div class="row">
-              <div class="col-md-4  col-sm-12 col-xs-12">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="ben_fullname" name="ben_fullname[]" placeholder="(Last Name,First, MI)" value= "<?php echo ($isEdit ? $ben->name : '') ?>">
-                  <span class="err"></span>
-                </div>
-              </div>
-              <div class="col-md-2 col-sm-12 col-xs-12">
-                <div class="form-group">
-                  <input type="text" class="form-control mydatepicker" id="ben_dob" name="ben_dob[]" placeholder="Date of Birth(mm/dd/yy)" value= "<?php echo ($isEdit ? $ben->dob : '') ?>">
-                  <span class="err"></span>
-                </div>
-              </div>
-              <div class="col-md-2 col-sm-12 col-xs-12">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="ben_relationship" name="ben_relationship[]" placeholder="Relationship" value= "<?php echo ($isEdit ? $ben->relationship : '') ?>">
-                  <span class="err"></span>
-                </div>
-              </div>
-              <div class="col-md-2 col-sm-12 col-xs-12">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="ben_education" name="ben_education[]" placeholder="Education" value= "<?php echo ($isEdit ? $ben->education : '') ?>">
-                  <span class="err"></span>
-                </div>
-              </div>
-              <div class="col-md-1 col-sm-12 col-xs-12">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="ben_percentage" name="ben_percentage[]" placeholder="%" value= "<?php echo ($isEdit ? $ben->percentage : '') ?>">
-                  <span class="err"></span>
-                </div>
-              </div>
-              <div class="col-md-1">
-                <div class="input-group-append">
-                  <button class="btn btn-success" type="button" onclick="add();"><i class="fa fa-plus"></i></button>
-                </div>
+            <?php foreach ($ben as $key => $value): ?>
+            <div class="row removeMe<?= $key ?>">
+                   <div class="col-md-4  col-sm-12 col-xs-12">
+                     <div class="form-group">
+                       <input type="text" class="form-control" id="ben_fullname" name="ben_fullname[]" placeholder="(Last Name,First, MI)" value= "<?php echo ($isEdit ? $value['name'] : '') ?>">
+                       <span class="err"></span>
+                     </div>
+                   </div>
+                   <div class="col-md-2 col-sm-12 col-xs-12">
+                     <div class="form-group">
+                       <input type="text" class="form-control mydatepicker" id="ben_dob" name="ben_dob[]" placeholder="Date of Birth(mm/dd/yy)" value= "<?php echo ($isEdit ?  $value['dob'] : '') ?>">
+                       <span class="err"></span>
+                     </div>
+                   </div>
+                   <div class="col-md-2 col-sm-12 col-xs-12">
+                     <div class="form-group">
+                       <input type="text" class="form-control" id="ben_relationship" name="ben_relationship[]" placeholder="Relationship" value= "<?php echo ($isEdit ? $value['relationship'] : '') ?>">
+                       <span class="err"></span>
+                     </div>
+                   </div>
+                   <div class="col-md-2 col-sm-12 col-xs-12">
+                     <div class="form-group">
+                       <input type="text" class="form-control" id="ben_education" name="ben_education[]" placeholder="Education" value= "<?php echo ($isEdit ? $value['education'] : '') ?>">
+                       <span class="err"></span>
+                     </div>
+                   </div>
+                   <div class="col-md-1 col-sm-12 col-xs-12">
+                     <div class="form-group">
+                       <input type="text" class="form-control" id="ben_percentage" name="ben_percentage[]" placeholder="%" value= "<?php echo ($isEdit ?  $value['percentage'] : '') ?>">
+                       <span class="err"></span>
+                     </div>
+                   </div>
+                   <div class="col-md-1">
+                     <div class="input-group-append">
+                       <?php
+                        $count = 0;
+                        if($count == $key) {
+                      ?>
+                       <button class="btn btn-success" type="button" onclick="add()"><i class="fa fa-plus"></i></button>
+                     <?php } else { ?>
+                        <button class="btn btn-success" type="button" onclick="remove_beneficiaries(<?= $key ?>)"><i class="fa fa-minus"></i></button>
+                     <?php } ?>
+                     </div>
+                   </div>
+                 </div>
+              <?php endforeach; ?>
+              <div id="addMore">
               </div>
             </div>
 
-            <div id="addMore">
-
-            </div>
 
             <div class="row">
               <div class="col-md-6">
