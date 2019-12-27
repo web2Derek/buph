@@ -525,7 +525,7 @@ $(document).on('submit', '#edit_sms_form', function(event) {
  $(document).on('click', '#sms_ip_address', function(e) {
    let getIp = localStorage.getItem('ip');
    $('#current_ip').text(getIp);
-   let n = 'http://192.168.30.100:1688/services/api/messaging/';
+   let n = '192.168.30.100:1688';
    console.log(n.length);
  })
 
@@ -546,13 +546,13 @@ $(document).on('submit', '#sent_individual', function(e) {
   let values = $('#to').val();
   let sms_url = localStorage.getItem('ip');
   if(sms_url == null || sms_url.length < 50) {
-    Swal.fire('Error', 'No IP Provided or Invalid IP');
+    Swal.fire('Error', 'No IP or Invalid IP Provided');
   } else {
     $('.spinner').css('display', 'block');
     values.map((val,idx) => {
       $.ajax({
         method: 'POST',
-        url: sms_url,
+        url: `http://${sms_url}/services/api/messaging/`,
         data:  {'to':val, 'message':message},
         success:  function(response) {
           if(response.isSuccessful) {
@@ -589,7 +589,7 @@ $('#group_contact').on('submit', function(e) {
   let sms_url = localStorage.getItem('ip');
 
   if(sms_url == null || sms_url.length < 50) {
-    Swal.fire('Error', 'No IP Provided or Invalid IP');
+    Swal.fire('Error', 'No IP or Invalid IP Provided');
       } else {
   $.ajax({
     url: url + 'sms/sent_group',
@@ -631,7 +631,7 @@ function sentToGroup( data ,sms_url) {
   $(data).each(function(idx, val) {
     $.ajax({
       method: 'POST',
-      url: sms_url,
+      url: `http://${sms_url}/services/api/messaging/`,
       data:  {'to':val, 'message':group_message},
       success:  function(response) {
         console.log('success');
@@ -1560,13 +1560,17 @@ jQuery(function ($) {
 $('#sms-template').on('change', function(event){
   event.preventDefault();
   let sms_message = $('#sms-template').val();
+  let charCount = sms_message.length;
   $('#message').val(sms_message);
+  $('#charNum').text(charCount);
 })
 
 $('#sms-group-template').on('change', function(event){
   event.preventDefault();
   let group_template = $('#sms-group-template').val();
+  let charCount = group_template.length;
   $('#group_message').val(group_template);
+  $('#groupcharNum').text(charCount);
 })
 
 $('#btn-clear-group').on('click', function() {

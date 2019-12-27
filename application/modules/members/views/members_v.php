@@ -625,7 +625,7 @@
 
             <?php if ($isEdit) {
                 $farmer = json_decode($info->farmer , true);
-                
+
             } ?>
 
           <div class="row" id="if_farmer">
@@ -737,31 +737,31 @@
             <div class="row">
               <div class="col-md-4  col-sm-12 col-xs-12">
                 <div class="form-group">
-                  <input type="text" class="form-control" id="ben_fullname" name="ben_fullname[]" placeholder="(Last Name,First, MI)" >
+                  <input type="text" class="form-control" id="ben_fullname" name="ben_fullname[]" placeholder="(Last Name,First, MI)" value= "<?php echo ($isEdit ? $ben->name : '') ?>">
                   <span class="err"></span>
                 </div>
               </div>
               <div class="col-md-2 col-sm-12 col-xs-12">
                 <div class="form-group">
-                  <input type="text" class="form-control mydatepicker" id="ben_dob" name="ben_dob[]" placeholder="Date of Birth(mm/dd/yy)" >
+                  <input type="text" class="form-control mydatepicker" id="ben_dob" name="ben_dob[]" placeholder="Date of Birth(mm/dd/yy)" value= "<?php echo ($isEdit ? $ben->dob : '') ?>">
                   <span class="err"></span>
                 </div>
               </div>
               <div class="col-md-2 col-sm-12 col-xs-12">
                 <div class="form-group">
-                  <input type="text" class="form-control" id="ben_relationship" name="ben_relationship[]" placeholder="Relationship" >
+                  <input type="text" class="form-control" id="ben_relationship" name="ben_relationship[]" placeholder="Relationship" value= "<?php echo ($isEdit ? $ben->relationship : '') ?>">
                   <span class="err"></span>
                 </div>
               </div>
               <div class="col-md-2 col-sm-12 col-xs-12">
                 <div class="form-group">
-                  <input type="text" class="form-control" id="ben_education" name="ben_education[]" placeholder="Education">
+                  <input type="text" class="form-control" id="ben_education" name="ben_education[]" placeholder="Education" value= "<?php echo ($isEdit ? $ben->education : '') ?>">
                   <span class="err"></span>
                 </div>
               </div>
               <div class="col-md-1 col-sm-12 col-xs-12">
                 <div class="form-group">
-                  <input type="text" class="form-control" id="ben_percentage" name="ben_percentage[]" placeholder="%" >
+                  <input type="text" class="form-control" id="ben_percentage" name="ben_percentage[]" placeholder="%" value= "<?php echo ($isEdit ? $ben->percentage : '') ?>">
                   <span class="err"></span>
                 </div>
               </div>
