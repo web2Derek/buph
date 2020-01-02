@@ -818,7 +818,7 @@ class Members extends MY_Controller {
 
     $results = array();
     $params['select'] = 'firstname , middlename , lastname, acount_id ,ac_resolution_no, member_type_id, tbl_mem_personal_information.date_added , branch , classifications , facilitator , encoded_by,invited_by , date_of_pmes ,date_approve,encoded_date ,
-    remarks , membership_fee , mortuary_prem , savings_deposit , paid_up_capital , total , amount , no_of_shares , deposited_for_subs , capital_share_deposit , loans_payable , credit_on_trade_payable,
+    remarks , membership_fee , mortuary_prem , savings_deposit , paid_up_capital , total,tbl_account_info.subs_share , amount , no_of_shares , deposited_for_subs , capital_share_deposit , loans_payable , credit_on_trade_payable,
     interest_on_loan_payable , penalties_on_trade_payable , time_deposit , penalties_on_loan_payable_2 , sub_total , deductions , grand_total';
     $params['where'] = array('tbl_mem_personal_information.member_id' => $post['id']);
     $params['join'] = array(
@@ -875,6 +875,7 @@ class Members extends MY_Controller {
       $exec = $this->MY_Model->update('tbl_monetary_req' ,$monetary , $where);
       if ($exec) {
         $info = array(
+          'subs_share'                     => $post['subs_share'],
           'ac_resolution_no'               => $post['resolutionNo'],
           'date_approve'                   => $post['dateApplied'],
           'branch'                         => $post['branch'],

@@ -3,6 +3,9 @@ $(document).on('change' ,'#member_type', function() {
     let data = $(this).val();
     if (data == 4) {
         $('#closeAccount').fadeIn();
+        $('#accountInfo').animate({
+            scrollTop : 700
+        } , 'slow');
     }else{
         $('#closeAccount').fadeOut();
     }
@@ -114,11 +117,11 @@ function renderhtmlData(res){
             $('#date_close_approve').val(res.closedata.date_approve);
             $('#w_resolution_no').val(res.closedata.wt_resolution_no);
             $('#close_reason').val(res.closedata.reason);
-            $('#account_info_btn_save').prop('disabled' , true);
-            $('#account_info_btn_save').hide();
+            // $('#account_info_btn_save').prop('disabled' , true);
+            // $('#account_info_btn_save').hide();
         }else{
-            $('#account_info_btn_save').prop('disabled' , false);
-            $('#account_info_btn_save').show();
+            // $('#account_info_btn_save').prop('disabled' , false);
+            // $('#account_info_btn_save').show();
             $('#closeAccount').fadeOut();
         }
         $('#branch').val(res.data.branch);
@@ -130,6 +133,7 @@ function renderhtmlData(res){
         $('#savingsDeposit').val(res.data.savings_deposit);
         $('#paidup_capital').val(res.data.paid_up_capital);
         $('#total').text(res.data.total);
+        $('#subs_share').val(res.data.subs_share);
         $('#amount').val(res.data.amount);
         $('#noOfshares').val(res.data.no_of_shares);
         $('#depositedForSubs').val(res.data.deposited_for_subs);

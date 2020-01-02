@@ -46,20 +46,17 @@ $(document).ready(function() {
     "serverSide": true, //Feature control DataTables' server-side processing mode.
     "order": [[0,'desc']], //Initial no order.
     "columns":[
-      {"data":"first_name" , "render" : function(data, type, row,meta) {
-        var str = row.first_name+ ' ' +row.last_name;
-        return str;
-      }
-    },
     {"data":"acount_id"},
-    {"data":"title"},
+    {"data":"first_name" , "render" : function(data, type, row,meta) {
+    var str = row.first_name+ ' ' +row.last_name;
+    return str;
+    }
+    },
+    {"data":"gender"},
     {"data":"birthdate"},
     {"data":"age"},
-    {"data":"blood_type"},
-    {"data":"gender"},
-    {"data":"civil_status"},
-    {"data":"religion"},
     {"data":"branch_name"},
+    {"data":"title"},
     {"data":"acount_id" , "render" : function(data, type, row,meta) {
       var str = '';
       str = `
@@ -90,7 +87,7 @@ $(document).ready(function() {
   //Set column definition initialisation properties.
   "columnDefs": [
     {
-      "targets": [10], //first column / numbering column
+      "targets": [6], //first column / numbering column
       "orderable": true, //set not orderable
     },
   ],
@@ -892,7 +889,7 @@ $('input[name="source_others"]').click(function() {
                         $("input[name='"+val+"']").css('border' , '1px solid red');
                         $("input[name='"+val+"']").next('.err').text(data.form_error[val]);
                     });
-                    console.log(keys[0]);
+
                     $('html, body').animate({
                         scrollTop: $("input[name='"+keys[0]+"']").offset().top - 160
                     }, 2000);
