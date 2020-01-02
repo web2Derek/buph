@@ -728,109 +728,148 @@
           </div>
         </div>
 
-
         <div class="card">
           <div class="card-header bg-info">
             <h4 class="m-b-0 text-white">Beneficiaries</h4>
           </div>
           <div class="card-body">
-            <?php foreach ($ben as $key => $value): ?>
-            <div class="row removeMe<?= $key ?>">
-                   <div class="col-md-4  col-sm-12 col-xs-12">
-                     <div class="form-group">
-                       <input type="text" class="form-control" id="ben_fullname" name="ben_fullname[]" placeholder="(Last Name,First, MI)" value= "<?php echo ($isEdit ? $value['name'] : '') ?>">
-                       <span class="err"></span>
-                     </div>
-                   </div>
-                   <div class="col-md-2 col-sm-12 col-xs-12">
-                     <div class="form-group">
-                       <input type="text" class="form-control mydatepicker" id="ben_dob" name="ben_dob[]" placeholder="Date of Birth(mm/dd/yy)" value= "<?php echo ($isEdit ?  $value['dob'] : '') ?>">
-                       <span class="err"></span>
-                     </div>
-                   </div>
-                   <div class="col-md-2 col-sm-12 col-xs-12">
-                     <div class="form-group">
-                       <input type="text" class="form-control" id="ben_relationship" name="ben_relationship[]" placeholder="Relationship" value= "<?php echo ($isEdit ? $value['relationship'] : '') ?>">
-                       <span class="err"></span>
-                     </div>
-                   </div>
-                   <div class="col-md-2 col-sm-12 col-xs-12">
-                     <div class="form-group">
-                       <input type="text" class="form-control" id="ben_education" name="ben_education[]" placeholder="Education" value= "<?php echo ($isEdit ? $value['education'] : '') ?>">
-                       <span class="err"></span>
-                     </div>
-                   </div>
-                   <div class="col-md-1 col-sm-12 col-xs-12">
-                     <div class="form-group">
-                       <input type="text" class="form-control" id="ben_percentage" name="ben_percentage[]" placeholder="%" value= "<?php echo ($isEdit ?  $value['percentage'] : '') ?>">
-                       <span class="err"></span>
-                     </div>
-                   </div>
-                   <div class="col-md-1">
-                     <div class="input-group-append">
-                       <?php
-                        $count = 0;
-                        if($count == $key) {
+
+            <?php if($isEdit) { foreach ($ben as $key => $value): ?>
+              <div class="row removeMe<?= $key ?>">
+                <div class="col-md-4  col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="ben_fullname" name="ben_fullname[]" placeholder="(Last Name,First, MI)" value= "<?php echo ($isEdit ? $value['name'] : '') ?>">
+                    <span class="err"></span>
+                  </div>
+                </div>
+                <div class="col-md-2 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control mydatepicker" id="ben_dob" name="ben_dob[]" placeholder="Date of Birth(mm/dd/yy)" value= "<?php echo ($isEdit ?  $value['dob'] : '') ?>">
+                    <span class="err"></span>
+                  </div>
+                </div>
+                <div class="col-md-2 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="ben_relationship" name="ben_relationship[]" placeholder="Relationship" value= "<?php echo ($isEdit ? $value['relationship'] : '') ?>">
+                    <span class="err"></span>
+                  </div>
+                </div>
+                <div class="col-md-2 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="ben_education" name="ben_education[]" placeholder="Education" value= "<?php echo ($isEdit ? $value['education'] : '') ?>">
+                    <span class="err"></span>
+                  </div>
+                </div>
+                <div class="col-md-1 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="ben_percentage" name="ben_percentage[]" placeholder="%" value= "<?php echo ($isEdit ?  $value['percentage'] : '') ?>">
+                    <span class="err"></span>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <div class="input-group-append">
+                    <?php
+                    $count = 0;
+                    if($count == $key) {
                       ?>
-                       <button class="btn btn-success" type="button" onclick="add()"><i class="fa fa-plus"></i></button>
-                     <?php } else { ?>
-                        <button class="btn btn-success" type="button" onclick="remove_beneficiaries(<?= $key ?>)"><i class="fa fa-minus"></i></button>
-                     <?php } ?>
-                     </div>
-                   </div>
-                 </div>
-              <?php endforeach; ?>
-              <div id="addMore">
-              </div>
-            </div>
-
-
-            <div class="row">
-              <div class="col-md-6">
-                <h4>I attest that the above information are true, correct and voluntarily given</h4>
-              </div>
-              <div class="col-md-2">
-                <div class="form-group">
-                  <input type="text" class="form-control mydatepicker"  name="date_applied" value="<?php echo ($isEdit ? $info->date_added : '') ?>">
-                  <span class="err"></span>
+                      <button class="btn btn-success" type="button" onclick="add()"><i class="fa fa-plus"></i></button>
+                    <?php } else { ?>
+                      <button class="btn btn-success" type="button" onclick="remove_beneficiaries(<?= $key ?>)"><i class="fa fa-minus"></i></button>
+                    <?php } ?>
+                  </div>
                 </div>
               </div>
+            <?php endforeach; }  else { ?>
+              <div class="row">
+                <div class="col-md-4  col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="ben_fullname" name="ben_fullname[]" placeholder="(Last Name,First, MI)">
+                    <span class="err"></span>
+                  </div>
+                </div>
+                <div class="col-md-2 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control mydatepicker" id="ben_dob" name="ben_dob[]" placeholder="Date of Birth(mm/dd/yy)">
+                    <span class="err"></span>
+                  </div>
+                </div>
+                <div class="col-md-2 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="ben_relationship" name="ben_relationship[]" placeholder="Relationship">
+                    <span class="err"></span>
+                  </div>
+                </div>
+                <div class="col-md-2 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="ben_education" name="ben_education[]" placeholder="Education">
+                    <span class="err"></span>
+                  </div>
+                </div>
+                <div class="col-md-1 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="ben_percentage" name="ben_percentage[]" placeholder="%">
+                    <span class="err"></span>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <div class="input-group-append">
+                        <button class="btn btn-success" type="button" onclick="add()"><i class="fa fa-plus"></i></button>
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
+            <div id="addMore">
+              </div>
             </div>
+          </div>
 
-            <div class="row">
-              <div class="col-md-6 col-sm-12">
-                <!-- <input type="hidden" id="testsignature" name="member_signature">
-                <div id="signaturetab" style="width:400px; height: 200px"></div> -->
 
-                <label for="input-file-now">Attach signature here:</label>
-                <?php if ($isEdit && !empty($info->sg_file_name)): ?>
-                  <input type="file" name="signature_edit" id="signature_edit" class="dropify" data-max-file-size-preview="5M" data-allowed-file-extensions="jpg png jpeg" data-default-file="<?php echo base_url() ?>assets/signatures/members/<?php echo $info->sg_file_name; ?>"/>
-                <?php else: ?>
-                  <input type="file" name="signature" id="signature" class="dropify"/>
-                <?php endif; ?>
+          <div class="row">
+            <div class="col-md-6">
+              <h4>I attest that the above information are true, correct and voluntarily given</h4>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <input type="text" class="form-control mydatepicker"  name="date_applied" value="<?php echo ($isEdit ? $info->date_added : '') ?>">
                 <span class="err"></span>
               </div>
             </div>
-
-            <!-- <div class="row">
-            <div class="col-md-6">
-            <button type="button" class="btn btn-dark mr-2 btn-sm" id="clear_signature">Clear</button>
           </div>
-        </div> -->
-      </div>
-    </div>
 
-    <!-- <div class="card">
-    <div class="card-header bg-info">
-    <h4 class="m-b-0 text-white">Account Information</h4>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <!-- <input type="hidden" id="testsignature" name="member_signature">
+              <div id="signaturetab" style="width:400px; height: 200px"></div> -->
+
+              <label for="input-file-now">Attach signature here:</label>
+              <?php if ($isEdit && !empty($info->sg_file_name)): ?>
+                <input type="file" name="signature_edit" id="signature_edit" class="dropify" data-max-file-size-preview="5M" data-allowed-file-extensions="jpg png jpeg" data-default-file="<?php echo base_url() ?>assets/signatures/members/<?php echo $info->sg_file_name; ?>"/>
+              <?php else: ?>
+                <input type="file" name="signature" id="signature" class="dropify"/>
+              <?php endif; ?>
+              <span class="err"></span>
+            </div>
+          </div>
+
+          <!-- <div class="row">
+          <div class="col-md-6">
+          <button type="button" class="btn btn-dark mr-2 btn-sm" id="clear_signature">Clear</button>
+        </div>
+      </div> -->
+    </div>
   </div>
 
-  <div class="card-body">
-  <div class="row">
-  <div class="col-md-4 col-sm-12">
-  <div class="form-group">
-  <label for="">Resolution No.</label>
-  <input type="text" name="resolution_no" class="form-control">
+  <!-- <div class="card">
+  <div class="card-header bg-info">
+  <h4 class="m-b-0 text-white">Account Information</h4>
+</div>
+
+<div class="card-body">
+<div class="row">
+<div class="col-md-4 col-sm-12">
+<div class="form-group">
+<label for="">Resolution No.</label>
+<input type="text" name="resolution_no" class="form-control">
 </div>
 </div>
 
