@@ -734,7 +734,7 @@
             <h4 class="m-b-0 text-white">Beneficiaries</h4>
           </div>
           <div class="card-body">
-<<<<<<< HEAD
+
             <?php foreach ($ben as $key => $value): ?>
             <div class="row removeMe<?= $key ?>">
                    <div class="col-md-4  col-sm-12 col-xs-12">
@@ -782,7 +782,7 @@
                  </div>
               <?php endforeach; ?>
               <div id="addMore">
-=======
+
             <div class="row">
               <div class="col-md-4  col-sm-12 col-xs-12">
                 <div class="form-group">
@@ -818,7 +818,7 @@
                 <div class="input-group-append">
                   <button class="btn btn-success" type="button" onclick="add();"><i class="fa fa-plus"></i></button>
                 </div>
->>>>>>> 62ab9aa555d00e21751de9df000d70f245ab3b91
+
               </div>
             </div>
 
