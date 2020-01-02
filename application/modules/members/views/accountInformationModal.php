@@ -100,7 +100,15 @@
             </div>
         </div>
         <hr>
-
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="subs_share">Subscriber Share</label>
+                    <input type="text" name="subs_share" class="form-control" id="subs_share">
+                </div>
+            </div>
+        </div>
+        <hr>
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
@@ -202,7 +210,7 @@
         </div>
         <hr>
         <!-- FOR CLOSE ACCOUNT -->
-        <div id="closeAccount" style="display:none">
+        <div id="closeAccount" style="display:none; border: 1px solid #068101; padding: 5px;border-radius: 3px">
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
@@ -288,7 +296,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Close</button>
-            <button type="submit" class="btn btn-outline-warning" id="account_info_btn_save"><i class="far fa-save"></i> Save Changes</button>
+            <button type="submit" class="btn btn-success" id="account_info_btn_save"><i class="far fa-save"></i> Save Changes</button>
         </div>
       </div>
       </form>

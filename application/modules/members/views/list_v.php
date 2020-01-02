@@ -22,16 +22,13 @@
                             <table id="memberlist" class="table  color-table success-table tablesaw table-bordered table-hover table no-wrap">
                                 <thead>
                                     <tr>
-                                        <th>Member Name</th>
                                         <th>Account ID</th>
-                                        <th>Member Type</th>
+                                        <th>Member Name</th>
+                                        <th>Gender</th>
                                         <th>Birth Date</th>
                                         <th>Age</th>
-                                        <th>Blood Type</th>
-                                        <th>Gender</th>
-                                        <th>Civil Status</th>
-                                        <th>Religion</th>
                                         <th>Branch</th>
+                                        <th>Member Type</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
