@@ -734,7 +734,7 @@
           </div>
           <div class="card-body">
 
-            <?php if($isEdit) { foreach ($ben as $key => $value): ?>
+            <?php if($isEdit) { foreach ($ben as $key => $value):?>
               <div class="row removeMe<?= $key ?>">
                 <div class="col-md-4  col-sm-12 col-xs-12">
                   <div class="form-group">
@@ -779,7 +779,45 @@
                   </div>
                 </div>
               </div>
-            <?php endforeach; }  else { ?>
+            <?php endforeach; } elseif(isset($isEmpty)) { ?>
+              <div class="row">
+                <div class="col-md-4  col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="ben_fullname" name="ben_fullname[]" placeholder="(Last Name,First, MI)">
+                    <span class="err"></span>
+                  </div>
+                </div>
+                <div class="col-md-2 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control mydatepicker" id="ben_dob" name="ben_dob[]" placeholder="Date of Birth(mm/dd/yy)">
+                    <span class="err"></span>
+                  </div>
+                </div>
+                <div class="col-md-2 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="ben_relationship" name="ben_relationship[]" placeholder="Relationship">
+                    <span class="err"></span>
+                  </div>
+                </div>
+                <div class="col-md-2 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="ben_education" name="ben_education[]" placeholder="Education">
+                    <span class="err"></span>
+                  </div>
+                </div>
+                <div class="col-md-1 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="ben_percentage" name="ben_percentage[]" placeholder="%">
+                    <span class="err"></span>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <div class="input-group-append">
+                        <button class="btn btn-success" type="button" onclick="add()"><i class="fa fa-plus"></i></button>
+                  </div>
+                </div>
+              </div>
+            <?php } else { ?>
               <div class="row">
                 <div class="col-md-4  col-sm-12 col-xs-12">
                   <div class="form-group">

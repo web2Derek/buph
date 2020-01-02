@@ -767,6 +767,7 @@ class Members extends MY_Controller {
     $params['where'] = array(
       'tbl_mem_personal_information.member_id' => $member_id
     );
+
     $params['join'] = array(
       'tbl_mem_residence'             => 'tbl_mem_personal_information.member_id = tbl_mem_residence.member_id',
       'tbl_mem_eployment_information' => 'tbl_mem_personal_information.member_id = tbl_mem_eployment_information.member_id',
@@ -777,7 +778,15 @@ class Members extends MY_Controller {
       'tbl_profile_img'               => 'tbl_mem_personal_information.member_id = tbl_profile_img.member_id',
       'tbl_signatures'                => 'tbl_mem_personal_information.member_id = tbl_signatures.member_id',
     );
-    $data['ben'] = $this->MY_Model->getRows('tbl_mem_beneficiaries', array('member_id' => $member_id));
+
+    $where['where'] = array('member_id' => $member_id);
+    $data['ben'] = $this->MY_Model->getRows('tbl_mem_beneficiaries', $where);
+    if (count($data['ben']) == 0) {
+      $data['ben']['isEmpty'] = true;
+    } else {
+      $data['ben']['isEmpty'] = false;
+    }
+
     $data['info'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params, 'row');
     $data['isEdit'] = true;
     if ($data['info']) {
