@@ -777,11 +777,7 @@ class Members extends MY_Controller {
       'tbl_profile_img'               => 'tbl_mem_personal_information.member_id = tbl_profile_img.member_id',
       'tbl_signatures'                => 'tbl_mem_personal_information.member_id = tbl_signatures.member_id',
     );
-<<<<<<< HEAD
     $data['ben'] = $this->MY_Model->getRows('tbl_mem_beneficiaries', array('member_id' => $member_id));
-=======
-    // $data['ben'] = $this->MY_Model->getRows('tbl_mem_beneficiaries', array('member_id' => $member_id), 'row');
->>>>>>> 62ab9aa555d00e21751de9df000d70f245ab3b91
     $data['info'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params, 'row');
     $data['isEdit'] = true;
     if ($data['info']) {
