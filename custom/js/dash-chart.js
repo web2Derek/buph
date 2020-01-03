@@ -9,115 +9,32 @@ $(document).ready(function() {
     dataType:"json",
     success: function(data) {
       let table_data = '';
-      let male_count = [];
-      let range = [];
-      var female_count = [];
-      // console.log(data['female']);
-      // for(var i=0;i<data.length;i++){
-      //   if(data[i].gender === "Male")
-      //   {
-      //     male_count.push(data[i].count);// for(var i=0;i<data.length;i++){
-      //   if(data[i].gender === "Male")
-      //   {
-      //     male_count.push(data[i].count);
-      //   }
-      //   if(data[i].gender === "Female")
-      //   {
-      //     female_count.push(data[i].count);
-      //   }
-      //   range.push(data[i].range_data);
-      // }
-      //
-      // for(var i = 0; i < female_count.length; i++) {
-      //   table_data = `
-      //       <td>${female_count[i]}</td>
-      //     `;
-      //   $('.table_body_data').next('#range_data_body').append(table_data);
-      // }
-      //   }
-      //   if(data[i].gender === "Female")
-      //   {
-      //     female_count.push(data[i].count);
-      //   }
-      //   range.push(data[i].range_data);
-      // }
-      //
-      // for(var i = 0; i < female_count.length; i++) {
-      //   table_data = `
-      //       <td>${female_count[i]}</td>
-      //     `;
-      //   $('.table_body_data').next('#range_data_body').append(table_data);
-      // }
+      let mem_count = [];
+      console.log(data['members_count']);
 
-      // for(var i = 0; i < data['female'].length; i++) {
-      //   range.push(data['female'][i]);
-      // }
-
-      for(var i = 0; i < data['female'].length; i++) {
-          console.log(data['female'][i].range_data)
-      }
-
-      // REMOVE REDUNDANT RANGE
-
-      // let newSet = [...new Set(range)];
-      // console.log(newSet);
-      //
-        if(data['female'].length > 0) {
+        if(data['members_count'].length > 0) {
             generateTr(data);
           } else {
             table_data = `
               <tr><td>No Data Found</td></tr>`;
         }
-              // <td>${[i].count}</td>
-              // <td>${[i].count}</td>
           $('#range_data_body').prepend(table_data);
         }
       })
-
           // GENERATE TOTAL MEMBER SUMMARY
       function generateTr(data) {
-        let newArr = data['female'].reverse();
-        let maleData = data['male'];
-        let mcount = 0;
-
-
+        let newArr = data['members_count'].reverse();
         for(var i = 0; i < newArr.length; i++) {
-          // if(maleData[i].length <= i) {
-          //   mcount = 0
-          // } else {
-          //   mcount = maleData[i].count;
-          // }
           table_data = `
               <tr class="${newArr[i].range_data}">
                   <td>${newArr[i].range_data} Years Old</td>
-                  <td>${newArr[i].count}</td>
-                  <td>${mcount}</td>
+                  <td>${newArr[i].female}</td>
+                  <td>${newArr[i].male}</td>
               </tr>
                   `;
           $('.table_body_data').prepend(table_data);
-          // for(let arr in maleData) {
-          //   console.log(maleData.count);
-          //   if(arr.length <= i) {
-          //     mcount = '0';
-          //   } else {
-          //     mcount = maleData[arr].count;
-          //   }
-          // }
-          // if(newArr.count = '18-30 years old') {
-            // console.log('1');
-            // table_data = `
-            //     <td >${newArr[i].count}</td>
-            //     <td >${mcount}</td>
-            //   `;
-            // $('.18-30').prepend(table_data);
-          // }
 
         }
-        // for(var i= 0; i < data['male'].length; i++) {
-        //    maletd = `<td>${data['male'][i].count}</td>`;
-        //  ('#mem_data_range').append(maletd);
-        // }
-
       }
 
 

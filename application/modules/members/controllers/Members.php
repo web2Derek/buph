@@ -68,7 +68,6 @@ class Members extends MY_Controller {
 
   public function AddNewMember() {
     $post = $this->input->post();
-
     $results = array();
     $this->form_validation->set_rules('lastname' , 'Last Name' , 'required');
     $this->form_validation->set_rules('firstname' , 'First Name' , 'required|is_unique[tbl_mem_personal_information.first_name]');
@@ -242,14 +241,18 @@ class Members extends MY_Controller {
               //  BENEFICIARIES SECTION]
 
               $ben_arr = array();
-
+              foreach ($post['ben_fullname'] as $key => $value) {
+                $items = array(
+                    'member_id' => $pi_id,
+                    'name' => $post['ben_fullname'][$key],
+                    'dob' => $post['ben_dob'][$key],
+                    'relationship' => $post['ben_relationship'][$key],
+                    'education' => $post['ben_education'][$key],
+                    'percentage' => $post['ben_percentage'][$key]
+                );
+                $this->MY_Model->insert('tbl_mem_beneficiaries', $items);
+              }
               // $data =  array (
-              //   'member_id' => $pi_id,
-              //   'name' => $post['ben_fullname'],
-              //   'dob' => $post['ben_dob'],
-              //   'relationship' => $post['ben_relationship'],
-              //   'education' => $post['ben_education'],
-              //   'percentage' => $post['ben_percentage']
               // );
               //
               // // $parse_data = json_encode($data);
@@ -263,7 +266,7 @@ class Members extends MY_Controller {
                   'sg_file_name' => $file_name
                 );
 
-                $profile_image = array(
+                $profile = array(
                   'member_id' => $pi_id,
                   'pr_file_name' => $profile_image,
                   'pr_date_added' => date("Y-m-d")
@@ -292,7 +295,7 @@ class Members extends MY_Controller {
                 $this->MY_Model->update('tbl_financial_info' , $main_data[2] , $where);
                 $this->MY_Model->update('tbl_financial_info' , $main_data[3] , $where);
                 $this->MY_Model->insert('tbl_signatures'     , $signature);
-                $this->MY_Model->insert('tbl_profile_img'    , $profile_image);
+                $this->MY_Model->insert('tbl_profile_img'    , $profile);
                 $this->MY_Model->insert('tbl_account_info'   , $acount_info);
                 $this->MY_Model->insert('tbl_monetary_req'   , $monetary);
                 $this->MY_Model->insert('tbl_id_logs'        , $idlogs);
