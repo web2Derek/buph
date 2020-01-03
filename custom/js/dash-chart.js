@@ -27,7 +27,7 @@ $(document).ready(function() {
         for(var i = 0; i < newArr.length; i++) {
           table_data = `
               <tr class="${newArr[i].range_data}">
-                  <td>${newArr[i].range_data} Years Old</td>
+                  <td>${newArr[i].range_data}</td>
                   <td>${newArr[i].female}</td>
                   <td>${newArr[i].male}</td>
               </tr>

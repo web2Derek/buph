@@ -1,0 +1,48 @@
+COUNT WORK SQL
+
+SELECT type_of_employment, 
+
+       count(case
+                 when gender = 'Female' then 1
+                 else null
+             end) as f_work_count,
+             
+        count(case
+             when gender = 'Male' then 1
+             else null
+         end) as m_work_count
+             
+from tbl_mem_eployment_information
+
+LEFT JOIN tbl_mem_personal_information ON 
+
+tbl_mem_personal_information.member_id = tbl_mem_eployment_information.fk_member_id
+
+group by type_of_employment
+
+COUNT AGE RANGE
+
+SELECT case
+           when age between 0 and 17 then 'Invalid Age'
+           when age between 18 and 30 then '18 - 30 Age'
+           when age between 31 and 35 then '31 − 35 Age'
+           when age between 36 and 40 then '36 − 40 Age'
+           when age between 41 and 50 then '41 − 50 Age'
+           when age between 51 and 60 then '51 − 60 Age'
+           when age between 61 and 70 then '61 − 70 Age'
+           when age between 71 and 100 then '71 Above Age'
+       end as 'range',
+       count(case
+                 when gender = 'Male' then 1
+                 else null
+             end) as male_count,
+       count(case
+                 when gender = 'Female' then 1
+                 else null
+             end) as female_count
+FROM
+  (select *,
+          TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) AS aged
+   from tbl_mem_personal_information
+   LEFT JOIN tbl_mem_eployment_information ON tbl_mem_personal_information.member_id = tbl_mem_eployment_information.fk_member_id) as t
+group by `range`
