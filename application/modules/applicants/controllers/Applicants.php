@@ -40,11 +40,7 @@ class Applicants extends Applicant_Controller{
       $params['where'] = array('username' => $mem_user, 'password' => $mem_pass);
       $params['join'] = array('tbl_progress' => 'tbl_user_credentials.credentials_id = tbl_progress.fk_member_id');
       $result = $this->MY_Model->getRows('tbl_user_credentials', $params, 'row');
-<<<<<<< HEAD
 
-=======
-     
->>>>>>> 212012c806659520559d1604a16005800eafba2d
       if($result){
         if ($result->user_type == 0) {
           $session = array(
