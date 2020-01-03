@@ -67,9 +67,7 @@ class Members extends MY_Controller {
     }
 
   public function AddNewMember() {
-
     $post = $this->input->post();
-
     $results = array();
     $this->form_validation->set_rules('lastname' , 'Last Name' , 'required');
     $this->form_validation->set_rules('firstname' , 'First Name' , 'required|is_unique[tbl_mem_personal_information.first_name]');

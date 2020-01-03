@@ -100,36 +100,22 @@ class Home extends MY_Controller {
 	ini_set('display_errors', 0);
 
 		$ageRange = $this->MY_Model->raw('
-				SELECT
-				case
-					when age between 18 and 30 then "18 - 30"
-					when age between 31 and 35 then "31 − 35"
-	        when age between 36 and 40 then "36 − 40"
-	        when age between 41 and 50 then "41 − 50"
-	        when age between 51 and 60 then "51 − 60"
-	        when age between 61 and 70 then "61 − 70"
-      	end as range_data,
-       gender,
-       count(*) as count
-    	from (select *, TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) AS ages
-			from tbl_mem_personal_information WHERE gender = "Male") as t group by range_data','array');
+		SELECT case
+when age between 0 and 17 then "Invalid Age"
+when age between 18 and 30 then "18 - 30"
+when age between 31 and 35 then "31 − 35"
+when age between 36 and 40 then "36 − 40"
+when age between 41 and 50 then "41 − 50"
+when age between 51 and 60 then "51 − 60"
+when age between 61 and 70 then "61 − 70"
+when age between 71 and 100 then "71 and above"
+end as "range_data",
+count(case when gender = "Male" then 1 else null end) as male,
+count(case when gender = "Female" then 1 else null end) as female
+from
+(select *, TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) AS ages from tbl_mem_personal_information) as t group by range_data', 'array');
 
-			$ageRangeFemale = $this->MY_Model->raw('
-					SELECT
-					case
-						when age between 18 and 30 then "18 - 30"
-						when age between 31 and 35 then "31 − 35"
-						when age between 36 and 40 then "36 − 40"
-						when age between 41 and 50 then "41 − 50"
-						when age between 51 and 60 then "51 − 60"
-						when age between 61 and 70 then "61 − 70"
-					end as range_data,
-				 gender,
-				 count(*) as count
-				from (select *, TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) AS ages
-				from tbl_mem_personal_information WHERE gender = "Female") as t group by range_data','array');
-
-			$newArr = array('male' => $ageRange, 'female' => $ageRangeFemale);
+			$newArr = array('members_count' => $ageRange);
 			echo json_encode($newArr);
 	}
 
