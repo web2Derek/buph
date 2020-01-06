@@ -134,7 +134,7 @@ class Members extends MY_Controller {
 
               // Employment Information Section
               $emp_info = array(
-                'member_id'          => $pi_id,
+                'fk_member_id'        => $pi_id,
                 'type_of_employment' => $post['employment_info'],
                 'company_name'       => $post['empinfo_companyName'],
                 'company_contact_no' => $post['emp_company_contactNo'],
@@ -773,7 +773,7 @@ class Members extends MY_Controller {
 
     $params['join'] = array(
       'tbl_mem_residence'             => 'tbl_mem_personal_information.member_id = tbl_mem_residence.member_id',
-      'tbl_mem_eployment_information' => 'tbl_mem_personal_information.member_id = tbl_mem_eployment_information.member_id',
+      'tbl_mem_eployment_information' => 'tbl_mem_personal_information.member_id = tbl_mem_eployment_information.fk_member_id',
       'tbl_mem_education_attainment'  => 'tbl_mem_personal_information.member_id = tbl_mem_education_attainment.member_id',
       'tbl_mem_spouse_information'    => 'tbl_mem_personal_information.member_id = tbl_mem_spouse_information.member_id',
       'tbl_mem_spouse_emp_info'       => 'tbl_mem_personal_information.member_id = tbl_mem_spouse_emp_info.member_id',

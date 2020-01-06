@@ -93,6 +93,10 @@
   border:none!important;
 }
 
+.d-file {
+  color: #fff!important;
+}
+
 .spinner {
   display: none;
   position: absolute;
