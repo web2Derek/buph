@@ -1308,6 +1308,7 @@ $(document).on('submit' , '#account_info' , function(e) {
     success : function(res){
       if (res.status == 'success') {
         Swal.fire('Success', 'Member Updated', 'success');
+        memberlist.ajax.reload();
       }else{
         Swal.fire('Error', 'Something went wrong. Please try again', 'error');
       }
