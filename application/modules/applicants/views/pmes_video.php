@@ -48,7 +48,7 @@
             </div>
                 <div class="modal-body">
                   <h3 class="text-justify">Please don't close the Browser or refresh the Page.
-                  This will not save you progress.</h3>
+                  This will not save your progress.</h3>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
                 </div>

@@ -23,6 +23,7 @@
 <script src="<?php echo base_url() ?>assets/js/sidebarmenu.js"></script>
 <!--Custom JavaScript -->
 <script src="<?php echo base_url() ?>assets/js/custom.min.js"></script>
+<script src="<?php echo base_url(); ?>custom/js/applicant.js"></script>
 <!-- GENERATE QR CODE -->
 <script src="<?php echo base_url() ?>assets/js/qr-code.js"></script>
 <!-- ============================================================== -->
@@ -69,7 +70,6 @@
 <script src="<?php echo base_url();?>custom/js/selectjs.js" charset="utf-8"></script>
 <script src="<?php echo base_url();?>assets/node_modules/wizard/jquery.steps.min.js"></script>
 <script src="<?php echo base_url();?>assets/node_modules/wizard/jquery.validate.min.js"></script>
-<script src="<?php echo base_url(); ?>custom/js/applicant.js"></script>
 <script>
 
   $(document).ready(function(e) {

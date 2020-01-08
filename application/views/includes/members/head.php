@@ -226,7 +226,7 @@
                     </div>
                   </li>
                   <li role="separator" class="divider"></li>
-                  <li><a href="<?php echo base_url();?>home"><i class="ti-user"></i> My Profile</a></li>
+                  <li><a href="<?php echo base_url('applicants');?>"><i class="ti-user"></i> My Profile</a></li>
                   <li role="separator" class="divider"></li>
                   <li><a href="<?php echo base_url()?>logout/logout_member"><i class="fa fa-power-off"></i> Logout</a></li>
                 </ul>

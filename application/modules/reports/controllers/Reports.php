@@ -662,14 +662,16 @@ class Reports extends MY_Controller {
     $spreadsheet->getActiveSheet()->setCellValue('B6',"MO 9 S. 2019");
     $spreadsheet->getActiveSheet()->setCellValue('A7',"For:");
     $spreadsheet->getActiveSheet()->setCellValue('B7',"JERALYN C. CUCHAPIN");
-    $spreadsheet->getActiveSheet()->setCellValue('A8',"From:");
-    $spreadsheet->getActiveSheet()->setCellValue('B8',": GHRESALYN B. HERNANE:");
-    $spreadsheet->getActiveSheet()->setCellValue('A9',"Date:");
-    $spreadsheet->getActiveSheet()->setCellValue('B9',"November 6, 2019:");
-    $spreadsheet->getActiveSheet()->setCellValue('A10',"Re:");
-    $spreadsheet->getActiveSheet()->setCellValue('B10',"Membership Monthly Report - OCTOBER 2019");
-    $spreadsheet->getActiveSheet()->setCellValue('A12',"( NEW MEMBERS )");
-    $spreadsheet->getActiveSheet()->setCellValue('A13',"( For the month of OCTOBER)");
+    $spreadsheet->getActiveSheet()->setCellValue('B8',"HR MANAGER");
+    $spreadsheet->getActiveSheet()->setCellValue('A9',"From:");
+    $spreadsheet->getActiveSheet()->setCellValue('B9',"GHRESALYN B. HERNANE:");
+    $spreadsheet->getActiveSheet()->setCellValue('B10'," Records and Membership Assistant");
+    $spreadsheet->getActiveSheet()->setCellValue('A11',"Date:");
+    $spreadsheet->getActiveSheet()->setCellValue('B11',"November 6, 2019:");
+    $spreadsheet->getActiveSheet()->setCellValue('A12',"Re:");
+    $spreadsheet->getActiveSheet()->setCellValue('B12',"Membership Monthly Report - OCTOBER 2019");
+    $spreadsheet->getActiveSheet()->setCellValue('A14',"( NEW MEMBERS )");
+    $spreadsheet->getActiveSheet()->setCellValue('A15',"( For the month of OCTOBER)");
 
 
     //merge heading
@@ -677,8 +679,8 @@ class Reports extends MY_Controller {
     $spreadsheet->getActiveSheet()->mergeCells("A2:D2");
     $spreadsheet->getActiveSheet()->mergeCells("A3:D3");
     $spreadsheet->getActiveSheet()->mergeCells("A4:D4");
-    $spreadsheet->getActiveSheet()->mergeCells("A12:D12");
-    $spreadsheet->getActiveSheet()->mergeCells("A13:D13");
+    $spreadsheet->getActiveSheet()->mergeCells("A14:D14");
+    $spreadsheet->getActiveSheet()->mergeCells("A15:D15");
 
     //setting to font bold
     $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
@@ -688,9 +690,9 @@ class Reports extends MY_Controller {
     $spreadsheet->getActiveSheet()->getStyle('A2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
     $spreadsheet->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
     $spreadsheet->getActiveSheet()->getStyle('A4')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-    $spreadsheet->getActiveSheet()->getStyle('A12')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-    $spreadsheet->getActiveSheet()->getStyle('A13')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-    $spreadsheet->getActiveSheet()->getStyle("A1:D10")->applyFromArray($styleArray);
+    $spreadsheet->getActiveSheet()->getStyle('A14')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $spreadsheet->getActiveSheet()->getStyle('A15')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $spreadsheet->getActiveSheet()->getStyle("A1:D12")->applyFromArray($styleArray);
     // COLUMN DIMENSION
     $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(15);
     $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(15);

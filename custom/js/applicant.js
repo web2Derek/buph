@@ -180,7 +180,7 @@ $(document).ready(function() {
     let url = $('#base_url').val();
     let mem_id = $('#members_id').val();
     let prevTime = $('#prev_time').val();
-    // SAVE TIME WATCH EVERY 5 seconds
+    // SAVE TIME WATCH EVERY 5 seconds AND UPDATE IN DB
     setTimeout(function() {
       lastwatch(timex, url, mem_id);
     }, 5000);
@@ -301,3 +301,58 @@ function addfields(){
 function removefields(id){
     $('.removedpnd'+id).remove();
 }
+
+
+function memberFormConfig(){
+  $('.mydatepicker').datepicker();
+  // Initial State;
+  $('#if_business').hide();
+  $('#if_farmer').hide();
+  $('#if_others').hide();
+}
+
+// SHOW SOURCE OF INCOME
+//Section
+memberFormConfig();
+$('input[name="source_business"]').click(function() {
+  if ($(this).prop('checked') == true) {
+    $('#if_business').fadeIn();
+  }else{
+    $('#if_business').fadeOut();
+  }
+})
+
+if ($('input[name="source_business"]').prop('checked') == true) {
+    $('#if_business').fadeIn();
+    alert('4');
+}
+if ($('input[name="source_farmer"]').prop('checked') == true) {
+    $('#if_farmer').fadeIn();
+    alert('3');
+}
+
+$('input[name="source_farmer"]').click(function() {
+  if ($(this).prop('checked') == true) {
+    $('#if_farmer').fadeIn();
+    alert('1');
+  }else{
+    $('#if_farmer').fadeOut();
+      alert('2');
+  }
+})
+
+$('input[name="source_others"]').click(function() {
+  if ($(this).prop('checked') == true) {
+    $('#if_others').fadeIn();
+  }else{
+    $('#if_others').fadeOut();
+  }
+})
+
+$('input[name="source_others"]').click(function() {
+    if ($(this).prop('checked') == true) {
+        $('#if_others').fadeIn();
+    }else{
+        $('#if_others').fadeOut();
+    }
+})
