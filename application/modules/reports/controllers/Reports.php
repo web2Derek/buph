@@ -635,27 +635,50 @@ class Reports extends MY_Controller {
     ->setName('Calibri')
     ->setSize(15);
     //heading
-    $sheeti = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-    $sheeti->setName('name');
-    $sheeti->setDescription('description');
-    $sheeti->setPath(base_url('assets/images/gallery/icon.png'));
-    $sheeti->setHeight(90);
-    $sheeti->setCoordinates("G14");
-    $sheeti->setOffsetX(20);
-    $sheeti->setOffsetY(5);
-    $sheeti->setWorksheet($sheet);
+    // $sheeti = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+    // $sheeti->setName('BUPHARCO');
+    // $sheeti->setDescription('description');
+    // $sheeti->setPath(base_url('assets/images/gallery/icon.png'));
+    // $sheeti->setHeight(90);
+    // $sheeti->setCoordinates("G14");
+    // $sheeti->setOffsetX(20);
+    // $sheeti->setOffsetY(5);
+    // $sheeti->setWorksheet($sheet);
+    $styleArray = [
+    'borders' => [
+        'outline' => [
+            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+            'color' => ['argb' => '000000'],
+        ],
+      ],
+    ];
 
     $spreadsheet->getActiveSheet()
-    ->setCellValue('A1',$sheeti."BUPHARCO");
+    ->setCellValue('A1',"BUPHARCO");
     $spreadsheet->getActiveSheet()->setCellValue('A2',"WE CARE, WE SHARE");
     $spreadsheet->getActiveSheet()->setCellValue('A3',"Bukidnon PharmaceuticalMultipurpose Cooperative");
     $spreadsheet->getActiveSheet()->setCellValue('A4',"P-16, Sayre Highway, Poblacion Valencia City, Bukidnon, Philippines");
+    $spreadsheet->getActiveSheet()->setCellValue('A6',"Memo No.:");
+    $spreadsheet->getActiveSheet()->setCellValue('B6',"MO 9 S. 2019");
+    $spreadsheet->getActiveSheet()->setCellValue('A7',"For:");
+    $spreadsheet->getActiveSheet()->setCellValue('B7',"JERALYN C. CUCHAPIN");
+    $spreadsheet->getActiveSheet()->setCellValue('A8',"From:");
+    $spreadsheet->getActiveSheet()->setCellValue('B8',": GHRESALYN B. HERNANE:");
+    $spreadsheet->getActiveSheet()->setCellValue('A9',"Date:");
+    $spreadsheet->getActiveSheet()->setCellValue('B9',"November 6, 2019:");
+    $spreadsheet->getActiveSheet()->setCellValue('A10',"Re:");
+    $spreadsheet->getActiveSheet()->setCellValue('B10',"Membership Monthly Report - OCTOBER 2019");
+    $spreadsheet->getActiveSheet()->setCellValue('A12',"( NEW MEMBERS )");
+    $spreadsheet->getActiveSheet()->setCellValue('A13',"( For the month of OCTOBER)");
+
 
     //merge heading
     $spreadsheet->getActiveSheet()->mergeCells("A1:D1");
     $spreadsheet->getActiveSheet()->mergeCells("A2:D2");
     $spreadsheet->getActiveSheet()->mergeCells("A3:D3");
     $spreadsheet->getActiveSheet()->mergeCells("A4:D4");
+    $spreadsheet->getActiveSheet()->mergeCells("A12:D12");
+    $spreadsheet->getActiveSheet()->mergeCells("A13:D13");
 
     //setting to font bold
     $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
@@ -665,7 +688,9 @@ class Reports extends MY_Controller {
     $spreadsheet->getActiveSheet()->getStyle('A2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
     $spreadsheet->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
     $spreadsheet->getActiveSheet()->getStyle('A4')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-
+    $spreadsheet->getActiveSheet()->getStyle('A12')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $spreadsheet->getActiveSheet()->getStyle('A13')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $spreadsheet->getActiveSheet()->getStyle("A1:D10")->applyFromArray($styleArray);
     // COLUMN DIMENSION
     $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(15);
     $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(15);
@@ -680,6 +705,10 @@ class Reports extends MY_Controller {
     $spreadsheet->getActiveSheet()->getStyle('A3')->getFont()->setBold(true);
     $spreadsheet->getActiveSheet()->getStyle('A4')->getFont()->setBold(true);
     $spreadsheet->getActiveSheet()->getStyle('A6')->getFont()->setBold(true);
+    $spreadsheet->getActiveSheet()->getStyle('A7')->getFont()->setBold(true);
+    $spreadsheet->getActiveSheet()->getStyle('A8')->getFont()->setBold(true);
+    $spreadsheet->getActiveSheet()->getStyle('A9')->getFont()->setBold(true);
+    $spreadsheet->getActiveSheet()->getStyle('A10')->getFont()->setBold(true);
 
 
     //setting column width
