@@ -623,8 +623,8 @@ class Reports extends MY_Controller {
   }
 
   public function getMemberStatistic() {
-    // error_reporting(E_ALL);
-    // ini_set('display_errors', 0);
+    error_reporting(E_ALL);
+    ini_set('display_errors', 0);
 
     $spreadsheet = new Spreadsheet();
     //get current active sheet (first sheet)
@@ -673,6 +673,15 @@ class Reports extends MY_Controller {
     $spreadsheet->getActiveSheet()->setCellValue('A14',"( NEW MEMBERS )");
     $spreadsheet->getActiveSheet()->setCellValue('A15',"( For the month of OCTOBER)");
 
+    $branch = $this->MY_Model->raw('
+    SELECT branch_name from tbl_branch');
+    $cell = 'A';
+    $b = 17;
+    for($i = 0; $i<count($branch); $i++) {
+        $spreadsheet->getActiveSheet()->setCellValue("$cell$b", $branch[$i]['branch_name']);
+        $spreadsheet->getActiveSheet()->getColumnDimension("$cell$b")->setWidth(15);
+        $cell++;
+    }
 
     //merge heading
     $spreadsheet->getActiveSheet()->mergeCells("A1:D1");
