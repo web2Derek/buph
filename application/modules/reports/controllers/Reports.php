@@ -100,7 +100,7 @@ public function get_full_pledge() {
   $draw = $this->input->post('draw');
   $to = $this->input->post('to');
 
-  $column_order = array('first_name', 'middle_name', 'last_name', 'barangay_district',                            'municipality','gender','birthdate', 'age', 'facilitator', 'invited_by',
+  $column_order = array('first_name', 'middle_name', 'last_name', 'barangay_district','municipality','gender','birthdate', 'age', 'facilitator', 'invited_by',
   'grand_total', 'savings_deposit','branch_name');
 
   // $select = "*";
