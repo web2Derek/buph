@@ -470,6 +470,7 @@ button.swal2-cancel.swal2-styled{
 
 .filter_table_btn {
     background:#137E09;
+    border: none;
 }
 
 .fil_clear {

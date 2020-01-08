@@ -14,7 +14,7 @@
         <div class="card">
             <div class="card-body">
               <button type="button" class="btn btn-primary filter_table_btn" name="button">
-                <a href="<?php echo base_url('reports/membershipStatistic');?>" class="d-file">
+                <a href="<?php echo base_url('reports/getMemberStatistic');?>" class="d-file">
                   GENERATE REPORT
                 </a>
               </button>
