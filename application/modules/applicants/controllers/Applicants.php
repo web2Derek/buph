@@ -9,11 +9,11 @@ class Applicants extends Applicant_Controller{
   }
 
   public function index() {
-    // if($this->session->userdata('logged_in')) {
-    //   $this->load_member_page('member_dashboard', '');
-    // } else {
+    if($this->session->userdata('logged_in')) {
+      $this->load_member('pmes_video', '');
+    } else {
     $this->load_member_page('member_login', '');
-    // }
+    }
   }
 
   public function depositors_signature() {
@@ -40,24 +40,24 @@ class Applicants extends Applicant_Controller{
       $params['where'] = array('username' => $mem_user, 'password' => $mem_pass);
       $params['join'] = array('tbl_progress' => 'tbl_user_credentials.credentials_id = tbl_progress.fk_member_id');
       $result = $this->MY_Model->getRows('tbl_user_credentials', $params, 'row');
-     
+
       if($result){
         if ($result->user_type == 0) {
-            $session = array(
+          $session = array(
             'logged_in' => true,
             'first_name' => $mem_user,
             'user_type' => 0,
             'member_id' => $result->credentials_id,
             'previous_session' => $result->previous_session
           );
-            $this->session->set_userdata($session);
-            if($result->branch_id == 0) {
-              redirect(base_url('applicants/mem_branch'));
-            } elseif($result->progress_status == 0) {
-              redirect(base_url('applicants/pmes_video'));
-            }else{
-              redirect(base_url('applicants/membership_registration'));
-            }
+          $this->session->set_userdata($session);
+          if($result->branch_id == 0) {
+            redirect(base_url('applicants/mem_branch'));
+          } elseif($result->progress_status == 0) {
+            redirect(base_url('applicants/pmes_seminar'));
+          }else{
+            redirect(base_url('applicants/membership_registration'));
+          }
         }
       } else {
         $this->session->set_flashdata('error-mem', 'Invalid Username or Password!');
@@ -106,14 +106,18 @@ class Applicants extends Applicant_Controller{
   }
 
   // LOAD VIDEOS FOR MEMBER Registration
-public function pmes_video() {
-  $this->load_member('pmes_seminar', '');
-}
+  public function pmes_seminar() {
+    if($this->session->userdata('logged_in')) {
+        $this->load_member('pmes_video', '');
+    } else {
+      redirect(base_url('applicants'));
+    }
+  }
 
-// LOAD BRANCH FOR USER TO select branch
+  // LOAD BRANCH FOR USER TO select branch
   public function mem_branch() {
-      $branch['branch'] = $this->MY_Model->getRows('tbl_branch');
-      $this->load->view('members_branch', $branch);
+    $branch['branch'] = $this->MY_Model->getRows('tbl_branch');
+    $this->load->view('members_branch', $branch);
   }
 
   public function selectedBranch(){
@@ -124,7 +128,7 @@ public function pmes_video() {
     );
     $result = $this->MY_Model->update('tbl_user_credentials', $item, $where);
     if ($result) {
-      redirect(base_url('applicants/membership_registration'));
+      redirect(base_url('applicants/pmes_seminar'));
     }
   }
 
@@ -158,13 +162,22 @@ public function pmes_video() {
           'lastname' => $post['member_lastname'],
           'date_added' => date('Y-m-d')
         );
+
+        $pdata = array(
+          'fk_member_id' => $result,
+          'progress_status' => 0,
+          'previous_session' => 0,
+          'member_status' => 'Pending'
+        );
+
+        $this->MY_Model->insert('tbl_progress', $pdata);
         $this->MY_Model->insert('tbl_user_informations', $data1);
       }
       echo json_encode($result);
     }
   }
 
-// ADD APPLICANTS DATA IN DB
+  // ADD APPLICANTS DATA IN DB
   public function addApplicants() {
     $post = $this->input->post();
     if(!empty($post)) {
@@ -458,38 +471,38 @@ public function pmes_video() {
     return $data ? false : true;
   }
 
-// public function updateSignatureImage(){
-//   $member_id = $this->input->post('member_id');
-//   $results = array();
-//   $available_file = array('jpg' , 'jpeg' , 'png');
-//   $file_type = pathinfo($_FILES['signature_new']['name'], PATHINFO_EXTENSION);
-//   $config['upload_path'] = './assets/signatures/members/';
-//   $config['allowed_types'] = '*';
-//   $config['max_size'] = 2000;
-//   $config['file_name'] =  date('ymd').'-'.uniqid('' , false);
-//   $this->load->library('upload', $config);
-//   if(in_array($file_type , $available_file)){
-//     if ($this->upload->do_upload('signature_new')) {
-//       $file_name = $config['file_name'].'.'.$file_type;
-//       $where = array('member_id' => $member_id);
-//       $set = array('sg_file_name' => $file_name);
-//       $update = $this->MY_Model->update('tbl_signatures' , $set , $where);
-//       if ($update) {
-//         $results = array('status' => 'Success' , 'msg' => 'Member signature updated.');
-//       }else{
-//         $results = array('status' => 'Error' , 'msg' => 'Something went wrong while uploading the image.Please try again');
-//       }
-//     }else{
-//       $results = array('status' => 'Error' , 'msg' => $this->upload->display_errors()['error'] );
-//     }
-//   } else {
-//     $results = array('status' => 'Error' , 'msg'=> 'Invalid file type');
-//   }
-//
-//   echo json_encode($results);
-// }
+  // public function updateSignatureImage(){
+  //   $member_id = $this->input->post('member_id');
+  //   $results = array();
+  //   $available_file = array('jpg' , 'jpeg' , 'png');
+  //   $file_type = pathinfo($_FILES['signature_new']['name'], PATHINFO_EXTENSION);
+  //   $config['upload_path'] = './assets/signatures/members/';
+  //   $config['allowed_types'] = '*';
+  //   $config['max_size'] = 2000;
+  //   $config['file_name'] =  date('ymd').'-'.uniqid('' , false);
+  //   $this->load->library('upload', $config);
+  //   if(in_array($file_type , $available_file)){
+  //     if ($this->upload->do_upload('signature_new')) {
+  //       $file_name = $config['file_name'].'.'.$file_type;
+  //       $where = array('member_id' => $member_id);
+  //       $set = array('sg_file_name' => $file_name);
+  //       $update = $this->MY_Model->update('tbl_signatures' , $set , $where);
+  //       if ($update) {
+  //         $results = array('status' => 'Success' , 'msg' => 'Member signature updated.');
+  //       }else{
+  //         $results = array('status' => 'Error' , 'msg' => 'Something went wrong while uploading the image.Please try again');
+  //       }
+  //     }else{
+  //       $results = array('status' => 'Error' , 'msg' => $this->upload->display_errors()['error'] );
+  //     }
+  //   } else {
+  //     $results = array('status' => 'Error' , 'msg'=> 'Invalid file type');
+  //   }
+  //
+  //   echo json_encode($results);
+  // }
 
-public function profileUpload(){
+  public function profileUpload(){
 
     $available_file = array('jpg', 'jpeg', 'png');
     $file_type = pathinfo($_FILES['member_profile']['name'], PATHINFO_EXTENSION);
@@ -513,90 +526,90 @@ public function profileUpload(){
   }
 
 
-public function member_id(){
-  if($this->session->has_userdata('logged_in')) {
-    $params['select'] = "CONCAT(last_name ,',',first_name,',' , middle_name) as membername , acount_id , member_id";
-    $params['where'] = array(
+  public function member_id(){
+    if($this->session->has_userdata('logged_in')) {
+      $params['select'] = "CONCAT(last_name ,',',first_name,',' , middle_name) as membername , acount_id , member_id";
+      $params['where'] = array(
         'member_type_id' => 2
-    );
-    $params['or_where'] = array(
+      );
+      $params['or_where'] = array(
         'member_type_id' => 6
-    );
-    $data['list'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params);
-    $this->load_page('memberId_v' , $data);
-  } else {
-    redirect(base_url('login'));
+      );
+      $data['list'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params);
+      $this->load_page('memberId_v' , $data);
+    } else {
+      redirect(base_url('login'));
+    }
+
   }
 
-        }
+  // public function agreementform(){
+  //     $this->load_member('agreementform' , '');
+  // }
 
-        // public function agreementform(){
-        //     $this->load_member('agreementform' , '');
-        // }
+  // public function submitAgreement(){
+  //     $post = $this->input->post();
+  //     echo "<pre>";
+  //     print_r($post);
+  //     die();
+  // }
 
-        // public function submitAgreement(){
-        //     $post = $this->input->post();
-        //     echo "<pre>";
-        //     print_r($post);
-        //     die();
-        // }
+  public function agreementform() {
+    $this->load_member('agreement_v');
+  }
 
-    public function agreementform() {
-      $this->load_member('agreement_v');
+  public function submitAgreement() {
+    $post = $this->input->post();
+    $member_id = "AG19B7B284BB00";
+
+    $docs = array(
+      'filled_form' => isset($post['filled_up_form']) ? true : false,
+      '2x_id' => isset($post['2x_id'] ) ? true : false,
+      'tin' => isset($post['tin']) ? true : false,
+    );
+
+    $item = array(
+      'member_id' => $member_id,
+      'doc_requirements' => json_encode($docs),
+      'subs_atleast' => $post['atleast_'],
+      'value_atleast' => $post['atleast_2'],
+      'date_added' => date('Y-m-d')
+    );
+
+    $insert = $this->MY_Model->insert('tbl_applicant_agreement' ,$item );
+    if ($insert) {
+      $filename = $this->agreementSignatureConvert($post['agre_sig_val']);
+      $itm = array('signature_file' => $filename);
+      $where = array('agreement_id' => $insert);
+      $this->MY_Model->update('tbl_applicant_agreement' ,$itm, $where);
     }
+  }
 
-    public function submitAgreement() {
-      $post = $this->input->post();
-      $member_id = "AG19B7B284BB00";
+  public function agreementSignatureConvert($base64){
+    $folderPath = "./assets/signatures/applicants/";
+    $base64_string = explode(";base64,", $base64);
+    $image_base64 = base64_decode($base64_string[1]);
+    $file_name = date('ymd').'-'.uniqid('' , false).".png";
+    $file = $folderPath . $file_name;
+    file_put_contents($file, $image_base64);
+    return $file_name;
+    // return "$account_id.png";
+  }
 
-      $docs = array(
-        'filled_form' => isset($post['filled_up_form']) ? true : false,
-        '2x_id' => isset($post['2x_id'] ) ? true : false,
-        'tin' => isset($post['tin']) ? true : false,
-      );
+  public function mem_signatures()  {
+    $base64 = $this->input->post('mem_signs');
+    $folderPath = "./assets/signatures/applicants/";
+    $base64_string = explode(";base64,", $base64);
+    $image_base64 = base64_decode($base64_string[1]);
+    $file_name = date('ymd').'-'.uniqid('' , false).".png";
+    $file = $folderPath . $file_name;
+    file_put_contents($file, $image_base64);
+    return $file_name;
+    // return "$account_id.png";
+  }
 
-      $item = array(
-          'member_id' => $member_id,
-          'doc_requirements' => json_encode($docs),
-          'subs_atleast' => $post['atleast_'],
-          'value_atleast' => $post['atleast_2'],
-          'date_added' => date('Y-m-d')
-      );
-
-      $insert = $this->MY_Model->insert('tbl_applicant_agreement' ,$item );
-        if ($insert) {
-            $filename = $this->agreementSignatureConvert($post['agre_sig_val']);
-            $itm = array('signature_file' => $filename);
-            $where = array('agreement_id' => $insert);
-            $this->MY_Model->update('tbl_applicant_agreement' ,$itm, $where);
-        }
-    }
-
-    public function agreementSignatureConvert($base64){
-      $folderPath = "./assets/signatures/applicants/";
-      $base64_string = explode(";base64,", $base64);
-      $image_base64 = base64_decode($base64_string[1]);
-      $file_name = date('ymd').'-'.uniqid('' , false).".png";
-      $file = $folderPath . $file_name;
-      file_put_contents($file, $image_base64);
-      return $file_name;
-      // return "$account_id.png";
-    }
-
-    public function mem_signatures()  {
-      $base64 = $this->input->post('mem_signs');
-      $folderPath = "./assets/signatures/applicants/";
-      $base64_string = explode(";base64,", $base64);
-      $image_base64 = base64_decode($base64_string[1]);
-      $file_name = date('ymd').'-'.uniqid('' , false).".png";
-      $file = $folderPath . $file_name;
-      file_put_contents($file, $image_base64);
-      return $file_name;
-      // return "$account_id.png";
-    }
-
-    public function insuranceform(){
-      $this->load_member('insuranceform');
-    }
+  public function insuranceform(){
+    $this->load_member('insuranceform');
+  }
 
 }

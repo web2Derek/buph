@@ -175,7 +175,7 @@ $(document).ready(function() {
               filename: 'Full Pledge Reports'
             }]
         });
-        $('.buttons-csv, .buttons-excel').addClass('btn btn-info mr-1');
+         
       }
 
 
@@ -220,7 +220,7 @@ $(document).ready(function() {
            filename: 'Membership Statistic Report'
          }]
      });
-     $('.buttons-csv, .buttons-excel').addClass('btn btn-info mr-1');
+      
    }
 
  });
