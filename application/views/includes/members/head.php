@@ -243,7 +243,7 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
           <ul id="sidebarnav">
-            <li> <a class=" waves-effect waves-dark" href="<?php echo base_url('appplicants/pmes_seminar') ?>" aria-expanded="false">
+            <li> <a class=" waves-effect waves-dark" href="<?php echo base_url('applicants/pmes_seminar') ?>" aria-expanded="false">
               <i class="fas fa-chart-area"></i><span class="hide-menu">Dashboard</span></a></li>
 
               <li> <a class="has-arrow waves-effect waves-dark" href="" aria-expanded="false"><i class="icon-Dashboard"></i><span class="hide-menu">My Account</span></a>

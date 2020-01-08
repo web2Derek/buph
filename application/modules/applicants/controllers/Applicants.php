@@ -186,8 +186,8 @@ class Applicants extends Applicant_Controller{
         'last_name'     => $post['lastname'],
         'first_name'    => $post['firstname'],
         'middle_name'   => $post['middlename'],
-        'birthdate'     => $post['birthdate'],
-        'age'           => calculateAge($post['age']),
+        'birthdate'     => calculateAge($post['birthdate']),
+        'age'           => $post['age'],
         'blood_type'    => $post['blood_type'],
         'birth_place'   => $post['birthplace'],
         'religion'      => $post['religion'],
@@ -231,7 +231,7 @@ class Applicants extends Applicant_Controller{
 
               // Employment Information Section
               $emp_info = array(
-                'member_id'          => $pi_id,
+                'fk_member_id'          => $pi_id,
                 'type_of_employment' => $post['employment_info'],
                 'company_name'       => $post['empinfo_companyName'],
                 'company_contact_no' => $post['emp_company_contactNo'],
@@ -366,11 +366,13 @@ class Applicants extends Applicant_Controller{
                   'pr_date_added' => date("Y-m-d")
                 );
 
+                $encode = !empty($this->session->userdata('info_id')) ? $this->session->userdata('info_id') : 0;
+
                 $acount_info = array(
                   'member_id'         => $pi_id,
                   'branch'            => 1,
                   'classifications'   => 'C',
-                  'encoded_by'        => $this->session->userdata('info_id'),
+                  'encoded_by'        => $encode,
                   'encoded_date'      => date("Y-m-d"),
                 );
 
