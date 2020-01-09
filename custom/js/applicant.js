@@ -249,14 +249,10 @@ $(document).ready(function() {
     $("#current").text(currentTime.toFixed(2)); //Change #current to currentTime
     $("#duration").text(Math.floor(duration))
   }
-
-  $('#pmes_notif').modal('show');
+  // $('#pmes_notif').modal('show');
 })
-  // CALCULATE MEMBERS AGE
-  // var membdate = $('#birthdate').val();
-  // var datenow = new Date().toLocaleDateString();
-  // alert(Math.floor(membdate - datenow));
-  // alert(membdate);
+  $('#vid_error_warning').modal('show');
+
 var count = 0;
 function addfields(){
     var html = '';
