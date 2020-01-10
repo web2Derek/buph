@@ -99,7 +99,7 @@ $(document).ready(function() {
     , bodyTag: "section"
     , transitionEffect: "fade"
     , titleTemplate: '<span class="step">#index#</span> #title#'
-    })
+  })
 
   var form = $(".validation-wizard").show();
   $(".validation-wizard").steps({
@@ -108,7 +108,7 @@ $(document).ready(function() {
     , transitionEffect: "fade"
     , titleTemplate: '<span class="step">#index#</span> #title#'
     , labels: {
-        finish: "Submit"
+      finish: "Submit"
     }
     , onStepChanging: function (event, currentIndex, newIndex) {
       return currentIndex > newIndex || !(3 === newIndex && Number($("#age-2").val()) < 18) && (currentIndex < newIndex && (form.find(".body:eq(" + newIndex + ") label.error").remove(), form.find(".body:eq(" + newIndex + ") .error").removeClass("error")), form.validate().settings.ignore = ":disabled,:hidden", form.valid())
@@ -153,7 +153,7 @@ $(document).ready(function() {
     , errorPlacement: function (error, element) {
       error.insertAfter(element)
     },
-     rules: {
+    rules: {
       emailAddress: {
         email: true
       },
@@ -184,20 +184,22 @@ $(document).ready(function() {
     setTimeout(function() {
       lastwatch(timex, url, mem_id);
     }, 5000);
-    if(this.ended) {
+    if(this.ended || this.currentTime == 470) {
       $.ajax({
         method: "POST",
         url: url + 'applicants/progressUp',
         data: {id: mem_id},
         success: function(data) {
-          Swal.fire('Completed',
-          'You have Completed the Seminar you may now Proceed to the next Step.')
+          Swal.fire(
+          'Completed',
+          'You have completed the seminar you may now proceed to the next step.'
+          );
         }
       })
     }
   });
 
-// FUNCTION TO SAVE TIME
+  // FUNCTION TO SAVE TIME
   function lastwatch(currentTime, url, mem_id) {
     $.ajax({
       method: 'POST',
@@ -220,12 +222,12 @@ $(document).ready(function() {
   // });
 
 
-//   window.onunload = function () {
-//     window.localstorage[myVideo.currentTime] = document.getElementById("pmesVid").currentTime;
-//     alert(window.localstorage[myVideo.currentTime]);
-// }
+  //   window.onunload = function () {
+  //     window.localstorage[myVideo.currentTime] = document.getElementById("pmesVid").currentTime;
+  //     alert(window.localstorage[myVideo.currentTime]);
+  // }
 
-// SAVE LAST WATCH  AFTER CLOSING
+  // SAVE LAST WATCH  AFTER CLOSING
   // function onclosing(saveTime, url) {
   // window.bind('beforeunload', function (e) {
   //          e.preventDefault();
@@ -261,47 +263,47 @@ $('#vid_error_warning').modal('show');
 
 var count = 0;
 function addfields(){
-    var html = '';
-    count++
-    html = `
-    <div class="row removedpnd${count}">
-      <div class="col-md-4  col-sm-12 col-xs-12">
-        <div class="form-group">
-          <input type="text" class="form-control" id="ben_fullname" name="ben_fullname[]" placeholder="(Last Name,First, MI)" >
-          <span class="err"></span>
-        </div>
-      </div>
-      <div class="col-md-2col-sm-12 col-xs-12">
-        <div class="form-group">
-          <input type="text" class="form-control mydatepicker" id="ben_dob" name="ben_dob[]" placeholder="Date of Birth(mm/dd/yy)" >
-          <span class="err"></span>
-        </div>
-      </div>
-      <div class="col-md-2 col-sm-12 col-xs-12">
-        <div class="form-group">
-          <input type="text" class="form-control" id="age" name="age[]" placeholder="Age" >
-          <span class="err"></span>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-12 col-xs-12">
-        <div class="form-group">
-          <input type="text" class="form-control" id="ben_relationship" name="ben_relationship[]" placeholder="Relationship" >
-          <span class="err"></span>
-        </div>
-      </div>
-      <div class="col-md-1">
-        <div class="input-group-append">
-          <button class="btn btn-success" type="button" onclick="removefields(${count});"><i class="fa fa-minus"></i></button>
-        </div>
-      </div>
-    </div>
-    `;
+  var html = '';
+  count++
+  html = `
+  <div class="row removedpnd${count}">
+  <div class="col-md-4  col-sm-12 col-xs-12">
+  <div class="form-group">
+  <input type="text" class="form-control" id="ben_fullname" name="ben_fullname[]" placeholder="(Last Name,First, MI)" >
+  <span class="err"></span>
+  </div>
+  </div>
+  <div class="col-md-2col-sm-12 col-xs-12">
+  <div class="form-group">
+  <input type="text" class="form-control mydatepicker" id="ben_dob" name="ben_dob[]" placeholder="Date of Birth(mm/dd/yy)" >
+  <span class="err"></span>
+  </div>
+  </div>
+  <div class="col-md-2 col-sm-12 col-xs-12">
+  <div class="form-group">
+  <input type="text" class="form-control" id="age" name="age[]" placeholder="Age" >
+  <span class="err"></span>
+  </div>
+  </div>
+  <div class="col-md-3 col-sm-12 col-xs-12">
+  <div class="form-group">
+  <input type="text" class="form-control" id="ben_relationship" name="ben_relationship[]" placeholder="Relationship" >
+  <span class="err"></span>
+  </div>
+  </div>
+  <div class="col-md-1">
+  <div class="input-group-append">
+  <button class="btn btn-success" type="button" onclick="removefields(${count});"><i class="fa fa-minus"></i></button>
+  </div>
+  </div>
+  </div>
+  `;
 
-    $('#formdpndents').append(html);
+  $('#formdpndents').append(html);
 }
 
 function removefields(id){
-    $('.removedpnd'+id).remove();
+  $('.removedpnd'+id).remove();
 }
 
 
@@ -325,12 +327,12 @@ $('input[name="source_business"]').click(function() {
 })
 
 if ($('input[name="source_business"]').prop('checked') == true) {
-    $('#if_business').fadeIn();
-    alert('4');
+  $('#if_business').fadeIn();
+  alert('4');
 }
 if ($('input[name="source_farmer"]').prop('checked') == true) {
-    $('#if_farmer').fadeIn();
-    alert('3');
+  $('#if_farmer').fadeIn();
+  alert('3');
 }
 
 $('input[name="source_farmer"]').click(function() {
@@ -339,7 +341,7 @@ $('input[name="source_farmer"]').click(function() {
     alert('1');
   }else{
     $('#if_farmer').fadeOut();
-      alert('2');
+    alert('2');
   }
 })
 
@@ -352,9 +354,9 @@ $('input[name="source_others"]').click(function() {
 })
 
 $('input[name="source_others"]').click(function() {
-    if ($(this).prop('checked') == true) {
-        $('#if_others').fadeIn();
-    }else{
-        $('#if_others').fadeOut();
-    }
+  if ($(this).prop('checked') == true) {
+    $('#if_others').fadeIn();
+  }else{
+    $('#if_others').fadeOut();
+  }
 })

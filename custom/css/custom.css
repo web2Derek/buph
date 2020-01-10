@@ -93,6 +93,13 @@
   border:none!important;
 }
 
+.vid_error_warning {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  background-color: #fffccc;
+}
+
 .pay_link {
   color: #fff;
 }

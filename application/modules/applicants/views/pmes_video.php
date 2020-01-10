@@ -1,5 +1,5 @@
-<div class="container" style="display:none;">
-    <div class="card alert alert-danger">
+<div class="container" style="">
+    <div class="card alert alert-danger vid_error_warning">
         <div class="card-body">
             <h2>Please Complete the Video to complete the Registration.
             Click on the link.</h2>

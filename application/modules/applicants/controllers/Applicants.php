@@ -25,8 +25,12 @@ class Applicants extends Applicant_Controller{
   }
 
   public function membership_registration() {
-    $this->load_member('membership_form', '');
-  }
+    if($_SESSION['progress_status'] == 0) {
+        $this->load_member('membership_form', '');
+      } else {
+        redirect(base_url('applicants'));
+      }
+    }
 
   public function member_account() {
 
@@ -48,6 +52,7 @@ class Applicants extends Applicant_Controller{
             'first_name' => $mem_user,
             'user_type' => 0,
             'member_id' => $result->credentials_id,
+            'progress_status' => $result->progress_status,
             'previous_session' => $result->previous_session
           );
           $this->session->set_userdata($session);
@@ -110,7 +115,7 @@ class Applicants extends Applicant_Controller{
     if($this->session->userdata('logged_in')) {
         $this->load_member('pmes_video', '');
     } else {
-      redirect(base_url('applicants'));
+      redirect(base_url('applicants/membership_registration'));
     }
   }
 
@@ -617,6 +622,39 @@ class Applicants extends Applicant_Controller{
 
   public function insuranceform(){
     $this->load_member('insuranceform');
+  }
+
+  // SAVE VIDE TIME
+  public function saveLastTime() {
+    $post = $this->input->post();
+    $data = array('fk_member_id' => $post['mem_id']);
+    $data = array('previous_session' => floor($post['timevid']));
+    $this->MY_Model->update('tbl_progress', $data);
+    return true;
+  }
+
+  // UPDATE AND CHECK USER PROGRESS
+  public function progressUp() {
+    $post = $this->input->post();
+    $where = array('fk_member_id' => $post['id']);
+    // Update user status
+    $result = $this->MY_Model->getRows('tbl_progress', $where);
+
+    if($result->progress_status == 0) {
+      $data = array('progress_status' => 1,);
+      $result = $this->MY_Model->update('tbl_progress', $data, $where);
+    }
+
+    if(!$result) {
+      $data = array(
+        'fk_member_id' => $post['id'],
+        'progress_status' => 1,
+        'member_status' => 'Pending'
+      );
+      //INSERT user status if pmes video is finish
+      $progress = $this->MY_Model->insert('tbl_progress', $data);
+      return true;
+    }
   }
 
 }
