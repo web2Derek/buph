@@ -93,6 +93,12 @@
   border:none!important;
 }
 
+.nextStep {
+  background: #068101!important;
+  border:none!important;
+  float: right;
+}
+
 .d-file {
   color: #fff!important;
 }
@@ -470,6 +476,7 @@ button.swal2-cancel.swal2-styled{
 
 .filter_table_btn {
     background:#137E09;
+    border: none;
 }
 
 .fil_clear {

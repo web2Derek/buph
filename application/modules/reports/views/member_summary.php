@@ -17,7 +17,7 @@
                 <div class="card-body">
                   <!-- DATE AND BRANCH FILTER -->
                   <button type="button" name="button" class="btn btn-primary filter_table_btn">
-                    <a href="<?php echo base_url('reports/totalSummary'); ?>" class="d-file">
+                    <a href="<?php echo base_url('reports/downloadFIle'); ?>" class="d-file">
                       GENERATE REPORT
                     </a>
                   </button>

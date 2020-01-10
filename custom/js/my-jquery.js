@@ -1062,6 +1062,7 @@ var data_arr = [];
       })
 
       $(data_arr).each(function(idx, val) {
+        console.log(val);
         setTimeout(function() {
           save_qr(val);
         }, 1000)
@@ -1071,17 +1072,17 @@ var data_arr = [];
   })
 
 
-    $(data_arr).each(function(idx, val) {
-      setTimeout(function(){
-        generate_qr(val);
-      },100)
-    })
-
-    $(accountID).each(function(idx, val) {
-      setTimeout(function() {
-        save_qr(val);
-      }, 1000)
-  });
+  //   $(data_arr).each(function(idx, val) {
+  //     setTimeout(function(){
+  //       generate_qr(val);
+  //     },100)
+  //   })
+  //
+  //   $(accountID).each(function(idx, val) {
+  //     setTimeout(function() {
+  //       save_qr(val);
+  //     }, 1000)
+  // });
   //
     get_id_details_ajax(data_array);
 

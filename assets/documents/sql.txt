@@ -46,3 +46,23 @@ FROM
    from tbl_mem_personal_information
    LEFT JOIN tbl_mem_eployment_information ON tbl_mem_personal_information.member_id = tbl_mem_eployment_information.fk_member_id) as t
 group by `range`
+
+GETTING TOTAL AND BRANCH
+
+SELECT
+  @fullpledge := (
+    SELECT COUNT(mq.monetary_id) AS person_count
+    FROM tbl_monetary_req AS mq
+    LEFT JOIN tbl_account_info AS m ON m.member_id = mq.member_id
+    WHERE mq.total >= 1000 AND m.branch = b.branch_id
+   ) AS fullpledge,
+   @share := (
+    SELECT COUNT(mq.monetary_id) AS person_count
+    FROM tbl_monetary_req AS mq
+    LEFT JOIN tbl_account_info AS m ON m.member_id = mq.member_id
+    WHERE mq.total < 1000 AND mq.total != '' AND m.branch = b.branch_id
+   ) AS share,
+   @fullpledge + @share AS total,
+   b.branch_name
+FROM tbl_branch AS b
+WHERE status = 1

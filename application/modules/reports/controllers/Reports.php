@@ -3,7 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use PhpOffice\PhpSpreadsheet\Writer\Xls;
+//call iofactory instead of xlsx writer
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
 
 
 
@@ -325,9 +328,9 @@ class Reports extends MY_Controller {
     // filename for download
     $filename = "website_data_" . date('Ymd') . ".xls";
 
-     // header("Content-Type: text/plain");
-    header("Content-Disposition: attachment; filename=\"$filename\"");
-    header("Content-Type: application/vnd.ms-excel");
+    // header("Content-Type: text/plain");
+    // header("Content-Disposition: attachment; filename=\"$filename\"");
+    // header("Content-Type: application/vnd.ms-excel");
 
 
     $data = $this->MY_Model->raw('
@@ -362,11 +365,40 @@ class Reports extends MY_Controller {
     tbl_mem_personal_information.member_id = tbl_mem_eployment_information.fk_member_id
     group by type_of_employment', 'array');
 
-    echo 'Bukidnon Pharmaceutical Multipurpose Cooperative'."\r\n";
-    echo "(BUPHARCO)"."\r\n";
-    echo 'Valencia City, Bukidnon'."\r\n";
-    echo 'CDA Reg. No. 9520-10000364'."\r\n";
-    echo 'TOTAL MEMBER SUMMARY'."\r\n";
+    //make a new spreadsheet object
+    $spreadsheet = new Spreadsheet();
+    //get current active sheet (first sheet)
+    $sheet = $spreadsheet->getActiveSheet();
+    //set default font
+    $spreadsheet->getDefaultStyle()
+    ->getFont()
+    ->setName('Arial')
+    ->setSize(10);
+
+    //heading
+    $spreadsheet->getActiveSheet()
+    ->setCellValue('A1',"Bukidnon Pharmaceutical Multipurpose Cooperative");
+    //merge heading
+    $spreadsheet->getActiveSheet()->mergeCells("A1:F1");
+    // set font style
+    $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setSize(20);
+
+    // set cell alignment
+    $spreadsheet->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+    //setting column width
+    $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(5);
+    $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(20);
+    $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(20);
+    $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(30);
+    $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(12);
+    $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(10);
+
+    // // echo 'Bukidnon Pharmaceutical Multipurpose Cooperative'."\r\n";
+    // echo "(BUPHARCO)"."\r\n";
+    // echo 'Valencia City, Bukidnon'."\r\n";
+    // echo 'CDA Reg. No. 9520-10000364'."\r\n";
+    // echo 'TOTAL MEMBER SUMMARY'."\r\n";
 
     $flag = false;
     foreach($data as $row) {
@@ -390,39 +422,323 @@ class Reports extends MY_Controller {
       array_walk($row1, __NAMESPACE__. '\cleanData');
       echo implode("\t", array_values($row1)) . "\r\n";
     }
-    exit;
+    $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
   }
 
   public function membershipStatistic() {
-      echo 'Still Working with this Page';
+    echo 'Still Working with this Page';
   }
 
   // SAMPLE REPORT
   public function downloadFIle() {
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-        $styleArray = array(
-          'borders' => array(
-              'outline' => array(
-                  'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
-                  'color' => array('argb' => 'FFFF0000'),
-            ),
-          ),
-        );
-        $sheet->getStyle('A1')->applyFromArray($styleArray);
-        //$sheet = $spreadsheet->getActiveSheet()->setShowGridlines(true);
-       $sheet->setCellValue('A1', 'Hello World !');
+    error_reporting(E_ALL);
+    ini_set('display_errors', 0);
 
 
-        $writer = new Xlsx($spreadsheet);
+    //EXCEL STYLE
+    $tableHead = [
+      'font'=>[
+        'color'=>[
+          'rgb'=>'FFFFFF'
+        ],
+        'bold'=>true,
+        'size'=>11
+      ],
+    ];
 
-        $filename = 'name-of-the-generated-file';
+    $spreadsheet = new Spreadsheet();
+    //get current active sheet (first sheet)
+    $sheet = $spreadsheet->getActiveSheet();
+    //set default font
+    $spreadsheet->getDefaultStyle()
+    ->getFont()
+    ->setName('Calibri')
+    ->setSize(11);
 
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"');
-        header('Cache-Control: max-age=0');
+    //heading
+    $spreadsheet->getActiveSheet()
+    ->setCellValue('A1',"Bukidnon Pharmaceutical Multipurpose Cooperative");
+    $spreadsheet->getActiveSheet()->setCellValue('A2',"(BUPHARCO)");
+    $spreadsheet->getActiveSheet()->setCellValue('A3',"Valencia City, Bukidnon");
+    $spreadsheet->getActiveSheet()->setCellValue('A4',"CDA Reg. No. 9520-10000364");
+    $spreadsheet->getActiveSheet()->setCellValue('A6',"TOTAL MEMBER SUMMARY");
 
-        $writer->save('php://output'); // download file
+    //merge heading
+    $spreadsheet->getActiveSheet()->mergeCells("A1:D1");
+    $spreadsheet->getActiveSheet()->mergeCells("A2:D2");
+    $spreadsheet->getActiveSheet()->mergeCells("A3:D3");
+    $spreadsheet->getActiveSheet()->mergeCells("A4:D4");
+    $spreadsheet->getActiveSheet()->mergeCells("A6:D6");
+    // set font style
+    $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setSize(11);
+    //setting to font bold
+    $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+
+    // set cell alignment
+    $spreadsheet->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $spreadsheet->getActiveSheet()->getStyle('A2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $spreadsheet->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $spreadsheet->getActiveSheet()->getStyle('A4')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $spreadsheet->getActiveSheet()->getStyle('A6')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+    // SETTING FONT TO BOLD
+    $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+    $spreadsheet->getActiveSheet()->getStyle('A2')->getFont()->setBold(true);
+    $spreadsheet->getActiveSheet()->getStyle('A3')->getFont()->setBold(true);
+    $spreadsheet->getActiveSheet()->getStyle('A4')->getFont()->setBold(true);
+    $spreadsheet->getActiveSheet()->getStyle('A6')->getFont()->setBold(true);
+
+
+    //setting column width
+    $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(5);
+    $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(20);
+    $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(20);
+    $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(30);
+    $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(12);
+    // $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(10);
+
+    //header text
+    $styleArray = [
+    'borders' => [
+        'outline' => [
+            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+            'color' => ['argb' => '000000'],
+        ],
+      ],
+    ];
+
+    $spreadsheet->getActiveSheet()
+    ->setCellValue('A8',"MEMBERS")
+    ->setCellValue('C8',"Male")
+    ->setCellValue('D8',"Female");
+
+    $spreadsheet->getActiveSheet()->mergeCells("A8:B8");
+    $spreadsheet->getActiveSheet()->getStyle('A8')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $spreadsheet->getActiveSheet()->getStyle('C8')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $spreadsheet->getActiveSheet()->getStyle('D8')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+        // APPLY BORDER STYLE
+    $spreadsheet->getActiveSheet()->getStyle('A8:B8')->applyFromArray($styleArray);
+    $spreadsheet->getActiveSheet()->getStyle('C8')->applyFromArray($styleArray);
+    $spreadsheet->getActiveSheet()->getStyle('D8')->applyFromArray($styleArray);
+
+    $data1 = $this->MY_Model->raw('
+    SELECT type_of_employment as MEMBERS_W,
+    count(case
+    when gender = "Female" then 1
+    else null
+    end) as FW,
+
+    count(case
+    when gender = "Male" then 1
+    else null
+    end) as MW
+
+    from tbl_mem_eployment_information LEFT JOIN tbl_mem_personal_information ON
+    tbl_mem_personal_information.member_id = tbl_mem_eployment_information.fk_member_id
+    group by type_of_employment', 'array');
+
+    $data = $this->MY_Model->raw('
+    SELECT case
+    when age between 0 and 17 then "Invalid Age"
+    when age between 18 and 30 then "18 - 30"
+    when age between 31 and 35 then "31 − 35"
+    when age between 36 and 40 then "36 − 40"
+    when age between 41 and 50 then "41 − 50"
+    when age between 51 and 60 then "51 − 60"
+    when age between 61 and 70 then "61 − 70"
+    when age between 71 and 100 then "71 and above"
+    end as "MEMBERS",
+    count(case when gender = "Male" then 1 else null end) as M,
+    count(case when gender = "Female" then 1 else null end) as F
+    from
+    (select *, TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) AS ages from tbl_mem_personal_information) as t group by MEMBERS', 'array');
+
+
+    //header text
+    $spreadsheet->getActiveSheet()
+    ->setCellValue('A18',"MEMBERS")
+    ->setCellValue('C18',"Male")
+    ->setCellValue('D18',"Female");
+    $spreadsheet->getActiveSheet()->mergeCells("A18:B18");
+    $spreadsheet->getActiveSheet()->getStyle('A18')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $spreadsheet->getActiveSheet()->getStyle('C18')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $spreadsheet->getActiveSheet()->getStyle('D18')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $spreadsheet->getActiveSheet()->getStyle("A18:B18")->applyFromArray($styleArray);
+    $spreadsheet->getActiveSheet()->getStyle("C18")->applyFromArray($styleArray);
+    $spreadsheet->getActiveSheet()->getStyle("D18")->applyFromArray($styleArray);
+
+    // DISPLAY ROW FOR AGE
+    $row2 = array();
+    $row = 9;
+    foreach ($data as $key => $value) {
+      $spreadsheet->getActiveSheet()
+      ->setCellValue("A$row" , $value['MEMBERS'])
+      ->setCellValue("C$row" , $value['M'])
+      ->setCellValue("D$row" , $value['F']);
+      $spreadsheet->getActiveSheet()->mergeCells("A$row:B$row");
+      // $spreadsheet->getActiveSheet()->getStyle("A$row:B$row")->getFont()->setBold(true);
+      $spreadsheet->getActiveSheet()->getStyle('A'.$row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+      $spreadsheet->getActiveSheet()->getStyle('C'.$row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+      $spreadsheet->getActiveSheet()->getStyle('D'.$row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+      // APPLY BORDERS
+      $spreadsheet->getActiveSheet()->getStyle("A$row:B$row")->applyFromArray($styleArray);
+      $spreadsheet->getActiveSheet()->getStyle('C'.$row)->applyFromArray($styleArray);
+      $spreadsheet->getActiveSheet()->getStyle('D'.$row)->applyFromArray($styleArray);
+      $row++;
+      array_push($row2, $row);
+    }
+
+    // DISPLAY ROW FOR WORK
+    $row3 = (end($row2)) + 2;
+    foreach ($data1 as $key => $value) {
+      $spreadsheet->getActiveSheet()
+        ->setCellValue("A$row3" , $value['MEMBERS_W'])
+        ->setCellValue("C$row3" , $value['MW'])
+        ->setCellValue("D$row3" , $value['FW']);
+        // MERGE CELLS
+      $spreadsheet->getActiveSheet()->mergeCells("A$row3:B$row3");
+      // $spreadsheet->getActiveSheet()->getStyle("A$row3:B$row3")->getFont()->setBold(true);
+      $spreadsheet->getActiveSheet()->getStyle("A$row3:B$row3")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+      $spreadsheet->getActiveSheet()->getStyle('C'.$row3)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+      $spreadsheet->getActiveSheet()->getStyle('D'.$row3)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+      //APPLY BORDERS IN EXCEL
+
+      $spreadsheet->getActiveSheet()->getStyle("A$row3:B$row3")->applyFromArray($styleArray);
+      $spreadsheet->getActiveSheet()->getStyle('C'.$row3)->applyFromArray($styleArray);
+      $spreadsheet->getActiveSheet()->getStyle('D'.$row3)->applyFromArray($styleArray);
+      $row3++;
+    }
+
+    $writer = new Xlsx($spreadsheet);
+    $filename = 'Total Member Summary Report';
+    header('Content-Type: application/vnd.ms-excel');
+    header('Content-Disposition: attachment;filename="'.$filename.'.xlsx"');
+    //create IOFactory object
+    $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+    //save into php output
+    $writer->save('php://output'); // download file
+  }
+
+  public function getMemberStatistic() {
+    error_reporting(E_ALL);
+    ini_set('display_errors', 0);
+
+    $spreadsheet = new Spreadsheet();
+    //get current active sheet (first sheet)
+    $sheet = $spreadsheet->getActiveSheet();
+    //set default font
+    $spreadsheet->getDefaultStyle()
+    ->getFont()
+    ->setName('Calibri')
+    ->setSize(15);
+    //heading
+    // $sheeti = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+    // $sheeti->setName('BUPHARCO');
+    // $sheeti->setDescription('description');
+    // $sheeti->setPath(base_url('assets/images/gallery/icon.png'));
+    // $sheeti->setHeight(90);
+    // $sheeti->setCoordinates("G14");
+    // $sheeti->setOffsetX(20);
+    // $sheeti->setOffsetY(5);
+    // $sheeti->setWorksheet($sheet);
+    $styleArray = [
+    'borders' => [
+        'outline' => [
+            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+            'color' => ['argb' => '000000'],
+        ],
+      ],
+    ];
+
+    $spreadsheet->getActiveSheet()
+    ->setCellValue('A1',"BUPHARCO");
+    $spreadsheet->getActiveSheet()->setCellValue('A2',"WE CARE, WE SHARE");
+    $spreadsheet->getActiveSheet()->setCellValue('A3',"Bukidnon PharmaceuticalMultipurpose Cooperative");
+    $spreadsheet->getActiveSheet()->setCellValue('A4',"P-16, Sayre Highway, Poblacion Valencia City, Bukidnon, Philippines");
+    $spreadsheet->getActiveSheet()->setCellValue('A6',"Memo No.:");
+    $spreadsheet->getActiveSheet()->setCellValue('B6',"MO 9 S. 2019");
+    $spreadsheet->getActiveSheet()->setCellValue('A7',"For:");
+    $spreadsheet->getActiveSheet()->setCellValue('B7',"JERALYN C. CUCHAPIN");
+    $spreadsheet->getActiveSheet()->setCellValue('B8',"HR MANAGER");
+    $spreadsheet->getActiveSheet()->setCellValue('A9',"From:");
+    $spreadsheet->getActiveSheet()->setCellValue('B9',"GHRESALYN B. HERNANE:");
+    $spreadsheet->getActiveSheet()->setCellValue('B10'," Records and Membership Assistant");
+    $spreadsheet->getActiveSheet()->setCellValue('A11',"Date:");
+    $spreadsheet->getActiveSheet()->setCellValue('B11',"November 6, 2019:");
+    $spreadsheet->getActiveSheet()->setCellValue('A12',"Re:");
+    $spreadsheet->getActiveSheet()->setCellValue('B12',"Membership Monthly Report - OCTOBER 2019");
+    $spreadsheet->getActiveSheet()->setCellValue('A14',"( NEW MEMBERS )");
+    $spreadsheet->getActiveSheet()->setCellValue('A15',"( For the month of OCTOBER)");
+
+    $branch = $this->MY_Model->raw('
+    SELECT branch_name from tbl_branch');
+    $cell = 'A';
+    $b = 17;
+    for($i = 0; $i<count($branch); $i++) {
+        $spreadsheet->getActiveSheet()->setCellValue("$cell$b", $branch[$i]['branch_name']);
+        $spreadsheet->getActiveSheet()->getColumnDimension("$cell$b")->setWidth(15);
+        $cell++;
+    }
+
+    //merge heading
+    $spreadsheet->getActiveSheet()->mergeCells("A1:D1");
+    $spreadsheet->getActiveSheet()->mergeCells("A2:D2");
+    $spreadsheet->getActiveSheet()->mergeCells("A3:D3");
+    $spreadsheet->getActiveSheet()->mergeCells("A4:D4");
+    $spreadsheet->getActiveSheet()->mergeCells("A14:D14");
+    $spreadsheet->getActiveSheet()->mergeCells("A15:D15");
+
+    //setting to font bold
+    $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+
+    // set cell alignment
+    $spreadsheet->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $spreadsheet->getActiveSheet()->getStyle('A2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $spreadsheet->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $spreadsheet->getActiveSheet()->getStyle('A4')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $spreadsheet->getActiveSheet()->getStyle('A14')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $spreadsheet->getActiveSheet()->getStyle('A15')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $spreadsheet->getActiveSheet()->getStyle("A1:D12")->applyFromArray($styleArray);
+    // COLUMN DIMENSION
+    $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(15);
+    $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(15);
+    $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(15);
+    $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(15);
+
+
+
+    // SETTING FONT TO BOLD
+    $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+    $spreadsheet->getActiveSheet()->getStyle('A2')->getFont()->setBold(true);
+    $spreadsheet->getActiveSheet()->getStyle('A3')->getFont()->setBold(true);
+    $spreadsheet->getActiveSheet()->getStyle('A4')->getFont()->setBold(true);
+    $spreadsheet->getActiveSheet()->getStyle('A6')->getFont()->setBold(true);
+    $spreadsheet->getActiveSheet()->getStyle('A7')->getFont()->setBold(true);
+    $spreadsheet->getActiveSheet()->getStyle('A8')->getFont()->setBold(true);
+    $spreadsheet->getActiveSheet()->getStyle('A9')->getFont()->setBold(true);
+    $spreadsheet->getActiveSheet()->getStyle('A10')->getFont()->setBold(true);
+
+
+    //setting column width
+    // $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(5);
+    // $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(20);
+    // $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(20);
+    // $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(30);
+    // $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(12);
+    // $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(10);
+
+    $writer = new Xlsx($spreadsheet);
+    $filename = 'Member Statistic Report';
+    header('Content-Type: application/vnd.ms-excel');
+    header('Content-Disposition: attachment;filename="'.$filename.'.xlsx"');
+    //create IOFactory object
+    $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+    //save into php output
+    $writer->save('php://output'); // download file
+
   }
 
 }

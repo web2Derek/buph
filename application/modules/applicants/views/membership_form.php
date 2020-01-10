@@ -41,7 +41,7 @@
                   <div class="col-md-2 col-sm-12">
                     <div class="form-group">
                       <label for="">Age</label>
-                      <input type="text" class="form-control" id="members_age" name="age" value="" required>
+                      <input type="text" class="form-control" id="members_age" name="age" value="" readonly>
                     </div>
                   </div>
                   <div class="col-md-2 col-sm-12">

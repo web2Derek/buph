@@ -226,7 +226,7 @@
                     </div>
                   </li>
                   <li role="separator" class="divider"></li>
-                  <li><a href="<?php echo base_url();?>home"><i class="ti-user"></i> My Profile</a></li>
+                  <li><a href="<?php echo base_url('applicants');?>"><i class="ti-user"></i> My Profile</a></li>
                   <li role="separator" class="divider"></li>
                   <li><a href="<?php echo base_url()?>logout/logout_member"><i class="fa fa-power-off"></i> Logout</a></li>
                 </ul>
@@ -243,7 +243,7 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
           <ul id="sidebarnav">
-            <li> <a class=" waves-effect waves-dark" href="<?php echo base_url('appplicants/pmes_seminar') ?>" aria-expanded="false">
+            <li> <a class=" waves-effect waves-dark" href="<?php echo base_url('applicants/pmes_seminar') ?>" aria-expanded="false">
               <i class="fas fa-chart-area"></i><span class="hide-menu">Dashboard</span></a></li>
 
               <li> <a class="has-arrow waves-effect waves-dark" href="" aria-expanded="false"><i class="icon-Dashboard"></i><span class="hide-menu">My Account</span></a>
