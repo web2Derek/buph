@@ -89,6 +89,7 @@ $(document).ready(function() {
   });
 
 
+
   // CLEAR ERROR
   function clearError() {
     $('.mem-err').text('');

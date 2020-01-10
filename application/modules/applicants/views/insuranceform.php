@@ -158,7 +158,7 @@
 
                                     </div>
 
-                                    <h6>Beneficiary(ies) to received the Benefits</h6>
+                                    <h6> <strong>Beneficiary(ies) to received the Benefits</strong> </h6>
                                     <p>Primary</p>
                                     <div class="row">
                                       <div class="col-md-4">
@@ -199,11 +199,108 @@
 
                                 <h6>HEALTH DECLARATION</h6>
                                 <section>
+
                                     <div class="row">
                                         <div class="col-md-12">
+                                            <p> Have you ever been diagnosed of cancer? </p>
                                             <div class="form-group">
-                                                
+                                                <input type="radio" class="check" id="diagnosed_cancer" name="cancer" data-radio="iradio_flat-green">
+                                                <label for="diagnosed_cancer">Yes</label>
+
+                                                <input type="radio" class="check" id="diagnosed_cancer" name="cancer" data-radio="iradio_flat-green">
+                                                <label for="diagnosed_cancer">No</label>
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p> Have you ever been diagnosed of HIV or AIDS? </p>
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="diagnosed_hiv_aids" name="hiv_aids" data-radio="iradio_flat-green">
+                                                <label for="diagnosed_hiv_aids">Yes</label>
+
+                                                <input type="radio" class="check" id="diagnosed_hiv_aids" name="hiv_aids" data-radio="iradio_flat-green">
+                                                <label for="diagnosed_hiv_aids">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <p> At present, are you aware of or have received advice from your doctor that you are suffering from any illness?  </p>
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="illness_yes" name="illness" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="illness_yes">Yes</label>
+
+                                                <input type="radio" class="check" id="illness" name="illness" data-radio="iradio_flat-green" value="No">
+                                                <label for="illness">No</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="">If Yes, please specify</label>
+                                                <input type="text" class="form-control" name="illness_specify">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <h6>Long Health Declaration</h6>
+                                <section>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>1.) Are you presently in good health and entirely free from any mental or physical impairment and/or deformities? </p>
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="long_1" name="long_1" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="long_1">Yes</label>
+
+                                                <input type="radio" class="check" id="long_1" name="long_1" data-radio="iradio_flat-green" value="No">
+                                                <label for="long_1">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>2.) Are you mentally and / or physically able to perform the usual duties of your livelihood? </p>
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="long_2" name="long_2" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="long_2">Yes</label>
+
+                                                <input type="radio" class="check" id="long_2" name="long_2" data-radio="iradio_flat-green" value="No">
+                                                <label for="illness">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p>3.) Have you been medically examined, received medical advice or treatment, or hospitalized, or surgery within the last five (5) years?. </p>
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="long_3" name="long_3" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="long_3">Yes</label>
+
+                                                <input type="radio" class="check" id="long_3" name="long_3" data-radio="iradio_flat-green" value="No">
+                                                <label for="illness">No</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for=""></label>
+                                                <input type="text" class="form-control" name="long_3_yes" placeholder="If Yes, for what reason">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>4.) Have you ever suffered from any of the following?</p>
+                                            <ul>
+                                                <li>Test</li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </section>

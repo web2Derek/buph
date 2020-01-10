@@ -53,14 +53,14 @@ class Members extends MY_Controller {
     $this->load_page('members_v' , $data);
   }
 
-    public function dob_check($str){
-        if (!DateTime::createFromFormat('m/d/yyyy', $str)) { //yes it's YYYY-MM-DD
-        $this->form_validation->set_message('birthdate', 'The {field} has not a valid date format');
-            return FALSE;
-        } else {
-            return TRUE;
-        }
-    }
+    // public function dob_check($str){
+    //     if (!DateTime::createFromFormat('m/d/yyyy', $str)) { //yes it's YYYY-MM-DD
+    //     $this->form_validation->set_message('birthdate', 'The {field} has not a valid date format');
+    //         return FALSE;
+    //     } else {
+    //         return TRUE;
+    //     }
+    // }
 
   public function AddNewMember() {
     $post = $this->input->post();

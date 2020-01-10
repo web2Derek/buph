@@ -12,7 +12,7 @@
   <!-- End Page Title -->
 
   <div class="row">
-    <div class="col-9">
+    <div class="col-12">
       <div class="card wizard-content">
         <div class="card-body">
           <h6>PMES VIDEO</h6>
@@ -23,8 +23,7 @@
                   <div class=" col-md-12 col-sm-12 ">
                     <!-- HIDDE USER ID TO USE WHEN UPDATE USER -->
                     <input type="hidden" name="members_id" id="members_id" value="<?php echo $_SESSION['member_id'];?>">
-                    <input type="hidden" name="prev_time" id="prev_time" value="<?php echo
-                    $_SESSION['previous_session'];?>">
+                    <input type="hidden" name="prev_time" id="prev_time" value="<?php echo $_SESSION['previous_session'];?>">
 
                     <video id="pmesVid" width="100%" height="500" controls>
                       <source src="<?php echo base_url()?>assets/pmes_video/pmes.mp4" type="video/mp4">
@@ -73,7 +72,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
                 <div class="modal-body">
-                  <h3 class="text-justify">Complete the video to proceed to the Next Step!!!</h3>
+                  <h3 class="text-justify">Complete the video to proceed to the Next Step.</h3>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
                 </div>
