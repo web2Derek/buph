@@ -252,7 +252,13 @@ $(document).ready(function() {
   }
   // $('#pmes_notif').modal('show');
 })
-  $('#vid_error_warning').modal('show');
+
+$('.pay_link').on('click', function(e) {
+
+})
+
+$('#vid_error_warning').modal('show');
+
 
 var count = 0;
 function addfields(){

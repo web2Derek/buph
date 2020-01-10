@@ -114,6 +114,11 @@ class Applicants extends Applicant_Controller{
     }
   }
 
+  // lOAD PAYMENT Page
+  public function paymentPage() {
+    $this->load_member('payment','');
+  }
+
   // LOAD BRANCH FOR USER TO select branch
   public function mem_branch() {
     $branch['branch'] = $this->MY_Model->getRows('tbl_branch');

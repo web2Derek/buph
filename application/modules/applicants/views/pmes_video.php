@@ -1,3 +1,12 @@
+<div class="container" style="display:none;">
+    <div class="card alert alert-danger">
+        <div class="card-body">
+            <h2>Please Complete the Video to complete the Registration.
+            Click on the link.</h2>
+        </div>
+    </div>
+</div>
+
 <div>
   <!-- Page Title -->
   <div class="row page-titles">
@@ -31,7 +40,9 @@
                     </video>
 
                     <button type="button" class="btn btn-primary btn-md nextStep" name="nextStep">
-                      Next Step
+                      <a href="<?php echo base_url('applicants/paymentPage'); ?>" class="pay_link">
+                        Next Step
+                      </a>
                     </button>
                   </div>
                 </div>
@@ -51,8 +62,13 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
                 <div class="modal-body">
-                  <h3 class="text-justify">Please don't close the Browser or refresh the Page.
-                  This will not save your progress.</h3>
+                  <div class="card">
+                    <div class="card-body">
+                      <h3 class="text-justify">Please don't close the Browser or refresh the Page.
+                      This will not save your progress.</h3>
+                    </div>
+                  </div>
+
                 <div class="modal-footer">
                   <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
                 </div>
