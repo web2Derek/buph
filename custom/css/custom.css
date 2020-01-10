@@ -93,6 +93,10 @@
   border:none!important;
 }
 
+.pay_link {
+  color: #fff;
+}
+
 .nextStep {
   background: #068101!important;
   border:none!important;

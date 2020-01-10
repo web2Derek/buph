@@ -671,25 +671,65 @@ class Reports extends MY_Controller {
     $spreadsheet->getActiveSheet()->setCellValue('A12',"Re:");
     $spreadsheet->getActiveSheet()->setCellValue('B12',"Membership Monthly Report - OCTOBER 2019");
     $spreadsheet->getActiveSheet()->setCellValue('A14',"( NEW MEMBERS )");
-    $spreadsheet->getActiveSheet()->setCellValue('A15',"( For the month of OCTOBER)");
+    $spreadsheet->getActiveSheet()->setCellValue('A22',"( For the month of OCTOBER)");
+    $spreadsheet->getActiveSheet()->setCellValue('A23',"( For the month of OCTOBER)");
 
     $branch = $this->MY_Model->raw('
     SELECT branch_name from tbl_branch');
+
+    $total = $this->MY_Model->raw('
+    SELECT
+    @fullpledge := (
+      SELECT COUNT(mq.monetary_id) AS person_count
+      FROM tbl_monetary_req AS mq
+      LEFT JOIN tbl_account_info AS m ON m.member_id = mq.member_id
+      WHERE mq.total >= 1000 AND m.branch = b.branch_id
+     ) as fullpledge,
+
+     @share := (
+      SELECT COUNT(mq.monetary_id) AS person_count
+      FROM tbl_monetary_req AS mq
+      LEFT JOIN tbl_account_info AS m ON m.member_id = mq.member_id
+      WHERE mq.total < 1000 AND mq.total != "" AND m.branch = b.branch_id
+     ) AS share,
+
+     @fullpledge + @share AS total,
+     b.branch_name
+    FROM tbl_branch AS b
+    WHERE status = 1
+    ');
+
     $cell = 'A';
     $b = 17;
+    $c = 18;
+    $d = 19;
+    $e = 20;
+
     for($i = 0; $i<count($branch); $i++) {
         $spreadsheet->getActiveSheet()->setCellValue("$cell$b", $branch[$i]['branch_name']);
-        $spreadsheet->getActiveSheet()->getColumnDimension("$cell$b")->setWidth(15);
+        $spreadsheet->getActiveSheet()->setCellValue("$cell$c", $total[$i]['fullpledge']);
+        $spreadsheet->getActiveSheet()->setCellValue("$cell$d", $total[$i]['share']);
+        $spreadsheet->getActiveSheet()->setCellValue("$cell$e", $total[$i]['total']);
+        $spreadsheet->getActiveSheet()->getStyle("$cell$b")
+        ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->getActiveSheet()->getStyle("$cell$c")
+        ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->getActiveSheet()->getStyle("$cell$d")
+        ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->getActiveSheet()->getStyle("$cell$e")
+        ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $cell++;
     }
 
     //merge heading
-    $spreadsheet->getActiveSheet()->mergeCells("A1:D1");
-    $spreadsheet->getActiveSheet()->mergeCells("A2:D2");
-    $spreadsheet->getActiveSheet()->mergeCells("A3:D3");
-    $spreadsheet->getActiveSheet()->mergeCells("A4:D4");
-    $spreadsheet->getActiveSheet()->mergeCells("A14:D14");
-    $spreadsheet->getActiveSheet()->mergeCells("A15:D15");
+    $spreadsheet->getActiveSheet()->mergeCells("A1:E1");
+    $spreadsheet->getActiveSheet()->mergeCells("A2:E2");
+    $spreadsheet->getActiveSheet()->mergeCells("A3:E3");
+    $spreadsheet->getActiveSheet()->mergeCells("A4:E4");
+    $spreadsheet->getActiveSheet()->mergeCells("A14:E14");
+    $spreadsheet->getActiveSheet()->mergeCells("A15:E15");
+    $spreadsheet->getActiveSheet()->mergeCells("A22:E22");
+    $spreadsheet->getActiveSheet()->mergeCells("A23:E23");
 
     //setting to font bold
     $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
@@ -701,12 +741,22 @@ class Reports extends MY_Controller {
     $spreadsheet->getActiveSheet()->getStyle('A4')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
     $spreadsheet->getActiveSheet()->getStyle('A14')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
     $spreadsheet->getActiveSheet()->getStyle('A15')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-    $spreadsheet->getActiveSheet()->getStyle("A1:D12")->applyFromArray($styleArray);
+    $spreadsheet->getActiveSheet()->getStyle("A1:E12")->applyFromArray($styleArray);
+
     // COLUMN DIMENSION
     $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(15);
     $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(15);
     $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(15);
     $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(15);
+    $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(15);
+    $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(15);
+    $spreadsheet->getActiveSheet()->getColumnDimension('G')->setWidth(15);
+    $spreadsheet->getActiveSheet()->getColumnDimension('H')->setWidth(15);
+    $spreadsheet->getActiveSheet()->getColumnDimension('I')->setWidth(15);
+    $spreadsheet->getActiveSheet()->getColumnDimension('J')->setWidth(15);
+    $spreadsheet->getActiveSheet()->getColumnDimension('K')->setWidth(15);
+    $spreadsheet->getActiveSheet()->getColumnDimension('L')->setWidth(15);
+    $spreadsheet->getActiveSheet()->getColumnDimension('M')->setWidth(15);
 
 
 
