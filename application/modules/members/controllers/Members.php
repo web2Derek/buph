@@ -15,7 +15,6 @@ class Members extends MY_Controller {
     $data['list'] = $this->MY_Model->getRows('tbl_mem_personal_information' , $params);
     $data['others'][0] = $this->MY_Model->getRows('tbl_branch');
     $data['others'][1] = $this->MY_Model->getRows('tbl_member_types');
-
     $this->load_page('list_v' , $data);
   }
 
@@ -43,11 +42,8 @@ class Members extends MY_Controller {
       "recordsFiltered" => $list['count'],
       "data" => $list['data']
     );
-
     echo json_encode($output);
   }
-
-
 
   public function form(){
     $params['select'] = 'branch_id , branch_name';
@@ -773,7 +769,7 @@ class Members extends MY_Controller {
 
     $params['join'] = array(
       'tbl_mem_residence'             => 'tbl_mem_personal_information.member_id = tbl_mem_residence.member_id',
-      'tbl_mem_eployment_information' => 'tbl_mem_personal_information.member_id = tbl_mem_eployment_information.fk_member_id',
+      'tbl_mem_eployment_information' => 'tbl_mem_personal_information.member_id = tbl_mem_eployment_information.member_id',
       'tbl_mem_education_attainment'  => 'tbl_mem_personal_information.member_id = tbl_mem_education_attainment.member_id',
       'tbl_mem_spouse_information'    => 'tbl_mem_personal_information.member_id = tbl_mem_spouse_information.member_id',
       'tbl_mem_spouse_emp_info'       => 'tbl_mem_personal_information.member_id = tbl_mem_spouse_emp_info.member_id',

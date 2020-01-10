@@ -1251,7 +1251,24 @@ $('.profile_edit').on('change' , function() {
         Swal.close();
     });
 
+
     $(document).on('click' , '#take_picture' , function() {
+        // let inputs = [];
+        // navigator.mediaDevices.enumerateDevices().then(function (dev) {
+        //
+        //     $.each(dev , function(key,val) {
+        //         console.log(val.kind);
+        //             inputs.push(val.kind)
+        //     });
+        //     if (inputs.includes('videoinput')) {
+        //         alert('naa');
+        //     }else{
+        //         alert('wala');
+        //     }
+        //     return;
+        //
+        // })
+
         $('#controls').show();
         Webcam.set({
             width: 208,
@@ -1259,8 +1276,9 @@ $('.profile_edit').on('change' , function() {
             image_format: 'png',
             png_quality: 90
         });
-        Webcam.attach( '#photo_container' );
+        Webcam.attach('#photo_container');
         Swal.close();
+
     });
 
 $('#message').on('keyup', function() {
