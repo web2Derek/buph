@@ -218,12 +218,12 @@
                         </li>
 
                         <li class="nav-item dropdown u-pro">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo base_url(); ?>assets/images/gallery/profile.jpg" alt="user" class="" /> <span class="hidden-md-down"><?php echo sesdata('username'); ?> &nbsp;<i class="fa fa-angle-down"></i></span> </a>
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo base_url(); ?>assets/profile/profile.jpg" alt="user" class="" /> <span class="hidden-md-down"><?php echo sesdata('username'); ?> &nbsp;<i class="fa fa-angle-down"></i></span> </a>
                             <div class="dropdown-menu dropdown-menu-right animated flipInY">
                                 <ul class="dropdown-user">
                                     <li>
                                         <div class="dw-user-box">
-                                            <div class="u-img"><img src="<?php echo base_url(); ?>assets/images/gallery/profile.jpg" alt="user"></div>
+                                            <div class="u-img"><img src="<?php echo base_url(); ?>assets/profile/profile.jpg" alt="user"></div>
                                             <div class="u-text">
                                                 <h4><?php echo $_SESSION['email'] ;?></h4>
                                               </div>

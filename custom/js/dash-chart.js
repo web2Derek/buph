@@ -25,6 +25,7 @@ $(document).ready(function() {
       function generateTr(data) {
         let newArr = data['members_count'].reverse();
         for(var i = 0; i < newArr.length; i++) {
+          console.log(newArr[i].female);
           table_data = `
               <tr class="${newArr[i].range_data}">
                   <td>${newArr[i].range_data}</td>
