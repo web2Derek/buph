@@ -738,43 +738,6 @@ class Reports extends MY_Controller {
         ');
 
 
-        $class = $this->MY_Model->raw('
-        SELECT
-          @rm := (SELECT COUNT(type_id) FROM tbl_member_types as mt
-          LEFT JOIN tbl_mem_personal_information as mpi
-          ON mt.type_id = mpi.member_type_id
-          LEFT JOIN tbl_account_info AS tai
-          ON tai.member_id = mpi.member_id
-          WHERE mt.type_id = 6 AND gender = "Male" AND b.branch_id = branch) as Regular_M,
-
-          @rf := (SELECT COUNT(type_id) FROM tbl_member_types as mt
-          LEFT JOIN tbl_mem_personal_information as mpi
-          ON mt.type_id = mpi.member_type_id
-          LEFT JOIN tbl_account_info AS tai
-          ON tai.member_id = mpi.member_id
-          WHERE mt.type_id = 6 AND gender = "Female" and b.branch_id = branch) as Regular_F,
-
-          @am := (SELECT COUNT(type_id) FROM tbl_member_types as mt
-          LEFT JOIN tbl_mem_personal_information as mpi
-          ON mt.type_id = mpi.member_type_id
-          LEFT JOIN tbl_account_info AS tai
-          ON tai.member_id = mpi.member_id
-          WHERE mt.type_id = 2 AND gender = "Male" and b.branch_id = branch) as Associate_M,
-
-          @af := (SELECT COUNT(type_id) FROM tbl_member_types as mt
-          LEFT JOIN tbl_mem_personal_information as mpi
-          ON mt.type_id = mpi.member_type_id
-          LEFT JOIN tbl_account_info AS tai
-          ON tai.member_id = mpi.member_id
-          WHERE mt.type_id = 2 AND gender = "Female" and b.branch_id = branch) as Associate_F,
-
-          ROUND(@rm + @rf + @am + @AF) as total,
-
-          branch_name
-          from tbl_branch as b
-        ');
-
-
         $cell = 'B';
         $b = 17;
         $c = 18;
@@ -792,6 +755,8 @@ class Reports extends MY_Controller {
               ],
         ];
 
+
+        //NEW MEMBERS
         for($i = 0; $i<count($branch); $i++) {
           $spreadsheet->getActiveSheet()->setCellValue("$cell$b", $branch[$i]['branch_name']);
           $spreadsheet->getActiveSheet()->setCellValue("$cell$c", $total[$i]['fullpledge']);
@@ -831,6 +796,44 @@ class Reports extends MY_Controller {
           $spreadsheet->getActiveSheet()->getStyle("$wd_cell$wd")->applyFromArray($styleArray);
           $wd_cell++;
         }
+
+        $class = $this->MY_Model->raw('
+        SELECT
+          @rm := (SELECT COUNT(type_id) FROM tbl_member_types as mt
+          LEFT JOIN tbl_mem_personal_information as mpi
+          ON mt.type_id = mpi.member_type_id
+          LEFT JOIN tbl_account_info AS tai
+          ON tai.member_id = mpi.member_id
+          WHERE mt.type_id = 6 AND gender = "Male" AND b.branch_id = branch) as Regular_M,
+
+          @rf := (SELECT COUNT(type_id) FROM tbl_member_types as mt
+          LEFT JOIN tbl_mem_personal_information as mpi
+          ON mt.type_id = mpi.member_type_id
+          LEFT JOIN tbl_account_info AS tai
+          ON tai.member_id = mpi.member_id
+          WHERE mt.type_id = 6 AND gender = "Female" and b.branch_id = branch) as Regular_F,
+
+          @am := (SELECT COUNT(type_id) FROM tbl_member_types as mt
+          LEFT JOIN tbl_mem_personal_information as mpi
+          ON mt.type_id = mpi.member_type_id
+          LEFT JOIN tbl_account_info AS tai
+          ON tai.member_id = mpi.member_id
+          WHERE mt.type_id = 2 AND gender = "Male" and b.branch_id = branch) as Associate_M,
+
+          @af := (SELECT COUNT(type_id) FROM tbl_member_types as mt
+          LEFT JOIN tbl_mem_personal_information as mpi
+          ON mt.type_id = mpi.member_type_id
+          LEFT JOIN tbl_account_info AS tai
+          ON tai.member_id = mpi.member_id
+          WHERE mt.type_id = 2 AND gender = "Female" and b.branch_id = branch) as Associate_F,
+
+          ROUND(@rm + @rf + @am + @AF) as total,
+
+          branch_name
+          from tbl_branch as b
+        ');
+
+
         // ASSIGN CELL COLUMN
         $cl_cell = 'B';
         $cl = 34;
@@ -839,8 +842,18 @@ class Reports extends MY_Controller {
         $cl_c = 37;
         $cl_d = 38;
         $cl_e = 39;
-
+        $rm = 0;
+        $rf = 0;
+        $am = 0;
+        $af = 0;
+        $member_total = 0;
+        //CLASSIFICATION
         for($i = 0; $i<count($branch); $i++) {
+          $rm += $class[$i]['Regular_M'];
+          $rf += $class[$i]['Regular_F'];
+          $am += $class[$i]['Associate_M'];
+          $af += $class[$i]['Associate_F'];
+          $member_total += $class[$i]['total'];
           $spreadsheet->getActiveSheet()->setCellValue("$cl_cell$cl", $class[$i]['branch_name']);
           $spreadsheet->getActiveSheet()->setCellValue("$cl_cell$cl_a", $class[$i]['Regular_M']);
           $spreadsheet->getActiveSheet()->setCellValue("$cl_cell$cl_b", $class[$i]['Regular_F']);
@@ -866,6 +879,18 @@ class Reports extends MY_Controller {
           $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl")->applyFromArray($styleArray);
           $cl_cell++;
         }
+
+        //TOTAL
+        $r_loop = 39;
+        for($i = 35; $i <= $r_loop; $i++ ) {
+        $spreadsheet->getActiveSheet()->setCellValue("O$i", $rm);
+        $spreadsheet->getActiveSheet()->setCellValue("O$i", $rf);
+        $spreadsheet->getActiveSheet()->setCellValue("O$i", $am);
+        $spreadsheet->getActiveSheet()->setCellValue("O$i", $af);
+        $spreadsheet->getActiveSheet()->setCellValue("O$i", $member_total);
+        $spreadsheet->getActiveSheet()->getStyle("O$i")->applyFromArray($styled);
+      }
+
 
         //RUNNING BALANCE
         $balance = $this->MY_Model->raw('
@@ -904,9 +929,19 @@ class Reports extends MY_Controller {
           $bal_c = 30;
           $bal_d = 31;
           $bal_e = 32;
+          $f_total = 0;
+          $s_total = 0;
+          $p_total = 0;
+          $w_total = 0;
+          $t_total = 0;
 
           //RUNNING BALANCE DATA
           for($i = 0; $i<count($branch); $i++) {
+            $f_total += $balance[$i]['fullpledge'];
+            $s_total += $balance[$i]['share'];
+            $p_total += $balance[$i]['total'];
+            $w_total += $balance[$i]['withdraw_total'];
+            $t_total += $balance[$i]['overall'];
             $spreadsheet->getActiveSheet()->setCellValue("$bal$bal_data", $balance[$i]['branch_name']);
             $spreadsheet->getActiveSheet()->setCellValue("$bal$bal_a", $balance[$i]['fullpledge']);
             $spreadsheet->getActiveSheet()->setCellValue("$bal$bal_b", $balance[$i]['share']);
@@ -937,8 +972,16 @@ class Reports extends MY_Controller {
             $spreadsheet->getActiveSheet()->getStyle("$bal$bal_data")->applyFromArray($styleArray);
             $bal++;
           }
-
-
+          // TOTAL CLASSIFICATION
+          $loop = 32;
+          for($i = 28; $i <= $loop;$i++) {
+          $spreadsheet->getActiveSheet()->setCellValue("O$i","$f_total");
+          $spreadsheet->getActiveSheet()->setCellValue("O$i","$s_total");
+          $spreadsheet->getActiveSheet()->setCellValue("O$i","$p_total");
+          $spreadsheet->getActiveSheet()->setCellValue("O$i","$w_total");
+          $spreadsheet->getActiveSheet()->setCellValue("O$i","$t_total");
+          $spreadsheet->getActiveSheet()->getStyle("O$i")->applyFromArray($styled);
+          }
 
         //merge heading
         $spreadsheet->getActiveSheet()->mergeCells("A1:E1");
