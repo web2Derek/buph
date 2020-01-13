@@ -881,13 +881,13 @@ class Reports extends MY_Controller {
         }
 
         //TOTAL
+        $spreadsheet->getActiveSheet()->setCellValue("O35", $rm);
+        $spreadsheet->getActiveSheet()->setCellValue("O36", $rf);
+        $spreadsheet->getActiveSheet()->setCellValue("O37", $am);
+        $spreadsheet->getActiveSheet()->setCellValue("O38", $af);
+        $spreadsheet->getActiveSheet()->setCellValue("O39", $member_total);
         $r_loop = 39;
         for($i = 35; $i <= $r_loop; $i++ ) {
-        $spreadsheet->getActiveSheet()->setCellValue("O$i", $rm);
-        $spreadsheet->getActiveSheet()->setCellValue("O$i", $rf);
-        $spreadsheet->getActiveSheet()->setCellValue("O$i", $am);
-        $spreadsheet->getActiveSheet()->setCellValue("O$i", $af);
-        $spreadsheet->getActiveSheet()->setCellValue("O$i", $member_total);
         $spreadsheet->getActiveSheet()->getStyle("O$i")->applyFromArray($styled);
       }
 
@@ -973,13 +973,13 @@ class Reports extends MY_Controller {
             $bal++;
           }
           // TOTAL CLASSIFICATION
-          $loop = 32;
-          for($i = 28; $i <= $loop;$i++) {
-          $spreadsheet->getActiveSheet()->setCellValue("O$i","$f_total");
-          $spreadsheet->getActiveSheet()->setCellValue("O$i","$s_total");
-          $spreadsheet->getActiveSheet()->setCellValue("O$i","$p_total");
-          $spreadsheet->getActiveSheet()->setCellValue("O$i","$w_total");
-          $spreadsheet->getActiveSheet()->setCellValue("O$i","$t_total");
+          $spreadsheet->getActiveSheet()->setCellValue("O35","$f_total");
+          $spreadsheet->getActiveSheet()->setCellValue("O36","$s_total");
+          $spreadsheet->getActiveSheet()->setCellValue("O37","$p_total");
+          $spreadsheet->getActiveSheet()->setCellValue("O38","$w_total");
+          $spreadsheet->getActiveSheet()->setCellValue("O39","$t_total");
+          $loop = 39;
+          for($i = 35 ; $i <= $loop;$i++) {
           $spreadsheet->getActiveSheet()->getStyle("O$i")->applyFromArray($styled);
           }
 
