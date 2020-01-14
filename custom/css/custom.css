@@ -93,6 +93,10 @@
   border:none!important;
 }
 
+#date_of_report {
+  text-align: center;
+}
+
 .btn-primary, .btn-primary.disabled {
     background: #137E09!important;
     border: 1px solid #137E09!important;

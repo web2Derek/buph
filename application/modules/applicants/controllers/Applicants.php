@@ -28,7 +28,7 @@ class Applicants extends Applicant_Controller{
     if($_SESSION['progress_status'] == 0) {
         $this->load_member('membership_form', '');
       } else {
-        redirect(base_url('applicants'));
+        redirect(base_url('applicants/paymentPage'));
       }
     }
 
