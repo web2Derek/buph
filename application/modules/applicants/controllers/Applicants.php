@@ -10,7 +10,7 @@ class Applicants extends Applicant_Controller{
 
   public function index() {
     if($this->session->userdata('logged_in')) {
-      $this->load_member('pmes_video', '');
+    $this->load_member('pmes_video', '');
     } else {
     $this->load_member_page('member_login', '');
     }
@@ -74,6 +74,7 @@ class Applicants extends Applicant_Controller{
   }
 
   public function registration() {
+
     if($this->session->userdata('logged_in')) {
       $this->load_member_page('member_dashboard', '');
     } else {
@@ -216,6 +217,7 @@ class Applicants extends Applicant_Controller{
       if ($pi_id) {
         // Generate Account ID & SIGNATURE FILENAME
         $account_id = $this->AccountId();
+        $_SESSION['act_id'] = $account_id;
         $file_name = $this->convertSignature($this->input->post('mem_sign'), $account_id);
         // end
         if (!is_array($file_name)) {
@@ -572,8 +574,8 @@ class Applicants extends Applicant_Controller{
 
   public function submitAgreement() {
     $post = $this->input->post();
-    $member_id = "AG19B7B284BB00";
-
+    $results = array();
+    $member_id = $_SESSION['act_id'];
     $docs = array(
       'filled_form' => isset($post['filled_up_form']) ? true : false,
       '2x_id' => isset($post['2x_id'] ) ? true : false,
@@ -589,12 +591,19 @@ class Applicants extends Applicant_Controller{
     );
 
     $insert = $this->MY_Model->insert('tbl_applicant_agreement' ,$item );
-    if ($insert) {
-      $filename = $this->agreementSignatureConvert($post['agre_sig_val']);
-      $itm = array('signature_file' => $filename);
-      $where = array('agreement_id' => $insert);
-      $this->MY_Model->update('tbl_applicant_agreement' ,$itm, $where);
-    }
+        if ($insert) {
+            $filename = $this->agreementSignatureConvert($post['agre_sig_val']);
+            $itm = array('signature_file' => $filename);
+            $where = array('agreement_id' => $insert);
+            $res = $this->MY_Model->update('tbl_applicant_agreement' ,$itm, $where);
+            if ($res) {
+                $results = array('status' => 'success');
+            }
+        }else{
+            $results = array('status' => 'fail');
+        }
+
+        echo json_encode($results);
   }
 
   public function agreementSignatureConvert($base64){
@@ -622,6 +631,13 @@ class Applicants extends Applicant_Controller{
 
   public function insuranceform(){
     $this->load_member('insuranceform');
+  }
+
+  public function addinsurace(){
+      $post = $this->input->post();
+      echo "<pre>";
+      print_r($post);
+      die();
   }
 
   // SAVE VIDE TIME

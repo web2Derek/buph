@@ -298,9 +298,389 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <p>4.) Have you ever suffered from any of the following?</p>
+                                            <p>a.)</p>
                                             <ul>
-                                                <li>Test</li>
+                                                <li>epilepsy</li>
+                                                <li>fainting attacks</li>
+                                                <li>any mental disorder</li>
+                                                <li>any mental disorder</li>
+                                                <li>any nervous system disorder or breakdown?</li>
                                             </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="4_a" name="4_a" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="4_a">Yes</label>
+
+                                                <input type="radio" class="check" id="4_a" name="4_a" data-radio="iradio_flat-green" value="No">
+                                                <label for="4_a">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>b.)</p>
+                                            <ul>
+                                                <li>asthma</li>
+                                                <li>bronchitis</li>
+                                                <li>pneumonia</li>
+                                                <li>tuberculosis</li>
+                                                <li>any other lung complains?</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="4_b" name="4_b" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="4_b">Yes</label>
+
+                                                <input type="radio" class="check" id="4_b" name="4_b" data-radio="iradio_flat-green" value="No">
+                                                <label for="4_b">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>c.)</p>
+                                            <ul>
+                                                <li>chest pain</li>
+                                                <li>high blood pressure</li>
+                                                <li>palpitations</li>
+                                                <li>shortness of breath</li>
+                                                <li>stroke</li>
+                                                <li>any heart problem</li>
+                                                <li>circulatory problem</li>
+                                                <li>disease of arteries or veins?</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="4_c" name="4_c" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="4_c">Yes</label>
+
+                                                <input type="radio" class="check" id="4_c" name="4_c" data-radio="iradio_flat-green" value="No">
+                                                <label for="4_c">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>d.)</p>
+                                            <ul>
+                                                <li>indigestion</li>
+                                                <li>gastric or duodenal ulcer</li>
+                                                <li>chronic or recurrent diarrhea</li>
+                                                <li>any problems of the stomach or bowels?</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="4_d" name="4_d" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="4_d">Yes</label>
+
+                                                <input type="radio" class="check" id="4_d" name="4_d" data-radio="iradio_flat-green" value="No">
+                                                <label for="4_d">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>e.)</p>
+                                            <ul>
+                                                <li>diabetes</li>
+                                                <li>kidneys disorder</li>
+                                                <li>liver disorder</li>
+                                                <li>bladder disorder</li>
+                                                <li>urinary system disorder?</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="4_e" name="4_e" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="4_e">Yes</label>
+
+                                                <input type="radio" class="check" id="4_e" name="4_e" data-radio="iradio_flat-green" value="No">
+                                                <label for="4_e">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>f.)</p>
+                                            <ul>
+                                                <li>rheumatic feverrheumatic fever</li>
+                                                <li>arthritis</li>
+                                                <li>gout</li>
+                                                <li>any joint or bone disease?</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="4_f" name="4_f" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="4_f">Yes</label>
+
+                                                <input type="radio" class="check" id="4_f" name="4_f" data-radio="iradio_flat-green" value="No">
+                                                <label for="4_f">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>g.)</p>
+                                            <ul>
+                                                <li>any form of cancer</li>
+                                                <li>tumor</li>
+                                                <li>blood disorder</li>
+                                                <li>spleen disorder</li>
+                                                <li>enlarged glands?</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="4_g" name="4_g" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="4_g">Yes</label>
+
+                                                <input type="radio" class="check" id="4_g" name="4_g" data-radio="iradio_flat-green" value="No">
+                                                <label for="4_g">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>h.)</p>
+                                            <ul>
+                                                <li>unexplained recurrent or persistent fever</li>
+                                                <li>dengue</li>
+                                                <li>weight loss</li>
+                                                <li>any skin disorder?</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="4_h" name="4_h" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="4_h">Yes</label>
+
+                                                <input type="radio" class="check" id="4_h" name="4_h" data-radio="iradio_flat-green" value="No">
+                                                <label for="4_h">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>i.)</p>
+                                            <ul>
+                                                <li>unexplainedany sexually transmitted disease (such as syphilis or gonorrhea) </li>
+                                                <li>ever sought medical advice, treatment,</li>
+                                                <li>had a blood test or been diagnose in connection with a viral disease (such as hepatitis B or AIDS or HIV), or other Venereal diseases?</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="4_i" name="4_i" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="4_i">Yes</label>
+
+                                                <input type="radio" class="check" id="4_i" name="4_i" data-radio="iradio_flat-green" value="No">
+                                                <label for="4_i">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>
+                                                any disease or disorder of the
+                                            </p>
+                                            <p>j.)</p>
+                                            <ul>
+                                                <li>eyes</li>
+                                                <li>ears</li>
+                                                <li>nose</li>
+                                                <li>throat</li>
+                                                <li>mouth</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="4_i" name="4_i" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="4_i">Yes</label>
+
+                                                <input type="radio" class="check" id="4_i" name="4_i" data-radio="iradio_flat-green" value="No">
+                                                <label for="4_i">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <p>k.)</p>
+                                            <ul>
+                                                <li>unexplained night sweat</li>
+                                                <li>unexplained infections or swollen glands?</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="4_k" name="4_k" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="4_k">Yes</label>
+
+                                                <input type="radio" class="check" id="4_k" name="4_k" data-radio="iradio_flat-green" value="No">
+                                                <label for="4_k">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>l.) any illness, injury, or disability not mentioned above?</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="4_l" name="4_l" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="4_l">Yes</label>
+
+                                                <input type="radio" class="check" id="4_l" name="4_l" data-radio="iradio_flat-green" value="No">
+                                                <label for="4_l">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>5.) Are you taking medication of any kind? If YES, for what? </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="long_5" name="long_5" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="long_5">Yes</label>
+
+                                                <input type="radio" class="check" id="long_5" name="long_5" data-radio="iradio_flat-green" value="No">
+                                                <label for="long_5">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>6.) Have any of your natural parents, brothers, or sisters died from or suffered from  </p>
+                                            <ul>
+                                                <li>diabetes</li>
+                                                <li>stroke</li>
+                                                <li>heart disease</li>
+                                                <li>cancer</li>
+                                                <li>tuberculosis</li>
+                                                <li>mental illness?</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="long_6" name="long_6" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="long_6">Yes</label>
+
+                                                <input type="radio" class="check" id="long_6" name="long_6" data-radio="iradio_flat-green" value="No">
+                                                <label for="long_6">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>7.) Have you smoked any cigarettes in the past 12 months?  </p>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="long_7" name="long_7" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="long_7">Yes</label>
+
+                                                <input type="radio" class="check" id="long_7" name="long_7" data-radio="iradio_flat-green" value="No">
+                                                <label for="long_7">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>8.) Has any proposal for life assurance on your life ever been declined, postponed, or accepted on special terms?  </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="long_8" name="long_8" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="long_8">Yes</label>
+
+                                                <input type="radio" class="check" id="long_8" name="long_8" data-radio="iradio_flat-green" value="No">
+                                                <label for="long_8">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>9.) Have you ever been received or receiving disability benefit?  </p>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="radio" class="check" id="long_9" name="long_9" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="long_9">Yes</label>
+
+                                                <input type="radio" class="check" id="long_9" name="long_9" data-radio="iradio_flat-green" value="No">
+                                                <label for="long_9">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>10.) Please provide the name and address of your attending physician  </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="long_10">
+                                            </div>
                                         </div>
                                     </div>
                                 </section>

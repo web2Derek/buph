@@ -52,21 +52,21 @@ $(document).ready(function() {
     })
   });
 
-  $(document).on('submit' , '#submitAgreement' , function(e) {
-    e.preventDefault();
-    let formdata = new FormData($(this)[0]);
-    $.ajax({
-      url : url + 'applicants/submitAgreement',
-      method : 'POST',
-      data : formdata,
-      processData: false,
-      contentType: false,
-      dataType : 'json',
-      success : function(e){
-        console.log(e);
-      }
-    });
-  });
+  // $(document).on('submit' , '#submitAgreement' , function(e) {
+  //   e.preventDefault();
+  //   let formdata = new FormData($(this)[0]);
+  //   $.ajax({
+  //     url : url + 'applicants/submitAgreement',
+  //     method : 'POST',
+  //     data : formdata,
+  //     processData: false,
+  //     contentType: false,
+  //     dataType : 'json',
+  //     success : function(e){
+  //       console.log(e);
+  //     }
+  //   });
+  // });
 
   $(document).on('click' , '#clear_sig' , function() {
     $('#agreementform_sig').signature('clear');
@@ -82,8 +82,14 @@ $(document).ready(function() {
       data : formdata,
       processData: false,
       contentType: false,
+      dataType : 'json',
       success : function(response){
-        console.log(response);
+        if (response.status == 'success') {
+            Swal.fire('Success', 'You will be redirected to the next step. Please wait.', 'success');
+            setTimeout(function () {
+                window.location.href= url + 'applicants/insuranceform';
+            }, 3000);
+        }
       }
     })
   });
@@ -134,7 +140,10 @@ $(document).ready(function() {
           if(data) {
             $('#applicant_form')[0].reset();
             $('#signaturetab_form').signature('clear');
-            Swal.fire("Registration Form Completed", "Please Proceed to the next Step.");
+            Swal.fire("Registration Form Completed", "You will be redirected to the next step.");
+            setTimeout(function () {
+                window.location.href= url + 'applicants/agreementform';
+            }, 3000);
           }
         }
       })
