@@ -575,7 +575,7 @@ class Applicants extends Applicant_Controller{
   public function submitAgreement() {
     $post = $this->input->post();
     $results = array();
-    $member_id = '1234566';
+    $member_id = $_SESSION['act_id'];
     $docs = array(
       'filled_form' => isset($post['filled_up_form']) ? true : false,
       '2x_id' => isset($post['2x_id'] ) ? true : false,
