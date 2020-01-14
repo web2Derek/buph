@@ -633,6 +633,13 @@ class Applicants extends Applicant_Controller{
     $this->load_member('insuranceform');
   }
 
+  public function addinsurace(){
+      $post = $this->input->post();
+      echo "<pre>";
+      print_r($post);
+      die();
+  }
+
   // SAVE VIDE TIME
   public function saveLastTime() {
     $post = $this->input->post();
