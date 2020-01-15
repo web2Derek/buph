@@ -175,7 +175,7 @@ $(document).ready(function() {
               filename: 'Full Pledge Reports'
             }]
         });
-         
+
       }
 
 
@@ -220,7 +220,7 @@ $(document).ready(function() {
            filename: 'Membership Statistic Report'
          }]
      });
-      
+
    }
 
  });
@@ -331,7 +331,23 @@ $(document).ready(function() {
             });
         }
 
+// MEMBERSHIP REPORT
 
+  $(document).on('submit', function(e) {
+    e.preventDefault();
+    let url = $('#base_url').val();
+    let data_r = $('#member_report_date').val();
+
+    $.ajax({
+      method: 'POST',
+      url: url + 'reports/getMemberStatistic',
+      data: {data: data_r},
+      dataType: 'json',
+      success:function(data) {
+          console.log(data);
+        }
+    })
+  })
 
   /*******************************************/
       // Single Date Range Picker
@@ -357,10 +373,16 @@ $(document).ready(function() {
 
   $('#fp_singledate').datepicker({
       format: "mm-dd-yyyy",
-     viewMode: "months",
-     minViewMode: "months"
+       viewMode: "months",
+       minViewMode: "months"
   });
 
+//DATE PICKER FOR MEMBERSHIP STATISTIC REPORT
+$('#member_report_date').datepicker({
+    format: "mm-dd-yyyy",
+    viewMode: "months",
+    minViewMode: "months"
+});
   // $('#fp_singledate').daterangepicker({
   //   singleDatePicker: true,
   //   showDropdowns: true,

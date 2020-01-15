@@ -625,7 +625,7 @@ class Reports extends MY_Controller {
   public function getMemberStatistic() {
     error_reporting(E_ALL);
     ini_set('display_errors', 0);
-
+    $post = $this->input->post();
     $spreadsheet = new Spreadsheet();
     //get current active sheet (first sheet)
     $sheet = $spreadsheet->getActiveSheet();
@@ -661,44 +661,87 @@ class Reports extends MY_Controller {
         ],
     ];
 
+    $header = [
+      // 'borders' => [
+      //   'outline' => [
+      //     'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+      //     'color' => ['argb' => '000000'],
+      //   ],
+      // ],
+        'font' => [
+          'bold' => true,
+          'size' => 16,
+      ],
+    'alignment' => [
+    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+        ],
+
+    ];
+
+    $date_generated = date('Y-m-d');
     $spreadsheet->getActiveSheet()
     ->setCellValue('A1',"BUPHARCO");
     $spreadsheet->getActiveSheet()->setCellValue('A2',"WE CARE, WE SHARE");
     $spreadsheet->getActiveSheet()->setCellValue('A3',"Bukidnon PharmaceuticalMultipurpose Cooperative");
     $spreadsheet->getActiveSheet()->setCellValue('A4',"P-16, Sayre Highway, Poblacion Valencia City, Bukidnon, Philippines");
-    $spreadsheet->getActiveSheet()->setCellValue('A6',"Memo No.:");
-    $spreadsheet->getActiveSheet()->setCellValue('B6',"MO 9 S. 2019");
-    $spreadsheet->getActiveSheet()->setCellValue('A7',"For:");
-    $spreadsheet->getActiveSheet()->setCellValue('B7',"JERALYN C. CUCHAPIN");
-    $spreadsheet->getActiveSheet()->setCellValue('B8',"HR MANAGER");
-    $spreadsheet->getActiveSheet()->setCellValue('A9',"From:");
-    $spreadsheet->getActiveSheet()->setCellValue('B9',"GHRESALYN B. HERNANE:");
-    $spreadsheet->getActiveSheet()->setCellValue('B10'," Records and Membership Assistant");
-    $spreadsheet->getActiveSheet()->setCellValue('A11',"Date:");
-    $spreadsheet->getActiveSheet()->setCellValue('B11',"November 6, 2019:");
-    $spreadsheet->getActiveSheet()->setCellValue('A12',"Re:");
-    $spreadsheet->getActiveSheet()->setCellValue('B12',"Membership Monthly Report - OCTOBER 2019");
+    $spreadsheet->getActiveSheet()->setCellValue('A6',"Memo No.: MO 9 S. 2019");
+    $spreadsheet->getActiveSheet()->setCellValue('A7',"For: JERALYN C. CUCHAPIN");
+    $spreadsheet->getActiveSheet()->setCellValue('A8',"HR MANAGER");
+    $spreadsheet->getActiveSheet()->setCellValue('A9',"From: GHRESALYN B. HERNANE");
+    $spreadsheet->getActiveSheet()->setCellValue('A10'," Records and Membership Assistant");
+    $spreadsheet->getActiveSheet()->setCellValue('A11',"Date: $date_generated");
+    $spreadsheet->getActiveSheet()->setCellValue('A12',"Re: Membership Monthly Report - OCTOBER 2019");
     $spreadsheet->getActiveSheet()->setCellValue('A14',"( NEW MEMBERS )");
     $spreadsheet->getActiveSheet()->setCellValue('A15',"For the month of OCTOBER");
     $spreadsheet->getActiveSheet()->setCellValue('A17',"BRANCH");
     $spreadsheet->getActiveSheet()->setCellValue('A18',"Full Pledge");
-    $spreadsheet->getActiveSheet()->setCellValue('A19',"BELOW 2 SHARES BUT MORE THAN ONE SHARE");
+    $spreadsheet->getActiveSheet()->setCellValue('A19',"Below 2 shares but more than one share");
     $spreadsheet->getActiveSheet()->setCellValue('A20',"TOTAL");
     $spreadsheet->getActiveSheet()->setCellValue('A22',"(NEW WITHDRAWN MEMBERS)");
     $spreadsheet->getActiveSheet()->setCellValue('A24',"BRANCH");
     $spreadsheet->getActiveSheet()->setCellValue('A25',"Withdraw");
-    $spreadsheet->getActiveSheet()->setCellValue('A27',"Withdraw");
+    $spreadsheet->getActiveSheet()->setCellValue('A27',"Branch");
     $spreadsheet->getActiveSheet()->setCellValue('A28',"FULLPLEDGE");
-    $spreadsheet->getActiveSheet()->setCellValue('A29',"BELOW 2 SHARES BUT MORE THAN ONE SHARE");
+    $spreadsheet->getActiveSheet()->setCellValue('A29',"Below 2 shares but more than one share");
     $spreadsheet->getActiveSheet()->setCellValue('A30',"TOTAL");
-    $spreadsheet->getActiveSheet()->setCellValue('A31',"WITHDRAWN MEMBERS (SEPTEMBER)");
-    $spreadsheet->getActiveSheet()->setCellValue('A32',"TOTAL NUMBERS OF MEMBERS");
+    $spreadsheet->getActiveSheet()->setCellValue('A31',"Wihdrawn Members (SEPTEMBER)");
+    $spreadsheet->getActiveSheet()->setCellValue('A32',"Total Numbers of Members");
     $spreadsheet->getActiveSheet()->setCellValue('A34',"BRANCH");
     $spreadsheet->getActiveSheet()->setCellValue('A35',"Regular Male");
     $spreadsheet->getActiveSheet()->setCellValue('A36',"Regular Female");
     $spreadsheet->getActiveSheet()->setCellValue('A37',"Associate Male");
     $spreadsheet->getActiveSheet()->setCellValue('A38',"Associate Female");
     $spreadsheet->getActiveSheet()->setCellValue('A39',"Total");
+    $spreadsheet->getActiveSheet()->setCellValue('O17', "Total");
+    $spreadsheet->getActiveSheet()->setCellValue('O24', "Total");
+    $spreadsheet->getActiveSheet()->setCellValue('O27', "Total");
+    $spreadsheet->getActiveSheet()->setCellValue('O34', "Total");
+
+    //STYLE FOR FINAL CELL
+    $spreadsheet->getActiveSheet()->getStyle("O17")->applyFromArray($styleArray);
+    $spreadsheet->getActiveSheet()->getStyle("O24")->applyFromArray($styleArray);
+    $spreadsheet->getActiveSheet()->getStyle("O27")->applyFromArray($styleArray);
+    $spreadsheet->getActiveSheet()->getStyle("O34")->applyFromArray($styleArray);
+
+    // STYLE ARRAY
+    $styled = [
+        'font' => [
+          'bold' => true,
+          'size' => 14,
+          'setWrapText' => true,
+      ],
+      'alignment' => [
+      'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+      'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+          ],
+      'borders' => [
+        'outline' => [
+          'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+          'color' => ['argb' => '000000'],
+        ],
+      ],
+    ];
 
     $branch = $this->MY_Model->raw('
     SELECT branch_name from tbl_branch');
@@ -744,20 +787,15 @@ class Reports extends MY_Controller {
         $d = 19;
         $e = 20;
 
-        $styled = [
-            'font' => [
-              'bold' => true,
-              'size' => 12
-          ],
-          'alignment' => [
-          'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
-          'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-              ],
-        ];
-
-
+        $nf_total = 0;
+        $ns_total = 0;
+        $n_total = 0;
         //NEW MEMBERS
         for($i = 0; $i<count($branch); $i++) {
+          $nf_total += $total[$i]['fullpledge'];
+          $ns_total += $total[$i]['share'];
+          $n_total += $total[$i]['total'];
+
           $spreadsheet->getActiveSheet()->setCellValue("$cell$b", $branch[$i]['branch_name']);
           $spreadsheet->getActiveSheet()->setCellValue("$cell$c", $total[$i]['fullpledge']);
           $spreadsheet->getActiveSheet()->setCellValue("$cell$d", $total[$i]['share']);
@@ -766,20 +804,34 @@ class Reports extends MY_Controller {
           ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
           $spreadsheet->getActiveSheet()->getStyle("$cell$c")
           ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-          // $spreadsheet->getActiveSheet()->getStyle("$cell$d")
-          // ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
           $spreadsheet->getActiveSheet()->getStyle("$cell$e")
           ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
           //SET BORDER FOR BRANCH FIELD
           $spreadsheet->getActiveSheet()->getStyle("$cell$d")->applyFromArray($styled);
-          $spreadsheet->getActiveSheet()->getStyle("$cell$b")->applyFromArray($styleArray);
+          $spreadsheet->getActiveSheet()->getStyle("$cell$c")->applyFromArray($styled);
+          $spreadsheet->getActiveSheet()->getStyle("$cell$e")->applyFromArray($styled);
+          $spreadsheet->getActiveSheet()->getStyle("$cell$b")->applyFromArray($styled);
           $cell++;
         }
+        //NEW MEMBERS TOTAL
+        $spreadsheet->getActiveSheet()->setCellValue('O18', $nf_total);
+        $spreadsheet->getActiveSheet()->setCellValue('O19', $ns_total);
+        $spreadsheet->getActiveSheet()->setCellValue('O20', $n_total);
+        $n_loop = 20;
 
+        for($i = 17; $i <= $n_loop; $i++) {
+          $spreadsheet->getActiveSheet()->getStyle("O$i")->applyFromArray($styled);
+          $spreadsheet->getActiveSheet()->getStyle("A$i")->applyFromArray($styled);
+        }
+
+        //WITHDRAWN MEMBERS
         $wd_cell = 'B';
         $wd_d = 25;
         $wd = 24;
+        $w_total = 0;
         for($i = 0; $i<count($branch); $i++) {
+          $w_total += $withdraw_member[$i]['withdraw_total'];
           $spreadsheet->getActiveSheet()->setCellValue("$wd_cell$wd", $branch[$i]['branch_name']);
           $spreadsheet->getActiveSheet()->setCellValue("$wd_cell$wd_d", $withdraw_member[$i]['withdraw_total']);
           // CENTER CELL DATA
@@ -787,110 +839,18 @@ class Reports extends MY_Controller {
           ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
           $spreadsheet->getActiveSheet()->getStyle("$wd_cell$wd_d")
           ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-          // $spreadsheet->getActiveSheet()->getStyle("$cell$d")
-          // ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-          // $spreadsheet->getActiveSheet()->getStyle("$cell$e")
-          // ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-          //SET BORDER FOR BRANCH FIELD
-          // $spreadsheet->getActiveSheet()->getStyle("$cell$b")->applyFromArray($styleArray);
-          $spreadsheet->getActiveSheet()->getStyle("$wd_cell$wd")->applyFromArray($styleArray);
+
+          $spreadsheet->getActiveSheet()->getStyle("$wd_cell$wd")->applyFromArray($styled);
+          $spreadsheet->getActiveSheet()->getStyle("$wd_cell$wd_d")->applyFromArray($styled);
+          $spreadsheet->getActiveSheet()->getStyle("A24")->applyFromArray($styled);
+          $spreadsheet->getActiveSheet()->getStyle("A25")->applyFromArray($styled);
           $wd_cell++;
         }
 
-        $class = $this->MY_Model->raw('
-        SELECT
-          @rm := (SELECT COUNT(type_id) FROM tbl_member_types as mt
-          LEFT JOIN tbl_mem_personal_information as mpi
-          ON mt.type_id = mpi.member_type_id
-          LEFT JOIN tbl_account_info AS tai
-          ON tai.member_id = mpi.member_id
-          WHERE mt.type_id = 6 AND gender = "Male" AND b.branch_id = branch) as Regular_M,
-
-          @rf := (SELECT COUNT(type_id) FROM tbl_member_types as mt
-          LEFT JOIN tbl_mem_personal_information as mpi
-          ON mt.type_id = mpi.member_type_id
-          LEFT JOIN tbl_account_info AS tai
-          ON tai.member_id = mpi.member_id
-          WHERE mt.type_id = 6 AND gender = "Female" and b.branch_id = branch) as Regular_F,
-
-          @am := (SELECT COUNT(type_id) FROM tbl_member_types as mt
-          LEFT JOIN tbl_mem_personal_information as mpi
-          ON mt.type_id = mpi.member_type_id
-          LEFT JOIN tbl_account_info AS tai
-          ON tai.member_id = mpi.member_id
-          WHERE mt.type_id = 2 AND gender = "Male" and b.branch_id = branch) as Associate_M,
-
-          @af := (SELECT COUNT(type_id) FROM tbl_member_types as mt
-          LEFT JOIN tbl_mem_personal_information as mpi
-          ON mt.type_id = mpi.member_type_id
-          LEFT JOIN tbl_account_info AS tai
-          ON tai.member_id = mpi.member_id
-          WHERE mt.type_id = 2 AND gender = "Female" and b.branch_id = branch) as Associate_F,
-
-          ROUND(@rm + @rf + @am + @AF) as total,
-
-          branch_name
-          from tbl_branch as b
-        ');
-
-
-        // ASSIGN CELL COLUMN
-        $cl_cell = 'B';
-        $cl = 34;
-        $cl_a = 35;
-        $cl_b = 36;
-        $cl_c = 37;
-        $cl_d = 38;
-        $cl_e = 39;
-        $rm = 0;
-        $rf = 0;
-        $am = 0;
-        $af = 0;
-        $member_total = 0;
-        //CLASSIFICATION
-        for($i = 0; $i<count($branch); $i++) {
-          $rm += $class[$i]['Regular_M'];
-          $rf += $class[$i]['Regular_F'];
-          $am += $class[$i]['Associate_M'];
-          $af += $class[$i]['Associate_F'];
-          $member_total += $class[$i]['total'];
-          $spreadsheet->getActiveSheet()->setCellValue("$cl_cell$cl", $class[$i]['branch_name']);
-          $spreadsheet->getActiveSheet()->setCellValue("$cl_cell$cl_a", $class[$i]['Regular_M']);
-          $spreadsheet->getActiveSheet()->setCellValue("$cl_cell$cl_b", $class[$i]['Regular_F']);
-          $spreadsheet->getActiveSheet()->setCellValue("$cl_cell$cl_c", $class[$i]['Associate_M']);
-          $spreadsheet->getActiveSheet()->setCellValue("$cl_cell$cl_d", $class[$i]['Associate_F']);
-          $spreadsheet->getActiveSheet()->setCellValue("$cl_cell$cl_e", $class[$i]['total']);
-          // CENTER CELL DATA
-          $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl")
-          ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-          $spreadsheet->getActiveSheet()->getStyle("$$cl_cell$cl_a")
-          ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-          $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl_b")
-          ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-          $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl_c")
-          ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-          $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl_d")
-          ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-          $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl_e")
-          ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-
-          //SET BORDER FOR BRANCH FIELD
-          // $spreadsheet->getActiveSheet()->getStyle("$cell$b")->applyFromArray($styleArray);
-          $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl")->applyFromArray($styleArray);
-          $cl_cell++;
-        }
-
-        //TOTAL
-        $spreadsheet->getActiveSheet()->setCellValue("O35", $rm);
-        $spreadsheet->getActiveSheet()->setCellValue("O36", $rf);
-        $spreadsheet->getActiveSheet()->setCellValue("O37", $am);
-        $spreadsheet->getActiveSheet()->setCellValue("O38", $af);
-        $spreadsheet->getActiveSheet()->setCellValue("O39", $member_total);
-        $r_loop = 39;
-        for($i = 35; $i <= $r_loop; $i++ ) {
-        $spreadsheet->getActiveSheet()->getStyle("O$i")->applyFromArray($styled);
-      }
-
+        // TOTAL WITHDRAWN MEMBER
+        $spreadsheet->getActiveSheet()->setCellValue('O25', $w_total);
+        $spreadsheet->getActiveSheet()->getStyle("A25")->applyFromArray($styled);
+        $spreadsheet->getActiveSheet()->getStyle("O25")->applyFromArray($styled);
 
         //RUNNING BALANCE
         $balance = $this->MY_Model->raw('
@@ -948,60 +908,154 @@ class Reports extends MY_Controller {
             $spreadsheet->getActiveSheet()->setCellValue("$bal$bal_c", $balance[$i]['total']);
             $spreadsheet->getActiveSheet()->setCellValue("$bal$bal_d", $balance[$i]['withdraw_total']);
             $spreadsheet->getActiveSheet()->setCellValue("$bal$bal_e", $balance[$i]['overall']);
-            // CENTER CELL DATA
-            // $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl")
-            // ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-            // $spreadsheet->getActiveSheet()->getStyle("$$cl_cell$cl_a")
-            // ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-            // $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl_b")
-            // ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-            // $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl_c")
-            // ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-            // $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl_d")
-            // ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-            // $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl_e")
-            // ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
             //SET BORDER FOR BRANCH FIELD
+          $spreadsheet->getActiveSheet()->getStyle("$bal$bal_a")->applyFromArray($styled);
+          $spreadsheet->getActiveSheet()->getStyle("$bal$bal_b")->applyFromArray($styled);
+          $spreadsheet->getActiveSheet()->getStyle("$bal$bal_c")->applyFromArray($styled);
+          $spreadsheet->getActiveSheet()->getStyle("$bal$bal_d")->applyFromArray($styled);
+          $spreadsheet->getActiveSheet()->getStyle("$bal$bal_e")->applyFromArray($styled);
+          $spreadsheet->getActiveSheet()->getStyle("$bal$bal_data")->applyFromArray($styled);
+          $bal++;
+          }
 
-            $spreadsheet->getActiveSheet()->getStyle("$bal$bal_a")->applyFromArray($styled);
-            $spreadsheet->getActiveSheet()->getStyle("$bal$bal_b")->applyFromArray($styled);
-            $spreadsheet->getActiveSheet()->getStyle("$bal$bal_c")->applyFromArray($styled);
-            $spreadsheet->getActiveSheet()->getStyle("$bal$bal_d")->applyFromArray($styled);
-            $spreadsheet->getActiveSheet()->getStyle("$bal$bal_e")->applyFromArray($styled);
-            $spreadsheet->getActiveSheet()->getStyle("$bal$bal_data")->applyFromArray($styleArray);
-            $bal++;
-          }
-          // TOTAL CLASSIFICATION
-          $spreadsheet->getActiveSheet()->setCellValue("O35","$f_total");
-          $spreadsheet->getActiveSheet()->setCellValue("O36","$s_total");
-          $spreadsheet->getActiveSheet()->setCellValue("O37","$p_total");
-          $spreadsheet->getActiveSheet()->setCellValue("O38","$w_total");
-          $spreadsheet->getActiveSheet()->setCellValue("O39","$t_total");
-          $loop = 39;
-          for($i = 35 ; $i <= $loop;$i++) {
+          // TOTAL WITHDRAWN AND BALANCE
+          $spreadsheet->getActiveSheet()->setCellValue("O28","$f_total");
+          $spreadsheet->getActiveSheet()->setCellValue("O29","$s_total");
+          $spreadsheet->getActiveSheet()->setCellValue("O30","$p_total");
+          $spreadsheet->getActiveSheet()->setCellValue("O31","$w_total");
+          $spreadsheet->getActiveSheet()->setCellValue("O32","$t_total");
+          $loop = 32;
+          for($i = 27 ; $i <= $loop;$i++) {
+          $spreadsheet->getActiveSheet()->getStyle("A$i")->getAlignment()->setWrapText(true);
           $spreadsheet->getActiveSheet()->getStyle("O$i")->applyFromArray($styled);
+          $spreadsheet->getActiveSheet()->getStyle("A$i")->applyFromArray($styled);
           }
+
+        $class = $this->MY_Model->raw('
+        SELECT
+          @rm := (SELECT COUNT(type_id) FROM tbl_member_types as mt
+          LEFT JOIN tbl_mem_personal_information as mpi
+          ON mt.type_id = mpi.member_type_id
+          LEFT JOIN tbl_account_info AS tai
+          ON tai.member_id = mpi.member_id
+          WHERE mt.type_id = 6 AND gender = "Male" AND b.branch_id = branch) as Regular_M,
+
+          @rf := (SELECT COUNT(type_id) FROM tbl_member_types as mt
+          LEFT JOIN tbl_mem_personal_information as mpi
+          ON mt.type_id = mpi.member_type_id
+          LEFT JOIN tbl_account_info AS tai
+          ON tai.member_id = mpi.member_id
+          WHERE mt.type_id = 6 AND gender = "Female" and b.branch_id = branch) as Regular_F,
+
+          @am := (SELECT COUNT(type_id) FROM tbl_member_types as mt
+          LEFT JOIN tbl_mem_personal_information as mpi
+          ON mt.type_id = mpi.member_type_id
+          LEFT JOIN tbl_account_info AS tai
+          ON tai.member_id = mpi.member_id
+          WHERE mt.type_id = 2 AND gender = "Male" and b.branch_id = branch) as Associate_M,
+
+          @af := (SELECT COUNT(type_id) FROM tbl_member_types as mt
+          LEFT JOIN tbl_mem_personal_information as mpi
+          ON mt.type_id = mpi.member_type_id
+          LEFT JOIN tbl_account_info AS tai
+          ON tai.member_id = mpi.member_id
+          WHERE mt.type_id = 2 AND gender = "Female" and b.branch_id = branch) as Associate_F,
+
+          ROUND(@rm + @rf + @am + @AF) as total,
+
+          branch_name
+          from tbl_branch as b
+        ');
+
+        // ASSIGN CELL COLUMN
+        $cl_cell = 'B';
+        $cl = 34;
+        $cl_a = 35;
+        $cl_b = 36;
+        $cl_c = 37;
+        $cl_d = 38;
+        $cl_e = 39;
+        $rm = 0;
+        $rf = 0;
+        $am = 0;
+        $af = 0;
+        $member_total = 0;
+        //CLASSIFICATION
+        for($i = 0; $i<count($branch); $i++) {
+          $rm += $class[$i]['Regular_M'];
+          $rf += $class[$i]['Regular_F'];
+          $am += $class[$i]['Associate_M'];
+          $af += $class[$i]['Associate_F'];
+          $member_total += $class[$i]['total'];
+          $spreadsheet->getActiveSheet()->setCellValue("$cl_cell$cl", $class[$i]['branch_name']);
+          $spreadsheet->getActiveSheet()->setCellValue("$cl_cell$cl_a", $class[$i]['Regular_M']);
+          $spreadsheet->getActiveSheet()->setCellValue("$cl_cell$cl_b", $class[$i]['Regular_F']);
+          $spreadsheet->getActiveSheet()->setCellValue("$cl_cell$cl_c", $class[$i]['Associate_M']);
+          $spreadsheet->getActiveSheet()->setCellValue("$cl_cell$cl_d", $class[$i]['Associate_F']);
+          $spreadsheet->getActiveSheet()->setCellValue("$cl_cell$cl_e", $class[$i]['total']);
+          // CENTER CELL DATA
+          $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl")
+          ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $spreadsheet->getActiveSheet()->getStyle("$$cl_cell$cl_a")
+          ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl_b")
+          ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl_c")
+          ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl_d")
+          ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl_e")
+          ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+          //SET BORDER FOR BRANCH FIELD
+          // $spreadsheet->getActiveSheet()->getStyle("$cell$b")->applyFromArray($styleArray);
+          $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl")->applyFromArray($styled);
+          $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl_a")->applyFromArray($styled);
+          $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl_b")->applyFromArray($styled);
+          $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl_c")->applyFromArray($styled);
+          $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl_d")->applyFromArray($styled);
+          $spreadsheet->getActiveSheet()->getStyle("$cl_cell$cl_e")->applyFromArray($styled);
+          $cl_cell++;
+        }
+
+        //TOTAL CLASSFIFICATION
+        $spreadsheet->getActiveSheet()->setCellValue("O35", $rm);
+        $spreadsheet->getActiveSheet()->setCellValue("O36", $rf);
+        $spreadsheet->getActiveSheet()->setCellValue("O37", $am);
+        $spreadsheet->getActiveSheet()->setCellValue("O38", $af);
+        $spreadsheet->getActiveSheet()->setCellValue("O39", $member_total);
+
+        $r_loop = 39;
+        for($i = 34; $i <= $r_loop; $i++ ) {
+        $spreadsheet->getActiveSheet()->getStyle("A$i")->getAlignment()->setWrapText(true);
+        $spreadsheet->getActiveSheet()->getStyle("O$i")->applyFromArray($styled);
+        $spreadsheet->getActiveSheet()->getStyle("A$i")->applyFromArray($styled);
+      }
 
         //merge heading
-        $spreadsheet->getActiveSheet()->mergeCells("A1:E1");
-        $spreadsheet->getActiveSheet()->mergeCells("A2:E2");
-        $spreadsheet->getActiveSheet()->mergeCells("A3:E3");
-        $spreadsheet->getActiveSheet()->mergeCells("A4:E4");
-        $spreadsheet->getActiveSheet()->mergeCells("A14:E14");
-        $spreadsheet->getActiveSheet()->mergeCells("A15:E15");
-        $spreadsheet->getActiveSheet()->mergeCells("A22:E22");
-        $spreadsheet->getActiveSheet()->mergeCells("A23:E23");
+        $h = 16;
+        for($i = 1; $i <= $h; $i++) {
+          $spreadsheet->getActiveSheet()->mergeCells("A$i:O$i");
+        }
+
+        // $spreadsheet->getActiveSheet()->mergeCells("A2:O2");
+        // $spreadsheet->getActiveSheet()->mergeCells("A3:O3");
+        // $spreadsheet->getActiveSheet()->mergeCells("A4:O4");
+        // $spreadsheet->getActiveSheet()->mergeCells("A14:O14");
+        $spreadsheet->getActiveSheet()->mergeCells("A15:O15");
+        $spreadsheet->getActiveSheet()->mergeCells("A22:O22");
+        $spreadsheet->getActiveSheet()->mergeCells("A23:O23");
 
 
         //setting to font bold
         $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
 
         // set cell alignment
-        $spreadsheet->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $spreadsheet->getActiveSheet()->getStyle('A2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $spreadsheet->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $spreadsheet->getActiveSheet()->getStyle('A4')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        // $spreadsheet->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        // $spreadsheet->getActiveSheet()->getStyle('A2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        // $spreadsheet->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        // $spreadsheet->getActiveSheet()->getStyle('A4')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $spreadsheet->getActiveSheet()->getStyle('A14')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $spreadsheet->getActiveSheet()->getStyle('A15')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $spreadsheet->getActiveSheet()->getStyle('B19')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
@@ -1009,7 +1063,8 @@ class Reports extends MY_Controller {
         $spreadsheet->getActiveSheet()->getStyle('A22')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $spreadsheet->getActiveSheet()->getStyle('A23')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $spreadsheet->getActiveSheet()->getStyle('A28')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $spreadsheet->getActiveSheet()->getStyle("A1:E12")->applyFromArray($styleArray);
+        //HEADER STYLE
+        // $spreadsheet->getActiveSheet()->getStyle("A1:E12")->applyFromArray($styleArray);
 
         // COLUMN DIMENSION
         $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(12);
@@ -1031,14 +1086,19 @@ class Reports extends MY_Controller {
         $spreadsheet->getActiveSheet()->getStyle('A29')->getAlignment()->setWrapText(true);
 
         // SETTING FONT TO BOLD
-        $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
-        $spreadsheet->getActiveSheet()->getStyle('A2')->getFont()->setBold(true);
-        $spreadsheet->getActiveSheet()->getStyle('A3')->getFont()->setBold(true);
-        $spreadsheet->getActiveSheet()->getStyle('A4')->getFont()->setBold(true);
-        $spreadsheet->getActiveSheet()->getStyle('A6')->getFont()->setBold(true);
-        $spreadsheet->getActiveSheet()->getStyle('A7')->getFont()->setBold(true);
-        $spreadsheet->getActiveSheet()->getStyle('A8')->getFont()->setBold(true);
-        $spreadsheet->getActiveSheet()->getStyle('A9')->getFont()->setBold(true);
+        $a_loop = 12;
+        for($i=1; $i <= $a_loop; $i++) {
+          $spreadsheet->getActiveSheet()->getStyle("A$i")->getFont()->setBold(true);
+          $spreadsheet->getActiveSheet()->getStyle("A$i")->applyFromArray($header);
+        }
+
+        // $spreadsheet->getActiveSheet()->getStyle('A2')->getFont()->setBold(true);
+        // $spreadsheet->getActiveSheet()->getStyle('A3')->getFont()->setBold(true);
+        // $spreadsheet->getActiveSheet()->getStyle('A4')->getFont()->setBold(true);
+        // $spreadsheet->getActiveSheet()->getStyle('A6')->getFont()->setBold(true);
+        // $spreadsheet->getActiveSheet()->getStyle('A7')->getFont()->setBold(true);
+        // $spreadsheet->getActiveSheet()->getStyle('A8')->getFont()->setBold(true);
+        // $spreadsheet->getActiveSheet()->getStyle('A9')->getFont()->setBold(true);
         $spreadsheet->getActiveSheet()->getStyle('A10')->getFont()->setBold(true);
         $spreadsheet->getActiveSheet()->getStyle('A18')->getFont()->setBold(true);
         $spreadsheet->getActiveSheet()->getStyle('A19')->getFont()->setBold(true);

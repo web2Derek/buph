@@ -13,11 +13,10 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-              <button type="button" class="btn btn-primary filter_table_btn" name="button">
-                <a href="<?php echo base_url('reports/getMemberStatistic');?>" class="d-file">
-                  GENERATE REPORT
-                </a>
-              </button>
+
+                  <button type="button" data-target="#report_date" data-toggle="modal" class="btn btn-primary filter_table_btn" name="button">EXPORT MEMBERSHIP REPORT</button>
+
+
                 <!-- <form class="" action="" method="POST" id="filterMemberStat">
                     <div class="row">
                         <div class="col-md-4">
@@ -95,6 +94,32 @@
         </div>
     </div>
 </div> -->
+
+<div class="modal fade bd-example-modal-lg" id="report_date" tabindex="-1" role="dialog" aria-labelledby="Generate Report" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Date Of Report</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="" action="" id="date_of_report">
+            <div class="form-group">
+              <label for="member_report_date">Month Of Report</label>
+                <input type="text" class="form-control" name="member_report_date" id="member_report_date" autocomplete="off" placeholder="Choose a Month" required/>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary btn-sm" id="btn-report" name="btn-report">Generate Report</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <div class="modal fade bd-example-modal-lg" id="viewMember" tabindex="-1" role="dialog" aria-labelledby="viewMember" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
