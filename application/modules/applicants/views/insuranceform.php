@@ -270,7 +270,7 @@
                                                 <label for="long_2">Yes</label>
 
                                                 <input type="radio" class="check" id="long_2_2" name="long_2" data-radio="iradio_flat-green" value="No">
-                                                <label for="illness">No</label>
+                                                <label for="long_2">No</label>
                                             </div>
                                         </div>
                                     </div>
@@ -311,7 +311,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="4_a_1" name="4_a_" data-radio="iradio_flat-green" value="Yes">
+                                                <input type="radio" class="check" id="4_a_1" name="4_a" data-radio="iradio_flat-green" value="Yes">
                                                 <label for="4_a">Yes</label>
 
                                                 <input type="radio" class="check" id="4_a_2" name="4_a" data-radio="iradio_flat-green" value="No">
