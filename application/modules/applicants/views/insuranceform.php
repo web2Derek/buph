@@ -204,11 +204,11 @@
                                         <div class="col-md-12">
                                             <p> Have you ever been diagnosed of cancer? </p>
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="diagnosed_cancer" name="cancer" data-radio="iradio_flat-green">
-                                                <label for="diagnosed_cancer">Yes</label>
+                                                <input type="radio" class="check" id="diagnosed_cancer_1" name="cancer" data-radio="iradio_flat-green">
+                                                <label for="diagnosed_cancer_1">Yes</label>
 
-                                                <input type="radio" class="check" id="diagnosed_cancer" name="cancer" data-radio="iradio_flat-green">
-                                                <label for="diagnosed_cancer">No</label>
+                                                <input type="radio" class="check" id="diagnosed_cancer_2" name="cancer" data-radio="iradio_flat-green">
+                                                <label for="diagnosed_cancer_2">No</label>
                                             </div>
                                         </div>
                                     </div>
@@ -217,11 +217,11 @@
                                         <div class="col-md-12">
                                             <p> Have you ever been diagnosed of HIV or AIDS? </p>
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="diagnosed_hiv_aids" name="hiv_aids" data-radio="iradio_flat-green">
-                                                <label for="diagnosed_hiv_aids">Yes</label>
+                                                <input type="radio" class="check" id="diagnosed_hiv_aids_1" name="hiv_aids" data-radio="iradio_flat-green">
+                                                <label for="diagnosed_hiv_aids_1">Yes</label>
 
-                                                <input type="radio" class="check" id="diagnosed_hiv_aids" name="hiv_aids" data-radio="iradio_flat-green">
-                                                <label for="diagnosed_hiv_aids">No</label>
+                                                <input type="radio" class="check" id="diagnosed_hiv_aids_2" name="hiv_aids" data-radio="iradio_flat-green">
+                                                <label for="diagnosed_hiv_aids_2">No</label>
                                             </div>
                                         </div>
                                     </div>
@@ -253,10 +253,10 @@
                                         <div class="col-md-12">
                                             <p>1.) Are you presently in good health and entirely free from any mental or physical impairment and/or deformities? </p>
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="long_1" name="long_1" data-radio="iradio_flat-green" value="Yes">
+                                                <input type="radio" class="check" id="long_1_1" name="long_1" data-radio="iradio_flat-green" value="Yes">
                                                 <label for="long_1">Yes</label>
 
-                                                <input type="radio" class="check" id="long_1" name="long_1" data-radio="iradio_flat-green" value="No">
+                                                <input type="radio" class="check" id="long_1_2" name="long_1" data-radio="iradio_flat-green" value="No">
                                                 <label for="long_1">No</label>
                                             </div>
                                         </div>
@@ -266,10 +266,10 @@
                                         <div class="col-md-12">
                                             <p>2.) Are you mentally and / or physically able to perform the usual duties of your livelihood? </p>
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="long_2" name="long_2" data-radio="iradio_flat-green" value="Yes">
+                                                <input type="radio" class="check" id="long_2_1" name="long_2" data-radio="iradio_flat-green" value="Yes">
                                                 <label for="long_2">Yes</label>
 
-                                                <input type="radio" class="check" id="long_2" name="long_2" data-radio="iradio_flat-green" value="No">
+                                                <input type="radio" class="check" id="long_2_2" name="long_2" data-radio="iradio_flat-green" value="No">
                                                 <label for="illness">No</label>
                                             </div>
                                         </div>
@@ -279,10 +279,10 @@
                                         <div class="col-md-6">
                                             <p>3.) Have you been medically examined, received medical advice or treatment, or hospitalized, or surgery within the last five (5) years?. </p>
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="long_3" name="long_3" data-radio="iradio_flat-green" value="Yes">
+                                                <input type="radio" class="check" id="long_3_1" name="long_3" data-radio="iradio_flat-green" value="Yes">
                                                 <label for="long_3">Yes</label>
 
-                                                <input type="radio" class="check" id="long_3" name="long_3" data-radio="iradio_flat-green" value="No">
+                                                <input type="radio" class="check" id="long_3_2" name="long_3" data-radio="iradio_flat-green" value="No">
                                                 <label for="illness">No</label>
                                             </div>
                                         </div>
@@ -311,10 +311,10 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="4_a" name="4_a" data-radio="iradio_flat-green" value="Yes">
+                                                <input type="radio" class="check" id="4_a_1" name="4_a_" data-radio="iradio_flat-green" value="Yes">
                                                 <label for="4_a">Yes</label>
 
-                                                <input type="radio" class="check" id="4_a" name="4_a" data-radio="iradio_flat-green" value="No">
+                                                <input type="radio" class="check" id="4_a_2" name="4_a" data-radio="iradio_flat-green" value="No">
                                                 <label for="4_a">No</label>
                                             </div>
                                         </div>
@@ -335,10 +335,10 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="4_b" name="4_b" data-radio="iradio_flat-green" value="Yes">
+                                                <input type="radio" class="check" id="4_b_1" name="4_b" data-radio="iradio_flat-green" value="Yes">
                                                 <label for="4_b">Yes</label>
 
-                                                <input type="radio" class="check" id="4_b" name="4_b" data-radio="iradio_flat-green" value="No">
+                                                <input type="radio" class="check" id="4_b_2" name="4_b" data-radio="iradio_flat-green" value="No">
                                                 <label for="4_b">No</label>
                                             </div>
                                         </div>
@@ -362,10 +362,10 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="4_c" name="4_c" data-radio="iradio_flat-green" value="Yes">
+                                                <input type="radio" class="check" id="4_c_1" name="4_c" data-radio="iradio_flat-green" value="Yes">
                                                 <label for="4_c">Yes</label>
 
-                                                <input type="radio" class="check" id="4_c" name="4_c" data-radio="iradio_flat-green" value="No">
+                                                <input type="radio" class="check" id="4_c_2" name="4_c" data-radio="iradio_flat-green" value="No">
                                                 <label for="4_c">No</label>
                                             </div>
                                         </div>
@@ -385,10 +385,10 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="4_d" name="4_d" data-radio="iradio_flat-green" value="Yes">
+                                                <input type="radio" class="check" id="4_d_1" name="4_d" data-radio="iradio_flat-green" value="Yes">
                                                 <label for="4_d">Yes</label>
 
-                                                <input type="radio" class="check" id="4_d" name="4_d" data-radio="iradio_flat-green" value="No">
+                                                <input type="radio" class="check" id="4_d_2" name="4_d" data-radio="iradio_flat-green" value="No">
                                                 <label for="4_d">No</label>
                                             </div>
                                         </div>
@@ -409,10 +409,10 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="4_e" name="4_e" data-radio="iradio_flat-green" value="Yes">
+                                                <input type="radio" class="check" id="4_e_1" name="4_e" data-radio="iradio_flat-green" value="Yes">
                                                 <label for="4_e">Yes</label>
 
-                                                <input type="radio" class="check" id="4_e" name="4_e" data-radio="iradio_flat-green" value="No">
+                                                <input type="radio" class="check" id="4_e_2" name="4_e" data-radio="iradio_flat-green" value="No">
                                                 <label for="4_e">No</label>
                                             </div>
                                         </div>
@@ -432,10 +432,10 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="4_f" name="4_f" data-radio="iradio_flat-green" value="Yes">
+                                                <input type="radio" class="check" id="4_f_1" name="4_f" data-radio="iradio_flat-green" value="Yes">
                                                 <label for="4_f">Yes</label>
 
-                                                <input type="radio" class="check" id="4_f" name="4_f" data-radio="iradio_flat-green" value="No">
+                                                <input type="radio" class="check" id="4_f_2" name="4_f" data-radio="iradio_flat-green" value="No">
                                                 <label for="4_f">No</label>
                                             </div>
                                         </div>
@@ -456,10 +456,10 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="4_g" name="4_g" data-radio="iradio_flat-green" value="Yes">
+                                                <input type="radio" class="check" id="4_g_1" name="4_g" data-radio="iradio_flat-green" value="Yes">
                                                 <label for="4_g">Yes</label>
 
-                                                <input type="radio" class="check" id="4_g" name="4_g" data-radio="iradio_flat-green" value="No">
+                                                <input type="radio" class="check" id="4_g_2" name="4_g" data-radio="iradio_flat-green" value="No">
                                                 <label for="4_g">No</label>
                                             </div>
                                         </div>
@@ -479,10 +479,10 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="4_h" name="4_h" data-radio="iradio_flat-green" value="Yes">
+                                                <input type="radio" class="check" id="4_h_1" name="4_h" data-radio="iradio_flat-green" value="Yes">
                                                 <label for="4_h">Yes</label>
 
-                                                <input type="radio" class="check" id="4_h" name="4_h" data-radio="iradio_flat-green" value="No">
+                                                <input type="radio" class="check" id="4_h_2" name="4_h" data-radio="iradio_flat-green" value="No">
                                                 <label for="4_h">No</label>
                                             </div>
                                         </div>
@@ -501,10 +501,10 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="4_i" name="4_i" data-radio="iradio_flat-green" value="Yes">
+                                                <input type="radio" class="check" id="4_i_1" name="4_i" data-radio="iradio_flat-green" value="Yes">
                                                 <label for="4_i">Yes</label>
 
-                                                <input type="radio" class="check" id="4_i" name="4_i" data-radio="iradio_flat-green" value="No">
+                                                <input type="radio" class="check" id="4_i_2" name="4_i" data-radio="iradio_flat-green" value="No">
                                                 <label for="4_i">No</label>
                                             </div>
                                         </div>
@@ -528,11 +528,11 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="4_i" name="4_i" data-radio="iradio_flat-green" value="Yes">
-                                                <label for="4_i">Yes</label>
+                                                <input type="radio" class="check" id="4_j_1" name="4_j" data-radio="iradio_flat-green" value="Yes">
+                                                <label for="4_j">Yes</label>
 
-                                                <input type="radio" class="check" id="4_i" name="4_i" data-radio="iradio_flat-green" value="No">
-                                                <label for="4_i">No</label>
+                                                <input type="radio" class="check" id="4_j_2" name="4_j" data-radio="iradio_flat-green" value="No">
+                                                <label for="4_j">No</label>
                                             </div>
                                         </div>
                                     </div>
@@ -549,10 +549,10 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="4_k" name="4_k" data-radio="iradio_flat-green" value="Yes">
+                                                <input type="radio" class="check" id="4_k_1" name="4_k" data-radio="iradio_flat-green" value="Yes">
                                                 <label for="4_k">Yes</label>
 
-                                                <input type="radio" class="check" id="4_k" name="4_k" data-radio="iradio_flat-green" value="No">
+                                                <input type="radio" class="check" id="4_k_2" name="4_k" data-radio="iradio_flat-green" value="No">
                                                 <label for="4_k">No</label>
                                             </div>
                                         </div>
@@ -566,10 +566,10 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="4_l" name="4_l" data-radio="iradio_flat-green" value="Yes">
+                                                <input type="radio" class="check" id="4_l_1" name="4_l" data-radio="iradio_flat-green" value="Yes">
                                                 <label for="4_l">Yes</label>
 
-                                                <input type="radio" class="check" id="4_l" name="4_l" data-radio="iradio_flat-green" value="No">
+                                                <input type="radio" class="check" id="4_l_2" name="4_l" data-radio="iradio_flat-green" value="No">
                                                 <label for="4_l">No</label>
                                             </div>
                                         </div>
@@ -583,10 +583,10 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="long_5" name="long_5" data-radio="iradio_flat-green" value="Yes">
+                                                <input type="radio" class="check" id="long_5_1" name="long_5" data-radio="iradio_flat-green" value="Yes">
                                                 <label for="long_5">Yes</label>
 
-                                                <input type="radio" class="check" id="long_5" name="long_5" data-radio="iradio_flat-green" value="No">
+                                                <input type="radio" class="check" id="long_5_2" name="long_5" data-radio="iradio_flat-green" value="No">
                                                 <label for="long_5">No</label>
                                             </div>
                                         </div>
@@ -608,10 +608,10 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="long_6" name="long_6" data-radio="iradio_flat-green" value="Yes">
+                                                <input type="radio" class="check" id="long_6_1" name="long_6" data-radio="iradio_flat-green" value="Yes">
                                                 <label for="long_6">Yes</label>
 
-                                                <input type="radio" class="check" id="long_6" name="long_6" data-radio="iradio_flat-green" value="No">
+                                                <input type="radio" class="check" id="long_6_2" name="long_6" data-radio="iradio_flat-green" value="No">
                                                 <label for="long_6">No</label>
                                             </div>
                                         </div>
@@ -626,10 +626,10 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="long_7" name="long_7" data-radio="iradio_flat-green" value="Yes">
+                                                <input type="radio" class="check" id="long_7_1" name="long_7" data-radio="iradio_flat-green" value="Yes">
                                                 <label for="long_7">Yes</label>
 
-                                                <input type="radio" class="check" id="long_7" name="long_7" data-radio="iradio_flat-green" value="No">
+                                                <input type="radio" class="check" id="long_7_2" name="long_7" data-radio="iradio_flat-green" value="No">
                                                 <label for="long_7">No</label>
                                             </div>
                                         </div>
@@ -643,10 +643,10 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="long_8" name="long_8" data-radio="iradio_flat-green" value="Yes">
+                                                <input type="radio" class="check" id="long_8_1" name="long_8" data-radio="iradio_flat-green" value="Yes">
                                                 <label for="long_8">Yes</label>
 
-                                                <input type="radio" class="check" id="long_8" name="long_8" data-radio="iradio_flat-green" value="No">
+                                                <input type="radio" class="check" id="long_8_2" name="long_8" data-radio="iradio_flat-green" value="No">
                                                 <label for="long_8">No</label>
                                             </div>
                                         </div>
@@ -662,10 +662,10 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <input type="radio" class="check" id="long_9" name="long_9" data-radio="iradio_flat-green" value="Yes">
+                                                <input type="radio" class="check" id="long_9_1" name="long_9" data-radio="iradio_flat-green" value="Yes">
                                                 <label for="long_9">Yes</label>
 
-                                                <input type="radio" class="check" id="long_9" name="long_9" data-radio="iradio_flat-green" value="No">
+                                                <input type="radio" class="check" id="long_9_2" name="long_9" data-radio="iradio_flat-green" value="No">
                                                 <label for="long_9">No</label>
                                             </div>
                                         </div>
