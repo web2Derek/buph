@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <div class="card">
                         <div class="card-body">
-                            <form id="insuranceform" class="validation-wizard wizard-circle">
+                            <form id="insuranceform" class="insuranceform-wizard validation-wizard wizard-circle">
                                 <!-- step 1 -->
                                 <h6>Personal Information</h6>
                                 <section>
@@ -658,7 +658,7 @@
                                         </div>
                                     </div>
 
-                                    
+
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">

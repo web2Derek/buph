@@ -10,9 +10,9 @@ class Applicants extends Applicant_Controller{
 
   public function index() {
     if($this->session->userdata('logged_in')) {
-    $this->load_member('pmes_video', '');
+        $this->load_member('pmes_video', '');
     } else {
-    $this->load_member_page('member_login', '');
+        $this->load_member_page('member_login', '');
     }
   }
 
@@ -633,7 +633,7 @@ class Applicants extends Applicant_Controller{
     $this->load_member('insuranceform');
   }
 
-  public function addinsurace(){
+  public function addinsurance(){
       $post = $this->input->post();
       echo "<pre>";
       print_r($post);

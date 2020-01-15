@@ -94,6 +94,11 @@ $(document).ready(function() {
     })
   });
 
+  $(document).on('submit' , '#insuranceform' , function(e) {
+        e.preventDefault();
+        alert('test');
+  });
+
 
 
   // CLEAR ERROR

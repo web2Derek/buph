@@ -4,7 +4,7 @@
     <div class="card wizard-content">
       <div class="card-body">
         <h4 class="card-title">Membership Form</h4>
-        <form action="#" id="applicant_form" class="validation-wizard wizard-circle" enctype="multipart/form-data">
+        <form action="#" id="applicant_form" class=" validation-wizard wizard-circle" enctype="multipart/form-data">
           <!-- Step 1 -->
           <h6>Personal Information</h6>
           <section>
