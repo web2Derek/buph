@@ -115,14 +115,15 @@ $(document).ready(function() {
 
   var form = $(".validation-wizard").show();
   $(".validation-wizard").steps({
-    headerTag: "h6"
-    , bodyTag: "section"
-    , transitionEffect: "fade"
-    , titleTemplate: '<span class="step">#index#</span> #title#'
-    , labels: {
+    headerTag: "h6",
+    bodyTag: "section",
+    transitionEffect: "fade",
+    autofocus: true,
+    titleTemplate: '<span class="step">#index#</span> #title#',
+    labels: {
       finish: "Submit"
-    }
-    , onStepChanging: function (event, currentIndex, newIndex) {
+    },
+    onStepChanging: function (event, currentIndex, newIndex) {
       return currentIndex > newIndex || !(3 === newIndex && Number($("#age-2").val()) < 18) && (currentIndex < newIndex && (form.find(".body:eq(" + newIndex + ") label.error").remove(), form.find(".body:eq(" + newIndex + ") .error").removeClass("error")), form.validate().settings.ignore = ":disabled,:hidden", form.valid())
     }
     , onFinishing: function (event, currentIndex) {
@@ -153,9 +154,86 @@ $(document).ready(function() {
         }
       })
     }
-
     // FORM VALIDATION
-  }), $(".validation-wizard").validate({
+  }),
+   $(".validation-wizard").validate({
+    ignore: "input[type=hidden]"
+    , errorClass: "text-danger"
+    , successClass: "text-success"
+    , highlight: function (element, errorClass) {
+      $(element).removeClass(errorClass)
+    }
+    , unhighlight: function (element, errorClass) {
+      $(element).removeClass(errorClass)
+    }
+    , errorPlacement: function (error, element) {
+      error.insertAfter(element)
+    },
+    rules: {
+      emailAddress: {
+        email: true
+      },
+      members_age: {
+        digit: true,
+        required: true
+      },
+      // zip_code: {
+      //   digit: true,
+      //   required: true
+      // }
+    },
+    messages: {
+      mebers_age: "Please input a valid data"
+    }
+  })
+
+  //INSURANCE FORM
+
+  var insurance = $("#insuranceform").show();
+  $("#insuranceform").steps({
+    headerTag: "h6"
+    , bodyTag: "section"
+    , transitionEffect: "fade"
+    , titleTemplate: '<span class="step">#index#</span> #title#'
+    , labels: {
+      finish: "Submit"
+    }
+    , onStepChanging: function (event, currentIndex, newIndex) {
+      return currentIndex > newIndex || !(3 === newIndex && Number($("#age-2").val()) < 18) && (currentIndex < newIndex && (insurance.find(".body:eq(" + newIndex + ") label.error").remove(), insurance.find(".body:eq(" + newIndex + ") .error").removeClass("error")), insurance.validate().settings.ignore = ":disabled,:hidden", insurance.valid())
+    }
+    , onFinishing: function (event, currentIndex) {
+      return insurance.validate().settings.ignore = ":disabled", insurance.valid()
+    }
+    , onFinished: function (event, currentIndex) {
+      // Swal.fire("Form Submitted!", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem erat eleifend ex semper, lobortis purus sed.");
+      event.preventDefault();
+      var url = $('#base_url').val();
+      alert("1");
+      debugger
+      // var formdata = $('#applicant_form').serialize();
+      var formdata = new FormData($('#applicant_form')[0]);
+      $.ajax({
+        method: "POST",
+        url: url + 'applicants/addApplicants',
+        data: formdata,
+        processData: false,
+        contentType: false,
+        success: function(data) {
+          console.log(data);
+          if(data) {
+            $('#applicant_form')[0].reset();
+            $('#signaturetab_form').signature('clear');
+            Swal.fire("Registration Form Completed", "You will be redirected to the next step.");
+            setTimeout(function () {
+                window.location.href= url + 'applicants/agreementform';
+            }, 3000);
+          }
+        }
+      })
+    }
+    // FORM VALIDATION
+  }),
+   $(".validation-wizard").validate({
     ignore: "input[type=hidden]"
     , errorClass: "text-danger"
     , successClass: "text-success"

@@ -558,7 +558,7 @@ class Applicants extends Applicant_Controller{
   }
 
   // public function agreementform(){
-  //     $this->load_member('agreementform' , '');
+  //     $this->load_member('agreementform', '');
   // }
 
   // public function submitAgreement(){
