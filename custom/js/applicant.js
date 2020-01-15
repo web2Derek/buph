@@ -107,11 +107,89 @@ $(document).ready(function() {
   }
 
   $(".pmes-wizard").steps({
-    headerTag: "h6"
-    , bodyTag: "section"
-    , transitionEffect: "fade"
-    , titleTemplate: '<span class="step">#index#</span> #title#'
+    headerTag: "h6",
+    bodyTag: "section",
+    transitionEffect: "fade",
+    titleTemplate: '<span class="step">#index#</span> #title#',
+    labels: {
+      finish: "Submit"
+    }
   })
+
+  //INSURANCE FORM
+  let insurance = $(".insuranceform-wizard").show();
+  $(".insuranceform-wizard").steps({
+    headerTag: "h6"
+     , bodyTag: "section"
+     , transitionEffect: "fade"
+     , titleTemplate: '<span class="step">#index#</span> #title#'
+     , labels: {
+         finish: "Submit"
+     },
+     onStepChanging: function (event, currentIndex, newIndex) {
+       return currentIndex > newIndex || !(3 === newIndex && Number($("#age-2").val()) < 18) && (currentIndex < newIndex && (insurance.find(".body:eq(" + newIndex + ") label.error").remove(), insurance.find(".body:eq(" + newIndex + ") .error").removeClass("error")), insurance.validate().settings.ignore = ":disabled,:hidden", insurance.valid())
+     }
+     , onFinishing: function (event, currentIndex) {
+       return insurance.validate().settings.ignore = ":disabled", insurance.valid()
+     }
+     , onFinished: function (event, currentIndex) {
+       // Swal.fire("Form Submitted!", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem erat eleifend ex semper, lobortis purus sed.");
+       event.preventDefault();
+       var url = $('#base_url').val();
+       // var formdata = $('#applicant_form').serialize();
+       var formdata = new FormData($('#insuranceform')[0]);
+       $.ajax({
+         method: "POST",
+         url: url + 'applicants/addApplicants',
+         data: formdata,
+         processData: false,
+         contentType: false,
+         success: function(data) {
+           console.log(data);
+           if(data) {
+             $('#applicant_form')[0].reset();
+             $('#signaturetab_form').signature('clear');
+             Swal.fire("Registration Form Completed", "You will be redirected to the next step.");
+             setTimeout(function () {
+                 window.location.href= url + 'applicants/agreementform';
+             }, 3000);
+           }
+         }
+       })
+     }
+     // FORM VALIDATION
+   }),
+    $(".insurance-wizard").validate({
+     ignore: "input[type=hidden]"
+     , errorClass: "text-danger"
+     , successClass: "text-success"
+     , highlight: function (element, errorClass) {
+       $(element).removeClass(errorClass)
+     }
+     , unhighlight: function (element, errorClass) {
+       $(element).removeClass(errorClass)
+     }
+     , errorPlacement: function (error, element) {
+       error.insertAfter(element)
+     },
+     rules: {
+       emailAddress: {
+         email: true
+       },
+       members_age: {
+         digit: true,
+         required: true
+       },
+       // zip_code: {
+       //   digit: true,
+       //   required: true
+       // }
+     },
+     messages: {
+       mebers_age: "Please input a valid data"
+     }
+   })
+
 
   var form = $(".validation-wizard").show();
   $(".validation-wizard").steps({
@@ -187,82 +265,82 @@ $(document).ready(function() {
     }
   })
 
-  //INSURANCE FORM
 
-  var insurance = $("#insuranceform").show();
-  $("#insuranceform").steps({
-    headerTag: "h6"
-    , bodyTag: "section"
-    , transitionEffect: "fade"
-    , titleTemplate: '<span class="step">#index#</span> #title#'
-    , labels: {
-      finish: "Submit"
-    }
-    , onStepChanging: function (event, currentIndex, newIndex) {
-      return currentIndex > newIndex || !(3 === newIndex && Number($("#age-2").val()) < 18) && (currentIndex < newIndex && (insurance.find(".body:eq(" + newIndex + ") label.error").remove(), insurance.find(".body:eq(" + newIndex + ") .error").removeClass("error")), insurance.validate().settings.ignore = ":disabled,:hidden", insurance.valid())
-    }
-    , onFinishing: function (event, currentIndex) {
-      return insurance.validate().settings.ignore = ":disabled", insurance.valid()
-    }
-    , onFinished: function (event, currentIndex) {
-      // Swal.fire("Form Submitted!", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem erat eleifend ex semper, lobortis purus sed.");
-      event.preventDefault();
-      var url = $('#base_url').val();
-      alert("1");
-      debugger
-      // var formdata = $('#applicant_form').serialize();
-      var formdata = new FormData($('#applicant_form')[0]);
-      $.ajax({
-        method: "POST",
-        url: url + 'applicants/addApplicants',
-        data: formdata,
-        processData: false,
-        contentType: false,
-        success: function(data) {
-          console.log(data);
-          if(data) {
-            $('#applicant_form')[0].reset();
-            $('#signaturetab_form').signature('clear');
-            Swal.fire("Registration Form Completed", "You will be redirected to the next step.");
-            setTimeout(function () {
-                window.location.href= url + 'applicants/agreementform';
-            }, 3000);
-          }
-        }
-      })
-    }
-    // FORM VALIDATION
-  }),
-   $(".validation-wizard").validate({
-    ignore: "input[type=hidden]"
-    , errorClass: "text-danger"
-    , successClass: "text-success"
-    , highlight: function (element, errorClass) {
-      $(element).removeClass(errorClass)
-    }
-    , unhighlight: function (element, errorClass) {
-      $(element).removeClass(errorClass)
-    }
-    , errorPlacement: function (error, element) {
-      error.insertAfter(element)
-    },
-    rules: {
-      emailAddress: {
-        email: true
-      },
-      members_age: {
-        digit: true,
-        required: true
-      },
-      // zip_code: {
-      //   digit: true,
-      //   required: true
-      // }
-    },
-    messages: {
-      mebers_age: "Please input a valid data"
-    }
-  })
+
+  // var insurance = $("#insuranceform").show();
+  // $("#insuranceform").steps({
+  //   headerTag: "h6"
+  //   , bodyTag: "section"
+  //   , transitionEffect: "fade"
+  //   , titleTemplate: '<span class="step">#index#</span> #title#'
+  //   , labels: {
+  //     finish: "Submit"
+  //   }
+  //   , onStepChanging: function (event, currentIndex, newIndex) {
+  //     return currentIndex > newIndex || !(3 === newIndex && Number($("#age-2").val()) < 18) && (currentIndex < newIndex && (insurance.find(".body:eq(" + newIndex + ") label.error").remove(), insurance.find(".body:eq(" + newIndex + ") .error").removeClass("error")), insurance.validate().settings.ignore = ":disabled,:hidden", insurance.valid())
+  //   }
+  //   , onFinishing: function (event, currentIndex) {
+  //     return insurance.validate().settings.ignore = ":disabled", insurance.valid()
+  //   }
+  //   , onFinished: function (event, currentIndex) {
+  //     // Swal.fire("Form Submitted!", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem erat eleifend ex semper, lobortis purus sed.");
+  //     event.preventDefault();
+  //     var url = $('#base_url').val();
+  //     alert("1");
+  //     debugger
+  //     // var formdata = $('#applicant_form').serialize();
+  //     var formdata = new FormData($('#applicant_form')[0]);
+  //     $.ajax({
+  //       method: "POST",
+  //       url: url + 'applicants/addApplicants',
+  //       data: formdata,
+  //       processData: false,
+  //       contentType: false,
+  //       success: function(data) {
+  //         console.log(data);
+  //         if(data) {
+  //           $('#applicant_form')[0].reset();
+  //           $('#signaturetab_form').signature('clear');
+  //           Swal.fire("Registration Form Completed", "You will be redirected to the next step.");
+  //           setTimeout(function () {
+  //               window.location.href= url + 'applicants/agreementform';
+  //           }, 3000);
+  //         }
+  //       }
+  //     })
+  //   }
+  //   // FORM VALIDATION
+  // }),
+  //  $(".validation-wizard").validate({
+  //   ignore: "input[type=hidden]"
+  //   , errorClass: "text-danger"
+  //   , successClass: "text-success"
+  //   , highlight: function (element, errorClass) {
+  //     $(element).removeClass(errorClass)
+  //   }
+  //   , unhighlight: function (element, errorClass) {
+  //     $(element).removeClass(errorClass)
+  //   }
+  //   , errorPlacement: function (error, element) {
+  //     error.insertAfter(element)
+  //   },
+  //   rules: {
+  //     emailAddress: {
+  //       email: true
+  //     },
+  //     members_age: {
+  //       digit: true,
+  //       required: true
+  //     },
+  //     // zip_code: {
+  //     //   digit: true,
+  //     //   required: true
+  //     // }
+  //   },
+  //   messages: {
+  //     mebers_age: "Please input a valid data"
+  //   }
+  // })
 
 
 
